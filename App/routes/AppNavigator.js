@@ -47,19 +47,28 @@ const AppNavigator = () => {
           borderTopRightRadius: 60,
           elevation: 20,
         },
+        tabBarShowLabel: false,
       })}
     >
-      <Tab.Screen name="Home" component={Home} options={{ tabBarLabel: "" }} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen
         name="Applications"
         component={Applications}
-        options={{ tabBarLabel: "" }}
+        options={{ headerShown: false }}
       />
-      <Tab.Screen name="Chat" component={Chat} options={{ tabBarLabel: "" }} />
+      <Tab.Screen
+        name="Chat"
+        component={Chat}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen
         name="Settings"
         component={Settings}
-        options={{ tabBarLabel: "" }}
+        options={{ headerShown: false }}
       />
     </Tab.Navigator>
   );

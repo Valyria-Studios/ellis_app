@@ -4,8 +4,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <View style={styles.search}>
         <Text>Search Bar</Text>
+        <Text> Icon </Text>
       </View>
       <View>
         <Text>Scroller</Text>
@@ -26,5 +27,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     // alignItems: "center",
     // justifyContent: "center",
+  },
+  search: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

@@ -40,12 +40,13 @@ const AppNavigator = () => {
         },
         tabBarActiveTintColor: "#ebae52", // Set active tab color
         tabBarInactiveTintColor: "gray", // Set inactive tab color
-        tabBarStyle: [
-          {
-            display: "flex",
-          },
-          null,
-        ],
+        tabBarStyle: {
+          display: "flex",
+          height: 70,
+          borderTopLeftRadius: 60,
+          borderTopRightRadius: 60,
+          elevation: 20,
+        },
       })}
     >
       <Tab.Screen name="Home" component={Home} options={{ tabBarLabel: "" }} />

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Card from "../shared/card";
 
 export default function App() {
   return (
@@ -30,7 +31,9 @@ export default function App() {
         </ScrollView>
       </View>
       <View>
-        <Text>Cards</Text>
+        <Card>
+          <Text>Hello</Text>
+        </Card>
       </View>
     </SafeAreaView>
   );

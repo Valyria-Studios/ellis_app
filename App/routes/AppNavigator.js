@@ -1,11 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/Home";
 import Chat from "../screens/Chat";
 import Applications from "../screens/Applications";
 import Settings from "../screens/Settings";
 import Feathericons from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Home from '../screens/home';
 
 const Tab = createBottomTabNavigator();
 

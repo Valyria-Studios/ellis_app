@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
@@ -9,10 +9,25 @@ export default function App() {
         <Text> Icon </Text>
       </View>
       <View>
-        <Text>Scroller</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <Text style={styles.scrollerItems}>Scroller</Text>
+          <Text style={styles.scrollerItems}>Scroller</Text>
+          <Text style={styles.scrollerItems}>Scroller</Text>
+          <Text style={styles.scrollerItems}>Scroller</Text>
+          <Text style={styles.scrollerItems}>Scroller</Text>
+          <Text style={styles.scrollerItems}>Scroller</Text>
+          <Text style={styles.scrollerItems}>Scroller</Text>
+        </ScrollView>
       </View>
-      <View>
-        <Text>Sort by</Text>
+      <View style={styles.sortByContainer}>
+        <Text style={styles.sortBy}>Sort by</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <Text style={styles.sortByItems}>hello</Text>
+          <Text style={styles.sortByItems}>hello</Text>
+          <Text style={styles.sortByItems}>hello</Text>
+          <Text style={styles.sortByItems}>hello</Text>
+          <Text style={styles.sortByItems}>hello</Text>
+        </ScrollView>
       </View>
       <View>
         <Text>Cards</Text>
@@ -25,11 +40,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    padding: 10,
     // alignItems: "center",
     // justifyContent: "center",
   },
   search: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 30,
+  },
+  scrollerItems: {
+    fontSize: 30,
+    paddingRight: 20,
+  },
+  sortByContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  sortBy: {
+    fontSize: 20,
+  },
+  sortByItems: {
+    fontSize: 20,
+    color: "blue",
+    padding: 20,
   },
 });

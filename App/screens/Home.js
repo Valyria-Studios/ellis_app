@@ -98,8 +98,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   scrollerItems: {
+    textAlign: "center",
     fontSize: 30,
     padding: 15,
+    borderWidth: 2,
+    borderColor: "transparent",
   },
   selectedCategory: {
     padding: 15,

@@ -5,7 +5,7 @@ import Applications from "../screens/Applications";
 import Settings from "../screens/Settings";
 import Feathericons from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Home from '../screens/home';
+import Home from "../screens/Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +45,7 @@ const AppNavigator = () => {
           height: 70,
           borderTopLeftRadius: 60,
           borderTopRightRadius: 60,
-          elevation: 20,
+          elevation: 10,
         },
         tabBarShowLabel: false,
       })}

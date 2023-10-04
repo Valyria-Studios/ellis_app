@@ -12,24 +12,23 @@ export default function App() {
       </View>
       <View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Text style={styles.scrollerItems}>Scroller</Text>
-          <Text style={styles.scrollerItems}>Scroller</Text>
-          <Text style={styles.scrollerItems}>Scroller</Text>
-          <Text style={styles.scrollerItems}>Scroller</Text>
-          <Text style={styles.scrollerItems}>Scroller</Text>
-          <Text style={styles.scrollerItems}>Scroller</Text>
-          <Text style={styles.scrollerItems}>Scroller</Text>
+          <Text style={styles.scrollerItems}>All</Text>
+          <Text style={styles.scrollerItems}>Food</Text>
+          <Text style={styles.scrollerItems}>Shelter</Text>
+          <Text style={styles.scrollerItems}>Hygiene</Text>
+          <Text style={styles.scrollerItems}>Health</Text>
+          <Text style={styles.scrollerItems}>Work & Learn</Text>
+          <Text style={styles.scrollerItems}>Finance</Text>
+          <Text style={styles.scrollerItems}>Other</Text>
         </ScrollView>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.sortByContainer}>
           <Text style={styles.sortBy}>Sort by</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <Text style={styles.sortByItems}>hello</Text>
-            <Text style={styles.sortByItems}>hello</Text>
-            <Text style={styles.sortByItems}>hello</Text>
-            <Text style={styles.sortByItems}>hello</Text>
-            <Text style={styles.sortByItems}>hello</Text>
+            <Text style={styles.sortByItems}>Distance</Text>
+            <Text style={styles.sortByItems}>Type</Text>
+            <Text style={styles.sortByItems}>Availability</Text>
           </ScrollView>
         </View>
         {Amenities.map((amenity) => (
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
   sortByContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   sortBy: {
     fontSize: 20,

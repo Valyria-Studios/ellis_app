@@ -1,9 +1,19 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../shared/Card";
 import Amenities from "../shared/Amenities";
 
 export default function App() {
+  const handlePress = (category) => {
+    console.log(`Selected category: ${category}`);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.search}>
@@ -12,14 +22,23 @@ export default function App() {
       </View>
       <View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Text style={styles.scrollerItems}>All</Text>
-          <Text style={styles.scrollerItems}>Food</Text>
-          <Text style={styles.scrollerItems}>Shelter</Text>
-          <Text style={styles.scrollerItems}>Hygiene</Text>
-          <Text style={styles.scrollerItems}>Health</Text>
-          <Text style={styles.scrollerItems}>Work & Learn</Text>
-          <Text style={styles.scrollerItems}>Finance</Text>
-          <Text style={styles.scrollerItems}>Other</Text>
+          {[
+            "All",
+            "Food",
+            "Shelter",
+            "Hygiene",
+            "Health",
+            "Work & Learn",
+            "Finance",
+            "Other",
+          ].map((category) => (
+            <TouchableOpacity
+              key={category}
+              onPress={() => handlePress(category)}
+            >
+              <Text style={styles.scrollerItems}>{category}</Text>
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

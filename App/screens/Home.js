@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,8 +11,14 @@ import Card from "../shared/Card";
 import Amenities from "../shared/Amenities";
 
 export default function App() {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const handlePress = (category) => {
-    console.log(`Selected category: ${category}`);
+    if (selectedCategory === category) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+    }
   };
 
   return (
@@ -35,8 +42,18 @@ export default function App() {
             <TouchableOpacity
               key={category}
               onPress={() => handlePress(category)}
+              activeOpacity={1}
             >
-              <Text style={styles.scrollerItems}>{category}</Text>
+              <View>
+                <Text
+                  style={[
+                    styles.scrollerItems,
+                    category === selectedCategory && styles.selectedCategory,
+                  ]}
+                >
+                  {category}
+                </Text>
+              </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -82,7 +99,15 @@ const styles = StyleSheet.create({
   },
   scrollerItems: {
     fontSize: 30,
-    paddingRight: 20,
+    padding: 15,
+  },
+  selectedCategory: {
+    padding: 15,
+    fontWeight: "600",
+    color: "#ebae52",
+    borderWidth: 2,
+    borderRadius: 100,
+    borderColor: "#ebae52",
   },
   sortByContainer: {
     flexDirection: "row",

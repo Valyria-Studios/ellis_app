@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#ebae52",
     borderWidth: 2,
-    borderRadius: 100,
+    borderRadius: 30,
     borderColor: "#ebae52",
   },
   sortByContainer: {

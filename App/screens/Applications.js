@@ -1,10 +1,29 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 export default function App() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const allItems = [
+    "Food Benefits",
+    "Health Insurance",
+    "Cash Assistance",
+    "Affordable Housing",
+    "Job Placement",
+    "Continuing Education",
+    "Disability Assistance",
+    "Legal Documents",
+    "Case Management",
+    "Other",
+  ];
 
   const handleDropdownItemPress = (item) => {
     console.log(`Item ${item} pressed.`);
@@ -14,9 +33,20 @@ export default function App() {
     console.log(`Text ${index} pressed.`);
   };
 
+  const filteredItems = allItems.filter((item) =>
+    item.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search..."
+          onChangeText={(text) => setSearchQuery(text)}
+          value={searchQuery}
+        />
+
         <TouchableOpacity
           activeOpacity={0.6}
           onPress={() => setDropdownVisible(!isDropdownVisible)}
@@ -32,15 +62,7 @@ export default function App() {
 
         {isDropdownVisible && (
           <View style={styles.dropdownContainer}>
-            {[
-              "Food Benefits",
-              "Health Insurance",
-              "Cash Assistance",
-              "Affordable Housing",
-              "Job Placement",
-              "Continuing Education",
-              "Disability Assistance",
-            ].map((item, index) => (
+            {filteredItems.slice(0, 7).map((item, index) => (
               <TouchableOpacity
                 activeOpacity={0.6}
                 key={index}
@@ -52,7 +74,7 @@ export default function App() {
           </View>
         )}
 
-        {["Legal Documents", "Case Management", "Other"].map((text, index) => (
+        {filteredItems.slice(7).map((text, index) => (
           <TouchableOpacity
             activeOpacity={0.6}
             key={index}
@@ -67,7 +89,6 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -107,5 +128,14 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     borderBottomColor: "#ddd",
     borderBottomWidth: 1,
+  },
+  searchInput: {
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
+    fontSize: 18,
   },
 });

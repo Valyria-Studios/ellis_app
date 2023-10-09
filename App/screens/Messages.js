@@ -6,6 +6,7 @@ import {
   Image,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchMessages } from "../api/messages";
@@ -56,14 +57,18 @@ const Messages = () => {
           data={messages}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
-            <View style={styles.messageContainer}>
+            <TouchableOpacity
+              style={styles.messageContainer}
+              activeOpacity={0.7}
+              // onPress={() => navigateToMessagePage(item)}
+            >
               <Image source={item.image} style={styles.profileImage} />
               <View style={styles.textContainer}>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.message}>{item.message}</Text>
               </View>
               <Text style={styles.timestamp}>{item.timestamp}</Text>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </View>

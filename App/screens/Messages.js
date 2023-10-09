@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchMessages } from "../api/messages";
+import Icon from "@expo/vector-icons/Fontisto";
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
+  const [search, setSearch] = useState(""); // State to hold the search input
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,6 +25,18 @@ const Messages = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchBar}
+            value={search}
+            onChangeText={setSearch}
+            placeholder="Search..."
+          />
+          <Icon name="nav-icon-grid-a" size={20} color="#094851" />
+        </View>
+        <Text style={styles.title}>Messages</Text>
+      </View>
       <View>
         <FlatList
           data={messages}
@@ -37,6 +58,29 @@ const Messages = () => {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderColor: "#e0e0e0",
+    backgroundColor: "#f3f8f9",
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: "bold",
+    marginTop: 10,
+    color: "#094851",
+  },
+  searchContainer: {
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
+    borderRadius: 5,
+    padding: 5,
+    alignItems: "center",
+  },
+  searchBar: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: "#f0f0f0",

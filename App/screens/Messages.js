@@ -3,22 +3,6 @@ import { View, Text, FlatList, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchMessages } from "../api/messages";
 
-const data = [
-  {
-    name: "Steve Binnquist",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "Just Now",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  // ... add other entries here
-];
-
 const Messages = () => {
   const [messages, setMessages] = useState([]);
 

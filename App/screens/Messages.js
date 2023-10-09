@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchMessages } from "../api/messages";
-import Icon from "@expo/vector-icons/Fontisto";
+import Fontisto from "@expo/vector-icons/Fontisto";
+import Icon from "@expo/vector-icons/Ionicons";
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
@@ -26,14 +27,27 @@ const Messages = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchBar}
-            value={search}
-            onChangeText={setSearch}
-            placeholder="Search..."
+        <View style={styles.searchSection}>
+          <View style={styles.searchContainer}>
+            <Icon
+              name="search-outline"
+              size={25}
+              color="#616a6c"
+              style={styles.searchIcon}
+            />
+            <TextInput
+              style={styles.searchBar}
+              value={search}
+              onChangeText={setSearch}
+              placeholder="Type in keyword"
+            />
+          </View>
+          <Fontisto
+            name="nav-icon-grid-a"
+            size={20}
+            color="#094851"
+            style={styles.gridIcon}
           />
-          <Icon name="nav-icon-grid-a" size={20} color="#094851" />
         </View>
         <Text style={styles.title}>Messages</Text>
       </View>
@@ -68,16 +82,31 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "#094851",
   },
+  searchIcon: {
+    paddingHorizontal: 10,
+  },
+  searchSection: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   searchContainer: {
     flexDirection: "row",
     borderWidth: 1,
     borderColor: "#e0e0e0",
-    borderRadius: 5,
+    borderRadius: 50,
     padding: 5,
     alignItems: "center",
+    flex: 1,
+    height: 50,
+    backgroundColor: "white",
   },
   searchBar: {
     flex: 1,
+    fontSize: 18,
+    color: "#999fa0",
+  },
+  gridIcon: {
+    paddingLeft: 20,
   },
   container: {
     flex: 1,
@@ -104,12 +133,13 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: "bold",
+    color: "#0f4c55",
   },
   message: {
-    color: "gray",
+    color: "#343838",
   },
   timestamp: {
-    color: "gray",
+    color: "#6a7374",
     marginLeft: 10,
   },
 });

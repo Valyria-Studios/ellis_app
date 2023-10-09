@@ -60,8 +60,6 @@ const Messages = () => {
 const styles = StyleSheet.create({
   header: {
     padding: 15,
-    borderBottomWidth: 1,
-    borderColor: "#e0e0e0",
     backgroundColor: "#f3f8f9",
   },
   title: {
@@ -83,14 +81,16 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#f3f8f9",
   },
   messageContainer: {
     flexDirection: "row",
     padding: 15,
-    borderBottomWidth: 1,
-    borderColor: "#e0e0e0",
     alignItems: "center",
+    backgroundColor: "white",
+    marginBottom: 5,
+    marginHorizontal: 10,
+    borderRadius: 10,
   },
   profileImage: {
     width: 50,

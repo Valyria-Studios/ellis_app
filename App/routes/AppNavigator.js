@@ -1,8 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Chat from "../screens/Chat";
+import Messages from "../screens/Messages";
 import Applications from "../screens/Applications";
 import Settings from "../screens/Settings";
+import Relationships from "../screens/Relationships";
 import Feathericons from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "../screens/Home";
@@ -20,10 +21,10 @@ const AppNavigator = () => {
           if (route.name === "Home") {
             iconName = focused ? "compass" : "compass";
             IconComponent = Feathericons;
-          } else if (route.name === "Applications") {
+          } else if (route.name === "Relationships") {
             iconName = focused ? "plus-circle" : "plus-circle";
             IconComponent = Feathericons;
-          } else if (route.name === "Chat") {
+          } else if (route.name === "Messages") {
             iconName = focused
               ? "person-circle-outline"
               : "person-circle-outline";
@@ -56,13 +57,13 @@ const AppNavigator = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Applications"
-        component={Applications}
+        name="Relationships"
+        component={Relationships}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Chat"
-        component={Chat}
+        name="Messages"
+        component={Messages}
         options={{ headerShown: false }}
       />
       <Tab.Screen

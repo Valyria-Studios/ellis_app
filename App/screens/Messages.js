@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Chat() {
+export default function Messages() {
   return (
     <View style={styles.container}>
-      <Text>Chat Page</Text>
+      <Text>Messages Page</Text>
     </View>
   );
 }

@@ -38,7 +38,6 @@ export default function App() {
             "Work & Learn",
             "Finance",
             "Other",
-            "Testing",
           ].map((category) => (
             <TouchableOpacity
               key={category}

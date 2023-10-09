@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { fetchMessages } from "../api/messages";
 
 const data = [
   {
@@ -15,63 +16,25 @@ const data = [
     timestamp: "3:35pm",
     // image: require("./path_to_image.jpg"),
   },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
-  {
-    name: "Kent McCormick",
-    message: "Lorem ipsum dolor sit amet...",
-    timestamp: "3:35pm",
-    // image: require("./path_to_image.jpg"),
-  },
   // ... add other entries here
 ];
 
 const Messages = () => {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchMessages();
+      setMessages(data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
         <FlatList
-          data={data}
+          data={messages}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
             <View style={styles.messageContainer}>

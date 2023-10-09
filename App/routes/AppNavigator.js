@@ -18,16 +18,14 @@ const AppNavigator = () => {
           let iconName, IconComponent;
 
           // Select an icon name based on the route name
-          if (route.name === "Home") {
-            iconName = focused ? "compass" : "compass";
-            IconComponent = Feathericons;
+          if (route.name === "Directory") {
+            iconName = focused ? "compass" : "compass-outline";
+            IconComponent = Ionicons;
           } else if (route.name === "Relationships") {
-            iconName = focused ? "plus-circle" : "plus-circle";
-            IconComponent = Feathericons;
+            iconName = focused ? "person-circle" : "person-circle-outline";
+            IconComponent = Ionicons;
           } else if (route.name === "Messages") {
-            iconName = focused
-              ? "person-circle-outline"
-              : "person-circle-outline";
+            iconName = focused ? "chatbox" : "chatbox-outline";
             IconComponent = Ionicons;
           } else if (route.name === "Settings") {
             iconName = focused ? "settings" : "settings-outline";
@@ -39,20 +37,18 @@ const AppNavigator = () => {
           // Return an Icon component with the selected iconName
           return <IconComponent name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: "#ebae52", // Set active tab color
+        tabBarActiveTintColor: "#FFFFFF", // Set active tab color
         tabBarInactiveTintColor: "gray", // Set inactive tab color
+        tabBarActiveBackgroundColor: "#10798a",
         tabBarStyle: {
+          // height: 100,
           display: "flex",
-          height: 70,
-          borderTopLeftRadius: 60,
-          borderTopRightRadius: 60,
           elevation: 10,
         },
-        tabBarShowLabel: false,
       })}
     >
       <Tab.Screen
-        name="Home"
+        name="Directory"
         component={Home}
         options={{ headerShown: false }}
       />

@@ -24,7 +24,7 @@ const AppNavigator = () => {
           } else if (route.name === "Relationships") {
             iconName = focused ? "person-circle" : "person-circle-outline";
             IconComponent = Ionicons;
-          } else if (route.name === "ChatPage") {
+          } else if (route.name === "Messages") {
             iconName = focused ? "chatbox" : "chatbox-outline";
             IconComponent = Ionicons;
           } else if (route.name === "Settings") {
@@ -58,7 +58,7 @@ const AppNavigator = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="ChatPage"
+        name="Messages"
         component={ChatPage}
         options={{ headerShown: false }}
       />

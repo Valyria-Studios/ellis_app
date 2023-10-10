@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Messages from "../screens/Messages";
 import Settings from "../screens/Settings";
 import Relationships from "../screens/Relationships";
-import Feathericons from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "../screens/Home";
 import ChatPage from "../screens/ChatPage";
@@ -16,14 +15,14 @@ const MessagesStackNavigator = () => {
   return (
     <MessagesStack.Navigator>
       <MessagesStack.Screen
-        name="MessagesList"
+        name=" "
         component={Messages}
         options={{ headerShown: false }}
       />
       <MessagesStack.Screen
         name="ChatPage"
         component={ChatPage}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </MessagesStack.Navigator>
   );

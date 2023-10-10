@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  Button,
+} from "react-native";
 import mockFetchMessages from "../api/ChatMessages";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -22,31 +29,29 @@ export default function ChatPage() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.chat}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Kent</Text>
-        </View>
-        <ScrollView style={styles.messagesContainer}>
-          {messages.map((message, index) => (
-            <Message
-              key={index}
-              received={message.type === "received"}
-              text={message.text}
-            />
-          ))}
-        </ScrollView>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            value={inputText}
-            onChangeText={setInputText}
-            placeholder="Type a message..."
-          />
-          <Button title="Send" onPress={handleSend} />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Kent</Text>
       </View>
-    </SafeAreaView>
+      <ScrollView style={styles.messagesContainer}>
+        {messages.map((message, index) => (
+          <Message
+            key={index}
+            received={message.type === "received"}
+            text={message.text}
+          />
+        ))}
+      </ScrollView>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          value={inputText}
+          onChangeText={setInputText}
+          placeholder="Type a message..."
+        />
+        <Button title="Send" onPress={handleSend} />
+      </View>
+    </View>
   );
 }
 

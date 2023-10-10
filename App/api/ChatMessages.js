@@ -14,7 +14,36 @@ const mockFetchMessages = (chatIdentifier) => {
           { type: "sent", text: "Beware the Jabberwock, my son!" },
           // ... additional messages ...
         ],
-        // ... other chat identifiers ...
+        "Robert Trace": [
+          { type: "received", text: "'Twas brillig, and the slithy toves..." },
+          { type: "sent", text: "Beware the Jabberwock, my son!" },
+          // ... additional messages ...
+        ],
+        "Timothy Horton": [
+          { type: "received", text: "'Twas brillig, and the slithy toves..." },
+          { type: "sent", text: "Beware the Jabberwock, my son!" },
+          // ... additional messages ...
+        ],
+        "Andrew Stilt": [
+          { type: "received", text: "'Twas brillig, and the slithy toves..." },
+          { type: "sent", text: "Beware the Jabberwock, my son!" },
+          // ... additional messages ...
+        ],
+        "Travis Stalker": [
+          { type: "received", text: "'Twas brillig, and the slithy toves..." },
+          { type: "sent", text: "Beware the Jabberwock, my son!" },
+          // ... additional messages ...
+        ],
+        "Henry Mince": [
+          { type: "received", text: "'Twas brillig, and the slithy toves..." },
+          { type: "sent", text: "Beware the Jabberwock, my son!" },
+          // ... additional messages ...
+        ],
+        "Tracy Toggler": [
+          { type: "received", text: "'Twas brillig, and the slithy toves..." },
+          { type: "sent", text: "Beware the Jabberwock, my son!" },
+          // ... additional messages ...
+        ],
       };
 
       resolve(chatData[chatIdentifier] || []);

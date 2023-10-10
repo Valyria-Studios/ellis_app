@@ -29,10 +29,7 @@ export default function ChatPage() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Kent</Text>
-      </View>
+    <View style={styles.chat}>
       <ScrollView style={styles.messagesContainer}>
         {messages.map((message, index) => (
           <Message
@@ -42,15 +39,17 @@ export default function ChatPage() {
           />
         ))}
       </ScrollView>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          value={inputText}
-          onChangeText={setInputText}
-          placeholder="Type a message..."
-        />
-        <Button title="Send" onPress={handleSend} />
-      </View>
+      <SafeAreaView>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.textInput}
+            value={inputText}
+            onChangeText={setInputText}
+            placeholder="Type a message..."
+          />
+          <Button title="Send" onPress={handleSend} />
+        </View>
+      </SafeAreaView>
     </View>
   );
 }

@@ -9,24 +9,6 @@ import Home from "../screens/Home";
 import ChatPage from "../screens/ChatPage";
 
 const Tab = createBottomTabNavigator();
-const MessagesStack = createStackNavigator(); // <-- Create a stack navigator for messages
-
-const MessagesStackNavigator = () => {
-  return (
-    <MessagesStack.Navigator>
-      <MessagesStack.Screen
-        name=" "
-        component={Messages}
-        options={{ headerShown: false }}
-      />
-      <MessagesStack.Screen
-        name="ChatPage"
-        component={ChatPage}
-        options={{ headerShown: true }}
-      />
-    </MessagesStack.Navigator>
-  );
-};
 
 const AppNavigator = () => {
   return (
@@ -77,7 +59,7 @@ const AppNavigator = () => {
       />
       <Tab.Screen
         name="Messages"
-        component={MessagesStackNavigator}
+        component={Messages}
         options={{ headerShown: false }}
       />
       <Tab.Screen

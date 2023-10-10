@@ -10,14 +10,17 @@ import {
 import mockFetchMessages from "../api/ChatMessages";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function ChatPage() {
+export default function ChatPage({ route }) {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
 
   useEffect(() => {
-    // Mock API call
-    mockFetchMessages()
-      .then((data) => setMessages(data))
+    const chatIdentifier = route.params.chatIdentifier;
+
+    mockFetchMessages(chatIdentifier)
+      .then((data) => {
+        setMessages(data);
+      })
       .catch((error) => console.error("Error fetching messages:", error));
   }, []);
 

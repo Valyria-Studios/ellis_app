@@ -1,15 +1,25 @@
 // Mock function to simulate fetching messages from an API
-export default mockFetchMessages = () => {
+const mockFetchMessages = (chatIdentifier) => {
   return new Promise((resolve, reject) => {
-    // Simulate a delay of 2 seconds using setTimeout
     setTimeout(() => {
-      resolve([
-        { type: "received", text: "'Twas brillig, and the slithy toves..." },
-        { type: "sent", text: "Beware the Jabberwock, my son!" },
-        { type: "sent", text: "The jaws that bite, the claws that catch!" },
-        { type: "received", text: "He took his vorpal sword in hand..." },
-        { type: "sent", text: "So rested he by the Tumtum tree..." },
-      ]);
+      // Sample chat data
+      const chatData = {
+        "Steve Binnquist": [
+          { type: "received", text: "Hey there!" },
+          { type: "sent", text: "Hello Steve!" },
+          // ... additional messages ...
+        ],
+        "Kent McCormick": [
+          { type: "received", text: "'Twas brillig, and the slithy toves..." },
+          { type: "sent", text: "Beware the Jabberwock, my son!" },
+          // ... additional messages ...
+        ],
+        // ... other chat identifiers ...
+      };
+
+      resolve(chatData[chatIdentifier] || []);
     });
   });
 };
+
+export default mockFetchMessages;

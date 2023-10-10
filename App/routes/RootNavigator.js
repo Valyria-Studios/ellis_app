@@ -17,7 +17,7 @@ const RootNavigator = () => {
         name="ChatPage"
         component={ChatPage}
         options={({ route }) => ({
-          headerTitle: route.params.chatName || "Chat",
+          headerTitle: route.params.chatIdentifier || "Chat",
         })}
       />
     </RootStack.Navigator>

@@ -63,7 +63,7 @@ const Messages = () => {
               style={styles.messageContainer}
               activeOpacity={0.7}
               onPress={() =>
-                navigation.navigate("ChatPage", { chatName: item.name })
+                navigation.navigate("ChatPage", { chatIdentifier: item.name })
               }
             >
               <Image source={item.image} style={styles.profileImage} />

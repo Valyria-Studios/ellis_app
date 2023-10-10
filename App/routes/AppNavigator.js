@@ -1,5 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import Messages from "../screens/Messages";
 import Settings from "../screens/Settings";
 import Relationships from "../screens/Relationships";
@@ -9,6 +10,24 @@ import Home from "../screens/Home";
 import ChatPage from "../screens/ChatPage";
 
 const Tab = createBottomTabNavigator();
+const MessagesStack = createStackNavigator(); // <-- Create a stack navigator for messages
+
+const MessagesStackNavigator = () => {
+  return (
+    <MessagesStack.Navigator>
+      <MessagesStack.Screen
+        name="MessagesList"
+        component={Messages}
+        options={{ headerShown: false }}
+      />
+      <MessagesStack.Screen
+        name="ChatPage"
+        component={ChatPage}
+        options={{ headerShown: false }}
+      />
+    </MessagesStack.Navigator>
+  );
+};
 
 const AppNavigator = () => {
   return (
@@ -59,7 +78,7 @@ const AppNavigator = () => {
       />
       <Tab.Screen
         name="Messages"
-        component={ChatPage}
+        component={MessagesStackNavigator}
         options={{ headerShown: false }}
       />
       <Tab.Screen

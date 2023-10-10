@@ -9,11 +9,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 import { fetchMessages } from "../api/Chats";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 
 const Messages = () => {
+  const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
   const [search, setSearch] = useState(""); // State to hold the search input
 
@@ -60,7 +62,7 @@ const Messages = () => {
             <TouchableOpacity
               style={styles.messageContainer}
               activeOpacity={0.7}
-              // onPress={() => navigateToMessagePage(item)}
+              onPress={() => navigation.navigate("ChatPage")}
             >
               <Image source={item.image} style={styles.profileImage} />
               <View style={styles.textContainer}>

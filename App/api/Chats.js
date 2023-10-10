@@ -1,4 +1,4 @@
-export const fetchMessages = async () => {
+export const fetchChats = async () => {
   // Simulate an API call
   // In a real scenario, replace this with an actual API fetch.
   return await new Promise((resolve) => {

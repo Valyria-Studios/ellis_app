@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { fetchMessages } from "../api/Chats";
+import { fetchChats } from "../api/Chats";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 
@@ -21,7 +21,7 @@ const Messages = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchMessages();
+      const data = await fetchChats();
       setMessages(data);
     };
     fetchData();

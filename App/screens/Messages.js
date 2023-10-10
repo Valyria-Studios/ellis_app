@@ -62,7 +62,9 @@ const Messages = () => {
             <TouchableOpacity
               style={styles.messageContainer}
               activeOpacity={0.7}
-              onPress={() => navigation.navigate("ChatPage")}
+              onPress={() =>
+                navigation.navigate("ChatPage", { chatName: item.name })
+              }
             >
               <Image source={item.image} style={styles.profileImage} />
               <View style={styles.textContainer}>

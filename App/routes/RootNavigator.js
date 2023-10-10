@@ -16,9 +16,9 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="ChatPage"
         component={ChatPage}
-        options={{
-          headerTitle: "hello", // You can set your title or use default.
-        }}
+        options={({ route }) => ({
+          headerTitle: route.params.chatName || "Chat",
+        })}
       />
     </RootStack.Navigator>
   );

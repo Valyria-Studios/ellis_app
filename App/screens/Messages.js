@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { fetchMessages } from "../api/messages";
+import { fetchMessages } from "../api/Chats";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 

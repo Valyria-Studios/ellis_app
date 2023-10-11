@@ -122,6 +122,11 @@ export default function App() {
               {"\n"}
               {amenity.address}
             </Text>
+            {amenity.type.map((type, index) => (
+              <Text key={index} style={styles.cardType}>
+                {type}
+              </Text>
+            ))}
           </Card>
         ))}
       </ScrollView>

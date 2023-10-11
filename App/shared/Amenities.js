@@ -4,6 +4,7 @@ const Amenities = [
     times: "24 hours",
     distance: "1 mile",
     address: "123 this place now",
+    type: ["Shelter", "Education", "Learn"],
     key: "1",
   },
   {
@@ -11,6 +12,7 @@ const Amenities = [
     times: "10:00 am - 6: 00 pm",
     distance: "800 feet",
     address: "123 your place",
+    type: ["Health", "Hygiene"],
     key: "2",
   },
   {
@@ -18,6 +20,7 @@ const Amenities = [
     times: "12:00 pm - 9:00 pm",
     distance: "3 miles",
     address: "123 my house",
+    type: ["Shop"],
     key: "3",
   },
   {
@@ -25,6 +28,7 @@ const Amenities = [
     times: "7:00 am - 4:00 am",
     distance: "0.4 mile",
     address: `'123 I don't know'`,
+    type: ["Work", "Hygiene"],
     key: "4",
   },
   {
@@ -32,6 +36,7 @@ const Amenities = [
     times: "7:00 am - 4:00 am",
     distance: "0.4 mile",
     address: `'123 I don't know'`,
+    type: ["Food", "Finance"],
     key: "5",
   },
   {
@@ -39,6 +44,7 @@ const Amenities = [
     times: "7:00 am - 4:00 am",
     distance: "0.4 mile",
     address: `'123 I don't know'`,
+    type: ["Shelter", "Health", "Family"],
     key: "6",
   },
 ];

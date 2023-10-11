@@ -27,6 +27,10 @@ const Messages = () => {
     fetchData();
   }, []);
 
+  const filteredMessages = messages.filter((message) =>
+    message.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -56,7 +60,7 @@ const Messages = () => {
       </View>
       <View>
         <FlatList
-          data={messages}
+          data={filteredMessages}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
             <TouchableOpacity

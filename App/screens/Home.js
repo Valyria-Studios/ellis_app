@@ -30,6 +30,14 @@ export default function App() {
   const handlePress = (category) => {
     setSelectedCategory(category);
 
+    if (category === selectedCategory) {
+      setSelectedCategory(null);
+      setFilteredAmenities(Amenities);
+      return;
+    }
+
+    setSelectedCategory(category);
+
     if (category === "All") {
       setFilteredAmenities(Amenities);
     } else if (category === "Other") {

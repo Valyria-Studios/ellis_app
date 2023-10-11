@@ -5,13 +5,17 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../shared/Card";
 import Amenities from "../shared/Amenities";
+import Fontisto from "@expo/vector-icons/Fontisto";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
 
   const handlePress = (category) => {
     if (selectedCategory === category) {
@@ -21,11 +25,31 @@ export default function App() {
     }
   };
 
+  const handleSearchChange = (text) => {
+    setSearchInput(text);
+    const filtered = Amenities.filter((amenity) =>
+      amenity.location.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredAmenities(filtered);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.search}>
-        <Text>Search Bar</Text>
-        <Text> Icon </Text>
+      <View style={styles.searchSection}>
+        <View style={styles.searchContainer}>
+          <TextInput
+            value={searchInput}
+            onChangeText={handleSearchChange}
+            placeholder="Type in keyword"
+            style={styles.searchBar}
+          />
+        </View>
+        <Fontisto
+          name="nav-icon-grid-a"
+          size={20}
+          color="#094851"
+          style={styles.gridIcon}
+        />
       </View>
       <View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -44,11 +68,18 @@ export default function App() {
               onPress={() => handlePress(category)}
               activeOpacity={1}
             >
-              <View>
+              <View
+                style={[
+                  styles.scrollerItemContainer,
+                  category === selectedCategory &&
+                    styles.selectedCategoryContainer,
+                ]}
+              >
                 <Text
                   style={[
                     styles.scrollerItems,
-                    category === selectedCategory && styles.selectedCategory,
+                    category === selectedCategory &&
+                      styles.selectedScrollerItem,
                   ]}
                 >
                   {category}
@@ -67,7 +98,10 @@ export default function App() {
             <Text style={styles.sortByItems}>Availability</Text>
           </ScrollView>
         </View>
-        {Amenities.map((amenity) => (
+        <View>
+          <Text style={styles.directory}>Directory</Text>
+        </View>
+        {filteredAmenities.map((amenity) => (
           <Card key={amenity.key}>
             <Text style={styles.cardLocation}>{amenity.location}</Text>
             <Text style={styles.cardDetails}>
@@ -87,34 +121,59 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingLeft: 10,
-    paddingBottom: 0,
+    backgroundColor: "#f3f8f9",
+    padding: 15,
     // alignItems: "center",
     // justifyContent: "center",
   },
-  search: {
+  searchSection: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 30,
   },
+  searchContainer: {
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
+    borderRadius: 50,
+    padding: 5,
+    alignItems: "center",
+    flex: 1,
+    height: 50,
+    backgroundColor: "white",
+  },
+  searchBar: {
+    flex: 1,
+    fontSize: 18,
+    color: "#999fa0",
+  },
+  gridIcon: {
+    paddingLeft: 20,
+  },
+  scrollerItemContainer: {
+    borderWidth: 2,
+    borderColor: "transparent",
+    borderRadius: 25,
+    marginTop: 5,
+    marginHorizontal: 5, // Added this for spacing between items
+  },
+
+  selectedCategoryContainer: {
+    borderColor: "#ebae52",
+    backgroundColor: "#ffffff", // Adjust this to your desired background color
+  },
+
   scrollerItems: {
     textAlign: "center",
     fontSize: 30,
-    padding: 15,
-    borderWidth: 2,
-    borderColor: "transparent",
-  },
-  selectedCategory: {
-    padding: 15,
     fontWeight: "600",
-    color: "#ebae52",
-    borderWidth: 2,
-    borderRadius: 30,
-    borderColor: "#ebae52",
+    padding: 10,
+    color: "#094851",
   },
+
+  selectedScrollerItem: {
+    color: "#533509",
+  },
+
   sortByContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -128,6 +187,11 @@ const styles = StyleSheet.create({
     color: "blue",
     padding: 20,
   },
+  directory: {
+    fontSize: 40,
+    fontWeight: "bold",
+  },
+
   cardLocation: {
     fontSize: 30,
   },

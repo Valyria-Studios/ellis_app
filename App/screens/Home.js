@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../shared/Card";
 import Amenities from "../shared/Amenities";
 import Fontisto from "@expo/vector-icons/Fontisto";
+import Icon from "@expo/vector-icons/Ionicons";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -37,6 +38,12 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View style={styles.searchSection}>
         <View style={styles.searchContainer}>
+          <Icon
+            name="search-outline"
+            size={25}
+            color="#616a6c"
+            style={styles.searchIcon}
+          />
           <TextInput
             value={searchInput}
             onChangeText={handleSearchChange}
@@ -90,14 +97,15 @@ export default function App() {
         </ScrollView>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.sortByContainer}>
-          <Text style={styles.sortBy}>Sort by</Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <Text style={styles.sortByItems}>Distance</Text>
-            <Text style={styles.sortByItems}>Type</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.sortByContainer}>
+            <Text style={styles.sortBy}>Sort by</Text>
             <Text style={styles.sortByItems}>Availability</Text>
-          </ScrollView>
-        </View>
+            <Text style={styles.sortByItems}>Distance</Text>
+            <Text style={styles.sortByItems}>Open Now</Text>
+            <Text style={styles.sortByItems}>Type</Text>
+          </View>
+        </ScrollView>
         <View>
           <Text style={styles.directory}>Directory</Text>
         </View>
@@ -125,6 +133,9 @@ const styles = StyleSheet.create({
     padding: 15,
     // alignItems: "center",
     // justifyContent: "center",
+  },
+  searchIcon: {
+    paddingHorizontal: 10,
   },
   searchSection: {
     flexDirection: "row",

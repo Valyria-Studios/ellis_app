@@ -58,7 +58,7 @@ export default function App() {
           style={styles.gridIcon}
         />
       </View>
-      <View>
+      <View style={styles.scrollerContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {[
             "All",
@@ -168,6 +168,10 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 
+  scrollerContainer: {
+    paddingVertical: 10,
+  },
+
   scrollerItemContainer: {
     borderWidth: 2,
     borderColor: "transparent",
@@ -202,7 +206,9 @@ const styles = StyleSheet.create({
 
   sortBy: {
     fontSize: 20,
-    color: "#1d2122",
+    color: "#171b1c",
+    fontWeight: "bold",
+    paddingRight: 10,
   },
 
   sortByItemContainer: {
@@ -215,13 +221,14 @@ const styles = StyleSheet.create({
 
   sortByItems: {
     fontSize: 20,
-    color: "#1d2122",
+    color: "#094851",
     padding: 10,
   },
 
   directory: {
     fontSize: 40,
     fontWeight: "bold",
+    color: "#094851",
   },
 
   cardLocation: {

@@ -4,7 +4,7 @@ const Amenities = [
     times: "24 hours",
     distance: "1 mile",
     address: "123 this place now",
-    type: ["Shelter", "Education", "Learn"],
+    type: ["Shelter", "Learn"],
     key: "1",
   },
   {
@@ -20,7 +20,7 @@ const Amenities = [
     times: "12:00 pm - 9:00 pm",
     distance: "3 miles",
     address: "123 my house",
-    type: ["Shop"],
+    type: ["Shop", "Family"],
     key: "3",
   },
   {

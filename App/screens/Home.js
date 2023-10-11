@@ -18,11 +18,35 @@ export default function App() {
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
 
+  const categories = [
+    "food",
+    "shelter",
+    "hygiene",
+    "health",
+    "work & learn",
+    "finance",
+  ];
+
   const handlePress = (category) => {
-    if (selectedCategory === category) {
-      setSelectedCategory(null);
+    setSelectedCategory(category);
+
+    if (category === "All") {
+      setFilteredAmenities(Amenities);
+    } else if (category === "Other") {
+      const filtered = Amenities.filter(
+        (amenity) =>
+          !amenity.type.some((typeValue) =>
+            categories.includes(typeValue.toLowerCase())
+          )
+      );
+      setFilteredAmenities(filtered);
     } else {
-      setSelectedCategory(category);
+      const filtered = Amenities.filter((amenity) =>
+        amenity.type.some(
+          (typeValue) => typeValue.toLowerCase() === category.toLowerCase()
+        )
+      );
+      setFilteredAmenities(filtered);
     }
   };
 
@@ -122,11 +146,13 @@ export default function App() {
               {"\n"}
               {amenity.address}
             </Text>
-            {amenity.type.map((type, index) => (
-              <Text key={index} style={styles.cardType}>
-                {type}
-              </Text>
-            ))}
+            {amenity.type && Array.isArray(amenity.type)
+              ? amenity.type.map((type, index) => (
+                  <Text key={index} style={styles.cardType}>
+                    {type}
+                  </Text>
+                ))
+              : null}
           </Card>
         ))}
       </ScrollView>

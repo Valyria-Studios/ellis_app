@@ -154,13 +154,15 @@ export default function App() {
               {"\n"}
               {amenity.address}
             </Text>
-            {amenity.type && Array.isArray(amenity.type)
-              ? amenity.type.map((type, index) => (
-                  <Text key={index} style={styles.cardType}>
-                    {type}
-                  </Text>
-                ))
-              : null}
+            <View style={styles.typeContainer}>
+              {amenity.type && Array.isArray(amenity.type)
+                ? amenity.type.map((type, index) => (
+                    <Text key={index} style={styles.individualType}>
+                      {type}
+                    </Text>
+                  ))
+                : null}
+            </View>
           </Card>
         ))}
       </ScrollView>
@@ -276,5 +278,23 @@ const styles = StyleSheet.create({
 
   cardDetails: {
     fontSize: 20,
+  },
+
+  typeContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap", // in case there are many types and they need to wrap to the next line
+    marginTop: 10,
+  },
+
+  individualType: {
+    color: "#114e57",
+    fontSize: 12,
+    borderWidth: 1,
+    borderColor: "#d9dcdd",
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 5, // spacing between types
+    marginBottom: 5,
   },
 });

@@ -100,10 +100,13 @@ export default function App() {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.sortByContainer}>
             <Text style={styles.sortBy}>Sort by</Text>
-            <Text style={styles.sortByItems}>Availability</Text>
-            <Text style={styles.sortByItems}>Distance</Text>
-            <Text style={styles.sortByItems}>Open Now</Text>
-            <Text style={styles.sortByItems}>Type</Text>
+            {["Availability", "Distance", "Open Now", "Type"].map(
+              (sortItem) => (
+                <View style={styles.sortByItemContainer} key={sortItem}>
+                  <Text style={styles.sortByItems}>{sortItem}</Text>
+                </View>
+              )
+            )}
           </View>
         </ScrollView>
         <View>
@@ -131,16 +134,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f3f8f9",
     padding: 15,
-    // alignItems: "center",
-    // justifyContent: "center",
+    paddingBottom: 0,
   },
+
   searchIcon: {
     paddingHorizontal: 10,
   },
+
   searchSection: {
     flexDirection: "row",
     alignItems: "center",
   },
+
   searchContainer: {
     flexDirection: "row",
     borderWidth: 1,
@@ -152,14 +157,17 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "white",
   },
+
   searchBar: {
     flex: 1,
     fontSize: 18,
     color: "#999fa0",
   },
+
   gridIcon: {
     paddingLeft: 20,
   },
+
   scrollerItemContainer: {
     borderWidth: 2,
     borderColor: "transparent",
@@ -186,18 +194,31 @@ const styles = StyleSheet.create({
   },
 
   sortByContainer: {
+    marginVertical: 15,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
+
   sortBy: {
     fontSize: 20,
+    color: "#1d2122",
   },
+
+  sortByItemContainer: {
+    margin: 5,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: "#daddde",
+    backgroundColor: "#ffffff",
+  },
+
   sortByItems: {
     fontSize: 20,
-    color: "blue",
-    padding: 20,
+    color: "#1d2122",
+    padding: 10,
   },
+
   directory: {
     fontSize: 40,
     fontWeight: "bold",
@@ -206,6 +227,7 @@ const styles = StyleSheet.create({
   cardLocation: {
     fontSize: 30,
   },
+
   cardDetails: {
     fontSize: 20,
   },

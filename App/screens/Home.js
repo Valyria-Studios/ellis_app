@@ -148,11 +148,11 @@ export default function App() {
           <Card key={amenity.key}>
             <Text style={styles.cardLocation}>{amenity.location}</Text>
             <Text style={styles.cardDetails}>
-              {amenity.times}
+              {amenity.address}
               {"\n"}
               {amenity.distance}
               {"\n"}
-              {amenity.address}
+              {amenity.times}
             </Text>
             <View style={styles.typeContainer}>
               {amenity.type && Array.isArray(amenity.type)
@@ -261,7 +261,8 @@ const styles = StyleSheet.create({
   },
 
   sortByItems: {
-    fontSize: 20,
+    fontFamily: "karla-regular",
+    fontSize: 16,
     color: "#094851",
     padding: 10,
   },
@@ -275,10 +276,12 @@ const styles = StyleSheet.create({
   cardLocation: {
     fontFamily: "gabarito-regular",
     fontSize: 20,
+    paddingBottom: 10,
   },
 
   cardDetails: {
-    fontSize: 20,
+    fontFamily: "karla-regular",
+    fontSize: 14,
   },
 
   typeContainer: {

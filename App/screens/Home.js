@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   scrollerItems: {
     textAlign: "center",
     fontSize: 30,
-    fontWeight: "600",
+    fontFamily: "gabarito-medium",
     padding: 10,
     color: "#094851",
   },
@@ -246,9 +246,9 @@ const styles = StyleSheet.create({
   },
 
   sortBy: {
+    fontFamily: "gabarito-semibold",
     fontSize: 20,
     color: "#171b1c",
-    fontWeight: "bold",
     paddingRight: 10,
   },
 
@@ -267,13 +267,14 @@ const styles = StyleSheet.create({
   },
 
   directory: {
+    fontFamily: "gabarito-bold",
     fontSize: 40,
-    fontWeight: "bold",
     color: "#094851",
   },
 
   cardLocation: {
-    fontSize: 30,
+    fontFamily: "gabarito-regular",
+    fontSize: 20,
   },
 
   cardDetails: {

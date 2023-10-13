@@ -39,7 +39,7 @@ const AppNavigator = () => {
         },
         tabBarActiveTintColor: "#FFFFFF", // Set active tab color
         tabBarInactiveTintColor: "gray", // Set inactive tab color
-        tabBarActiveBackgroundColor: "#10798a",
+        tabBarActiveBackgroundColor: "#10798B",
         tabBarStyle: {
           // height: 100,
           display: "flex",

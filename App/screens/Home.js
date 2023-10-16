@@ -148,9 +148,11 @@ export default function App() {
           <Card key={amenity.key}>
             <View style={styles.cardHeader}>
               <Text style={styles.cardLocation}>{amenity.location}</Text>
-              <Text style={styles.cardAvailability}>
-                {amenity.availability} Available
-              </Text>
+              <View style={styles.cardAvailabilityContainer}>
+                <Text style={styles.cardAvailabilityText}>
+                  {amenity.availability} Available
+                </Text>
+              </View>
             </View>
             <Text style={styles.cardDetails}>
               {amenity.address}
@@ -283,13 +285,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  cardAvailability: {
-    padding: 5,
+  cardAvailabilityContainer: {
+    padding: 10,
     justifyContent: "center",
     alignContent: "center",
-    fontSize: 15,
-    borderRadius: 10,
-    borderWidth: 2,
+    borderRadius: 25,
+    backgroundColor: "#10798a",
+  },
+
+  cardAvailabilityText: {
+    fontSize: 14,
+    color: "#e3eff1",
   },
 
   cardLocation: {

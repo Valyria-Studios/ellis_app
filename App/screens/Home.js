@@ -146,7 +146,12 @@ export default function App() {
         </View>
         {filteredAmenities.map((amenity) => (
           <Card key={amenity.key}>
-            <Text style={styles.cardLocation}>{amenity.location}</Text>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardLocation}>{amenity.location}</Text>
+              <Text style={styles.cardAvailability}>
+                {amenity.availability} Available
+              </Text>
+            </View>
             <Text style={styles.cardDetails}>
               {amenity.address}
               {"\n"}
@@ -271,6 +276,20 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-bold",
     fontSize: 40,
     color: "#094851",
+  },
+
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  cardAvailability: {
+    padding: 5,
+    justifyContent: "center",
+    alignContent: "center",
+    fontSize: 15,
+    borderRadius: 10,
+    borderWidth: 2,
   },
 
   cardLocation: {

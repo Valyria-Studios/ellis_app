@@ -14,6 +14,7 @@ const getFonts = () =>
     "karla-italic": require("./assets/fonts/Karla-Italic.ttf"),
     "karla-regular": require("./assets/fonts/Karla-Regular.ttf"),
     "karla-semibold": require("./assets/fonts/Karla-SemiBold.ttf"),
+    "jetbrainsmono-regular": require("./assets/fonts/JetBrainsMono-Regular.ttf"),
   });
 
 export default function App() {

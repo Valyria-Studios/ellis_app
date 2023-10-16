@@ -1,11 +1,12 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ImageBackground } from "react-native";
 
 export default function Card(props) {
   return (
-    <View style={styles.card}>
+    <ImageBackground source={props.image} style={styles.card}>
+      <View style={styles.overlay} />
       <View style={styles.cardContent}>{props.children}</View>
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -21,7 +22,14 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     marginHorizontal: 4,
     marginVertical: 6,
+    overflow: "hidden",
   },
+
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(255,255,255,0.7)",
+  },
+
   cardContent: {
     marginHorizontal: 18,
     marginVertical: 20,

@@ -12,6 +12,7 @@ import Card from "../shared/Card";
 import Amenities from "../shared/Amenities";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
+import getAmenityImage from "../shared/getAmenityImage";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -145,7 +146,7 @@ export default function App() {
           <Text style={styles.directory}>Directory</Text>
         </View>
         {filteredAmenities.map((amenity) => (
-          <Card key={amenity.key}>
+          <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
             <View style={styles.cardHeader}>
               <Text style={styles.cardLocation}>{amenity.location}</Text>
               <View

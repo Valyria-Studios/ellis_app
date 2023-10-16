@@ -6,6 +6,7 @@ const Amenities = [
     address: "123 this place now",
     type: ["Shelter", "Learn"],
     availability: "20",
+    image: "../assets/images/location1.jpg",
     key: "1",
   },
   {
@@ -15,6 +16,7 @@ const Amenities = [
     address: "123 your place",
     type: ["Health", "Hygiene"],
     availability: "2",
+    image: "../assets/images/location2.jpg",
     key: "2",
   },
   {
@@ -24,6 +26,7 @@ const Amenities = [
     address: "123 my house",
     type: ["Shop", "Family"],
     availability: "0",
+    image: "../assets/images/location3.jpg",
     key: "3",
   },
   {
@@ -33,6 +36,7 @@ const Amenities = [
     address: `'123 I don't know'`,
     type: ["Work", "Hygiene"],
     availability: "7",
+    image: "../assets/images/location4.jpg",
     key: "4",
   },
   {
@@ -41,7 +45,8 @@ const Amenities = [
     distance: "0.4 mile",
     address: `'123 I don't know'`,
     type: ["Food", "Finance"],
-    availability: "12",
+    availability: "0",
+    image: "../assets/images/location5.jpg",
     key: "5",
   },
   {
@@ -51,7 +56,28 @@ const Amenities = [
     address: `'123 I don't know'`,
     type: ["Shelter", "Health", "Family"],
     availability: "15",
+    image: "../assets/images/location6.jpg",
     key: "6",
+  },
+  {
+    location: "nail salon",
+    times: "1:00 pm -  7:00 pm",
+    distance: "0.8 mile",
+    address: `'123 I don't know'`,
+    type: ["Health", "Beauty"],
+    availability: "4",
+    image: "../assets/images/location7.jpg",
+    key: "7",
+  },
+  {
+    location: "night school",
+    times: "10:00 pm - 3:00 am",
+    distance: "3 mile",
+    address: `'123 I don't know'`,
+    type: ["Education", "Learning"],
+    availability: "0",
+    image: "../assets/images/location8.jpg",
+    key: "8",
   },
 ];
 

@@ -7,6 +7,10 @@ export const getSortedAmenities = (amenities, sortCriteria) => {
         const distanceB = convertToFeet(b.distance);
         return distanceA - distanceB;
       });
+    case "Availability":
+      return sortedAmenities.sort((a, b) => {
+        return parseInt(b.availability, 10) - parseInt(a.availability, 10);
+      });
     // Add other sorting criteria as needed
     default:
       return amenities; // if no criteria or unknown, return original order

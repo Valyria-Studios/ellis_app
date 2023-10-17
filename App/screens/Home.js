@@ -16,10 +16,11 @@ import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 
 export default function App() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  // const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
   const [sortCriteria, setSortCriteria] = useState(null);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState(null);
 
   useEffect(() => {
     if (sortCriteria) {
@@ -39,34 +40,39 @@ export default function App() {
     "finance",
   ];
 
-  const handlePress = (category) => {
-    setSelectedCategory(category);
-
-    if (category === selectedCategory) {
-      setSelectedCategory(null);
-      setFilteredAmenities(Amenities);
-      return;
-    }
-
-    setSelectedCategory(category);
-
+  const applyCategoryFilter = (category) => {
     if (category === "All") {
-      setFilteredAmenities(Amenities);
+      return Amenities;
     } else if (category === "Other") {
-      const filtered = Amenities.filter(
+      return Amenities.filter(
         (amenity) =>
           !amenity.type.some((typeValue) =>
             categories.includes(typeValue.toLowerCase())
           )
       );
-      setFilteredAmenities(filtered);
     } else {
-      const filtered = Amenities.filter((amenity) =>
+      return Amenities.filter((amenity) =>
         amenity.type.some(
           (typeValue) => typeValue.toLowerCase() === category.toLowerCase()
         )
       );
-      setFilteredAmenities(filtered);
+    }
+  };
+
+  const handlePress = (category) => {
+    if (category === selectedCategoryFilter) {
+      // If the clicked category is the same as the currently selected category,
+      // reset to the original list and clear the selected category.
+      setFilteredAmenities(Amenities);
+      setSelectedCategoryFilter(null);
+    } else {
+      // Apply the category filter and update the selected category.
+      const filteredByCategory = applyCategoryFilter(category);
+      setFilteredAmenities(filteredByCategory);
+      setSelectedCategoryFilter(category);
+    }
+    if (sortCriteria) {
+      setSortCriteria(null);
     }
   };
 
@@ -80,7 +86,11 @@ export default function App() {
 
   const handleSortPress = (criterion) => {
     if (sortCriteria === criterion) {
-      setFilteredAmenities(filteredAmenities);
+      let resetList = Amenities;
+      if (selectedCategoryFilter) {
+        resetList = applyCategoryFilter(selectedCategoryFilter);
+      }
+      setFilteredAmenities(resetList);
       setSortCriteria(null);
     } else {
       setSortCriteria(criterion);
@@ -131,14 +141,14 @@ export default function App() {
               <View
                 style={[
                   styles.scrollerItemContainer,
-                  category === selectedCategory &&
+                  category === selectedCategoryFilter &&
                     styles.selectedCategoryContainer,
                 ]}
               >
                 <Text
                   style={[
                     styles.scrollerItems,
-                    category === selectedCategory &&
+                    category === selectedCategoryFilter &&
                       styles.selectedScrollerItem,
                   ]}
                 >

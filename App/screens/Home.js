@@ -16,7 +16,6 @@ import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 
 export default function App() {
-  // const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
   const [sortCriteria, setSortCriteria] = useState(null);
@@ -224,10 +223,8 @@ export default function App() {
             <View style={styles.typeContainer}>
               {amenity.type && Array.isArray(amenity.type)
                 ? amenity.type.map((type, index) => (
-                    <View style={styles.typeBackground}>
-                      <Text key={index} style={styles.individualType}>
-                        {type}
-                      </Text>
+                    <View key={index} style={styles.typeBackground}>
+                      <Text style={styles.individualType}>{type}</Text>
                     </View>
                   ))
                 : null}

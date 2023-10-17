@@ -19,15 +19,14 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
-  const [sortCriteria, setSortCriteria] = useState("");
+  const [sortCriteria, setSortCriteria] = useState(null);
 
   useEffect(() => {
-    if (sortCriteria === "Distance") {
-      const sortedByDistance = getSortedAmenities(
-        filteredAmenities,
-        sortCriteria
-      );
-      setFilteredAmenities(sortedByDistance);
+    if (sortCriteria) {
+      const sorted = getSortedAmenities(Amenities, sortCriteria);
+      setFilteredAmenities(sorted);
+    } else {
+      setFilteredAmenities(Amenities);
     }
   }, [sortCriteria]);
 
@@ -77,6 +76,14 @@ export default function App() {
       amenity.location.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredAmenities(filtered);
+  };
+
+  const handleSortPress = (criterion) => {
+    if (sortCriteria === criterion) {
+      setSortCriteria(null);
+    } else {
+      setSortCriteria(criterion);
+    }
   };
 
   return (
@@ -149,7 +156,7 @@ export default function App() {
               (sortItem) => (
                 <TouchableOpacity
                   key={sortItem}
-                  onPress={() => setSortCriteria(sortItem)}
+                  onPress={() => handleSortPress(sortItem)}
                 >
                   <View style={styles.sortByItemContainer} key={sortItem}>
                     <Text style={styles.sortByItems}>{sortItem}</Text>

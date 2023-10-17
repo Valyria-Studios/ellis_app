@@ -23,10 +23,10 @@ export default function App() {
 
   useEffect(() => {
     if (sortCriteria) {
-      const sorted = getSortedAmenities(Amenities, sortCriteria);
+      const sorted = getSortedAmenities(filteredAmenities, sortCriteria);
       setFilteredAmenities(sorted);
     } else {
-      setFilteredAmenities(Amenities);
+      setFilteredAmenities(filteredAmenities);
     }
   }, [sortCriteria]);
 
@@ -80,6 +80,7 @@ export default function App() {
 
   const handleSortPress = (criterion) => {
     if (sortCriteria === criterion) {
+      setFilteredAmenities(filteredAmenities);
       setSortCriteria(null);
     } else {
       setSortCriteria(criterion);
@@ -157,6 +158,7 @@ export default function App() {
                 <TouchableOpacity
                   key={sortItem}
                   onPress={() => handleSortPress(sortItem)}
+                  activeOpacity={1}
                 >
                   <View style={styles.sortByItemContainer} key={sortItem}>
                     <Text style={styles.sortByItems}>{sortItem}</Text>

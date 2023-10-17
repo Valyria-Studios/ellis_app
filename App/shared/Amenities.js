@@ -32,7 +32,7 @@ const Amenities = [
   {
     location: "haircuts",
     times: "7:00 am - 4:00 am",
-    distance: "0.4 mile",
+    distance: "6 mile",
     address: `'123 I don't know'`,
     type: ["Work", "Hygiene"],
     availability: "7",
@@ -42,7 +42,7 @@ const Amenities = [
   {
     location: "restaurant",
     times: "7:00 am - 4:00 am",
-    distance: "0.4 mile",
+    distance: "0.8 mile",
     address: `'123 I don't know'`,
     type: ["Food", "Finance"],
     availability: "0",
@@ -52,7 +52,7 @@ const Amenities = [
   {
     location: "sleeping",
     times: "7:00 am - 4:00 am",
-    distance: "0.4 mile",
+    distance: "232 feet",
     address: `'123 I don't know'`,
     type: ["Shelter", "Health", "Family"],
     availability: "15",
@@ -62,7 +62,7 @@ const Amenities = [
   {
     location: "nail salon",
     times: "1:00 pm -  7:00 pm",
-    distance: "0.8 mile",
+    distance: "0.9 mile",
     address: `'123 I don't know'`,
     type: ["Health", "Beauty"],
     availability: "4",
@@ -72,7 +72,7 @@ const Amenities = [
   {
     location: "night school",
     times: "10:00 pm - 3:00 am",
-    distance: "3 mile",
+    distance: "2 mile",
     address: `'123 I don't know'`,
     type: ["Education", "Learning"],
     availability: "0",

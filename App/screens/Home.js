@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,11 +13,23 @@ import Amenities from "../shared/Amenities";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 import getAmenityImage from "../shared/getAmenityImage";
+import { getSortedAmenities } from "../filtering/sortByFiltering";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
+  const [sortCriteria, setSortCriteria] = useState("");
+
+  useEffect(() => {
+    if (sortCriteria === "Distance") {
+      const sortedByDistance = getSortedAmenities(
+        filteredAmenities,
+        sortCriteria
+      );
+      setFilteredAmenities(sortedByDistance);
+    }
+  }, [sortCriteria]);
 
   const categories = [
     "food",
@@ -135,9 +147,14 @@ export default function App() {
             <Text style={styles.sortBy}>Sort by</Text>
             {["Availability", "Distance", "Open Now", "Type"].map(
               (sortItem) => (
-                <View style={styles.sortByItemContainer} key={sortItem}>
-                  <Text style={styles.sortByItems}>{sortItem}</Text>
-                </View>
+                <TouchableOpacity
+                  key={sortItem}
+                  onPress={() => setSortCriteria(sortItem)}
+                >
+                  <View style={styles.sortByItemContainer} key={sortItem}>
+                    <Text style={styles.sortByItems}>{sortItem}</Text>
+                  </View>
+                </TouchableOpacity>
               )
             )}
           </View>

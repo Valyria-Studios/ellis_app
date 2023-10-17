@@ -224,9 +224,11 @@ export default function App() {
             <View style={styles.typeContainer}>
               {amenity.type && Array.isArray(amenity.type)
                 ? amenity.type.map((type, index) => (
-                    <Text key={index} style={styles.individualType}>
-                      {type}
-                    </Text>
+                    <View style={styles.typeBackground}>
+                      <Text key={index} style={styles.individualType}>
+                        {type}
+                      </Text>
+                    </View>
                   ))
                 : null}
             </View>
@@ -309,8 +311,8 @@ const styles = StyleSheet.create({
     margin: 5,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: "#daddde",
-    backgroundColor: "#daddde",
+    borderColor: "#c9cdcd",
+    backgroundColor: "#c9cdcd",
   },
 
   activeSortByItems: {
@@ -338,7 +340,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: "#daddde",
+    borderColor: "#c9cdcd",
     backgroundColor: "#ffffff",
   },
 
@@ -396,15 +398,19 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  individualType: {
-    color: "#114e57",
-    fontSize: 12,
+  typeBackground: {
     borderWidth: 1,
-    borderColor: "#d9dcdd",
+    borderColor: "#c9cbcd",
+    backgroundColor: "#ffffff",
     borderRadius: 12,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginRight: 5, // spacing between types
     marginBottom: 5,
+  },
+
+  individualType: {
+    color: "#114e57",
+    fontSize: 12,
   },
 });

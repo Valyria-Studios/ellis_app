@@ -160,8 +160,22 @@ export default function App() {
                   onPress={() => handleSortPress(sortItem)}
                   activeOpacity={1}
                 >
-                  <View style={styles.sortByItemContainer} key={sortItem}>
-                    <Text style={styles.sortByItems}>{sortItem}</Text>
+                  <View
+                    style={[
+                      styles.sortByItemContainer,
+                      sortItem === sortCriteria &&
+                        styles.activeSortByItemContainer,
+                    ]}
+                    key={sortItem}
+                  >
+                    <Text
+                      style={[
+                        styles.sortByItems,
+                        sortItem === sortCriteria && styles.activeSortByItems,
+                      ]}
+                    >
+                      {sortItem}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               )
@@ -279,6 +293,21 @@ const styles = StyleSheet.create({
 
   selectedScrollerItem: {
     color: "#533509",
+  },
+
+  activeSortByItemContainer: {
+    margin: 5,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: "#daddde",
+    backgroundColor: "#daddde",
+  },
+
+  activeSortByItems: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#094851",
+    padding: 10,
   },
 
   sortByContainer: {

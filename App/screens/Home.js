@@ -380,12 +380,14 @@ const styles = StyleSheet.create({
 
   cardLocation: {
     fontFamily: "gabarito-regular",
+    color: "#094851",
     fontSize: 20,
     paddingBottom: 10,
   },
 
   cardDetails: {
     fontFamily: "karla-regular",
+    color: "#202425",
     fontSize: 14,
   },
 

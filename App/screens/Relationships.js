@@ -57,6 +57,7 @@ const RelationshipPage = () => {
           <Text style={styles.relationships}>Relationships</Text>
         </View>
         <View style={styles.favoriteContainer}>
+          <Text style={styles.headerText}>Favorites</Text>
           <ScrollView horizontal={true}>
             <Image
               source={require("../assets/images/userImage1.jpg")}
@@ -71,6 +72,9 @@ const RelationshipPage = () => {
         </View>
 
         {/* Filter Section */}
+        <View>
+          <Text style={styles.headerText}>All Relationships</Text>
+        </View>
         <View style={styles.filterContainer}>
           <TouchableOpacity
             style={styles.filterButton}
@@ -155,7 +159,7 @@ const styles = StyleSheet.create({
   },
 
   relationshipsContainer: {
-    marginVertical: 20,
+    marginVertical: 15,
   },
 
   relationships: {
@@ -168,17 +172,26 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
+  headerText: {
+    fontSize: 20,
+    color: "#727c7d",
+    marginBottom: 10,
+    fontFamily: "gabarito-regular",
+  },
+
   profileIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 50,
     marginLeft: 10,
   },
+
   filterContainer: {
     flexDirection: "row",
     marginBottom: 20,
     justifyContent: "space-between",
   },
+
   filterButton: {
     borderColor: "gray",
     borderWidth: 1,

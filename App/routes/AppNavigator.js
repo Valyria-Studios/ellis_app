@@ -38,7 +38,7 @@ const AppNavigator = () => {
           return <IconComponent name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: "#FFFFFF", // Set active tab color
-        tabBarInactiveTintColor: "gray", // Set inactive tab color
+        tabBarInactiveTintColor: "#094851", // Set inactive tab color
         tabBarActiveBackgroundColor: "#10798B",
         tabBarStyle: {
           // height: 100,

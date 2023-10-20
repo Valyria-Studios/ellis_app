@@ -189,18 +189,17 @@ const styles = StyleSheet.create({
   filterContainer: {
     flexDirection: "row",
     marginBottom: 20,
-    justifyContent: "space-between",
   },
 
   filterButton: {
-    borderColor: "gray",
+    borderColor: "#1e8191",
     borderWidth: 1,
     borderRadius: 20,
     padding: 10,
-    flex: 1,
+    marginRight: 10,
     alignItems: "center",
-    marginHorizontal: 5,
   },
+
   card: {
     borderColor: "gray",
     borderWidth: 1,

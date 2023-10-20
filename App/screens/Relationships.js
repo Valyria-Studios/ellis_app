@@ -53,6 +53,9 @@ const RelationshipPage = () => {
         </View>
 
         {/* Favorite People Section */}
+        <View style={styles.relationshipsContainer}>
+          <Text style={styles.relationships}>Relationships</Text>
+        </View>
         <View style={styles.favoriteContainer}>
           <ScrollView horizontal={true}>
             <Image
@@ -151,8 +154,18 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 
-  favoriteContainer: {
+  relationshipsContainer: {
     marginVertical: 20,
+  },
+
+  relationships: {
+    fontSize: 40,
+    color: "#094851",
+    fontFamily: "gabarito-bold",
+  },
+
+  favoriteContainer: {
+    marginBottom: 20,
   },
 
   profileIcon: {

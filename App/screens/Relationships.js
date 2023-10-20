@@ -13,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 import Card from "../shared/Card";
+import Clients from "../shared/Clients";
 
 const RelationshipPage = () => {
   const [filter, setFilter] = useState("current"); // default filter
@@ -95,26 +96,13 @@ const RelationshipPage = () => {
             <Text>Past</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Cards Section based on filter */}
-        {filter === "current" && (
-          <View style={styles.card}>
-            <Text>Client Card for Current</Text>
-            {/* Add your card component here */}
-          </View>
-        )}
-        {filter === "requested" && (
-          <View style={styles.card}>
-            <Text>Client Card for Requested</Text>
-            {/* Add your card component here */}
-          </View>
-        )}
-        {filter === "past" && (
-          <View style={styles.card}>
-            <Text>Client Card for Past</Text>
-            {/* Add your card component here */}
-          </View>
-        )}
+        {Clients.map((client) => (
+          <Card key={client.key}>
+            <View>
+              <Text>{client.name}</Text>
+            </View>
+          </Card>
+        ))}
       </ScrollView>
     </SafeAreaView>
   );

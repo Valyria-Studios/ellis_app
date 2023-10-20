@@ -32,3 +32,5 @@ const Clients = [
     // progressbar: 'some code to relate services and completion'
   },
 ];
+
+export default Clients;

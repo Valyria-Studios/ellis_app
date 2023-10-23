@@ -13,7 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 import Card from "../shared/Card";
-import Clients from "../shared/Clients";
+import Clients from "../api/Clients";
 
 const RelationshipPage = () => {
   const [filter, setFilter] = useState("current"); // default filter
@@ -98,6 +98,7 @@ const RelationshipPage = () => {
         </View>
         {Clients.map((client) => (
           <Card key={client.key}>
+            <Image source={client.image} style= {styles.profileImage} />
             <View>
               <Text>{client.name}</Text>
             </View>
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingBottom: 0,
   },
+
   searchIcon: {
     paddingHorizontal: 10,
   },

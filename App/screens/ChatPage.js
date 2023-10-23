@@ -75,16 +75,7 @@ const styles = StyleSheet.create({
   chat: {
     flex: 1,
   },
-  header: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: "#ddd",
-    backgroundColor: "#f5f5f5",
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
+
   messagesContainer: {
     padding: 10,
   },

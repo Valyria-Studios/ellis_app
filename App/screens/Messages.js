@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { fetchChats } from "../api/Chats";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
+import globalstyles from "../shared/globalStyles";
 
 const Messages = () => {
   const navigation = useNavigation();
@@ -34,16 +35,16 @@ const Messages = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.searchSection}>
-          <View style={styles.searchContainer}>
+        <View style={globalstyles.searchSection}>
+          <View style={globalstyles.searchContainer}>
             <Icon
               name="search-outline"
               size={25}
               color="#616a6c"
-              style={styles.searchIcon}
+              style={globalstyles.searchIcon}
             />
             <TextInput
-              style={styles.searchBar}
+              style={globalstyles.searchBar}
               value={search}
               onChangeText={setSearch}
               placeholder="Type in keyword"
@@ -53,7 +54,7 @@ const Messages = () => {
             name="nav-icon-grid-a"
             size={20}
             color="#094851"
-            style={styles.gridIcon}
+            style={globalstyles.gridIcon}
           />
         </View>
         <Text style={styles.title}>Messages</Text>
@@ -89,42 +90,19 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: "#f3f8f9",
   },
+
   title: {
     fontSize: 40,
     fontWeight: "bold",
     marginTop: 10,
     color: "#094851",
   },
-  searchIcon: {
-    paddingHorizontal: 10,
-  },
-  searchSection: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  searchContainer: {
-    flexDirection: "row",
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
-    borderRadius: 50,
-    padding: 5,
-    alignItems: "center",
-    flex: 1,
-    height: 50,
-    backgroundColor: "white",
-  },
-  searchBar: {
-    flex: 1,
-    fontSize: 18,
-    color: "#999fa0",
-  },
-  gridIcon: {
-    paddingLeft: 20,
-  },
+
   container: {
     flex: 1,
     backgroundColor: "#f3f8f9",
   },
+
   messageContainer: {
     flexDirection: "row",
     padding: 15,
@@ -134,23 +112,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 10,
   },
+
   profileImage: {
     width: 50,
     height: 50,
     borderRadius: 25,
     marginRight: 15,
   },
+
   textContainer: {
     flex: 1,
   },
+
   name: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#0f4c55",
   },
+
   message: {
     color: "#343838",
   },
+
   timestamp: {
     color: "#6a7374",
     marginLeft: 10,

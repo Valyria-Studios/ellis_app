@@ -39,3 +39,5 @@ const globalstyles = StyleSheet.create({
     marginRight: 15,
   },
 });
+
+export default globalstyles;

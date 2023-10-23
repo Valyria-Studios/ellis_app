@@ -14,6 +14,7 @@ import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 import Card from "../shared/Card";
 import Clients from "../api/Clients";
+import globalstyles from "../shared/globalStyles";
 
 const RelationshipPage = () => {
   const [filter, setFilter] = useState("current"); // default filter
@@ -30,26 +31,26 @@ const RelationshipPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={styles.searchSection}>
-          <View style={styles.searchContainer}>
+        <View style={globalstyles.searchSection}>
+          <View style={globalstyles.searchContainer}>
             <Icon
               name="search-outline"
               size={25}
               color="#616a6c"
-              style={styles.searchIcon}
+              style={globalstyles.searchIcon}
             />
             <TextInput
               value={searchInput}
               onChangeText={handleSearchChange}
               placeholder="Type in keyword"
-              style={styles.searchBar}
+              style={globalstyles.searchBar}
             />
           </View>
           <Fontisto
             name="nav-icon-grid-a"
             size={20}
             color="#094851"
-            style={styles.gridIcon}
+            style={globalstyles.gridIcon}
           />
         </View>
 
@@ -115,37 +116,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#f3f8f9",
     padding: 15,
     paddingBottom: 0,
-  },
-
-  searchIcon: {
-    paddingHorizontal: 10,
-  },
-
-  searchSection: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  searchContainer: {
-    flexDirection: "row",
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
-    borderRadius: 50,
-    padding: 5,
-    alignItems: "center",
-    flex: 1,
-    height: 50,
-    backgroundColor: "white",
-  },
-
-  searchBar: {
-    flex: 1,
-    fontSize: 18,
-    color: "#999fa0",
-  },
-
-  gridIcon: {
-    paddingLeft: 20,
   },
 
   relationshipsContainer: {

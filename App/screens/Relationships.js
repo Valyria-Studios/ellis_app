@@ -30,7 +30,7 @@ const RelationshipPage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={globalstyles.searchSection}>
           <View style={globalstyles.searchContainer}>
             <Icon
@@ -108,7 +108,11 @@ const RelationshipPage = () => {
                   />
                   <View>
                     <Text style={styles.name}>{client.name}</Text>
-                    <Text style={styles.recency}>{client.recency}</Text>
+                    <Text style={styles.recency}>
+                      {client.status === "Requested"
+                        ? `Requested service ${client.recency}`
+                        : `Last met: ${client.recency}`}
+                    </Text>
                   </View>
                 </View>
                 <View>

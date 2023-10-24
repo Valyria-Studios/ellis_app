@@ -3,10 +3,10 @@
 const Clients = [
   {
     name: "John Smith",
-    status: "current", //should be dependent on progress bar and if they are working with providers
+    status: "Current", //should be dependent on progress bar and if they are working with providers
     recency: "last week", //should be rendered and updated from backend
     services: ["haircut", "financial aid", "celebrate recovery"], //should be dependent on the services they signed up for
-    providers: "receiving service from 5 people", //should be dynamically rendered
+    providers: "receiving service from 5 providers", //should be dynamically rendered depending on status
     image: require("../assets/images/userImage1.jpg"),
     key: "1",
 
@@ -14,10 +14,10 @@ const Clients = [
   },
   {
     name: "Tim Langston",
-    status: "past", //should be dependent on progress bar and if they are working with providers
+    status: "Past", //should be dependent on progress bar and if they are working with providers
     recency: "Jan 2024", //should be rendered and updated from backend depending on current date
     services: ["haircut", "financial aid", "celebrate recovery"], //should be dependent on the services they signed up for
-    providers: "receiving service from 5 people", //should be dynamically rendered
+    providers: "received 16 services from 5 providers", //should be dynamically rendered depending on status
     image: require("../assets/images/userImage2.jpg"),
 
     key: "2",
@@ -26,10 +26,10 @@ const Clients = [
   },
   {
     name: "Oscar Simmons",
-    status: "requested", //should be dependent on progress bar and if they are working with providers
+    status: "Requested", //should be dependent on progress bar and if they are working with providers
     recency: "yesterday", //should be rendered and updated from backend
     services: ["haircut", "financial aid", "celebrate recovery"], //should be dependent on the services they signed up for
-    providers: "receiving service from 5 people", //should be dynamically rendered
+    providers: "", //should be dynamically rendered depending on status
     image: require("../assets/images/userImage3.jpg"),
     key: "3",
 

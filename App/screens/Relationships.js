@@ -100,7 +100,7 @@ const RelationshipPage = () => {
         </View>
         {filteredClients.map((client) => (
           <Card key={client.key}>
-            <View style={styles.cardContainer}>
+            <View style={styles.headerContainer}>
               <View style={styles.header}>
                 <View style={styles.start}>
                   <Image
@@ -155,6 +155,9 @@ const RelationshipPage = () => {
                   </View>
                 </View>
               </View>
+            </View>
+            <View>
+              <Text>{client.providers}</Text>
             </View>
           </Card>
         ))}
@@ -213,8 +216,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  cardContainer: {
+  headerContainer: {
     flexDirection: "row",
+    marginBottom: 20,
   },
 
   header: {

@@ -19,13 +19,14 @@ import globalstyles from "../shared/globalStyles";
 const RelationshipPage = () => {
   const [filter, setFilter] = useState("current"); // default filter
   const [searchInput, setSearchInput] = useState("");
+  const [filteredClients, setFilteredClients] = useState(Clients);
 
   const handleSearchChange = (text) => {
     setSearchInput(text);
-    const filtered = Amenities.filter((amenity) =>
-      amenity.location.toLowerCase().includes(text.toLowerCase())
+    const filtered = Clients.filter((client) =>
+      client.name.toLowerCase().includes(text.toLowerCase())
     );
-    setFilteredAmenities(filtered);
+    setFilteredClients(filtered);
   };
 
   return (
@@ -97,7 +98,7 @@ const RelationshipPage = () => {
             <Text>Past</Text>
           </TouchableOpacity>
         </View>
-        {Clients.map((client) => (
+        {filteredClients.map((client) => (
           <Card key={client.key}>
             <View style={styles.cardContainer}>
               <View style={styles.header}>

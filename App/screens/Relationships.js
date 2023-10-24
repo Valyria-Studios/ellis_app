@@ -112,7 +112,42 @@ const RelationshipPage = () => {
                   </View>
                 </View>
                 <View>
-                  <Text style={styles.status}>{client.status}</Text>
+                  <View
+                    style={[
+                      styles.status,
+                      client.status === "Current"
+                        ? {
+                            backgroundColor: "#e7f2f3",
+                            borderColor: "#5fa5b1",
+                          }
+                        : {},
+                      client.status === "Requested"
+                        ? {
+                            backgroundColor: "#fdf8ee",
+                            borderColor: "#f3c98b",
+                          }
+                        : {},
+                      client.status === "Past"
+                        ? {
+                            backgroundColor: "#dbdddd",
+                            borderColor: "#c7cccc",
+                          }
+                        : {},
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.statusText,
+                        client.status === "Current" ? { color: "#41737a" } : {},
+                        client.status === "Requested"
+                          ? { color: "#694e27" }
+                          : {},
+                        client.status === "Past" ? { color: "#6c7576" } : {},
+                      ]}
+                    >
+                      {client.status}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -179,7 +214,6 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
-    // borderWidth: 3,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -192,11 +226,14 @@ const styles = StyleSheet.create({
   name: {},
 
   status: {
-    alignContent: "center",
+    alignItems: "center",
     justifyContent: "center",
-    padding: 10,
-    borderWidth: 3,
-    borderRadius: 20,
+    borderWidth: 1,
+    borderRadius: 18,
+  },
+
+  statusText: {
+    padding: 8,
     fontSize: 12,
   },
 });

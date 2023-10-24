@@ -99,9 +99,11 @@ const RelationshipPage = () => {
         </View>
         {Clients.map((client) => (
           <Card key={client.key}>
-            <Image source={client.image} style= {styles.profileImage} />
-            <View>
-              <Text>{client.name}</Text>
+            <View style={styles.cardContainer}>
+              <Image source={client.image} style={globalstyles.profileImage} />
+              <View style={styles.card}>
+                <Text>{client.name}</Text>
+              </View>
             </View>
           </Card>
         ))}
@@ -160,13 +162,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  card: {
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
+  cardContainer: {
+    flexDirection: "row",
   },
+
 });
 
 export default RelationshipPage;

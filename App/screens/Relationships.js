@@ -153,8 +153,33 @@ const RelationshipPage = () => {
                 </View>
               </View>
             </View>
-            <View>
-              <Text style={styles.providersText}>{client.providers}</Text>
+            <View
+              style={
+                client.status === "Requested"
+                  ? styles.requestedContainer
+                  : styles.providerContainer
+              }
+            >
+              <Text
+                style={
+                  client.status === "Requested"
+                    ? styles.requestedText
+                    : styles.providersText
+                }
+              >
+                {client.status === "Requested"
+                  ? `REQUESTED SERVICES`
+                  : `${client.providers}`}
+              </Text>
+            </View>
+            <View style={styles.typeContainer}>
+              {client.services && Array.isArray(client.services)
+                ? client.services.map((services, index) => (
+                    <View key={index} style={styles.typeBackground}>
+                      <Text style={styles.individualType}>{services}</Text>
+                    </View>
+                  ))
+                : null}
             </View>
           </Card>
         ))}
@@ -215,7 +240,7 @@ const styles = StyleSheet.create({
 
   headerContainer: {
     flexDirection: "row",
-    marginBottom: 20,
+    marginBottom: 15,
   },
 
   header: {
@@ -261,10 +286,46 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
+  requestedContainer: {
+    marginBottom: 0,
+  },
+
+  providerContainer: {
+    marginBottom: 10,
+  },
+
+  requestedText: {
+    fontSize: 16,
+    color: "#677072",
+    fontFamily: "gabarito-regular",
+  },
+
   providersText: {
     fontSize: 16,
     color: "#677072",
     fontFamily: "karla-regular",
+  },
+
+  typeContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap", // in case there are many types and they need to wrap to the next line
+    marginTop: 10,
+  },
+
+  typeBackground: {
+    borderWidth: 1,
+    borderColor: "#c9cbcd",
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 5, // spacing between types
+    marginBottom: 5,
+  },
+
+  individualType: {
+    color: "#114e57",
+    fontSize: 12,
   },
 });
 

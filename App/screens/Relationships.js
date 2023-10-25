@@ -22,23 +22,21 @@ const RelationshipPage = () => {
   const [filteredClients, setFilteredClients] = useState(Clients);
 
   useEffect(() => {
+    let filtered = Clients; 
     if (searchInput) {
       // If there's a search input, filter based on the search input and the status.
-      const filtered = Clients.filter(
+      filtered = filtered.filter(
         (client) =>
-          client.name.toLowerCase().includes(searchInput.toLowerCase()) &&
-          client.status === filter
+          client.name.toLowerCase().includes(searchInput.toLowerCase())
       );
-      setFilteredClients(filtered);
-    } else if (filter && filter !== "all") {
-      // If there's no search input, filter based only on the status.
-      const filtered = Clients.filter(
-        (client) => client.status.toLowerCase() === filter.toLowerCase()
+    } if (filter && filter !== "all") {
+      filtered = filtered.filter((client) => 
+          client.status.toLowerCase() === filter.toLowerCase()
       );
-      setFilteredClients(filtered);
-    } else {
-      setFilteredClients(Clients);
-    }
+  }
+
+  setFilteredClients(filtered);
+
   }, [filter, searchInput]);
 
   const handleSearchChange = (text) => {

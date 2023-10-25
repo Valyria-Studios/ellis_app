@@ -29,7 +29,7 @@ const Messages = () => {
   }, []);
 
   const filteredMessages = messages.filter((message) =>
-    message.name.toLowerCase().includes(searchInput.toLowerCase())
+    message.name.toLowerCase().includes(searchi.toLowerCase())
   );
 
   return (

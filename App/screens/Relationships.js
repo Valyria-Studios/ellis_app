@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,16 +17,56 @@ import Clients from "../api/Clients";
 import globalstyles from "../shared/globalStyles";
 
 const RelationshipPage = () => {
-  const [filter, setFilter] = useState("current"); // default filter
+  const [filter, setFilter] = useState("all"); // default filter
   const [searchInput, setSearchInput] = useState("");
   const [filteredClients, setFilteredClients] = useState(Clients);
 
+  useEffect(() => {
+    if (searchInput) {
+      // If there's a search input, filter based on the search input and the status.
+      const filtered = Clients.filter(
+        (client) =>
+          client.name.toLowerCase().includes(searchInput.toLowerCase()) &&
+          client.status === filter
+      );
+      setFilteredClients(filtered);
+    } else if (filter && filter !== "all") {
+      // If there's no search input, filter based only on the status.
+      const filtered = Clients.filter(
+        (client) => client.status.toLowerCase() === filter.toLowerCase()
+      );
+      setFilteredClients(filtered);
+    } else {
+      setFilteredClients(Clients);
+    }
+  }, [filter, searchInput]);
+
   const handleSearchChange = (text) => {
     setSearchInput(text);
-    const filtered = Clients.filter((client) =>
-      client.name.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilteredClients(filtered);
+    if (text) {
+      const filtered = Clients.filter((client) =>
+        client.name.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredClients(filtered);
+    } else {
+      // If search input is cleared, show all clients or consider the filter.
+      if (filter && filter !== "all") {
+        const filtered = Clients.filter(
+          (client) => client.status.toLowerCase() === filter.toLowerCase()
+        );
+        setFilteredClients(filtered);
+      } else {
+        setFilteredClients(Clients);
+      }
+    }
+  };
+
+  const toggleFilter = (selectedFilter) => {
+    if (filter === selectedFilter) {
+      setFilter("all"); // Reset filter
+    } else {
+      setFilter(selectedFilter);
+    }
   };
 
   return (
@@ -79,24 +119,30 @@ const RelationshipPage = () => {
           <Text style={styles.headerText}>All Relationships</Text>
         </View>
         <View style={styles.filterContainer}>
-          <TouchableOpacity
-            style={styles.filterButton}
-            onPress={() => setFilter("current")}
-          >
-            <Text>Current</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.filterButton}
-            onPress={() => setFilter("requested")}
-          >
-            <Text>Requested</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.filterButton}
-            onPress={() => setFilter("past")}
-          >
-            <Text>Past</Text>
-          </TouchableOpacity>
+          {["Current", "Requested", "Past"].map((statusFilter) => (
+            <TouchableOpacity
+              key={statusFilter}
+              onPress={() => toggleFilter(statusFilter)}
+              activeOpacity={1}
+            >
+              <View
+                style={[
+                  styles.filterButton,
+                  statusFilter === filter && styles.selectedFilterButton,
+                ]}
+                key={statusFilter}
+              >
+                <Text
+                  style={[
+                    styles.filterText,
+                    statusFilter === filter && styles.selectedFilterText,
+                  ]}
+                >
+                  {statusFilter}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
         {filteredClients.map((client) => (
           <Card key={client.key}>
@@ -231,6 +277,19 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
     alignItems: "center",
+  },
+
+  filterText: {
+    color: "#094851",
+    fontFamily: "gabarito-medium",
+  },
+
+  selectedFilterText: {
+    color: "#ffffff",
+  },
+
+  selectedFilterButton: {
+    backgroundColor: "#1e8191",
   },
 
   headerContainer: {

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../shared/Card";
-import Amenities from "../shared/Amenities";
+import Amenities from "../api/Amenities";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Icon from "@expo/vector-icons/Ionicons";
 import getAmenityImage from "../shared/getAmenityImage";

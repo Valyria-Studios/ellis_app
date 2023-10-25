@@ -32,11 +32,26 @@ const globalstyles = StyleSheet.create({
     paddingLeft: 20,
   },
 
-  profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 15,
+  tagContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap", // in case there are many types and they need to wrap to the next line
+    marginTop: 10,
+  },
+
+  tagBackground: {
+    borderWidth: 1,
+    borderColor: "#c9cbcd",
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 5, // spacing between types
+    marginBottom: 5,
+  },
+
+  individualTags: {
+    color: "#114e57",
+    fontSize: 12,
   },
 });
 

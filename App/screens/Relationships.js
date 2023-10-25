@@ -172,11 +172,13 @@ const RelationshipPage = () => {
                   : `${client.providers}`}
               </Text>
             </View>
-            <View style={styles.typeContainer}>
+            <View style={globalstyles.tagContainer}>
               {client.services && Array.isArray(client.services)
                 ? client.services.map((services, index) => (
-                    <View key={index} style={styles.typeBackground}>
-                      <Text style={styles.individualType}>{services}</Text>
+                    <View key={index} style={globalstyles.tagBackground}>
+                      <Text style={globalstyles.individualTags}>
+                        {services}
+                      </Text>
                     </View>
                   ))
                 : null}
@@ -304,28 +306,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#677072",
     fontFamily: "karla-regular",
-  },
-
-  typeContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap", // in case there are many types and they need to wrap to the next line
-    marginTop: 10,
-  },
-
-  typeBackground: {
-    borderWidth: 1,
-    borderColor: "#c9cbcd",
-    backgroundColor: "#ffffff",
-    borderRadius: 12,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginRight: 5, // spacing between types
-    marginBottom: 5,
-  },
-
-  individualType: {
-    color: "#114e57",
-    fontSize: 12,
   },
 });
 

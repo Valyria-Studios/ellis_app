@@ -221,11 +221,11 @@ export default function App() {
               {"\n"}
               {amenity.times}
             </Text>
-            <View style={styles.typeContainer}>
+            <View style={globalstyles.tagContainer}>
               {amenity.type && Array.isArray(amenity.type)
                 ? amenity.type.map((type, index) => (
-                    <View key={index} style={styles.typeBackground}>
-                      <Text style={styles.individualType}>{type}</Text>
+                    <View key={index} style={globalstyles.tagBackground}>
+                      <Text style={globalstyles.individualTags}>{type}</Text>
                     </View>
                   ))
                 : null}
@@ -359,27 +359,5 @@ const styles = StyleSheet.create({
     fontFamily: "karla-regular",
     color: "#202425",
     fontSize: 14,
-  },
-
-  typeContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap", // in case there are many types and they need to wrap to the next line
-    marginTop: 10,
-  },
-
-  typeBackground: {
-    borderWidth: 1,
-    borderColor: "#c9cbcd",
-    backgroundColor: "#ffffff",
-    borderRadius: 12,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginRight: 5, // spacing between types
-    marginBottom: 5,
-  },
-
-  individualType: {
-    color: "#114e57",
-    fontSize: 12,
   },
 });

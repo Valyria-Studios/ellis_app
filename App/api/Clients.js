@@ -6,11 +6,11 @@ const Clients = [
     status: "Current", //should be dependent on progress bar and if they are working with providers
     recency: "last week", //should be rendered and updated from backend
     services: [
-      "haircut",
-      "financial aid",
-      "celebrate recovery",
-      "food",
-      "sleep",
+      "Haircut",
+      "Financial Aid",
+      "Celebrate Recovery",
+      "Food",
+      "Sleep",
     ], //should be dependent on the services they signed up for
     providers: "Receiving service from 5 providers", //should be dynamically rendered depending on status
     image: require("../assets/images/userImage1.jpg"),
@@ -23,10 +23,10 @@ const Clients = [
     status: "Past", //should be dependent on progress bar and if they are working with providers
     recency: "Jan 2024", //should be rendered and updated from backend depending on current date
     services: [
-      "haircut",
-      "financial aid",
-      "celebrate recovery",
-      "housing documentation",
+      "Haircut",
+      "Financial Aid",
+      "Celebrate Recovery",
+      "Housing Documentation",
     ], //should be dependent on the services they signed up for
     providers: "Received 16 services from 5 providers", //should be dynamically rendered depending on status
     image: require("../assets/images/userImage2.jpg"),
@@ -39,7 +39,7 @@ const Clients = [
     name: "Oscar Simmons",
     status: "Requested", //should be dependent on progress bar and if they are working with providers
     recency: "yesterday", //should be rendered and updated from backend
-    services: ["haircut", "financial aid", "celebrate recovery"], //should be dependent on the services they signed up for
+    services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
     providers: "", //should be dynamically rendered depending on status
     image: require("../assets/images/userImage3.jpg"),
     key: "3",

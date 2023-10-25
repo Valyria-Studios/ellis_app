@@ -108,6 +108,7 @@ export default function App() {
             style={globalstyles.searchIcon}
           />
           <TextInput
+            blurOnSubmit={true}
             value={searchInput}
             onChangeText={handleSearchChange}
             placeholder="Type in keyword"

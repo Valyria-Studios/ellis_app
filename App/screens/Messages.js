@@ -18,7 +18,7 @@ import globalstyles from "../shared/globalStyles";
 const Messages = () => {
   const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
-  const [search, setSearch] = useState(""); // State to hold the search input
+  const [searchInput, setSearchInput] = useState(""); // State to hold the search input
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,7 @@ const Messages = () => {
   }, []);
 
   const filteredMessages = messages.filter((message) =>
-    message.name.toLowerCase().includes(search.toLowerCase())
+    message.name.toLowerCase().includes(searchInput.toLowerCase())
   );
 
   return (
@@ -44,9 +44,10 @@ const Messages = () => {
               style={globalstyles.searchIcon}
             />
             <TextInput
+              blurOnSubmit={true}
               style={globalstyles.searchBar}
-              value={search}
-              onChangeText={setSearch}
+              value={searchInput}
+              onChangeText={setSearchInput}
               placeholder="Type in keyword"
             />
           </View>
@@ -87,6 +88,7 @@ const Messages = () => {
 
 const styles = StyleSheet.create({
   header: {
+    paddingTop: 0,
     padding: 15,
     backgroundColor: "#f3f8f9",
   },

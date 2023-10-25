@@ -64,11 +64,11 @@ const RelationshipPage = () => {
           <ScrollView horizontal={true}>
             <Image
               source={require("../assets/images/userImage1.jpg")}
-              style={styles.profileIcon}
+              style={styles.favoriteIcons}
             />
             <Image
               source={require("../assets/images/userImage2.jpg")}
-              style={styles.profileIcon}
+              style={styles.favoriteIcons}
             />
             {/* ... add more profiles as needed */}
           </ScrollView>
@@ -103,10 +103,7 @@ const RelationshipPage = () => {
             <View style={styles.headerContainer}>
               <View style={styles.header}>
                 <View style={styles.start}>
-                  <Image
-                    source={client.image}
-                    style={globalstyles.profileImage}
-                  />
+                  <Image source={client.image} style={styles.profileImage} />
                   <View>
                     <Text style={styles.name}>{client.name}</Text>
                     <Text style={styles.recency}>
@@ -157,7 +154,7 @@ const RelationshipPage = () => {
               </View>
             </View>
             <View>
-              <Text>{client.providers}</Text>
+              <Text style={styles.providersText}>{client.providers}</Text>
             </View>
           </Card>
         ))}
@@ -195,7 +192,7 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-regular",
   },
 
-  profileIcon: {
+  favoriteIcons: {
     width: 60,
     height: 60,
     borderRadius: 50,
@@ -228,11 +225,29 @@ const styles = StyleSheet.create({
   },
 
   start: {
+    flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
+    alignItems: "center",
   },
 
-  name: {},
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    marginRight: 15,
+  },
+
+  name: {
+    color: "#053e59",
+    fontSize: 24,
+    fontFamily: "gabarito-semibold",
+  },
+
+  recency: {
+    color: "#636c6e",
+    fontSize: 16,
+    fontFamily: "karla-regular",
+  },
 
   status: {
     alignItems: "center",
@@ -244,6 +259,12 @@ const styles = StyleSheet.create({
   statusText: {
     padding: 8,
     fontSize: 12,
+  },
+
+  providersText: {
+    fontSize: 16,
+    color: "#677072",
+    fontFamily: "karla-regular",
   },
 });
 

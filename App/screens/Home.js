@@ -10,8 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../shared/Card";
 import Amenities from "../api/Amenities";
-import Fontisto from "@expo/vector-icons/Fontisto";
-import Icon from "@expo/vector-icons/Ionicons";
+import SearchComponent from "../shared/SearchHeader";
 import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 import globalstyles from "../shared/globalStyles";
@@ -99,29 +98,10 @@ export default function App() {
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <View style={globalstyles.searchSection}>
-        <View style={globalstyles.searchContainer}>
-          <Icon
-            name="search-outline"
-            size={25}
-            color="#616a6c"
-            style={globalstyles.searchIcon}
-          />
-          <TextInput
-            blurOnSubmit={true}
-            value={searchInput}
-            onChangeText={handleSearchChange}
-            placeholder="Type in keyword"
-            style={globalstyles.searchBar}
-          />
-        </View>
-        <Fontisto
-          name="nav-icon-grid-a"
-          size={20}
-          color="#094851"
-          style={globalstyles.gridIcon}
-        />
-      </View>
+      <SearchComponent
+        searchInput={searchInput}
+        setSearchInput={handleSearchChange}
+      />
       <View style={styles.scrollerContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {[

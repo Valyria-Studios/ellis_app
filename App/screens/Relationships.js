@@ -10,8 +10,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Fontisto from "@expo/vector-icons/Fontisto";
-import Icon from "@expo/vector-icons/Ionicons";
+import SearchComponent from "../shared/SearchHeader";
 import Card from "../shared/Card";
 import Clients from "../api/Clients";
 import globalstyles from "../shared/globalStyles";
@@ -22,21 +21,20 @@ const RelationshipPage = () => {
   const [filteredClients, setFilteredClients] = useState(Clients);
 
   useEffect(() => {
-    let filtered = Clients; 
+    let filtered = Clients;
     if (searchInput) {
       // If there's a search input, filter based on the search input and the status.
+      filtered = filtered.filter((client) =>
+        client.name.toLowerCase().includes(searchInput.toLowerCase())
+      );
+    }
+    if (filter && filter !== "all") {
       filtered = filtered.filter(
-        (client) =>
-          client.name.toLowerCase().includes(searchInput.toLowerCase())
+        (client) => client.status.toLowerCase() === filter.toLowerCase()
       );
-    } if (filter && filter !== "all") {
-      filtered = filtered.filter((client) => 
-          client.status.toLowerCase() === filter.toLowerCase()
-      );
-  }
+    }
 
-  setFilteredClients(filtered);
-
+    setFilteredClients(filtered);
   }, [filter, searchInput]);
 
   const handleSearchChange = (text) => {
@@ -70,29 +68,10 @@ const RelationshipPage = () => {
   return (
     <SafeAreaView style={globalstyles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={globalstyles.searchSection}>
-          <View style={globalstyles.searchContainer}>
-            <Icon
-              name="search-outline"
-              size={25}
-              color="#616a6c"
-              style={globalstyles.searchIcon}
-            />
-            <TextInput
-              blurOnSubmit={true}
-              value={searchInput}
-              onChangeText={handleSearchChange}
-              placeholder="Type in keyword"
-              style={globalstyles.searchBar}
-            />
-          </View>
-          <Fontisto
-            name="nav-icon-grid-a"
-            size={20}
-            color="#094851"
-            style={globalstyles.gridIcon}
-          />
-        </View>
+        <SearchComponent
+          searchInput={searchInput}
+          setSearchInput={handleSearchChange}
+        />
 
         {/* Favorite People Section */}
         <View style={styles.relationshipsContainer}>

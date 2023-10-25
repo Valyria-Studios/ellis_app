@@ -30,7 +30,7 @@ const RelationshipPage = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={globalstyles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={globalstyles.searchSection}>
           <View style={globalstyles.searchContainer}>
@@ -191,13 +191,6 @@ const RelationshipPage = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f3f8f9",
-    padding: 15,
-    paddingBottom: 0,
-  },
-
   relationshipsContainer: {
     marginVertical: 15,
   },

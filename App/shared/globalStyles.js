@@ -1,6 +1,14 @@
 import { StyleSheet } from "react-native";
 
 const globalstyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f3f8f9",
+    padding: 15,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+
   searchIcon: {
     paddingHorizontal: 10,
   },

@@ -98,7 +98,7 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={globalstyles.container}>
       <View style={globalstyles.searchSection}>
         <View style={globalstyles.searchContainer}>
           <Icon
@@ -238,13 +238,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f3f8f9",
-    padding: 15,
-    paddingBottom: 0,
-  },
-
   scrollerContainer: {
     paddingVertical: 10,
   },

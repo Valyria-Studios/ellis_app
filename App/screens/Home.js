@@ -180,6 +180,7 @@ export default function App({ navigation }) {
           <TouchableOpacity
             key={amenity.key}
             onPress={() => navigation.navigate("Amenity Page", { amenity })}
+            activeOpacity={1}
           >
             <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
               <View style={styles.cardHeader}>

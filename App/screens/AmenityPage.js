@@ -7,6 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import getAmenityImage from "../shared/getAmenityImage";
+import globalstyles from "../shared/globalStyles";
 
 function AmenityPage({ route }) {
   const { amenity } = route.params;
@@ -18,8 +19,19 @@ function AmenityPage({ route }) {
       <View style={styles.overlay} />
       <ScrollView>
         <View style={styles.centerCard}>
-          <View style={styles.locationText}>
+          <View style={styles.mainText}>
             <Text>{amenity.location}</Text>
+            <Text>{amenity.address}</Text>
+            <Text>{amenity.distance}</Text>
+            <View style={globalstyles.tagContainer}>
+              {amenity.type && Array.isArray(amenity.type)
+                ? amenity.type.map((type, index) => (
+                    <View key={index} style={globalstyles.tagBackground}>
+                      <Text style={globalstyles.individualTags}>{type}</Text>
+                    </View>
+                  ))
+                : null}
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -44,7 +56,7 @@ const styles = StyleSheet.create({
     marginTop: 450,
   },
 
-  locationText: {
+  mainText: {
     padding: 10,
     borderRadius: 10,
     backgroundColor: "white",

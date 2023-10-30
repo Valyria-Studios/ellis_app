@@ -25,7 +25,9 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Amenity Page"
         component={AmenityPage}
-        optoins={{ headerTitle: "Amenity Page" }}
+        options={({ route }) => ({
+          headerTitle: route.params.amenity.location,
+        })}
       />
     </RootStack.Navigator>
   );

@@ -15,7 +15,7 @@ import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 import globalstyles from "../shared/globalStyles";
 
-export default function App() {
+export default function App({ navigation }) {
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
   const [sortCriteria, setSortCriteria] = useState(null);
@@ -177,41 +177,46 @@ export default function App() {
           <Text style={styles.directory}>Directory</Text>
         </View>
         {filteredAmenities.map((amenity) => (
-          <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
-            <View style={styles.cardHeader}>
-              <Text style={styles.cardLocation}>{amenity.location}</Text>
-              <View
-                style={[
-                  styles.cardAvailabilityContainer,
-                  amenity.availability === "0"
-                    ? styles.noAvailability
-                    : styles.cardAvailabilityContainer,
-                ]}
-              >
-                <Text style={styles.cardAvailabilityText}>
-                  {amenity.availability === "0"
-                    ? "Unavailable"
-                    : `${amenity.availability} Available`}
-                </Text>
+          <TouchableOpacity
+            key={amenity.key}
+            onPress={() => navigation.navigate("AmenityPage", { amenity })}
+          >
+            <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
+              <View style={styles.cardHeader}>
+                <Text style={styles.cardLocation}>{amenity.location}</Text>
+                <View
+                  style={[
+                    styles.cardAvailabilityContainer,
+                    amenity.availability === "0"
+                      ? styles.noAvailability
+                      : styles.cardAvailabilityContainer,
+                  ]}
+                >
+                  <Text style={styles.cardAvailabilityText}>
+                    {amenity.availability === "0"
+                      ? "Unavailable"
+                      : `${amenity.availability} Available`}
+                  </Text>
+                </View>
               </View>
-            </View>
-            <Text style={styles.cardDetails}>
-              {amenity.address}
-              {"\n"}
-              {amenity.distance}
-              {"\n"}
-              {amenity.times}
-            </Text>
-            <View style={globalstyles.tagContainer}>
-              {amenity.type && Array.isArray(amenity.type)
-                ? amenity.type.map((type, index) => (
-                    <View key={index} style={globalstyles.tagBackground}>
-                      <Text style={globalstyles.individualTags}>{type}</Text>
-                    </View>
-                  ))
-                : null}
-            </View>
-          </Card>
+              <Text style={styles.cardDetails}>
+                {amenity.address}
+                {"\n"}
+                {amenity.distance}
+                {"\n"}
+                {amenity.times}
+              </Text>
+              <View style={globalstyles.tagContainer}>
+                {amenity.type && Array.isArray(amenity.type)
+                  ? amenity.type.map((type, index) => (
+                      <View key={index} style={globalstyles.tagBackground}>
+                        <Text style={globalstyles.individualTags}>{type}</Text>
+                      </View>
+                    ))
+                  : null}
+              </View>
+            </Card>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>

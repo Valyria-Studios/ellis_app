@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AppNavigator from "./AppNavigator"; // Import your BottomTabNavigator
 import ChatPage from "../screens/ChatPage";
+import AmenityPage from "../screens/AmenityPage";
 
 const RootStack = createStackNavigator();
 
@@ -20,6 +21,11 @@ const RootNavigator = () => {
           headerTitle: route.params.chatIdentifier || "Chat",
           headerTintColor: "black",
         })}
+      />
+      <RootStack.Screen
+        name="AmenityPage"
+        component={AmenityPage}
+        optoins={{ headerTitle: "Amenity Page" }}
       />
     </RootStack.Navigator>
   );

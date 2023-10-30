@@ -15,6 +15,7 @@ function AmenityPage({ route }) {
       source={getAmenityImage(amenity.location)}
       style={styles.container}
     >
+      <View style={styles.overlay} />
       <ScrollView>
         <View style={styles.centerCard}>
           <View style={styles.locationText}>
@@ -28,10 +29,15 @@ function AmenityPage({ route }) {
 
 const styles = StyleSheet.create({
   container: {
-    resizeMode: 'cover',
+    resizeMode: "cover",
     flex: 1,
     justifyContent: "center",
     alignContent: "center",
+  },
+
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(255,255,255, 0.4)",
   },
 
   centerCard: {

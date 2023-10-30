@@ -20,9 +20,14 @@ function AmenityPage({ route }) {
       <ScrollView>
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
-            <Text>{amenity.location}</Text>
-            <Text>{amenity.address}</Text>
-            <Text>{amenity.distance}</Text>
+            <Text style={styles.locationText}>{amenity.location}</Text>
+            <Text style={styles.cardDetails}>
+              {amenity.address}
+              {"\n"}
+              {amenity.distance}
+              {"\n"}
+              {amenity.times}
+            </Text>
             <View style={globalstyles.tagContainer}>
               {amenity.type && Array.isArray(amenity.type)
                 ? amenity.type.map((type, index) => (
@@ -60,6 +65,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     backgroundColor: "white",
+  },
+
+  locationText: {
+    fontSize: 28,
+    fontFamily: "gabarito-semibold",
+    color: "#094851",
+    marginVertical: 10,
   },
 });
 

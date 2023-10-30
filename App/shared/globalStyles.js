@@ -61,6 +61,12 @@ const globalstyles = StyleSheet.create({
     color: "#114e57",
     fontSize: 12,
   },
+
+  cardDetails: {
+    fontFamily: "karla-regular",
+    color: "#202425",
+    fontSize: 14,
+  },
 });
 
 export default globalstyles;

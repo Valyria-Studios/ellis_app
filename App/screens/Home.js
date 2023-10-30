@@ -200,7 +200,7 @@ export default function App({ navigation }) {
                   </Text>
                 </View>
               </View>
-              <Text style={styles.cardDetails}>
+              <Text style={globalstyles.cardDetails}>
                 {amenity.address}
                 {"\n"}
                 {amenity.distance}
@@ -333,11 +333,5 @@ const styles = StyleSheet.create({
     color: "#094851",
     fontSize: 20,
     paddingBottom: 10,
-  },
-
-  cardDetails: {
-    fontFamily: "karla-regular",
-    color: "#202425",
-    fontSize: 14,
   },
 });

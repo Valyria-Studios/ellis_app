@@ -21,7 +21,7 @@ function AmenityPage({ route }) {
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
             <Text style={styles.locationText}>{amenity.location}</Text>
-            <Text style={styles.cardDetails}>
+            <Text style={globalstyles.cardDetails}>
               {amenity.address}
               {"\n"}
               {amenity.distance}

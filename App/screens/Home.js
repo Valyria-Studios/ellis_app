@@ -179,7 +179,7 @@ export default function App({ navigation }) {
         {filteredAmenities.map((amenity) => (
           <TouchableOpacity
             key={amenity.key}
-            onPress={() => navigation.navigate("AmenityPage", { amenity })}
+            onPress={() => navigation.navigate("Amenity Page", { amenity })}
           >
             <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
               <View style={styles.cardHeader}>

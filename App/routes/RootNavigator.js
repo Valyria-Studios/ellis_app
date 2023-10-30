@@ -23,7 +23,7 @@ const RootNavigator = () => {
         })}
       />
       <RootStack.Screen
-        name="AmenityPage"
+        name="Amenity Page"
         component={AmenityPage}
         optoins={{ headerTitle: "Amenity Page" }}
       />

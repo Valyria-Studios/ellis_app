@@ -65,9 +65,11 @@ function AmenityPage({ route }) {
         </View>
       </ScrollView>
       <View style={styles.availabilityContainer}>
-        <View>
-          <Text>{amenity.availability}</Text>
-        </View>
+        <Text style={styles.availability}>
+          {amenity.availability !== "0"
+            ? `${amenity.availability} Available services`
+            : `No Services Available`}
+        </Text>
         <View style={styles.availabilityButtonContainer}>
           {renderButton("Refer a Client")}
           {renderButton("Check Availability")}
@@ -152,6 +154,10 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,1)", // you can change this
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  availability: {
+    margin: 10,
   },
 
   availabilityButtonContainer: {

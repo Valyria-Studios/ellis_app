@@ -71,18 +71,26 @@ function AmenityPage({ route }) {
             : `No Services Available`}
         </Text>
         <View style={styles.availabilityButtonContainer}>
-          {renderButton("Refer a Client")}
-          {renderButton("Check Availability")}
+          {renderButton(
+            "Refer a Client",
+            styles.referButton,
+            styles.referButtonText
+          )}
+          {renderButton(
+            "Check Availability",
+            styles.checkAvailabilityButton,
+            styles.checkAvailabilityButtonText
+          )}
         </View>
       </View>
     </ImageBackground>
   );
 }
 
-function renderButton(text) {
+function renderButton(text, buttonStyle, textStyle) {
   return (
-    <TouchableOpacity style={styles.availabilityButton}>
-      <Text>{text}</Text>
+    <TouchableOpacity style={[styles.availabilityButton, buttonStyle]}>
+      <Text style={[styles.availabilityButtonText, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 }
@@ -147,17 +155,22 @@ const styles = StyleSheet.create({
 
   availabilityContainer: {
     position: "absolute",
+    alignSelf: "center",
     bottom: 50,
-    left: 0,
-    right: 0,
-    // height: 50, // or whatever height you want
+    width: 400,
+    borderRadius: 35,
     backgroundColor: "rgba(255,255,255,1)", // you can change this
     justifyContent: "center",
     alignItems: "center",
   },
 
   availability: {
-    margin: 10,
+    margin: 15,
+    fontFamily: "gabarito-regular",
+    color: "#545e60",
+    fontSize: 14,
+    letterSpacing: 2,
+    textTransform: "uppercase",
   },
 
   availabilityButtonContainer: {
@@ -166,6 +179,33 @@ const styles = StyleSheet.create({
 
   availabilityButton: {
     borderWidth: 2,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    margin: 5,
+    borderRadius: 25,
+  },
+
+  availabilityButtonText: {
+    fontSize: 16,
+    fontFamily: "gabarito-medium",
+  },
+
+  referButton: {
+    backgroundColor: "#10798a",
+    borderColor: "#10798a",
+  },
+
+  referButtonText: {
+    color: "#ffffff",
+  },
+
+  checkAvailabilityButton: {
+    backgroundColor: "#ffffff",
+    borderColor: "#79b4be",
+  },
+
+  checkAvailabilityButtonText: {
+    color: "#094851",
   },
 });
 

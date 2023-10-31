@@ -57,6 +57,9 @@ function AmenityPage({ route }) {
                   ))
                 : null}
             </View>
+            <View>
+              <Text>{amenity.description}</Text>
+            </View>
           </View>
         </View>
       </ScrollView>

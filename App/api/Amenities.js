@@ -1,3 +1,6 @@
+const lorem = `
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+`;
 const Amenities = [
   {
     location: "school",
@@ -7,6 +10,7 @@ const Amenities = [
     type: ["Shelter", "Learn"],
     availability: "20",
     image: "../assets/images/location1.jpg",
+    description: [lorem, lorem, lorem, lorem, lorem],
     key: "1",
   },
   {
@@ -17,6 +21,7 @@ const Amenities = [
     type: ["Health", "Hygiene"],
     availability: "2",
     image: "../assets/images/location2.jpg",
+    description: [lorem, lorem],
     key: "2",
   },
   {
@@ -27,6 +32,7 @@ const Amenities = [
     type: ["Shop", "Family"],
     availability: "0",
     image: "../assets/images/location3.jpg",
+    description: [lorem],
     key: "3",
   },
   {
@@ -37,6 +43,7 @@ const Amenities = [
     type: ["Work", "Hygiene"],
     availability: "7",
     image: "../assets/images/location4.jpg",
+    description: [lorem, lorem, lorem],
     key: "4",
   },
   {
@@ -47,6 +54,7 @@ const Amenities = [
     type: ["Food", "Finance"],
     availability: "0",
     image: "../assets/images/location5.jpg",
+    description: [lorem, lorem],
     key: "5",
   },
   {
@@ -57,6 +65,7 @@ const Amenities = [
     type: ["Shelter", "Health", "Family"],
     availability: "15",
     image: "../assets/images/location6.jpg",
+    description: [lorem, lorem, lorem, lorem],
     key: "6",
   },
   {
@@ -67,6 +76,7 @@ const Amenities = [
     type: ["Health", "Beauty"],
     availability: "4",
     image: "../assets/images/location7.jpg",
+    description: [lorem],
     key: "7",
   },
   {
@@ -77,6 +87,7 @@ const Amenities = [
     type: ["Education", "Learning"],
     availability: "0",
     image: "../assets/images/location8.jpg",
+    description: [lorem, lorem],
     key: "8",
   },
 ];

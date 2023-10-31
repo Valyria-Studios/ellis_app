@@ -7,6 +7,8 @@ import {
   ScrollView,
 } from "react-native";
 import getAmenityImage from "../shared/getAmenityImage";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalstyles from "../shared/globalStyles";
 
 function AmenityPage({ route }) {
@@ -20,7 +22,17 @@ function AmenityPage({ route }) {
       <ScrollView>
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
-            <Text style={styles.locationText}>{amenity.location}</Text>
+            <View style={styles.header}>
+              <Text style={styles.locationText}>{amenity.location}</Text>
+              <View style={styles.iconsContainer}>
+                <View style={styles.icon}>
+                  <FontAwesome5 name="phone-alt" size={18} />
+                </View>
+                <View style={styles.icon}>
+                  <MaterialCommunityIcons name="message" size={18} />
+                </View>
+              </View>
+            </View>
             <Text style={globalstyles.cardDetails}>
               {amenity.address}
               {"\n"}
@@ -65,6 +77,25 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     backgroundColor: "white",
+  },
+
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  iconsContainer: {
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+  },
+
+  icon: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    margin: 5,
+    borderWidth: 1,
   },
 
   locationText: {

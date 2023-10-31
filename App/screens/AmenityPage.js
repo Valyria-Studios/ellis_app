@@ -162,6 +162,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,1)", // you can change this
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 8, // This will add shadow to the right of the container
+      height: 5,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.84,
   },
 
   availability: {
@@ -182,6 +189,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     margin: 5,
+    marginBottom: 15,
     borderRadius: 25,
   },
 

@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import getAmenityImage from "../shared/getAmenityImage";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -64,9 +65,23 @@ function AmenityPage({ route }) {
         </View>
       </ScrollView>
       <View style={styles.availabilityContainer}>
-        <Text>Content for the fixed container</Text>
+        <View>
+          <Text>{amenity.availability}</Text>
+        </View>
+        <View style={styles.availabilityButtonContainer}>
+          {renderButton("Refer a Client")}
+          {renderButton("Check Availability")}
+        </View>
       </View>
     </ImageBackground>
+  );
+}
+
+function renderButton(text) {
+  return (
+    <TouchableOpacity style={styles.availabilityButton}>
+      <Text>{text}</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -133,10 +148,18 @@ const styles = StyleSheet.create({
     bottom: 50,
     left: 0,
     right: 0,
-    height: 50, // or whatever height you want
+    // height: 50, // or whatever height you want
     backgroundColor: "rgba(255,255,255,1)", // you can change this
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  availabilityButtonContainer: {
+    flexDirection: "row",
+  },
+
+  availabilityButton: {
+    borderWidth: 2,
   },
 });
 

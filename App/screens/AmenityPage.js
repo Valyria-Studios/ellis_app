@@ -63,6 +63,9 @@ function AmenityPage({ route }) {
           </View>
         </View>
       </ScrollView>
+      <View style={styles.availabilityContainer}>
+        <Text>Content for the fixed container</Text>
+      </View>
     </ImageBackground>
   );
 }
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
   mainText: {
     padding: 10,
     borderRadius: 10,
-    backgroundColor: "white",
+    backgroundColor: "rgba(255,255,255,0.9)",
   },
 
   header: {
@@ -123,6 +126,17 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-semibold",
     color: "#094851",
     marginVertical: 10,
+  },
+
+  availabilityContainer: {
+    position: "absolute",
+    bottom: 50,
+    left: 0,
+    right: 0,
+    height: 50, // or whatever height you want
+    backgroundColor: "rgba(255,255,255,1)", // you can change this
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

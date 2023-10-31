@@ -24,12 +24,20 @@ function AmenityPage({ route }) {
           <View style={styles.mainText}>
             <View style={styles.header}>
               <Text style={styles.locationText}>{amenity.location}</Text>
-              <View style={styles.iconsContainer}>
-                <View style={styles.icon}>
-                  <FontAwesome5 name="phone-alt" size={18} />
+              <View style={styles.iconSpacing}>
+                <View style={styles.iconsContainer}>
+                  <FontAwesome5
+                    name="phone-alt"
+                    size={18}
+                    style={styles.icon}
+                  />
                 </View>
-                <View style={styles.icon}>
-                  <MaterialCommunityIcons name="message" size={18} />
+                <View style={styles.iconsContainer}>
+                  <MaterialCommunityIcons
+                    name="message"
+                    size={18}
+                    style={styles.icon}
+                  />
                 </View>
               </View>
             </View>
@@ -85,17 +93,26 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  iconsContainer: {
+  iconSpacing: {
     justifyContent: "space-evenly",
     flexDirection: "row",
   },
 
-  icon: {
+  iconsContainer: {
+    width: 40,
+    height: 40,
+    backgroundColor: "#10798a",
+    borderColor: "#10798a",
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
     margin: 5,
     borderWidth: 1,
+    borderRadius: 20,
+  },
+
+  icon: {
+    color: "#ffffff",
   },
 
   locationText: {

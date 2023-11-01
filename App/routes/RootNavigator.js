@@ -27,6 +27,13 @@ const RootNavigator = () => {
         component={AmenityPage}
         options={({ route }) => ({
           headerTitle: route.params.amenity.location,
+          headerTitleStyle: {
+            color: "#171b1c",
+            fontSize: 28,
+            marginLeft: -160,
+          },
+          headerTitleContainerStyle: { left: 0 },
+          headerTintColor: "#094851",
         })}
       />
     </RootStack.Navigator>

@@ -20,7 +20,7 @@ function AmenityPage({ route }) {
       style={styles.container}
     >
       <View style={styles.overlay} />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
             <View style={styles.header}>
@@ -109,7 +109,12 @@ const styles = StyleSheet.create({
   },
 
   centerCard: {
-    marginTop: 450,
+    marginTop: 400,
+    marginBottom: 175,
+  },
+
+  scrollView: {
+    flex: 1
   },
 
   mainText: {
@@ -157,6 +162,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     bottom: 50,
+    zIndex: 10,
     width: 400,
     borderRadius: 35,
     backgroundColor: "rgba(255,255,255,1)", // you can change this

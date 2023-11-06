@@ -23,13 +23,36 @@ export default function App({ navigation }) {
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState(null);
 
   useEffect(() => {
-    if (sortCriteria) {
-      const sorted = getSortedAmenities(filteredAmenities, sortCriteria);
-      setFilteredAmenities(sorted);
-    } else {
-      setFilteredAmenities(filteredAmenities);
+    applyFiltersAndSort();
+  }, [searchInput, selectedCategoryFilter, sortCriteria]);
+
+  const applyFiltersAndSort = () => {
+    let result = Amenities;
+
+    // Apply Search Filter
+    if (searchInput) {
+      result = result.filter((amenity) =>
+        amenity.location.toLowerCase().includes(searchInput.toLowerCase())
+      );
     }
-  }, [sortCriteria]);
+
+    // Apply Category Filter
+    if (selectedCategoryFilter) {
+      result = applyCategoryFilter(selectedCategoryFilter, result);
+    }
+
+    // Apply Open Now Filter
+    if (sortCriteria === "Open Now") {
+      result = filterOpenNowAmenities(result);
+    }
+
+    // Apply Sort Criteria
+    if (sortCriteria) {
+      result = getSortedAmenities(result, sortCriteria);
+    }
+
+    setFilteredAmenities(result);
+  };
 
   const categories = [
     "food",
@@ -40,18 +63,20 @@ export default function App({ navigation }) {
     "finance",
   ];
 
-  const applyCategoryFilter = (category) => {
+  const applyCategoryFilter = (category, amenities) => {
+    // Modify this function to take a second parameter 'amenities'
+    // so it can filter based on the current list (after search filter is applied).
     if (category === "All") {
-      return Amenities;
+      return amenities;
     } else if (category === "Other") {
-      return Amenities.filter(
+      return amenities.filter(
         (amenity) =>
           !amenity.type.some((typeValue) =>
             categories.includes(typeValue.toLowerCase())
           )
       );
     } else {
-      return Amenities.filter((amenity) =>
+      return amenities.filter((amenity) =>
         amenity.type.some(
           (typeValue) => typeValue.toLowerCase() === category.toLowerCase()
         )
@@ -62,18 +87,13 @@ export default function App({ navigation }) {
   const handlePress = (category) => {
     if (category === selectedCategoryFilter) {
       // If the clicked category is the same as the currently selected category,
-      // reset to the original list and clear the selected category.
-      setFilteredAmenities(Amenities);
+      // clear the selected category.
       setSelectedCategoryFilter(null);
     } else {
-      // Apply the category filter and update the selected category.
-      const filteredByCategory = applyCategoryFilter(category);
-      setFilteredAmenities(filteredByCategory);
+      // Update the selected category.
       setSelectedCategoryFilter(category);
     }
-    if (sortCriteria) {
-      setSortCriteria(null);
-    }
+    // No need to call applyFiltersAndSort here because useEffect will trigger it.
   };
 
   const handleSearchChange = (text) => {
@@ -86,19 +106,14 @@ export default function App({ navigation }) {
 
   const handleSortPress = (criterion) => {
     if (sortCriteria === criterion) {
-      let resetList = Amenities;
-      if (selectedCategoryFilter) {
-        resetList = applyCategoryFilter(selectedCategoryFilter);
-      }
-      setFilteredAmenities(resetList);
+      // If the clicked sort criterion is the same as the current one,
+      // clear the sort criteria.
       setSortCriteria(null);
     } else {
+      // Set the new sort criteria.
       setSortCriteria(criterion);
-      if (criterion === "Open Now") {
-        const openAmenities = filterOpenNowAmenities(filteredAmenities);
-        setFilteredAmenities(openAmenities);
-      }
     }
+    // No need to call applyFiltersAndSort here because useEffect will trigger it.
   };
 
   return (

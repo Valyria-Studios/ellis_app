@@ -196,49 +196,57 @@ export default function App({ navigation }) {
         <View>
           <Text style={styles.directory}>Directory</Text>
         </View>
-        {filteredAmenities.map((amenity) => (
-          <TouchableOpacity
-            key={amenity.key}
-            onPress={() => navigation.navigate("Amenity Page", { amenity })}
-            activeOpacity={1}
-          >
-            <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.cardLocation}>{amenity.location}</Text>
-                <View
-                  style={[
-                    styles.cardAvailabilityContainer,
-                    amenity.availability === "0"
-                      ? styles.noAvailability
-                      : styles.cardAvailabilityContainer,
-                  ]}
-                >
-                  <Text style={styles.cardAvailabilityText}>
-                    {amenity.availability === "0"
-                      ? "Unavailable"
-                      : `${amenity.availability} Available`}
-                  </Text>
+        {filteredAmenities.length > 0 ? (
+          filteredAmenities.map((amenity) => (
+            <TouchableOpacity
+              key={amenity.key}
+              onPress={() => navigation.navigate("Amenity Page", { amenity })}
+              activeOpacity={1}
+            >
+              <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardLocation}>{amenity.location}</Text>
+                  <View
+                    style={[
+                      styles.cardAvailabilityContainer,
+                      amenity.availability === "0"
+                        ? styles.noAvailability
+                        : styles.cardAvailabilityContainer,
+                    ]}
+                  >
+                    <Text style={styles.cardAvailabilityText}>
+                      {amenity.availability === "0"
+                        ? "Unavailable"
+                        : `${amenity.availability} Available`}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              <Text style={globalstyles.cardDetails}>
-                {amenity.address}
-                {"\n"}
-                {amenity.distance}
-                {"\n"}
-                {amenity.operationalHours}
-              </Text>
-              <View style={globalstyles.tagContainer}>
-                {amenity.type && Array.isArray(amenity.type)
-                  ? amenity.type.map((type, index) => (
-                      <View key={index} style={globalstyles.tagBackground}>
-                        <Text style={globalstyles.individualTags}>{type}</Text>
-                      </View>
-                    ))
-                  : null}
-              </View>
-            </Card>
-          </TouchableOpacity>
-        ))}
+                <Text style={globalstyles.cardDetails}>
+                  {amenity.address}
+                  {"\n"}
+                  {amenity.distance}
+                  {"\n"}
+                  {amenity.operationalHours}
+                </Text>
+                <View style={globalstyles.tagContainer}>
+                  {amenity.type && Array.isArray(amenity.type)
+                    ? amenity.type.map((type, index) => (
+                        <View key={index} style={globalstyles.tagBackground}>
+                          <Text style={globalstyles.individualTags}>
+                            {type}
+                          </Text>
+                        </View>
+                      ))
+                    : null}
+                </View>
+              </Card>
+            </TouchableOpacity>
+          ))
+        ) : (
+          <View style={styles.noAmenitesContainer}>
+            <Text style={styles.noAmenitiesText}>No Amenities Available</Text>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -353,5 +361,17 @@ const styles = StyleSheet.create({
     color: "#094851",
     fontSize: 20,
     paddingBottom: 10,
+  },
+
+  noAmenitesContainer: {
+    marginVertical: 200,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  noAmenitiesText: {
+    fontSize: 30,
+    fontFamily: "gabarito-regular",
+    color: "#094851",
   },
 });

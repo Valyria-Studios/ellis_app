@@ -24,7 +24,7 @@ export default function App({ navigation }) {
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
   const [sortCriteria, setSortCriteria] = useState(null);
-  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState(null);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
 
   useEffect(() => {
     const result = applyFiltersAndSort(
@@ -40,15 +40,9 @@ export default function App({ navigation }) {
   }, [searchInput, selectedCategoryFilter, sortCriteria]);
 
   const handlePress = (category) => {
-    if (category === selectedCategoryFilter) {
-      // If the clicked category is the same as the currently selected category,
-      // clear the selected category.
-      setSelectedCategoryFilter(null);
-    } else {
-      // Update the selected category.
-      setSelectedCategoryFilter(category);
-    }
-    // No need to call applyFiltersAndSort here because useEffect will trigger it.
+    setSelectedCategoryFilter((prevCategory) =>
+      prevCategory === category ? "All" : category
+    );
   };
 
   const handleSearchChange = (text) => {

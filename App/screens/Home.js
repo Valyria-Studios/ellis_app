@@ -15,6 +15,10 @@ import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 import globalstyles from "../shared/globalStyles";
 import { filterOpenNowAmenities } from "../filtering/openNowFilter";
+import {
+  applyFiltersAndSort,
+  applyCategoryFilter,
+} from "../filtering/amenityFilter";
 
 export default function App({ navigation }) {
   const [searchInput, setSearchInput] = useState("");
@@ -23,66 +27,17 @@ export default function App({ navigation }) {
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState(null);
 
   useEffect(() => {
-    applyFiltersAndSort();
-  }, [searchInput, selectedCategoryFilter, sortCriteria]);
-
-  const applyFiltersAndSort = () => {
-    let result = Amenities;
-
-    // Apply Search Filter
-    if (searchInput) {
-      result = result.filter((amenity) =>
-        amenity.location.toLowerCase().includes(searchInput.toLowerCase())
-      );
-    }
-
-    // Apply Category Filter
-    if (selectedCategoryFilter) {
-      result = applyCategoryFilter(selectedCategoryFilter, result);
-    }
-
-    // Apply Open Now Filter
-    if (sortCriteria === "Open Now") {
-      result = filterOpenNowAmenities(result);
-    }
-
-    // Apply Sort Criteria
-    if (sortCriteria) {
-      result = getSortedAmenities(result, sortCriteria);
-    }
-
+    const result = applyFiltersAndSort(
+      Amenities,
+      searchInput,
+      selectedCategoryFilter,
+      sortCriteria,
+      applyCategoryFilter,
+      filterOpenNowAmenities,
+      getSortedAmenities
+    );
     setFilteredAmenities(result);
-  };
-
-  const categories = [
-    "food",
-    "shelter",
-    "hygiene",
-    "health",
-    "work & learn",
-    "finance",
-  ];
-
-  const applyCategoryFilter = (category, amenities) => {
-    // Modify this function to take a second parameter 'amenities'
-    // so it can filter based on the current list (after search filter is applied).
-    if (category === "All") {
-      return amenities;
-    } else if (category === "Other") {
-      return amenities.filter(
-        (amenity) =>
-          !amenity.type.some((typeValue) =>
-            categories.includes(typeValue.toLowerCase())
-          )
-      );
-    } else {
-      return amenities.filter((amenity) =>
-        amenity.type.some(
-          (typeValue) => typeValue.toLowerCase() === category.toLowerCase()
-        )
-      );
-    }
-  };
+  }, [searchInput, selectedCategoryFilter, sortCriteria]);
 
   const handlePress = (category) => {
     if (category === selectedCategoryFilter) {
@@ -98,10 +53,6 @@ export default function App({ navigation }) {
 
   const handleSearchChange = (text) => {
     setSearchInput(text);
-    const filtered = Amenities.filter((amenity) =>
-      amenity.location.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilteredAmenities(filtered);
   };
 
   const handleSortPress = (criterion) => {

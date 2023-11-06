@@ -14,6 +14,7 @@ import SearchComponent from "../shared/SearchHeader";
 import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 import globalstyles from "../shared/globalStyles";
+import { filterOpenNowAmenities } from "../filtering/openNowFilter";
 
 export default function App({ navigation }) {
   const [searchInput, setSearchInput] = useState("");
@@ -93,6 +94,10 @@ export default function App({ navigation }) {
       setSortCriteria(null);
     } else {
       setSortCriteria(criterion);
+      if (criterion === "Open Now") {
+        const openAmenities = filterOpenNowAmenities(filteredAmenities);
+        setFilteredAmenities(openAmenities);
+      }
     }
   };
 

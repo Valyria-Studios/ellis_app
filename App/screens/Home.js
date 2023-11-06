@@ -205,7 +205,7 @@ export default function App({ navigation }) {
                 {"\n"}
                 {amenity.distance}
                 {"\n"}
-                {amenity.times}
+                {amenity.operationalHours}
               </Text>
               <View style={globalstyles.tagContainer}>
                 {amenity.type && Array.isArray(amenity.type)

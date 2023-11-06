@@ -47,7 +47,7 @@ function AmenityPage({ route }) {
               {"\n"}
               {amenity.distance}
               {"\n"}
-              {amenity.times}
+              {amenity.operationalHours}
             </Text>
             <View style={globalstyles.tagContainer}>
               {amenity.type && Array.isArray(amenity.type)
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   scrollView: {
-    flex: 1
+    flex: 1,
   },
 
   mainText: {

@@ -4,7 +4,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 const Amenities = [
   {
     location: "school",
-    times: "24 hours",
+    operationalHours: "24 Hours",
+    openingHour: "00:00",
+    closingHour: "23:59",
     distance: "1 mile",
     address: "123 this place now",
     type: ["Shelter", "Learn"],
@@ -15,7 +17,9 @@ const Amenities = [
   },
   {
     location: "fitness",
-    times: "10:00 am - 6: 00 pm",
+    operationalHours: "10:00 am - 6:00 pm",
+    openingHour: "10:00 am",
+    closingHour: "6: 00 pm",
     distance: "800 feet",
     address: "123 your place",
     type: ["Health", "Hygiene"],
@@ -26,7 +30,9 @@ const Amenities = [
   },
   {
     location: "plaza",
-    times: "12:00 pm - 9:00 pm",
+    operationalHours: "12:00 pm - 9:00 pm",
+    openingHour: "12:00 pm",
+    closingHour: "9:00 pm",
     distance: "3 miles",
     address: "123 my house",
     type: ["Shop", "Family"],
@@ -37,7 +43,9 @@ const Amenities = [
   },
   {
     location: "haircuts",
-    times: "7:00 am - 4:00 am",
+    operationalHours: "7:00 am - 4:00 am",
+    openingHour: "7:00 am",
+    closingHour: "4:00 am",
     distance: "6 mile",
     address: `'123 I don't know'`,
     type: ["Work", "Hygiene"],
@@ -48,7 +56,9 @@ const Amenities = [
   },
   {
     location: "restaurant",
-    times: "7:00 am - 4:00 am",
+    operationalHours: "9:00 am - 5:00 pm",
+    openingHour: "9:00 am",
+    closingHour: "5:00 pm",
     distance: "0.8 mile",
     address: `'123 I don't know'`,
     type: ["Food", "Finance"],
@@ -59,7 +69,9 @@ const Amenities = [
   },
   {
     location: "sleeping",
-    times: "7:00 am - 4:00 am",
+    operationalHours: "11:00 am - 8:00 pm",
+    openingHour: "11:00 am",
+    closingHour: "8:00 pm",
     distance: "232 feet",
     address: `'123 I don't know'`,
     type: ["Shelter", "Health", "Family"],
@@ -70,7 +82,9 @@ const Amenities = [
   },
   {
     location: "nail salon",
-    times: "1:00 pm -  7:00 pm",
+    operationalHours: "1:00 pm -  7:00 pm",
+    openingHour: "1:00 pm",
+    closingHour: "7:00 pm",
     distance: "0.9 mile",
     address: `'123 I don't know'`,
     type: ["Health", "Beauty"],
@@ -81,7 +95,9 @@ const Amenities = [
   },
   {
     location: "night school",
-    times: "10:00 pm - 3:00 am",
+    operationalHours: "10:00 pm - 3:00 am",
+    openingHour: "10:00 pm",
+    closingHour: "3:00 am",
     distance: "2 mile",
     address: `'123 I don't know'`,
     type: ["Education", "Learning"],

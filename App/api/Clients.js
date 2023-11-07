@@ -3,6 +3,7 @@
 const Clients = [
   {
     name: "John Smith",
+    age: "20",
     status: "Current", //should be dependent on progress bar and if they are working with providers
     recency: "last week", //should be rendered and updated from backend
     services: [
@@ -20,6 +21,7 @@ const Clients = [
   },
   {
     name: "Tim Langston",
+    age: "34",
     status: "Past", //should be dependent on progress bar and if they are working with providers
     recency: "Jan 2024", //should be rendered and updated from backend depending on current date
     services: [
@@ -37,6 +39,7 @@ const Clients = [
   },
   {
     name: "Oscar Simmons",
+    age: "40",
     status: "Requested", //should be dependent on progress bar and if they are working with providers
     recency: "yesterday", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
@@ -48,6 +51,7 @@ const Clients = [
   },
   {
     name: "Jackie Smith",
+    age: "25",
     status: "Past", //should be dependent on progress bar and if they are working with providers
     recency: "Mar 2024", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
@@ -59,6 +63,7 @@ const Clients = [
   },
   {
     name: "Timothy Sanders",
+    age: "54",
     status: "Requested", //should be dependent on progress bar and if they are working with providers
     recency: "6 hours ago", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
@@ -70,6 +75,7 @@ const Clients = [
   },
   {
     name: "Simon Baits",
+    age: "32",
     status: "Current", //should be dependent on progress bar and if they are working with providers
     recency: "yesterday", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for

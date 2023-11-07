@@ -20,7 +20,7 @@ function ProfilePage({ route }) {
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
             <View style={styles.header}>
-              <Text style={styles.locationText}>{client.name}</Text>
+              <Text style={styles.clientName}>{client.name}</Text>
               <View style={styles.iconSpacing}>
                 <View style={styles.iconsContainer}>
                   <FontAwesome5
@@ -39,15 +39,15 @@ function ProfilePage({ route }) {
               </View>
             </View>
             <Text style={globalstyles.cardDetails}>Hello</Text>
-            {/* <View style={globalstyles.tagContainer}>
-              {amenity.type && Array.isArray(amenity.type)
-                ? amenity.type.map((type, index) => (
+            <View style={globalstyles.tagContainer}>
+              {client.services && Array.isArray(client.services)
+                ? client.services.map((service, index) => (
                     <View key={index} style={globalstyles.tagBackground}>
-                      <Text style={globalstyles.individualTags}>{type}</Text>
+                      <Text style={globalstyles.individualTags}>{service}</Text>
                     </View>
                   ))
                 : null}
-            </View> */}
+            </View>
             <View>
               <Text>hello</Text>
             </View>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
 
-  locationText: {
+  clientName: {
     fontSize: 28,
     fontFamily: "gabarito-semibold",
     color: "#094851",

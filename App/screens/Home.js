@@ -71,6 +71,7 @@ export default function App({ navigation }) {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {[
             "All",
+            "Community",
             "Food",
             "Shelter",
             "Hygiene",

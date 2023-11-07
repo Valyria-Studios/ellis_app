@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
 
   filterButton: {
     borderColor: "#1e8191",
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 20,
     padding: 10,
     marginRight: 10,
@@ -258,6 +258,7 @@ const styles = StyleSheet.create({
   },
 
   filterText: {
+    fontSize: 18,
     color: "#094851",
     fontFamily: "gabarito-medium",
   },

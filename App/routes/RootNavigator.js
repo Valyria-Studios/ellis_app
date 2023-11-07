@@ -34,7 +34,7 @@ const RootNavigator = () => {
             marginLeft: -160,
           },
           headerTitleContainerStyle: { left: 0 },
-          headerTintColor: "#094851",
+          headerTintColor: "#094852",
         })}
       />
       <RootStack.Screen
@@ -43,9 +43,12 @@ const RootNavigator = () => {
         options={({ route }) => ({
           headerTitle: route.params.client.name,
           headerTitleStyle: {
-            color: "red",
-            fontSize: 20,
+            color: "#171B1C",
+            fontSize: 24,
+            marginLeft: -160,
           },
+          headerTitleContainerStyle: { left: 0 },
+          headerTintColor: "#094852"
         })}
       />
     </RootStack.Navigator>

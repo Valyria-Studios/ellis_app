@@ -7,7 +7,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalstyles from "../shared/globalStyles";
 
@@ -23,13 +22,6 @@ function ProfilePage({ route }) {
               <Text style={styles.clientName}>{client.name}</Text>
               <View style={styles.iconSpacing}>
                 <View style={styles.iconsContainer}>
-                  <FontAwesome5
-                    name="phone-alt"
-                    size={18}
-                    style={styles.icon}
-                  />
-                </View>
-                <View style={styles.iconsContainer}>
                   <MaterialCommunityIcons
                     name="message"
                     size={18}
@@ -39,8 +31,14 @@ function ProfilePage({ route }) {
               </View>
             </View>
             <View style={styles.detailsContainer}>
-              <Text style={styles.details}>Age</Text>
-              <Text style={styles.details}>Location</Text>
+              <View>
+                <Text style={styles.details}>Age</Text>
+                <Text style={styles.detailsText}>{client.age}</Text>
+              </View>
+              <View>
+                <Text style={styles.details}>Location</Text>
+                <Text style={styles.detailsText}>{client.location}</Text>
+              </View>
             </View>
             <View style={globalstyles.tagContainer}>
               {client.services && Array.isArray(client.services)
@@ -58,14 +56,6 @@ function ProfilePage({ route }) {
         </View>
       </ScrollView>
     </ImageBackground>
-  );
-}
-
-function renderButton(text, buttonStyle, textStyle) {
-  return (
-    <TouchableOpacity style={[styles.availabilityButton, buttonStyle]}>
-      <Text style={[styles.availabilityButtonText, textStyle]}>{text}</Text>
-    </TouchableOpacity>
   );
 }
 
@@ -140,10 +130,20 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
 
+  detailsText: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    letterSpacing: -0.16,
+    fontWeight: 400,
+    color: "#171B1C",
+    marginBottom: 10,
+    marginHorizontal: 10,
+  },
+
   clientName: {
-    fontSize: 28,
+    fontSize: 30,
     fontFamily: "gabarito-semibold",
-    color: "#094851",
+    color: "#094852",
     marginVertical: 10,
   },
 

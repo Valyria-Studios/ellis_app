@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AppNavigator from "./AppNavigator"; // Import your BottomTabNavigator
 import ChatPage from "../screens/ChatPage";
 import AmenityPage from "../screens/AmenityPage";
+import ProfilePage from "../screens/ProfilePage";
 
 const RootStack = createStackNavigator();
 
@@ -34,6 +35,17 @@ const RootNavigator = () => {
           },
           headerTitleContainerStyle: { left: 0 },
           headerTintColor: "#094851",
+        })}
+      />
+      <RootStack.Screen
+        name="Profile Page"
+        component={ProfilePage}
+        options={({ route }) => ({
+          headerTitle: route.params.client.name,
+          headerTitleStyle: {
+            color: "red",
+            fontSize: 20,
+          },
         })}
       />
     </RootStack.Navigator>

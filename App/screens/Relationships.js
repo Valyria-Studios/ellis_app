@@ -15,7 +15,7 @@ import Card from "../shared/Card";
 import Clients from "../api/Clients";
 import globalstyles from "../shared/globalStyles";
 
-const RelationshipPage = () => {
+const RelationshipPage = ({ navigation }) => {
   const [filter, setFilter] = useState("all"); // default filter
   const [searchInput, setSearchInput] = useState("");
   const [filteredClients, setFilteredClients] = useState(Clients);
@@ -123,91 +123,99 @@ const RelationshipPage = () => {
           ))}
         </View>
         {filteredClients.map((client) => (
-          <Card key={client.key}>
-            <View style={styles.headerContainer}>
-              <View style={styles.header}>
-                <View style={styles.start}>
-                  <Image source={client.image} style={styles.profileImage} />
-                  <View>
-                    <Text style={styles.name}>{client.name}</Text>
-                    <Text style={styles.recency}>
-                      {client.status === "Requested"
-                        ? `Requested service ${client.recency}`
-                        : `Last met: ${client.recency}`}
-                    </Text>
+          <TouchableOpacity
+            key={client.key}
+            onPress={() => navigation.navigate("Profile Page", { client })}
+            activeOpacity={1}
+          >
+            <Card key={client.key}>
+              <View style={styles.headerContainer}>
+                <View style={styles.header}>
+                  <View style={styles.start}>
+                    <Image source={client.image} style={styles.profileImage} />
+                    <View>
+                      <Text style={styles.name}>{client.name}</Text>
+                      <Text style={styles.recency}>
+                        {client.status === "Requested"
+                          ? `Requested service ${client.recency}`
+                          : `Last met: ${client.recency}`}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-                <View>
-                  <View
-                    style={[
-                      styles.status,
-                      client.status === "Current"
-                        ? {
-                            backgroundColor: "#e7f2f3",
-                            borderColor: "#5fa5b1",
-                          }
-                        : {},
-                      client.status === "Requested"
-                        ? {
-                            backgroundColor: "#fdf8ee",
-                            borderColor: "#f3c98b",
-                          }
-                        : {},
-                      client.status === "Past"
-                        ? {
-                            backgroundColor: "#dbdddd",
-                            borderColor: "#c7cccc",
-                          }
-                        : {},
-                    ]}
-                  >
-                    <Text
+                  <View>
+                    <View
                       style={[
-                        styles.statusText,
-                        client.status === "Current" ? { color: "#41737a" } : {},
-                        client.status === "Requested"
-                          ? { color: "#694e27" }
+                        styles.status,
+                        client.status === "Current"
+                          ? {
+                              backgroundColor: "#e7f2f3",
+                              borderColor: "#5fa5b1",
+                            }
                           : {},
-                        client.status === "Past" ? { color: "#6c7576" } : {},
+                        client.status === "Requested"
+                          ? {
+                              backgroundColor: "#fdf8ee",
+                              borderColor: "#f3c98b",
+                            }
+                          : {},
+                        client.status === "Past"
+                          ? {
+                              backgroundColor: "#dbdddd",
+                              borderColor: "#c7cccc",
+                            }
+                          : {},
                       ]}
                     >
-                      {client.status}
-                    </Text>
+                      <Text
+                        style={[
+                          styles.statusText,
+                          client.status === "Current"
+                            ? { color: "#41737a" }
+                            : {},
+                          client.status === "Requested"
+                            ? { color: "#694e27" }
+                            : {},
+                          client.status === "Past" ? { color: "#6c7576" } : {},
+                        ]}
+                      >
+                        {client.status}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-            <View
-              style={
-                client.status === "Requested"
-                  ? styles.requestedContainer
-                  : styles.providerContainer
-              }
-            >
-              <Text
+              <View
                 style={
                   client.status === "Requested"
-                    ? styles.requestedText
-                    : styles.providersText
+                    ? styles.requestedContainer
+                    : styles.providerContainer
                 }
               >
-                {client.status === "Requested"
-                  ? `REQUESTED SERVICES`
-                  : `${client.providers}`}
-              </Text>
-            </View>
-            <View style={globalstyles.tagContainer}>
-              {client.services && Array.isArray(client.services)
-                ? client.services.map((services, index) => (
-                    <View key={index} style={globalstyles.tagBackground}>
-                      <Text style={globalstyles.individualTags}>
-                        {services}
-                      </Text>
-                    </View>
-                  ))
-                : null}
-            </View>
-          </Card>
+                <Text
+                  style={
+                    client.status === "Requested"
+                      ? styles.requestedText
+                      : styles.providersText
+                  }
+                >
+                  {client.status === "Requested"
+                    ? `REQUESTED SERVICES`
+                    : `${client.providers}`}
+                </Text>
+              </View>
+              <View style={globalstyles.tagContainer}>
+                {client.services && Array.isArray(client.services)
+                  ? client.services.map((services, index) => (
+                      <View key={index} style={globalstyles.tagBackground}>
+                        <Text style={globalstyles.individualTags}>
+                          {services}
+                        </Text>
+                      </View>
+                    ))
+                  : null}
+              </View>
+            </Card>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>

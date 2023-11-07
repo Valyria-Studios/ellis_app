@@ -50,9 +50,12 @@ function ProfilePage({ route }) {
                 : null}
             </View>
             <View>
-              <Text>hello</Text>
+              <Text>Progress Bar goes here</Text>
             </View>
           </View>
+        </View>
+        <View style={styles.serviceContainer}>
+          <Text> hello </Text>
         </View>
       </ScrollView>
     </ImageBackground>
@@ -73,8 +76,7 @@ const styles = StyleSheet.create({
   },
 
   centerCard: {
-    marginTop: 400,
-    marginBottom: 175,
+    marginTop: 400,    
   },
 
   scrollView: {
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
   mainText: {
     padding: 10,
     borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.9)",
+    backgroundColor: "rgba(255,255,255,1)",
   },
 
   header: {
@@ -147,68 +149,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 
-  availabilityContainer: {
-    position: "absolute",
-    alignSelf: "center",
-    bottom: 50,
-    zIndex: 10,
-    width: 400,
-    borderRadius: 35,
-    backgroundColor: "rgba(255,255,255,1)", // you can change this
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 8, // This will add shadow to the right of the container
-      height: 5,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 3.84,
-  },
-
-  availability: {
-    margin: 15,
-    fontFamily: "gabarito-regular",
-    color: "#545e60",
-    fontSize: 14,
-    letterSpacing: 2,
-    textTransform: "uppercase",
-  },
-
-  availabilityButtonContainer: {
-    flexDirection: "row",
-  },
-
-  availabilityButton: {
-    borderWidth: 2,
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    margin: 5,
-    marginBottom: 15,
-    borderRadius: 25,
-  },
-
-  availabilityButtonText: {
-    fontSize: 16,
-    fontFamily: "gabarito-medium",
-  },
-
-  referButton: {
-    backgroundColor: "#10798a",
-    borderColor: "#10798a",
-  },
-
-  referButtonText: {
-    color: "#ffffff",
-  },
-
-  checkAvailabilityButton: {
-    backgroundColor: "#ffffff",
-    borderColor: "#79b4be",
-  },
-
-  checkAvailabilityButtonText: {
-    color: "#094851",
+  serviceContainer: {
+    backgroundColor: 'red',
   },
 });
 

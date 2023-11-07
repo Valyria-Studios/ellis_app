@@ -38,7 +38,10 @@ function ProfilePage({ route }) {
                 </View>
               </View>
             </View>
-            <Text style={globalstyles.cardDetails}>Hello</Text>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.details}>Age</Text>
+              <Text style={styles.details}>Location</Text>
+            </View>
             <View style={globalstyles.tagContainer}>
               {client.services && Array.isArray(client.services)
                 ? client.services.map((service, index) => (
@@ -120,6 +123,21 @@ const styles = StyleSheet.create({
 
   icon: {
     color: "#ffffff",
+  },
+
+  detailsContainer: {
+    flex: 1,
+    flexDirection: "row",
+  },
+
+  details: {
+    color: "#465355",
+    margin: 10,
+    fontFamily: "gabarito-regular",
+    fontSize: 12,
+    fontWeight: 400,
+    letterSpacing: 2.4,
+    textTransform: "uppercase",
   },
 
   clientName: {

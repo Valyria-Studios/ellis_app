@@ -7,20 +7,24 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 
 function Dropdown({ title, children }) {
   const [isOpen, setIsOpen] = useState(false);
+  const iconName = isOpen ? "keyboard-arrow-down" : "keyboard-arrow-up";
 
   return (
-    <View>
-      <TouchableOpacity onPress={() => setIsOpen(!isOpen)} activeOpacity={1}>
-        <View style={styles.dropDownContainer}>
+    <View style={styles.dropDownContainer}>
+      <TouchableOpacity
+        onPress={() => setIsOpen(!isOpen)}
+        activeOpacity={1}
+        style={styles.dropdownHeader}
+      >
           <Text style={styles.dropdownTitle}>{title}</Text>
-          {isOpen && <View style={styles.dropdownContent}>{children}</View>}
-        </View>
+          <MaterialIcons name={iconName} size={24} />
       </TouchableOpacity>
+      {isOpen && <View style={styles.dropdownContent}>{children}</View>}
     </View>
   );
 }
@@ -255,13 +259,20 @@ const styles = StyleSheet.create({
 
   dropdownTitle: {
     fontSize: 18,
-    padding: 10,
     fontFamily: "gabarito-regular",
     color: "#094852",
   },
 
   dropdownContent: {
-    padding: 10,
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+
+  dropdownHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 20,
   },
 });
 

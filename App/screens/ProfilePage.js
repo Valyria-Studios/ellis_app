@@ -28,11 +28,6 @@ function Dropdown({ title, children }) {
 function ProfilePage({ route }) {
   const { client } = route.params;
   const [selectedItem, setSelectedItem] = useState("Services");
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
 
   const servicesContent = (
     <View>
@@ -221,7 +216,7 @@ const styles = StyleSheet.create({
     top: -10,
     flex: 1,
     backgroundColor: "#f3f8f9",
-    paddingBottom: 20
+    paddingBottom: 20,
   },
 
   serviceHeader: {
@@ -253,13 +248,13 @@ const styles = StyleSheet.create({
 
   dropDownContainer: {
     marginHorizontal: 15,
-    marginBottom: 10,
+    marginBottom: 5,
     borderRadius: 10,
     backgroundColor: "#ffffff",
   },
 
   dropdownTitle: {
-    fontSize: 26,
+    fontSize: 18,
     padding: 10,
     fontFamily: "gabarito-regular",
     color: "#094852",

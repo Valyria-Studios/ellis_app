@@ -10,9 +10,44 @@ import {
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalstyles from "../shared/globalStyles";
 
+function Dropdown({ title, children }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <View>
+      <TouchableOpacity onPress={() => setIsOpen(!isOpen)} activeOpacity={1}>
+        <View style={styles.serviceContentContainer}>
+          <Text style={styles.dropdownTitle}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+      {isOpen && <View style={styles.dropdownContent}>{children}</View>}
+    </View>
+  );
+}
+
 function ProfilePage({ route }) {
   const { client } = route.params;
   const [selectedItem, setSelectedItem] = useState("Services");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const servicesContent = (
+    <View>
+      <Dropdown title="Housing">
+        <Text>housing</Text>
+      </Dropdown>
+      <Dropdown title="Legal Assistance">
+        <Text>legal</Text>
+      </Dropdown>
+      <Dropdown title="Job Placement">
+        <Text> Job</Text>
+      </Dropdown>
+    </View>
+  );
+  const notesContent = <Text>notes</Text>;
 
   return (
     <ImageBackground source={client.image} style={styles.container}>
@@ -61,7 +96,7 @@ function ProfilePage({ route }) {
             {["Services", "Notes"].map((sortItem) => (
               <TouchableOpacity
                 key={sortItem}
-                activeOpacity={0.5}
+                activeOpacity={1}
                 onPress={() => setSelectedItem(sortItem)}
               >
                 <View
@@ -75,6 +110,9 @@ function ProfilePage({ route }) {
                 </View>
               </TouchableOpacity>
             ))}
+          </View>
+          <View>
+            {selectedItem === "Services" ? servicesContent : notesContent}
           </View>
         </View>
       </ScrollView>
@@ -186,8 +224,8 @@ const styles = StyleSheet.create({
   },
 
   serviceHeader: {
-    flex: 1,
     flexDirection: "row",
+    marginBottom: 10,
   },
 
   serviceItemContainer: {
@@ -204,6 +242,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#094852",
     fontFamily: "gabarito-medium",
+  },
+
+  servicesContainers: {
+    borderWidth: 1,
+  },
+
+  serviceContentContainer: {
+    width: "100%",
+    borderWidth: 1,
   },
 });
 

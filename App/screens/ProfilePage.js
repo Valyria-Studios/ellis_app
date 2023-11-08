@@ -16,11 +16,11 @@ function Dropdown({ title, children }) {
   return (
     <View>
       <TouchableOpacity onPress={() => setIsOpen(!isOpen)} activeOpacity={1}>
-        <View style={styles.serviceContentContainer}>
+        <View style={styles.dropDownContainer}>
           <Text style={styles.dropdownTitle}>{title}</Text>
+          {isOpen && <View style={styles.dropdownContent}>{children}</View>}
         </View>
       </TouchableOpacity>
-      {isOpen && <View style={styles.dropdownContent}>{children}</View>}
     </View>
   );
 }
@@ -111,7 +111,7 @@ function ProfilePage({ route }) {
               </TouchableOpacity>
             ))}
           </View>
-          <View>
+          <View style={styles.something}>
             {selectedItem === "Services" ? servicesContent : notesContent}
           </View>
         </View>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
 
   centerCard: {
-    marginTop: 400,
+    marginTop: 350,
     zIndex: 2,
   },
 
@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
     top: -10,
     flex: 1,
     backgroundColor: "#f3f8f9",
+    paddingBottom: 20
   },
 
   serviceHeader: {
@@ -229,13 +230,15 @@ const styles = StyleSheet.create({
   },
 
   serviceItemContainer: {
-    margin: 10,
+    marginVertical: 10,
+    marginHorizontal: 15,
   },
 
   selectedItemContainer: {
     borderBottomWidth: 2,
     borderColor: "#10798a",
-    margin: 10,
+    marginVertical: 10,
+    marginHorizontal: 15,
   },
 
   serviceHeaderItems: {
@@ -248,9 +251,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
 
-  serviceContentContainer: {
-    width: "100%",
-    borderWidth: 1,
+  dropDownContainer: {
+    marginHorizontal: 15,
+    marginBottom: 10,
+    borderRadius: 10,
+    backgroundColor: "#ffffff",
+  },
+
+  dropdownTitle: {
+    fontSize: 26,
+    padding: 10,
+    fontFamily: "gabarito-regular",
+    color: "#094852",
+  },
+
+  dropdownContent: {
+    padding: 10,
   },
 });
 

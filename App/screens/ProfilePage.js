@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   Text,
@@ -6,23 +6,63 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Animated,
+  LayoutAnimation,
+  UIManager,
+  Platform,
 } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
+
 function Dropdown({ title, children }) {
   const [isOpen, setIsOpen] = useState(false);
-  const iconName = isOpen ? "keyboard-arrow-down" : "keyboard-arrow-up";
+  const fadeAnim = new Animated.Value(1); // Initial opacity for the first icon
+
+  useEffect(() => {
+    // Animate icon opacity
+    Animated.timing(fadeAnim, {
+      toValue: isOpen ? 0 : 1, // Animate to 0 for open (fade out), 1 for close (fade in)
+      duration: 400, // Duration of the animation
+      useNativeDriver: true, // Use native driver for better performance
+    }).start();
+  }, [isOpen]);
+
+  const handlePress = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setIsOpen(!isOpen);
+  };
 
   return (
     <View style={styles.dropDownContainer}>
       <TouchableOpacity
-        onPress={() => setIsOpen(!isOpen)}
-        activeOpacity={1}
+        onPress={handlePress}
+        activeOpacity={0.3}
         style={styles.dropdownHeader}
       >
-          <Text style={styles.dropdownTitle}>{title}</Text>
-          <MaterialIcons name={iconName} size={24} />
+        <Text style={styles.dropdownTitle}>{title}</Text>
+        <View style={{ position: "relative" }}>
+          <Animated.View style={{ position: "absolute", opacity: fadeAnim }}>
+            <MaterialIcons name="keyboard-arrow-down" size={24} />
+          </Animated.View>
+          <Animated.View
+            style={{
+              position: "relative",
+              opacity: fadeAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              }),
+            }}
+          >
+            <MaterialIcons name="horizontal-rule" size={24} />
+          </Animated.View>
+        </View>
       </TouchableOpacity>
       {isOpen && <View style={styles.dropdownContent}>{children}</View>}
     </View>

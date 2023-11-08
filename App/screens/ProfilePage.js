@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   Text,
@@ -12,6 +12,8 @@ import globalstyles from "../shared/globalStyles";
 
 function ProfilePage({ route }) {
   const { client } = route.params;
+  const [selectedItem, setSelectedItem] = useState("Services");
+
   return (
     <ImageBackground source={client.image} style={styles.container}>
       <View style={styles.overlay} />
@@ -55,7 +57,25 @@ function ProfilePage({ route }) {
           </View>
         </View>
         <View style={styles.serviceContainer}>
-          <Text> hello </Text>
+          <View style={styles.serviceHeader}>
+            {["Services", "Notes"].map((sortItem) => (
+              <TouchableOpacity
+                key={sortItem}
+                activeOpacity={0.5}
+                onPress={() => setSelectedItem(sortItem)}
+              >
+                <View
+                  style={
+                    selectedItem === sortItem
+                      ? styles.selectedItemContainer
+                      : styles.serviceItemContainer
+                  }
+                >
+                  <Text style={styles.serviceHeaderItems}>{sortItem}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </ImageBackground>
@@ -159,10 +179,31 @@ const styles = StyleSheet.create({
 
   serviceContainer: {
     zIndex: 1,
-    paddingTop: 10,
+    paddingTop: 30,
     top: -10,
     flex: 1,
     backgroundColor: "#f3f8f9",
+  },
+
+  serviceHeader: {
+    flex: 1,
+    flexDirection: "row",
+  },
+
+  serviceItemContainer: {
+    margin: 10,
+  },
+
+  selectedItemContainer: {
+    borderBottomWidth: 2,
+    borderColor: "#10798a",
+    margin: 10,
+  },
+
+  serviceHeaderItems: {
+    fontSize: 24,
+    color: "#094852",
+    fontFamily: "gabarito-medium",
   },
 });
 

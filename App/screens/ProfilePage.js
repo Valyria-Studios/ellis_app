@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
   },
 
   centerCard: {
-    marginTop: 400,    
+    marginTop: 400,
+    zIndex: 2,
   },
 
   scrollView: {
@@ -87,6 +88,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     backgroundColor: "rgba(255,255,255,1)",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 8, // This will add shadow to the right of the container
+      height: 4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
   },
 
   header: {
@@ -150,7 +158,11 @@ const styles = StyleSheet.create({
   },
 
   serviceContainer: {
-    backgroundColor: 'red',
+    zIndex: 1,
+    paddingTop: 10,
+    top: -10,
+    flex: 1,
+    backgroundColor: "#f3f8f9",
   },
 });
 

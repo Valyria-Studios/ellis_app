@@ -11,6 +11,7 @@ import {
   UIManager,
   Platform,
 } from "react-native";
+import ChecklistItem from "../shared/CheckBox";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 
@@ -76,13 +77,19 @@ function ProfilePage({ route }) {
   const servicesContent = (
     <View>
       <Dropdown title="Housing">
-        <Text>housing</Text>
+        <ChecklistItem title="Shelter" />
+        <ChecklistItem title="Applications" />
+        <ChecklistItem title="Community Shelters" />
       </Dropdown>
       <Dropdown title="Legal Assistance">
-        <Text>legal</Text>
+        <ChecklistItem title="Legal" />
+        <ChecklistItem title="Documents" />
+        <ChecklistItem title="Applications" />
       </Dropdown>
       <Dropdown title="Job Placement">
-        <Text> Job</Text>
+        <ChecklistItem title="Applications" />
+        <ChecklistItem title="Jobs Hiring" />
+        <ChecklistItem title="Certifications" />
       </Dropdown>
     </View>
   );

@@ -1,10 +1,30 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Animated,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 
 const CustomCheckbox = ({ isChecked, onToggle }) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: isChecked ? 1 : 0, // Animate to opacity: 1, or 0 if not checked
+      duration: 400, // Duration for the animation
+      useNativeDriver: true, // Add this line
+    }).start();
+  }, [isChecked, fadeAnim]);
+
   return (
-    <TouchableOpacity style={styles.checkbox} onPress={onToggle} activeOpacity={1}>
-      {isChecked && <View style={styles.checked} />}
+    <TouchableOpacity
+      style={styles.checkbox}
+      onPress={onToggle}
+      activeOpacity={1}
+    >
+      <Animated.View style={[styles.checked, { opacity: fadeAnim }]} />
     </TouchableOpacity>
   );
 };

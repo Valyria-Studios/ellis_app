@@ -85,8 +85,12 @@ function ProfilePage({ route }) {
   const totalItems = 9; // Total number of ChecklistItems
 
   // Callback for when a checklist item is toggled
-  const handleChecklistToggle = (isChecked) => {
-    setCheckedItems((prevCount) => (isChecked ? prevCount + 1 : prevCount - 1));
+  const handleChecklistToggle = (isItemChecked) => {
+    if (isItemChecked) {
+      setCheckedItems((prev) => prev + 1);
+    } else {
+      setCheckedItems((prev) => prev - 1);
+    }
   };
   const progress = (checkedItems / totalItems) * 100;
 
@@ -95,43 +99,43 @@ function ProfilePage({ route }) {
       <Dropdown title="Housing">
         <ChecklistItem
           title="Shelter"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
         <ChecklistItem
           title="Applications"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
         <ChecklistItem
           title="Community Shelters"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
       </Dropdown>
       <Dropdown title="Legal Assistance">
         <ChecklistItem
           title="Legal"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
         <ChecklistItem
           title="Documents"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
         <ChecklistItem
           title="Applications"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
       </Dropdown>
       <Dropdown title="Job Placement">
         <ChecklistItem
           title="Applications"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
         <ChecklistItem
           title="Jobs Hiring"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
         <ChecklistItem
           title="Certifications"
-          onToggle={() => handleChecklistToggle(true)}
+          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
         />
       </Dropdown>
     </View>

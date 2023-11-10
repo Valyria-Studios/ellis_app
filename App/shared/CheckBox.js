@@ -33,8 +33,9 @@ const ChecklistItem = ({ title, onToggle }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const toggleCheckbox = () => {
-    setIsChecked(!isChecked);
-    onToggle(!isChecked);
+    const newCheckedState = !isChecked;
+    setIsChecked(newCheckedState);
+    onToggle(newCheckedState);
   };
 
   return (

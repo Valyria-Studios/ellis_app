@@ -70,26 +70,69 @@ function Dropdown({ title, children }) {
   );
 }
 
+const ProgressBar = ({ progress }) => {
+  return (
+    <View style={styles.progressBarContainer}>
+      <View style={[styles.progressBar, { width: `${progress}%` }]} />
+    </View>
+  );
+};
+
 function ProfilePage({ route }) {
   const { client } = route.params;
   const [selectedItem, setSelectedItem] = useState("Services");
+  const [checkedItems, setCheckedItems] = useState(0);
+  const totalItems = 9; // Total number of ChecklistItems
+
+  // Callback for when a checklist item is toggled
+  const handleChecklistToggle = (isChecked) => {
+    setCheckedItems((prevCount) => (isChecked ? prevCount + 1 : prevCount - 1));
+  };
+  const progress = (checkedItems / totalItems) * 100;
 
   const servicesContent = (
     <View>
       <Dropdown title="Housing">
-        <ChecklistItem title="Shelter" />
-        <ChecklistItem title="Applications" />
-        <ChecklistItem title="Community Shelters" />
+        <ChecklistItem
+          title="Shelter"
+          onToggle={() => handleChecklistToggle(true)}
+        />
+        <ChecklistItem
+          title="Applications"
+          onToggle={() => handleChecklistToggle(true)}
+        />
+        <ChecklistItem
+          title="Community Shelters"
+          onToggle={() => handleChecklistToggle(true)}
+        />
       </Dropdown>
       <Dropdown title="Legal Assistance">
-        <ChecklistItem title="Legal" />
-        <ChecklistItem title="Documents" />
-        <ChecklistItem title="Applications" />
+        <ChecklistItem
+          title="Legal"
+          onToggle={() => handleChecklistToggle(true)}
+        />
+        <ChecklistItem
+          title="Documents"
+          onToggle={() => handleChecklistToggle(true)}
+        />
+        <ChecklistItem
+          title="Applications"
+          onToggle={() => handleChecklistToggle(true)}
+        />
       </Dropdown>
       <Dropdown title="Job Placement">
-        <ChecklistItem title="Applications" />
-        <ChecklistItem title="Jobs Hiring" />
-        <ChecklistItem title="Certifications" />
+        <ChecklistItem
+          title="Applications"
+          onToggle={() => handleChecklistToggle(true)}
+        />
+        <ChecklistItem
+          title="Jobs Hiring"
+          onToggle={() => handleChecklistToggle(true)}
+        />
+        <ChecklistItem
+          title="Certifications"
+          onToggle={() => handleChecklistToggle(true)}
+        />
       </Dropdown>
     </View>
   );
@@ -134,6 +177,7 @@ function ProfilePage({ route }) {
             </View>
             <View>
               <Text>Progress Bar goes here</Text>
+              <ProgressBar progress={progress} />
             </View>
           </View>
         </View>
@@ -167,6 +211,17 @@ function ProfilePage({ route }) {
 }
 
 const styles = StyleSheet.create({
+  progressBarContainer: {
+    height: 20,
+    width: "100%",
+    backgroundColor: "red",
+    borderRadius: 10,
+  },
+  progressBar: {
+    height: "100%",
+    backgroundColor: "green",
+    borderRadius: 10,
+  },
   container: {
     resizeMode: "cover",
     flex: 1,

@@ -33,17 +33,17 @@ const ChecklistItem = ({ title, onToggle }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const toggleCheckbox = () => {
-    const newCheckedState = !isChecked;
-    setIsChecked(newCheckedState);
-    onToggle(newCheckedState);
+    setIsChecked((prevChecked) => {
+      // Call onToggle in the setState callback
+      const newChecked = !prevChecked;
+      onToggle(newChecked);
+      return newChecked;
+    });
   };
 
   return (
     <View style={styles.item}>
-      <CustomCheckbox
-        isChecked={isChecked}
-        onToggle={() => setIsChecked(toggleCheckbox)}
-      />
+      <CustomCheckbox isChecked={isChecked} onToggle={toggleCheckbox} />
       <Text style={styles.text}>{title}</Text>
     </View>
   );

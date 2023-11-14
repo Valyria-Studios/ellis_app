@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ImageBackground,
   Text,
@@ -11,7 +11,6 @@ import {
   UIManager,
   Platform,
 } from "react-native";
-import ChecklistItem from "../shared/CheckBox";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 
@@ -83,59 +82,78 @@ function ProfilePage({ route }) {
   const [selectedItem, setSelectedItem] = useState("Services");
   const [checkedItems, setCheckedItems] = useState(0);
   const totalItems = 9; // Total number of ChecklistItems
+  const [isChecked, setIsChecked] = useState(false);
+  
+  const CustomCheckbox = ({ isChecked, onToggle }) => {
+    const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+
+    useEffect(() => {
+      Animated.timing(fadeAnim, {
+        toValue: isChecked ? 1 : 0, // Animate to opacity: 1, or 0 if not checked
+        duration: 400, // Duration for the animation
+        useNativeDriver: true, // Add this line
+      }).start();
+    }, [isChecked, fadeAnim]);
+
+    return (
+      <TouchableOpacity
+        style={styles.checkbox}
+        onPress={onToggle}
+        activeOpacity={1}
+      >
+        <Animated.View style={[styles.checked, { opacity: fadeAnim }]} />
+      </TouchableOpacity>
+    );
+  };
+
+  const ChecklistItem = ({ title, onToggle }) => {
+
+    const toggleCheckbox = () => {
+      setIsChecked((prevChecked) => {
+        // Call onToggle in the setState callback
+        const newChecked = !prevChecked;
+        onToggle(newChecked);
+        return newChecked;
+      });
+    };
+
+    return (
+      <View style={styles.item}>
+        <CustomCheckbox isChecked={isChecked} onToggle={toggleCheckbox} />
+        <Text style={styles.text}>{title}</Text>
+      </View>
+    );
+  };
 
   // Callback for when a checklist item is toggled
   const handleChecklistToggle = (isItemChecked) => {
-    if (isItemChecked) {
-      setCheckedItems((prev) => prev + 1);
-    } else {
-      setCheckedItems((prev) => prev - 1);
-    }
+    setCheckedItems((prevCount) =>
+      isItemChecked ? prevCount + 1 : prevCount - 1
+    );
   };
   const progress = (checkedItems / totalItems) * 100;
 
   const servicesContent = (
     <View>
       <Dropdown title="Housing">
-        <ChecklistItem
-          title="Shelter"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
-        />
-        <ChecklistItem
-          title="Applications"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
-        />
+        <ChecklistItem title="Shelter" onToggle={handleChecklistToggle} />
+        <ChecklistItem title="Applications" onToggle={handleChecklistToggle} />
         <ChecklistItem
           title="Community Shelters"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
+          onToggle={handleChecklistToggle}
         />
       </Dropdown>
       <Dropdown title="Legal Assistance">
-        <ChecklistItem
-          title="Legal"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
-        />
-        <ChecklistItem
-          title="Documents"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
-        />
-        <ChecklistItem
-          title="Applications"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
-        />
+        <ChecklistItem title="Legal" onToggle={handleChecklistToggle} />
+        <ChecklistItem title="Documents" onToggle={handleChecklistToggle} />
+        <ChecklistItem title="Applications" onToggle={handleChecklistToggle} />
       </Dropdown>
       <Dropdown title="Job Placement">
-        <ChecklistItem
-          title="Applications"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
-        />
-        <ChecklistItem
-          title="Jobs Hiring"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
-        />
+        <ChecklistItem title="Applications" onToggle={handleChecklistToggle} />
+        <ChecklistItem title="Jobs Hiring" onToggle={handleChecklistToggle} />
         <ChecklistItem
           title="Certifications"
-          onToggle={(isChecked) => handleChecklistToggle(isChecked)}
+          onToggle={handleChecklistToggle}
         />
       </Dropdown>
     </View>
@@ -379,6 +397,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 20,
+  },
+
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 5,
+    // additional styles
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#10798B",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  checked: {
+    width: 15,
+    height: 15,
+    borderRadius: 10,
+    backgroundColor: "#10798B",
+  },
+
+  text: {
+    fontFamily: "karla-regular",
+    color: "#171B1C",
+    fontSize: 16,
+    letterSpacing: -0.16,
   },
 });
 

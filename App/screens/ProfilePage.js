@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   Text,
@@ -6,7 +6,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Animated,
   UIManager,
   Platform,
 } from "react-native";
@@ -22,12 +21,15 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
+const dropdownItems = ["Housing", "Legal Assistance", "Job Placement"];
 const checklistItems = [
   "Basic Information",
   "Submit Request",
   "Follow Up",
   "Housing Granted",
 ];
+
+const totalItems = dropdownItems.length * checklistItems.length; // Total number of ChecklistItems
 
 const ProgressBar = ({ progress }) => {
   return (
@@ -41,7 +43,6 @@ function ProfilePage({ route }) {
   const { client } = route.params;
   const [selectedItem, setSelectedItem] = useState("Services");
   const [checkedItems, setCheckedItems] = useState(0);
-  const totalItems = 9; // Total number of ChecklistItems
 
   // Callback for when a checklist item is toggled
   const handleChecklistToggle = (isItemChecked) => {
@@ -53,8 +54,8 @@ function ProfilePage({ route }) {
 
   const servicesContent = (
     <View>
-      {["Housing", "Legal Assistance", "Job Placement"].map((dropdownItems) => (
-        <Dropdown title={dropdownItems} key={dropdownItems}>
+      {dropdownItems.map((dropdownItem) => (
+        <Dropdown title={dropdownItem} key={dropdownItem}>
           {checklistItems.map((checkListItem) => (
             <ChecklistItem
               title={checkListItem}
@@ -106,7 +107,6 @@ function ProfilePage({ route }) {
                 : null}
             </View>
             <View>
-              <Text>Progress Bar goes here</Text>
               <ProgressBar progress={progress} />
             </View>
           </View>
@@ -142,14 +142,18 @@ function ProfilePage({ route }) {
 
 const styles = StyleSheet.create({
   progressBarContainer: {
+    marginVertical: 20,
     height: 20,
     width: "100%",
-    backgroundColor: "red",
+    borderWidth: 1,
+    borderColor: "#10798B",
+    backgroundColor: "#F3F8F9",
     borderRadius: 10,
   },
   progressBar: {
     height: "100%",
-    backgroundColor: "green",
+    width: "100%",
+    backgroundColor: "#10798B",
     borderRadius: 10,
   },
   container: {

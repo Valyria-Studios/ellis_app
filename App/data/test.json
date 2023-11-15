@@ -1,0 +1,22 @@
+{
+  "test": [
+    {
+      "id": 1,
+      "title": "hello",
+      "body": "whatever",
+      "likes": 33
+    },
+    {
+      "id": 2,
+      "title": "hi",
+      "body": "wherever",
+      "likes": 10
+    },
+    {
+      "id": 3,
+      "title": "hey",
+      "body": "whoever",
+      "likes": 20
+    }
+  ]
+}

@@ -22,6 +22,13 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
+const checklistItems = [
+  "Basic Information",
+  "Submit Request",
+  "Follow Up",
+  "Housing Granted",
+];
+
 const ProgressBar = ({ progress }) => {
   return (
     <View style={styles.progressBarContainer}>
@@ -48,15 +55,10 @@ function ProfilePage({ route }) {
     <View>
       {["Housing", "Legal Assistance", "Job Placement"].map((dropdownItems) => (
         <Dropdown title={dropdownItems} key={dropdownItems}>
-          {[
-            "Basic Information",
-            "Submit Request",
-            "Follow Up",
-            "Housing Granted",
-          ].map((checkListItems) => (
+          {checklistItems.map((checkListItem) => (
             <ChecklistItem
-              title={checkListItems}
-              key={checkListItems}
+              title={checkListItem}
+              key={checkListItem}
               onToggle={handleChecklistToggle}
             />
           ))}

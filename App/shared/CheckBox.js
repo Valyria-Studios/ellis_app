@@ -7,9 +7,10 @@ import {
   StyleSheet,
 } from "react-native";
 
+
 const CustomCheckbox = ({ isChecked, onToggle }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
-
+  
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: isChecked ? 1 : 0, // Animate to opacity: 1, or 0 if not checked
@@ -17,12 +18,12 @@ const CustomCheckbox = ({ isChecked, onToggle }) => {
       useNativeDriver: true, // Add this line
     }).start();
   }, [isChecked, fadeAnim]);
-
+  
   return (
     <TouchableOpacity
-      style={styles.checkbox}
-      onPress={onToggle}
-      activeOpacity={1}
+    style={styles.checkbox}
+    onPress={onToggle}
+    activeOpacity={1}
     >
       <Animated.View style={[styles.checked, { opacity: fadeAnim }]} />
     </TouchableOpacity>
@@ -31,16 +32,21 @@ const CustomCheckbox = ({ isChecked, onToggle }) => {
 
 const ChecklistItem = ({ title, onToggle }) => {
   const [isChecked, setIsChecked] = useState(false);
-
+  const [isUserAction, setIsUserAction]= useState(false);
+  
   const toggleCheckbox = () => {
-    setIsChecked((prevChecked) => {
-      // Call onToggle in the setState callback
-      const newChecked = !prevChecked;
-      onToggle(newChecked);
-      return newChecked;
-    });
-  };
-
+      setIsUserAction(true);
+      setIsChecked((prevChecked) => !prevChecked);
+    };
+    
+    useEffect(() => {
+      if (isUserAction) {
+        onToggle(isChecked);
+        setIsUserAction(false);
+      }
+      
+    }, [isChecked, onToggle, isUserAction]);
+    
   return (
     <View style={styles.item}>
       <CustomCheckbox isChecked={isChecked} onToggle={toggleCheckbox} />

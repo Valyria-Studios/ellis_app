@@ -11,6 +11,7 @@ import {
   Platform,
 } from "react-native";
 import { Dropdown } from "../shared/Dropdown";
+import ChecklistItem from "../shared/CheckBox";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 
@@ -20,7 +21,6 @@ if (
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-
 
 const ProgressBar = ({ progress }) => {
   return (
@@ -35,43 +35,6 @@ function ProfilePage({ route }) {
   const [selectedItem, setSelectedItem] = useState("Services");
   const [checkedItems, setCheckedItems] = useState(0);
   const totalItems = 9; // Total number of ChecklistItems
-
-  const CustomCheckbox = ({ isChecked, onToggle }) => {
-    const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
-
-    useEffect(() => {
-      Animated.timing(fadeAnim, {
-        toValue: isChecked ? 1 : 0, // Animate to opacity: 1, or 0 if not checked
-        duration: 400, // Duration for the animation
-        useNativeDriver: true, // Add this line
-      }).start();
-    }, [isChecked, fadeAnim]);
-
-    return (
-      <TouchableOpacity
-        style={styles.checkbox}
-        onPress={onToggle}
-        activeOpacity={1}
-      >
-        <Animated.View style={[styles.checked, { opacity: fadeAnim }]} />
-      </TouchableOpacity>
-    );
-  };
-  
-  const ChecklistItem = ({ title, onToggle }) => {
-    const [isChecked, setIsChecked] = useState(false);
-    const toggleCheckbox = () => {
-      setIsChecked(!isChecked);
-      onToggle(!isChecked);
-    };
-
-    return (
-      <View style={styles.item}>
-        <CustomCheckbox isChecked={isChecked} onToggle={toggleCheckbox} />
-        <Text style={styles.text}>{title}</Text>
-      </View>
-    );
-  };
 
   // Callback for when a checklist item is toggled
   const handleChecklistToggle = (isItemChecked) => {
@@ -315,31 +278,6 @@ const styles = StyleSheet.create({
 
   servicesContainers: {
     borderWidth: 1,
-  },
-
-  dropDownContainer: {
-    marginHorizontal: 15,
-    marginBottom: 5,
-    borderRadius: 10,
-    backgroundColor: "#ffffff",
-  },
-
-  dropdownTitle: {
-    fontSize: 18,
-    fontFamily: "gabarito-regular",
-    color: "#094852",
-  },
-
-  dropdownContent: {
-    marginHorizontal: 20,
-    marginBottom: 20,
-  },
-
-  dropdownHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 20,
   },
 
   item: {

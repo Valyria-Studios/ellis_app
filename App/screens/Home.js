@@ -163,7 +163,7 @@ export default function App({ navigation }) {
                     <Text style={styles.cardAvailabilityText}>
                       {amenity.availability === "0"
                         ? "Unavailable"
-                        : `${amenity.availability} Available`}
+                        : `${amenity.availability} Services Available`}
                     </Text>
                   </View>
                 </View>
@@ -284,10 +284,11 @@ const styles = StyleSheet.create({
   },
 
   cardAvailabilityContainer: {
-    width: 100,
+    width: 'auto',
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 25,
+    padding: 10,
     backgroundColor: "#10798a",
   },
 

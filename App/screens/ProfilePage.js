@@ -7,11 +7,11 @@ import {
   ScrollView,
   TouchableOpacity,
   Animated,
-  LayoutAnimation,
   UIManager,
   Platform,
 } from "react-native";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { Dropdown } from "../shared/Dropdown";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 
 if (
@@ -21,53 +21,6 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-function Dropdown({ title, children }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const fadeAnim = new Animated.Value(1); // Initial opacity for the first icon
-
-  useEffect(() => {
-    // Animate icon opacity
-    Animated.timing(fadeAnim, {
-      toValue: isOpen ? 0 : 1, // Animate to 0 for open (fade out), 1 for close (fade in)
-      duration: 400, // Duration of the animation
-      useNativeDriver: true, // Use native driver for better performance
-    }).start();
-  }, [isOpen]);
-
-  const handlePress = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <View style={styles.dropDownContainer}>
-      <TouchableOpacity
-        onPress={handlePress}
-        activeOpacity={0.3}
-        style={styles.dropdownHeader}
-      >
-        <Text style={styles.dropdownTitle}>{title}</Text>
-        <View style={{ position: "relative" }}>
-          <Animated.View style={{ position: "absolute", opacity: fadeAnim }}>
-            <MaterialIcons name="keyboard-arrow-down" size={24} />
-          </Animated.View>
-          <Animated.View
-            style={{
-              position: "relative",
-              opacity: fadeAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0],
-              }),
-            }}
-          >
-            <MaterialIcons name="horizontal-rule" size={24} />
-          </Animated.View>
-        </View>
-      </TouchableOpacity>
-      {isOpen && <View style={styles.dropdownContent}>{children}</View>}
-    </View>
-  );
-}
 
 const ProgressBar = ({ progress }) => {
   return (
@@ -82,8 +35,7 @@ function ProfilePage({ route }) {
   const [selectedItem, setSelectedItem] = useState("Services");
   const [checkedItems, setCheckedItems] = useState(0);
   const totalItems = 9; // Total number of ChecklistItems
-  const [isChecked, setIsChecked] = useState(false);
-  
+
   const CustomCheckbox = ({ isChecked, onToggle }) => {
     const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
@@ -105,16 +57,12 @@ function ProfilePage({ route }) {
       </TouchableOpacity>
     );
   };
-
+  
   const ChecklistItem = ({ title, onToggle }) => {
-
+    const [isChecked, setIsChecked] = useState(false);
     const toggleCheckbox = () => {
-      setIsChecked((prevChecked) => {
-        // Call onToggle in the setState callback
-        const newChecked = !prevChecked;
-        onToggle(newChecked);
-        return newChecked;
-      });
+      setIsChecked(!isChecked);
+      onToggle(!isChecked);
     };
 
     return (
@@ -135,27 +83,22 @@ function ProfilePage({ route }) {
 
   const servicesContent = (
     <View>
-      <Dropdown title="Housing">
-        <ChecklistItem title="Shelter" onToggle={handleChecklistToggle} />
-        <ChecklistItem title="Applications" onToggle={handleChecklistToggle} />
-        <ChecklistItem
-          title="Community Shelters"
-          onToggle={handleChecklistToggle}
-        />
-      </Dropdown>
-      <Dropdown title="Legal Assistance">
-        <ChecklistItem title="Legal" onToggle={handleChecklistToggle} />
-        <ChecklistItem title="Documents" onToggle={handleChecklistToggle} />
-        <ChecklistItem title="Applications" onToggle={handleChecklistToggle} />
-      </Dropdown>
-      <Dropdown title="Job Placement">
-        <ChecklistItem title="Applications" onToggle={handleChecklistToggle} />
-        <ChecklistItem title="Jobs Hiring" onToggle={handleChecklistToggle} />
-        <ChecklistItem
-          title="Certifications"
-          onToggle={handleChecklistToggle}
-        />
-      </Dropdown>
+      {["Housing", "Legal Assistance", "Job Placement"].map((dropdownItems) => (
+        <Dropdown title={dropdownItems} key={dropdownItems}>
+          {[
+            "Basic Information",
+            "Submit Request",
+            "Follow Up",
+            "Housing Granted",
+          ].map((checkListItems) => (
+            <ChecklistItem
+              title={checkListItems}
+              key={checkListItems}
+              onToggle={handleChecklistToggle}
+            />
+          ))}
+        </Dropdown>
+      ))}
     </View>
   );
   const notesContent = <Text>notes</Text>;

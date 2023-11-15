@@ -5,7 +5,7 @@ import Messages from "../screens/Messages";
 import Settings from "../screens/Settings";
 import Relationships from "../screens/Relationships";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Home from "../screens/Home";
+import Directory from "../screens/Directory";
 import ChatPage from "../screens/ChatPage";
 
 const Tab = createBottomTabNavigator();
@@ -49,7 +49,7 @@ const AppNavigator = () => {
     >
       <Tab.Screen
         name="Directory"
-        component={Home}
+        component={Directory}
         options={{ headerShown: false }}
       />
       <Tab.Screen

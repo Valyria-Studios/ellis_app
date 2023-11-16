@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../shared/Card";
-import Amenities from "../api/Amenities";
+// import Amenities from "../api/Amenities";
 import SearchComponent from "../shared/SearchHeader";
 import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
@@ -22,21 +22,26 @@ import {
 
 export default function App({ navigation }) {
   const [searchInput, setSearchInput] = useState("");
-  const [filteredAmenities, setFilteredAmenities] = useState(Amenities);
+  const [filteredAmenities, setFilteredAmenities] = useState([]);
   const [sortCriteria, setSortCriteria] = useState(null);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
 
   useEffect(() => {
-    const result = applyFiltersAndSort(
-      Amenities,
-      searchInput,
-      selectedCategoryFilter,
-      sortCriteria,
-      applyCategoryFilter,
-      filterOpenNowAmenities,
-      getSortedAmenities
-    );
-    setFilteredAmenities(result);
+    fetch("http://localhost:3000/Amenities")
+      .then((response) => response.json())
+      .then((data) => {
+        const result = applyFiltersAndSort(
+          data, // Use the fetched data here
+          searchInput,
+          selectedCategoryFilter,
+          sortCriteria,
+          applyCategoryFilter,
+          filterOpenNowAmenities,
+          getSortedAmenities
+        );
+        setFilteredAmenities(result); // Update the filtered amenities
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   }, [searchInput, selectedCategoryFilter, sortCriteria]);
 
   const handlePress = (category) => {
@@ -284,7 +289,7 @@ const styles = StyleSheet.create({
   },
 
   cardAvailabilityContainer: {
-    width: 'auto',
+    width: "auto",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 25,

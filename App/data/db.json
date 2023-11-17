@@ -152,5 +152,92 @@
       ],
       "key": "8"
     }
+  ],
+
+  "Clients": [
+    {
+      "name": "John Smith",
+      "age": "20",
+      "location": "here",
+      "status": "Current", 
+      "recency": "last week", 
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery",
+        "Food",
+        "Sleep"
+      ], 
+      "providers": "Receiving service from 5 providers", 
+      "image": "require('../assets/images/userImage1.jpg')",
+      "key": "1"
+  
+    },
+    {
+      "name": "Tim Langston",
+      "age": "34",
+      "location": "over there",
+      "status": "Past",
+      "recency": "Jan 2024",  
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery",
+        "Housing Documentation"
+      ], 
+      "providers": "Received 16 services from 5 providers", 
+      "image": "require('../assets/images/userImage2.jpg')",
+  
+      "key": "2"
+  
+    },
+    {
+      "name": "Oscar Simmons",
+      "age": "40",
+      "location": "home",
+      "status": "Requested", 
+      "recency": "yesterday", 
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
+      "providers": "", 
+      "image": "require('../assets/images/userImage3.jpg')",
+      "key": "3"
+  
+    },
+    {
+      "name": "Jackie Smith",
+      "age": "25",
+      "location": "where",
+      "status": "Past", 
+      "recency": "Mar 2024", 
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
+      "providers": "Received 3 servies from 1 provider", 
+      "image": "require('../assets/images/userImage4.jpg')",
+      "key": "4"
+  
+    },
+    {
+      "name": "Timothy Sanders",
+      "age": "54",
+      "location": "under",
+      "status": "Requested", 
+      "recency": "6 hours ago", 
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
+      "providers": "", 
+      "image": "require('../assets/images/userImage5.jpg')",
+      "key": "5"
+  
+    },
+    {
+      "name": "Simon Baits",
+      "age": "32",
+      "location": "there",
+      "status": "Current", 
+      "recency": "yesterday", 
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
+      "providers": "Receiving service from 2 providers", 
+      "image": "require('../assets/images/userImage6.jpg')",
+      "key": "6"
+  
+    }
   ]
 }

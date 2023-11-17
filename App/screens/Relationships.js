@@ -12,48 +12,57 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchComponent from "../shared/SearchHeader";
 import Card from "../shared/Card";
-import Clients from "../api/Clients";
+// import Clients from "../api/Clients";
 import globalstyles from "../shared/globalStyles";
 
 const RelationshipPage = ({ navigation }) => {
   const [filter, setFilter] = useState("all"); // default filter
   const [searchInput, setSearchInput] = useState("");
-  const [filteredClients, setFilteredClients] = useState(Clients);
+  const [filteredClients, setFilteredClients] = useState([]);
+  const [allClients, setAllClients] = useState([]);
 
   useEffect(() => {
-    let filtered = Clients;
-    if (searchInput) {
-      // If there's a search input, filter based on the search input and the status.
-      filtered = filtered.filter((client) =>
-        client.name.toLowerCase().includes(searchInput.toLowerCase())
-      );
-    }
-    if (filter && filter !== "all") {
-      filtered = filtered.filter(
-        (client) => client.status.toLowerCase() === filter.toLowerCase()
-      );
-    }
+    fetch("http://localhost:3000/Clients")
+      .then((response) => response.json())
+      .then((data) => {
+        setAllClients(data);
+        setFilteredClients(data);
+        let filtered = data;
+        if (searchInput) {
+          // If there's a search input, filter based on the search input and the status.
+          filtered = filtered.filter((client) =>
+            client.name.toLowerCase().includes(searchInput.toLowerCase())
+          );
+        }
+        if (filter && filter !== "all") {
+          filtered = filtered.filter(
+            (client) => client.status.toLowerCase() === filter.toLowerCase()
+          );
+        }
 
-    setFilteredClients(filtered);
+        setFilteredClients(filtered);
+      });
   }, [filter, searchInput]);
 
   const handleSearchChange = (text) => {
     setSearchInput(text);
+
+    let filtered;
+
     if (text) {
-      const filtered = Clients.filter((client) =>
+      filtered = allClients.filter((client) =>
         client.name.toLowerCase().includes(text.toLowerCase())
       );
-      setFilteredClients(filtered);
     } else {
-      // If search input is cleared, show all clients or consider the filter.
-      if (filter && filter !== "all") {
-        const filtered = Clients.filter(
-          (client) => client.status.toLowerCase() === filter.toLowerCase()
-        );
-        setFilteredClients(filtered);
-      } else {
-        setFilteredClients(Clients);
-      }
+      filtered = allClients;
+    }
+
+    // If search input is cleared, show all clients or consider the filter.
+    if (filter && filter !== "all") {
+      filtered = filtered.filter(
+        (client) => client.status.toLowerCase() === filter.toLowerCase()
+      );
+      setFilteredClients(filtered);
     }
   };
 

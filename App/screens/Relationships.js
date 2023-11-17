@@ -3,8 +3,6 @@ import {
   View,
   Text,
   ScrollView,
-  TextInput,
-  Button,
   Image,
   TouchableOpacity,
   StyleSheet,
@@ -12,8 +10,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchComponent from "../shared/SearchHeader";
 import Card from "../shared/Card";
-// import Clients from "../api/Clients";
 import globalstyles from "../shared/globalStyles";
+import imageMap from "../shared/getProfileImage";
 
 const RelationshipPage = ({ navigation }) => {
   const [filter, setFilter] = useState("all"); // default filter
@@ -141,7 +139,10 @@ const RelationshipPage = ({ navigation }) => {
               <View style={styles.headerContainer}>
                 <View style={styles.header}>
                   <View style={styles.start}>
-                    <Image source={client.image} style={styles.profileImage} />
+                    <Image
+                      source={imageMap[client.image]}
+                      style={styles.profileImage}
+                    />
                     <View>
                       <Text style={styles.name}>{client.name}</Text>
                       <Text style={styles.recency}>

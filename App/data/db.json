@@ -169,7 +169,7 @@
         "Sleep"
       ], 
       "providers": "Receiving service from 5 providers", 
-      "image": "require('../assets/images/userImage1.jpg')",
+      "image": "userImage1",
       "key": "1"
   
     },
@@ -186,7 +186,7 @@
         "Housing Documentation"
       ], 
       "providers": "Received 16 services from 5 providers", 
-      "image": "require('../assets/images/userImage2.jpg')",
+      "image": "userImage2",
   
       "key": "2"
   
@@ -199,7 +199,7 @@
       "recency": "yesterday", 
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
       "providers": "", 
-      "image": "require('../assets/images/userImage3.jpg')",
+      "image": "userImage3",
       "key": "3"
   
     },
@@ -211,7 +211,7 @@
       "recency": "Mar 2024", 
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
       "providers": "Received 3 servies from 1 provider", 
-      "image": "require('../assets/images/userImage4.jpg')",
+      "image": "userImage4",
       "key": "4"
   
     },
@@ -223,7 +223,7 @@
       "recency": "6 hours ago", 
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
       "providers": "", 
-      "image": "require('../assets/images/userImage5.jpg')",
+      "image": "userImage5",
       "key": "5"
   
     },
@@ -235,9 +235,8 @@
       "recency": "yesterday", 
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
       "providers": "Receiving service from 2 providers", 
-      "image": "require('../assets/images/userImage6.jpg')",
+      "image": "userImage6",
       "key": "6"
-  
     }
   ]
 }

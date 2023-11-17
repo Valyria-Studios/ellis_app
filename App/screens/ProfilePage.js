@@ -13,6 +13,7 @@ import { Dropdown } from "../shared/Dropdown";
 import ChecklistItem from "../shared/CheckBox";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
+import imageMap from "../shared/getProfileImage";
 
 if (
   Platform.OS === "android" &&
@@ -70,7 +71,7 @@ function ProfilePage({ route }) {
   const notesContent = <Text>notes</Text>;
 
   return (
-    <ImageBackground source={client.image} style={styles.container}>
+    <ImageBackground source={imageMap[client.image]} style={styles.container}>
       <View style={styles.overlay} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.centerCard}>

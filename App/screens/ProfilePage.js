@@ -14,6 +14,7 @@ import ChecklistItem from "../shared/CheckBox";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
+import ProgressBar from "../shared/ProgressBar";
 
 if (
   Platform.OS === "android" &&
@@ -31,14 +32,6 @@ const checklistItems = [
 ];
 
 const totalItems = dropdownItems.length * checklistItems.length; // Total number of ChecklistItems
-
-const ProgressBar = ({ progress }) => {
-  return (
-    <View style={styles.progressBarContainer}>
-      <View style={[styles.progressBar, { width: `${progress}%` }]} />
-    </View>
-  );
-};
 
 function ProfilePage({ route }) {
   const { client } = route.params;
@@ -142,21 +135,6 @@ function ProfilePage({ route }) {
 }
 
 const styles = StyleSheet.create({
-  progressBarContainer: {
-    marginVertical: 20,
-    height: 20,
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "#10798B",
-    backgroundColor: "#F3F8F9",
-    borderRadius: 10,
-  },
-  progressBar: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: "#10798B",
-    borderRadius: 10,
-  },
   container: {
     resizeMode: "cover",
     flex: 1,

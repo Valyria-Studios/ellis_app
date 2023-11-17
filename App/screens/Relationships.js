@@ -12,6 +12,7 @@ import SearchComponent from "../shared/SearchHeader";
 import Card from "../shared/Card";
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
+import ProgressBar from "../shared/ProgressBar";
 
 const RelationshipPage = ({ navigation }) => {
   const [filter, setFilter] = useState("all"); // default filter
@@ -224,6 +225,7 @@ const RelationshipPage = ({ navigation }) => {
                     ))
                   : null}
               </View>
+              <ProgressBar progress={client.progress} />
             </Card>
           </TouchableOpacity>
         ))}

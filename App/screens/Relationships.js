@@ -225,7 +225,7 @@ const RelationshipPage = ({ navigation }) => {
                     ))
                   : null}
               </View>
-              <ProgressBar progress={client.progress} />
+              {/* <ProgressBar progress={client.progress} /> */}
             </Card>
           </TouchableOpacity>
         ))}

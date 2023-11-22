@@ -12,17 +12,20 @@ import globalstyles from "../shared/globalStyles";
 const Register = () => {
   return (
     <SafeAreaView style={styles.container}>
-        <View style ={{margin: 50,}}></View>
+      <View style={{ margin: 50 }}></View>
       <View style={styles.headerContainer}>
         <Text style={globalstyles.header}>Create an account</Text>
       </View>
-      <View>
+      <View style={{ marginBottom: 10 }}>
         <Text style={styles.subHeader}>
           Create an account on Ellis to get started
         </Text>
-        <TextInput placeholder="Name"></TextInput>
-        <TextInput placeholder="Email Address"></TextInput>
-        <TextInput placeholder="Password"></TextInput>
+        <TextInput placeholder="Name" style={styles.textInput}></TextInput>
+        <TextInput
+          placeholder="Email Address"
+          style={styles.textInput}
+        ></TextInput>
+        <TextInput placeholder="Password" style={styles.textInput}></TextInput>
       </View>
       <View>
         <Text>I agree to Ellis' privacy policy and terms of use</Text>
@@ -59,6 +62,16 @@ const styles = StyleSheet.create({
     fontFamily: "karla-regular",
     letterSpacing: -0.16,
     color: "#030E07",
+    marginBottom: 10,
+  },
+
+  textInput: {
+    padding: 15,
+    marginVertical: 5,
+    borderColor: "#C1C5C4",
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderRadius: 25,
   },
 });
 

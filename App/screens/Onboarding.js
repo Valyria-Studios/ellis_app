@@ -6,6 +6,7 @@ import globalstyles from "../shared/globalStyles";
 const Onboarding = ({ navigation }) => {
   return (
     <SafeAreaView style={globalstyles.container}>
+      <View style ={{margin: 40}}></View>
       <View style={styles.welcomeContainer}>
         <Text style={globalstyles.header}> Welcome to Ellis </Text>
       </View>
@@ -50,12 +51,9 @@ const Onboarding = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   welcomeContainer: {
-    marginTop: 50,
-    // marginTop: 100,
-    marginBottom: 425,
+    marginBottom: 400,
     padding: 5,
   },
-  
   descriptionContainer: {
     paddingHorizontal: 15,
   },

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
 
@@ -15,28 +15,30 @@ const Onboarding = ({ navigation }) => {
           meet our marginalized neighbors' needs more efficiently and
           effectively.
         </Text>
-      </View>
-      <View style={{ paddingTop: 30 }}>
-        <TouchableOpacity style={[styles.buttonContainer, { marginBottom: 5 }]}>
-          <View>
-            <Text style={styles.buttonText}>Log in</Text>
+        <View style={{ paddingTop: 30 }}>
+          <TouchableOpacity
+            style={[styles.buttonContainer, { marginBottom: 5 }]}
+          >
+            <View>
+              <Text style={styles.buttonText}>Log in</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonContainer, { marginTop: 5 }]}>
+            <View>
+              <Text style={styles.buttonText}>Register</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.dividerContainer}>
+            <View style={styles.divderLines} />
+            <Text style={styles.dividerText}>or</Text>
+            <View style={styles.divderLines} />
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonContainer, { marginTop: 5 }]}>
-          <View>
-            <Text style={styles.buttonText}>Register</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={styles.dividerContainer}>
-          <View style={styles.divderLines} />
-          <Text style={styles.dividerText}>or</Text>
-          <View style={styles.divderLines} />
+          <TouchableOpacity style={[styles.buttonContainer]}>
+            <View>
+              <Text style={styles.buttonText}>Enter an invite code</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={[styles.buttonContainer]}>
-          <View>
-            <Text style={styles.buttonText}>Enter an invite code</Text>
-          </View>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -44,7 +46,9 @@ const Onboarding = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   welcomeContainer: {
-    flex: 1,
+    marginTop: 100,
+    marginBottom: 425,
+    padding: 5,
   },
 
   welcome: {
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 12,
-    margin: 15,
+    // margin: 15,
   },
 
   buttonText: {

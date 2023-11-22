@@ -13,11 +13,29 @@ const Register = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [agreed, setAgreed] = useState(false);
 
-  const handleSubmit = () => {
-    // You can add form validation here
-    console.log("Form Submitted:", { name, email, password });
-    // Add your form submission logic here
+  const toggleAgree = () => {
+    setAgreed(!agreed);
+  };
+
+  const handleSubmit = async () => {
+    const formData = { name, email, password, agreed };
+
+    try {
+      const response = await fetch("http://localhost:3000/Accounts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const jsonResponse = await response.json();
+      console.log("Response from API:", jsonResponse);
+    } catch (error) {
+      console.error("Error sending data to API", error);
+    }
   };
 
   return (
@@ -50,34 +68,36 @@ const Register = () => {
           secureTextEntry={true}
         />
       </View>
-      <View style={styles.agreeContainer} activeOpacity={1}>
-        <TouchableOpacity style={styles.agreeCircle} />
+      <View style={styles.agreeContainer}>
+        <TouchableOpacity
+          style={[styles.agreeCircle, agreed && styles.checkedAgreeCircle]}
+          onPress={toggleAgree}
+          activeOpacity={0.8}
+        />
         <Text style={styles.agreeText}>
           I agree to Ellis' privacy policy and terms of use
         </Text>
       </View>
       <View>
         <TouchableOpacity
+          disabled={!agreed}
           style={[
             globalstyles.buttonContainer,
+            !agreed ? styles.disabledButton : null,
             { marginVertical: 10, backgroundColor: "#10798B" },
           ]}
           activeOpacity={0.6}
           onPress={handleSubmit}
         >
-          <View>
-            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
-              Sign Up
-            </Text>
-          </View>
+          <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+            Sign Up
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={globalstyles.buttonContainer}
           activeOpacity={0.6}
         >
-          <View>
-            <Text style={globalstyles.buttonText}>Use Passkey</Text>
-          </View>
+          <Text style={globalstyles.buttonText}>Use Passkey</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -114,7 +134,6 @@ const styles = StyleSheet.create({
 
   agreeContainer: {
     flexDirection: "row",
-    // justifyContent: 'center',
     alignItems: "center",
     marginVertical: 20,
   },
@@ -127,12 +146,25 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
 
+  checkedAgreeCircle: {
+    borderColor: "#10798B",
+    width: 18,
+    height: 18,
+    borderWidth: 1,
+    borderRadius: 50,
+    backgroundColor: "#10798B",
+  },
+
   agreeText: {
     color: "#030E07",
     fontFamily: "karla-regular",
     fontSize: 16,
     letterSpacing: -0.16,
     paddingLeft: 10,
+  },
+
+  disabledButton: {
+    backgroundColor: "#ccc",
   },
 });
 

@@ -1,5 +1,12 @@
 {
-
+  "Accounts": [
+    {
+      "name": "Test",
+      "email": "Test@email.com",
+      "password": "thisispassword",
+      "id": 1
+    }
+  ],
   "Amenities": [
     {
       "location": "school",
@@ -133,88 +140,81 @@
       "key": "8"
     }
   ],
-
   "Clients": [
     {
       "name": "John Smith",
       "age": "20",
       "location": "here",
-      "status": "Current", 
-      "recency": "last week", 
+      "status": "Current",
+      "recency": "last week",
       "services": [
         "Haircut",
         "Financial Aid",
         "Celebrate Recovery",
         "Food",
         "Sleep"
-      ], 
-      "providers": "Receiving service from 5 providers", 
+      ],
+      "providers": "Receiving service from 5 providers",
       "image": "userImage1",
       "key": "1"
-  
     },
     {
       "name": "Tim Langston",
       "age": "34",
       "location": "over there",
       "status": "Past",
-      "recency": "Jan 2024",  
+      "recency": "Jan 2024",
       "services": [
         "Haircut",
         "Financial Aid",
         "Celebrate Recovery",
         "Housing Documentation"
-      ], 
-      "providers": "Received 16 services from 5 providers", 
+      ],
+      "providers": "Received 16 services from 5 providers",
       "image": "userImage2",
-  
       "key": "2"
-  
     },
     {
       "name": "Oscar Simmons",
       "age": "40",
       "location": "home",
-      "status": "Requested", 
-      "recency": "yesterday", 
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
-      "providers": "", 
+      "status": "Requested",
+      "recency": "yesterday",
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "providers": "",
       "image": "userImage3",
       "key": "3"
-  
     },
     {
       "name": "Jackie Smith",
       "age": "25",
       "location": "where",
-      "status": "Past", 
-      "recency": "Mar 2024", 
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
-      "providers": "Received 3 servies from 1 provider", 
+      "status": "Past",
+      "recency": "Mar 2024",
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "providers": "Received 3 servies from 1 provider",
       "image": "userImage4",
       "key": "4"
-  
     },
     {
       "name": "Timothy Sanders",
       "age": "54",
       "location": "under",
-      "status": "Requested", 
-      "recency": "6 hours ago", 
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
-      "providers": "", 
+      "status": "Requested",
+      "recency": "6 hours ago",
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "providers": "",
       "image": "userImage5",
       "key": "5"
-  
     },
     {
       "name": "Simon Baits",
       "age": "32",
       "location": "there",
-      "status": "Current", 
-      "recency": "yesterday", 
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"], 
-      "providers": "Receiving service from 2 providers", 
+      "status": "Current",
+      "recency": "yesterday",
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "providers": "Receiving service from 2 providers",
       "image": "userImage6",
       "key": "6"
     }

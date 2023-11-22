@@ -5,6 +5,10 @@ import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
 import Onboarding from "./screens/Onboarding";
 import AppNavigator from "./routes/AppNavigator";
+import Login from "./screens/LoginPage";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Stack = createStackNavigator();
 
 const getFonts = () =>
   Font.loadAsync({
@@ -47,10 +51,17 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <Onboarding />
+        <Stack.Navigator initialRouteName="Onboarding">
+          <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown: false}}/>
+          <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        </Stack.Navigator>
       </NavigationContainer>
     );
   } else {
     return null;
   }
 }
+
+// <NavigationContainer>
+//   <RootNavigator />
+// </NavigationContainer>;

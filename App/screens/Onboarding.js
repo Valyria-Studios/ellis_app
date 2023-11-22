@@ -18,6 +18,7 @@ const Onboarding = ({ navigation }) => {
         <View style={{ paddingTop: 30 }}>
           <TouchableOpacity
             style={[styles.buttonContainer, { marginBottom: 5 }]}
+            onPress={() => navigation.push('Login')}
           >
             <View>
               <Text style={styles.buttonText}>Log in</Text>
@@ -46,7 +47,8 @@ const Onboarding = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   welcomeContainer: {
-    marginTop: 100,
+    marginTop: 50,
+    // marginTop: 100,
     marginBottom: 425,
     padding: 5,
   },

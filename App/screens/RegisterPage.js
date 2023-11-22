@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
 
 const Register = () => {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmit = () => {
+    // You can add form validation here
+    console.log("Form Submitted:", { name, email, password });
+    // Add your form submission logic here
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ margin: 40 }}></View>
@@ -20,12 +30,25 @@ const Register = () => {
         <Text style={styles.subHeader}>
           Create an account on Ellis to get started
         </Text>
-        <TextInput placeholder="Name" style={styles.textInput}></TextInput>
+        <TextInput
+          placeholder="Name"
+          style={styles.textInput}
+          value={name}
+          onChangeText={setName}
+        />
         <TextInput
           placeholder="Email Address"
           style={styles.textInput}
-        ></TextInput>
-        <TextInput placeholder="Password" style={styles.textInput}></TextInput>
+          value={email}
+          onChangeText={setEmail}
+        />
+        <TextInput
+          placeholder="Password"
+          style={styles.textInput}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={true}
+        />
       </View>
       <View style={styles.agreeContainer} activeOpacity={1}>
         <TouchableOpacity style={styles.agreeCircle} />
@@ -40,6 +63,7 @@ const Register = () => {
             { marginVertical: 10, backgroundColor: "#10798B" },
           ]}
           activeOpacity={0.6}
+          onPress={handleSubmit}
         >
           <View>
             <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
@@ -47,7 +71,10 @@ const Register = () => {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={globalstyles.buttonContainer} activeOpacity={0.6}>
+        <TouchableOpacity
+          style={globalstyles.buttonContainer}
+          activeOpacity={0.6}
+        >
           <View>
             <Text style={globalstyles.buttonText}>Use Passkey</Text>
           </View>

@@ -16,15 +16,25 @@ const Onboarding = ({ navigation }) => {
           effectively.
         </Text>
       </View>
-      <View>
+      <View style={{ paddingTop: 30 }}>
         <TouchableOpacity style={[styles.buttonContainer, { marginBottom: 5 }]}>
           <View>
-            <Text>Log in</Text>
+            <Text style={styles.buttonText}>Log in</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonContainer, { marginTop: 5 }]}>
           <View>
-            <Text>Register</Text>
+            <Text style={styles.buttonText}>Register</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.dividerContainer}>
+          <View style={styles.divderLines} />
+          <Text style={styles.dividerText}>or</Text>
+          <View style={styles.divderLines} />
+        </View>
+        <TouchableOpacity style={[styles.buttonContainer]}>
+          <View>
+            <Text style={styles.buttonText}>Enter an invite code</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -57,12 +67,44 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
+    backgroundColor: "#FFF",
     borderWidth: 1,
+    borderColor: "#10798B",
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
     padding: 12,
     margin: 15,
+  },
+
+  buttonText: {
+    fontSize: 16,
+    fontFamily: "gabarito-regular",
+    color: "#094852",
+  },
+
+  dividerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 15,
+    marginVertical: 10,
+  },
+
+  divderLines: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#909899",
+  },
+
+  dividerText: {
+    paddingHorizontal: 10,
+    fontSize: 12,
+    color: "#909899",
+    fontFamily: "gabarito-regular",
+    fontWeight: 400,
+    letterSpacing: 2.4,
+    textTransform: "uppercase",
   },
 });
 

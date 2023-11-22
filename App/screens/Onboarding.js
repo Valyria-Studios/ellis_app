@@ -16,9 +16,17 @@ const Onboarding = ({ navigation }) => {
           effectively.
         </Text>
       </View>
-      <View> 
-        <Button title="Login"></Button>
-        <Button title="Register"></Button>
+      <View>
+        <TouchableOpacity style={[styles.buttonContainer, { marginBottom: 5 }]}>
+          <View>
+            <Text>Log in</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.buttonContainer, { marginTop: 5 }]}>
+          <View>
+            <Text>Register</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -29,20 +37,32 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     marginBottom: 350,
   },
+
   welcome: {
     color: "#062411",
     fontSize: 30,
     fontFamily: "gabarito-semibold",
   },
+
   descriptionContainer: {
     paddingHorizontal: 15,
   },
+
   description: {
     color: "#062411",
     fontSize: 18,
     fontFamily: "gabarito-regular",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+
+  buttonContainer: {
+    borderWidth: 1,
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 12,
+    margin: 15,
   },
 });
 

@@ -7,6 +7,12 @@ const globalstyles = StyleSheet.create({
     paddingHorizontal: 15,
   },
 
+  header: {
+    color: "#062411",
+    fontSize: 30,
+    fontFamily: "gabarito-semibold",
+  },
+
   searchIcon: {
     paddingHorizontal: 10,
   },

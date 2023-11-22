@@ -7,7 +7,7 @@ const Onboarding = ({ navigation }) => {
   return (
     <SafeAreaView style={globalstyles.container}>
       <View style={styles.welcomeContainer}>
-        <Text style={styles.welcome}> Welcome to Ellis </Text>
+        <Text style={globalstyles.header}> Welcome to Ellis </Text>
       </View>
       <View style={styles.descriptionContainer}>
         <Text style={styles.description}>
@@ -55,13 +55,7 @@ const styles = StyleSheet.create({
     marginBottom: 425,
     padding: 5,
   },
-
-  welcome: {
-    color: "#062411",
-    fontSize: 30,
-    fontFamily: "gabarito-semibold",
-  },
-
+  
   descriptionContainer: {
     paddingHorizontal: 15,
   },

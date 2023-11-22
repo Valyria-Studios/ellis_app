@@ -18,13 +18,16 @@ const Onboarding = ({ navigation }) => {
         <View style={{ paddingTop: 30 }}>
           <TouchableOpacity
             style={[styles.buttonContainer, { marginBottom: 5 }]}
-            onPress={() => navigation.push('Login')}
+            onPress={() => navigation.push("Login")}
           >
             <View>
               <Text style={styles.buttonText}>Log in</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonContainer, { marginTop: 5 }]}>
+          <TouchableOpacity
+            style={[styles.buttonContainer, { marginTop: 5 }]}
+            onPress={() => navigation.push("Register")}
+          >
             <View>
               <Text style={styles.buttonText}>Register</Text>
             </View>

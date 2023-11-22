@@ -6,6 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import Onboarding from "./screens/Onboarding";
 import AppNavigator from "./routes/AppNavigator";
 import Login from "./screens/LoginPage";
+import Register from "./screens/RegisterPage";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -54,6 +55,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Onboarding">
           <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown: false}}/>
           <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+          <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

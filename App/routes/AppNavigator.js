@@ -50,7 +50,7 @@ const AppNavigator = () => {
     >
       <Tab.Screen
         name="Directory"
-        component={Onboarding}
+        component={Directory}
         options={{ headerShown: false }}
       />
       <Tab.Screen

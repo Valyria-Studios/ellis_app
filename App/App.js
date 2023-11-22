@@ -3,6 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
+import Onboarding from "./screens/Onboarding";
+import AppNavigator from "./routes/AppNavigator";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -45,7 +47,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <RootNavigator />
+        <Onboarding />
       </NavigationContainer>
     );
   } else {

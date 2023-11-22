@@ -44,8 +44,7 @@ const Onboarding = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   welcomeContainer: {
-    paddingVertical: 40,
-    marginBottom: 350,
+    flex: 1,
   },
 
   welcome: {

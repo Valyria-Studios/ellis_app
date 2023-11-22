@@ -18,19 +18,21 @@ const Onboarding = ({ navigation }) => {
         </Text>
         <View style={{ paddingTop: 30 }}>
           <TouchableOpacity
-            style={[styles.buttonContainer, { marginBottom: 5 }]}
+            style={[globalstyles.buttonContainer, { marginBottom: 5 }]}
             onPress={() => navigation.push("Login")}
+            activeOpacity={0.6}
           >
             <View>
-              <Text style={styles.buttonText}>Log in</Text>
+              <Text style={globalstyles.buttonText}>Log in</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.buttonContainer, { marginTop: 5 }]}
+            style={[globalstyles.buttonContainer, { marginTop: 5 }]}
             onPress={() => navigation.push("Register")}
+            activeOpacity={0.6}
           >
             <View>
-              <Text style={styles.buttonText}>Register</Text>
+              <Text style={globalstyles.buttonText}>Register</Text>
             </View>
           </TouchableOpacity>
           <View style={styles.dividerContainer}>
@@ -38,9 +40,9 @@ const Onboarding = ({ navigation }) => {
             <Text style={styles.dividerText}>or</Text>
             <View style={styles.divderLines} />
           </View>
-          <TouchableOpacity style={[styles.buttonContainer]}>
+          <TouchableOpacity style={[globalstyles.buttonContainer]} activeOpacity={0.6}>
             <View>
-              <Text style={styles.buttonText}>Enter an invite code</Text>
+              <Text style={globalstyles.buttonText}>Enter an invite code</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -64,23 +66,6 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-regular",
     alignItems: "center",
     justifyContent: "center",
-  },
-
-  buttonContainer: {
-    backgroundColor: "#FFF",
-    borderWidth: 1,
-    borderColor: "#10798B",
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 12,
-    // margin: 15,
-  },
-
-  buttonText: {
-    fontSize: 16,
-    fontFamily: "gabarito-regular",
-    color: "#094852",
   },
 
   dividerContainer: {

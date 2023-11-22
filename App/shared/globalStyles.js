@@ -71,6 +71,22 @@ const globalstyles = StyleSheet.create({
     color: "#202425",
     fontSize: 14,
   },
+
+  buttonContainer: {
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderColor: "#10798B",
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 12,
+  },
+
+  buttonText: {
+    fontSize: 16,
+    fontFamily: "gabarito-regular",
+    color: "#094852",
+  },
 });
 
 export default globalstyles;

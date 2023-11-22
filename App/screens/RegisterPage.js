@@ -12,7 +12,7 @@ import globalstyles from "../shared/globalStyles";
 const Register = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ margin: 50 }}></View>
+      <View style={{ margin: 40 }}></View>
       <View style={styles.headerContainer}>
         <Text style={globalstyles.header}>Create an account</Text>
       </View>
@@ -27,18 +27,29 @@ const Register = () => {
         ></TextInput>
         <TextInput placeholder="Password" style={styles.textInput}></TextInput>
       </View>
-      <View>
-        <Text>I agree to Ellis' privacy policy and terms of use</Text>
+      <View style={styles.agreeContainer} activeOpacity={1}>
+        <TouchableOpacity style={styles.agreeCircle} />
+        <Text style={styles.agreeText}>
+          I agree to Ellis' privacy policy and terms of use
+        </Text>
       </View>
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            globalstyles.buttonContainer,
+            { marginVertical: 10, backgroundColor: "#10798B" },
+          ]}
+          activeOpacity={0.6}
+        >
           <View>
-            <Text>Sign Up</Text>
+            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+              Sign Up
+            </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={globalstyles.buttonContainer} activeOpacity={0.6}>
           <View>
-            <Text>Use Passkey</Text>
+            <Text style={globalstyles.buttonText}>Use Passkey</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -72,6 +83,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderWidth: 1,
     borderRadius: 25,
+  },
+
+  agreeContainer: {
+    flexDirection: "row",
+    // justifyContent: 'center',
+    alignItems: "center",
+    marginVertical: 20,
+  },
+
+  agreeCircle: {
+    borderColor: "#10798B",
+    width: 18,
+    height: 18,
+    borderWidth: 1,
+    borderRadius: 50,
+  },
+
+  agreeText: {
+    color: "#030E07",
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    letterSpacing: -0.16,
+    paddingLeft: 10,
   },
 });
 

@@ -87,6 +87,27 @@ const globalstyles = StyleSheet.create({
     fontFamily: "gabarito-regular",
     color: "#094852",
   },
+
+  textInput: {
+    padding: 15,
+    marginVertical: 5,
+    borderColor: "#C1C5C4",
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderRadius: 25,
+  },
+
+  headerContainer: {
+    marginBottom: 30,
+  },
+
+  subHeader: {
+    fontSize: 16,
+    fontFamily: "karla-regular",
+    letterSpacing: -0.16,
+    color: "#030E07",
+    marginBottom: 10,
+  },
 });
 
 export default globalstyles;

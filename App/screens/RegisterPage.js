@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
-import CreateOrganization from "./CreateOrganization";
 
 const Register = ({ navigation }) => {
   const [name, setName] = useState();
@@ -46,28 +45,28 @@ const Register = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ margin: 40 }}></View>
-      <View style={styles.headerContainer}>
+      <View style={globalstyles.headerContainer}>
         <Text style={globalstyles.header}>Create an account</Text>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Text style={styles.subHeader}>
+        <Text style={globalstyles.subHeader}>
           Create an account on Ellis to get started
         </Text>
         <TextInput
           placeholder="Name"
-          style={styles.textInput}
+          style={globalstyles.textInput}
           value={name}
           onChangeText={setName}
         />
         <TextInput
           placeholder="Email Address"
-          style={styles.textInput}
+          style={globalstyles.textInput}
           value={email}
           onChangeText={setEmail}
         />
         <TextInput
           placeholder="Password"
-          style={styles.textInput}
+          style={globalstyles.textInput}
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
@@ -85,7 +84,7 @@ const Register = ({ navigation }) => {
       </View>
       <View>
         <TouchableOpacity
-          disabled={!agreed || !name || !email || !password}
+          // disabled={!agreed || !name || !email || !password}
           style={[
             globalstyles.buttonContainer,
             !agreed || !name || !email || !password
@@ -118,26 +117,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 
-  headerContainer: {
-    marginBottom: 30,
-  },
-
-  subHeader: {
-    fontSize: 16,
-    fontFamily: "karla-regular",
-    letterSpacing: -0.16,
-    color: "#030E07",
-    marginBottom: 10,
-  },
-
-  textInput: {
-    padding: 15,
-    marginVertical: 5,
-    borderColor: "#C1C5C4",
-    backgroundColor: "#FFF",
-    borderWidth: 1,
-    borderRadius: 25,
-  },
 
   agreeContainer: {
     flexDirection: "row",

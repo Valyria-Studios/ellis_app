@@ -84,11 +84,13 @@ const Register = () => {
       </View>
       <View>
         <TouchableOpacity
-          disabled={!agreed}
+          disabled={!agreed || !name || !email || !password}
           style={[
             globalstyles.buttonContainer,
-            !agreed ? styles.disabledButton : null,
-            { marginVertical: 10, backgroundColor: "#10798B" },
+            !agreed || !name || !email || !password
+              ? styles.disabledButton
+              : { backgroundColor: "#10798B" },
+            { marginVertical: 10 },
           ]}
           activeOpacity={0.6}
           onPress={handleSubmit}
@@ -169,6 +171,7 @@ const styles = StyleSheet.create({
 
   disabledButton: {
     backgroundColor: "#ccc",
+    borderColor: "#ccc",
   },
 });
 

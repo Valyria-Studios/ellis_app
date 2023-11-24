@@ -8,8 +8,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
+import CreateOrganization from "./CreateOrganization";
 
-const Register = () => {
+const Register = ({ navigation }) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -31,15 +32,15 @@ const Register = () => {
         body: JSON.stringify(formData),
       });
 
-      const jsonResponse = await response.json();
-      console.log("Response from API:", jsonResponse);
-
       setName("");
       setEmail("");
       setPassword("");
+      setAgreed(false);
     } catch (error) {
       console.error("Error sending data to API", error);
     }
+
+    navigation.push("CreateOrganization");
   };
 
   return (

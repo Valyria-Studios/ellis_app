@@ -8,6 +8,7 @@ import AppNavigator from "./routes/AppNavigator";
 import Login from "./screens/LoginPage";
 import Register from "./screens/RegisterPage";
 import { createStackNavigator } from "@react-navigation/stack";
+import CreateOrganization from "./screens/CreateOrganization";
 
 const Stack = createStackNavigator();
 
@@ -53,9 +54,26 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Onboarding">
-          <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown: false}}/>
-          <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
-          <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+          <Stack.Screen
+            name="Onboarding"
+            component={Onboarding}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CreateOrganization"
+            component={CreateOrganization}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );

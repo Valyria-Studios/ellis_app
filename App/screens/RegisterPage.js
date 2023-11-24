@@ -33,6 +33,10 @@ const Register = () => {
 
       const jsonResponse = await response.json();
       console.log("Response from API:", jsonResponse);
+
+      setName("");
+      setEmail("");
+      setPassword("");
     } catch (error) {
       console.error("Error sending data to API", error);
     }

@@ -29,6 +29,17 @@
         "website": "Taco",
         "serviceHours": "Taco"
       }
+    },
+    {
+      "agreed": false,
+      "id": 3,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
     }
   ],
   "Amenities": [

@@ -9,6 +9,7 @@ import Login from "./screens/LoginPage";
 import Register from "./screens/RegisterPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import CreateOrganization from "./screens/CreateOrganization";
+import ServicesPage from "./screens/addServicesPage";
 
 const Stack = createStackNavigator();
 
@@ -72,6 +73,11 @@ export default function App() {
           <Stack.Screen
             name="CreateOrganization"
             component={CreateOrganization}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Services"
+            component={ServicesPage}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

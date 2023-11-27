@@ -9,7 +9,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
 
-const CreateOrganization = ({ route }) => {
+const CreateOrganization = ({ route, navigation }) => {
   const { userId } = route.params;
 
   const handleSubmit = async () => {
@@ -33,6 +33,8 @@ const CreateOrganization = ({ route }) => {
     } catch (error) {
       console.error("Error adding new organization", error);
     }
+
+    navigation.push("Services")
   };
 
   const [organization, setOrganization] = useState("");

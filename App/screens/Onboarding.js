@@ -6,7 +6,7 @@ import globalstyles from "../shared/globalStyles";
 const Onboarding = ({ navigation }) => {
   return (
     <SafeAreaView style={globalstyles.container}>
-      <View style ={{margin: 40}}></View>
+      <View style={{ margin: 40 }}></View>
       <View style={styles.welcomeContainer}>
         <Text style={globalstyles.header}> Welcome to Ellis </Text>
       </View>
@@ -19,11 +19,13 @@ const Onboarding = ({ navigation }) => {
         <View style={{ paddingTop: 30 }}>
           <TouchableOpacity
             style={[globalstyles.buttonContainer, { marginBottom: 5 }]}
-            onPress={() => navigation.push("Login")}
+            onPress={() => navigation.push("Register")}
             activeOpacity={0.6}
           >
             <View>
-              <Text style={globalstyles.buttonText}>Log in</Text>
+              <Text style={globalstyles.buttonText}>
+                Register as a Service Provider
+              </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -32,7 +34,7 @@ const Onboarding = ({ navigation }) => {
             activeOpacity={0.6}
           >
             <View>
-              <Text style={globalstyles.buttonText}>Register</Text>
+              <Text style={globalstyles.buttonText}>Register as a Client</Text>
             </View>
           </TouchableOpacity>
           <View style={styles.dividerContainer}>
@@ -40,10 +42,19 @@ const Onboarding = ({ navigation }) => {
             <Text style={styles.dividerText}>or</Text>
             <View style={styles.divderLines} />
           </View>
-          <TouchableOpacity style={[globalstyles.buttonContainer]} activeOpacity={0.6}>
+          <TouchableOpacity
+            style={[globalstyles.buttonContainer]}
+            activeOpacity={0.6}
+          >
             <View>
               <Text style={globalstyles.buttonText}>Enter an invite code</Text>
             </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.loginContainer}
+            onPress={() => navigation.push("Login")}
+          >
+            <Text style={styles.loginText}>Already have an account? Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -53,9 +64,10 @@ const Onboarding = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   welcomeContainer: {
-    marginBottom: 400,
+    marginBottom: 350,
     padding: 5,
   },
+
   descriptionContainer: {
     paddingHorizontal: 15,
   },
@@ -90,6 +102,19 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     letterSpacing: 2.4,
     textTransform: "uppercase",
+  },
+
+  loginContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+  },
+
+  loginText: {
+    color: "#10798B",
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    textDecorationLine: "underline",
   },
 });
 

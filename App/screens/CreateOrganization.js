@@ -59,7 +59,7 @@ const CreateOrganization = () => {
             onChangeText={setServiceHours}
           />
           <TouchableOpacity
-            style={[globalstyles.buttonContainer, { marginTop: 10 }]}
+            style={[globalstyles.buttonContainer, { marginTop: 5 }]}
             activeOpacity={0.6}
           >
             <Text style={globalstyles.buttonText}>Add Another Location</Text>
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "gabarito-regular",
     paddingTop: 20,
+    paddingBottom: 5,
   },
 });
 

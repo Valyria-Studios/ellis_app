@@ -208,11 +208,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontFamily: "gabarito-semibold",
-    color: "#1A4674",
+    color: "#094852",
     marginVertical: 10,
   },
   icon: {
-    color: "#1A4674",
+    color: "#094852",
     marginRight: 10,
   },
   dropdownButton: {
@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginHorizontal: 20,
+    marginVertical: 5,
   },
 });
 

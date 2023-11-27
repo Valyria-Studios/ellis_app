@@ -9,7 +9,32 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
 
-const CreateOrganization = () => {
+const CreateOrganization = ({ route }) => {
+  const { userId } = route.params;
+
+  const handleSubmit = async () => {
+    const organizationData = {
+      organizationName: organization,
+      address,
+      phoneNumber,
+      website,
+      serviceHours,
+    };
+
+    try {
+      await fetch(`http://localhost:3000/Accounts/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ organization: organizationData }),
+      });
+      // Handle successful addition
+    } catch (error) {
+      console.error("Error adding new organization", error);
+    }
+  };
+
   const [organization, setOrganization] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -72,6 +97,7 @@ const CreateOrganization = () => {
             globalstyles.buttonContainer,
             { backgroundColor: "#10798B", marginTop: 20 },
           ]}
+          onPress={handleSubmit}
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Next</Text>
         </TouchableOpacity>

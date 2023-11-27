@@ -5,49 +5,30 @@
       "email": "Test",
       "password": "test",
       "agreed": true,
-      "id": 1
+      "id": 1,
+      "organization": [
+        {
+          "organizationName": "Hello12",
+          "address": "Hello12",
+          "phoneNumber": "Hello12",
+          "website": "Hello12",
+          "serviceHours": "Hello12"
+        }
+      ]
     },
     {
-      "name": "Daf",
-      "email": "Daf",
-      "password": "fda",
+      "name": "Ell",
+      "email": "Ell",
+      "password": "ell",
       "agreed": true,
-      "id": 2
-    },
-    {
-      "name": "D",
-      "email": "F",
-      "password": "f",
-      "agreed": true,
-      "id": 3
-    },
-    {
-      "name": "R",
-      "email": "R",
-      "password": "r",
-      "agreed": true,
-      "id": 4
-    },
-    {
-      "name": "Rr",
-      "email": "R",
-      "password": "r",
-      "agreed": true,
-      "id": 5
-    },
-    {
-      "name": "F",
-      "email": "F",
-      "password": "f",
-      "agreed": true,
-      "id": 6
-    },
-    {
-      "name": "",
-      "email": "",
-      "password": "",
-      "agreed": false,
-      "id": 7
+      "id": 2,
+      "organization": {
+        "organizationName": "Taco",
+        "address": "Taco",
+        "phoneNumber": "Taco",
+        "website": "Taco",
+        "serviceHours": "Taco"
+      }
     }
   ],
   "Amenities": [

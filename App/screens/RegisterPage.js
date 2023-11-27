@@ -30,16 +30,19 @@ const Register = ({ navigation }) => {
         },
         body: JSON.stringify(formData),
       });
+      if (response.ok) {
+        const responseJson = await response.json();
+        const userId = responseJson.id;
+        navigation.navigate("CreateOrganization", { userId: userId });
 
-      setName("");
-      setEmail("");
-      setPassword("");
-      setAgreed(false);
+      } else {
+        console.error("HTTP error: " + response.status);
+      }
     } catch (error) {
       console.error("Error sending data to API", error);
-    }
 
-    navigation.push("CreateOrganization");
+      navigation.push("CreateOrganization");
+    }
   };
 
   return (
@@ -116,7 +119,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F3F8F9",
     paddingHorizontal: 20,
   },
-
 
   agreeContainer: {
     flexDirection: "row",

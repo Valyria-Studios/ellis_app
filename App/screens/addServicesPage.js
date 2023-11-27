@@ -192,6 +192,14 @@ const ServicesPage = () => {
           </View>
         )}
       </View>
+      <TouchableOpacity
+        style={[
+          globalstyles.buttonContainer,
+          { backgroundColor: "#10798B", marginTop: 20 },
+        ]}
+      >
+        <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Next</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

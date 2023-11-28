@@ -10,6 +10,7 @@ import Register from "./onboarding/RegisterPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import CreateOrganization from "./onboarding/CreateOrganization";
 import ServicesPage from "./onboarding/addServicesPage";
+import ServiceHours from "./onboarding/addServiceHours";
 
 const Stack = createStackNavigator();
 
@@ -78,6 +79,11 @@ export default function App() {
           <Stack.Screen
             name="Services"
             component={ServicesPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Service_Hours"
+            component={ServiceHours}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

@@ -13,6 +13,20 @@
         "website": "",
         "serviceHours": ""
       }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 2,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
     }
   ],
   "Amenities": [

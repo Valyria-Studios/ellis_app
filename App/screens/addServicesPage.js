@@ -26,27 +26,32 @@ const ServicesPage = () => {
   const [selectedOptions, setSelectedOptions] = useState({
     Community: [],
     Finance: [],
+    Food: [],
+    Health: [],
+    Hygiene: [],
+    Shelter: [],
+    Work_Learn: [],
+    Other: [],
     // ... other dropdowns
   });
-  
+
   const handleSelect = (option, category) => {
-    setSelectedOptions(prevOptions => {
+    setSelectedOptions((prevOptions) => {
       const categoryOptions = prevOptions[category] || [];
-  
+
       if (categoryOptions.includes(option)) {
         return {
           ...prevOptions,
-          [category]: categoryOptions.filter(item => item !== option)
+          [category]: categoryOptions.filter((item) => item !== option),
         };
       } else {
         return {
           ...prevOptions,
-          [category]: [...categoryOptions, option]
+          [category]: [...categoryOptions, option],
         };
       }
     });
   };
-  
 
   const communityOptions = ["item 1", "item 2", "item 3", "item 4"];
   const financeOptions = ["item 1", "item 2", "item 3", "item 4"];
@@ -56,7 +61,6 @@ const ServicesPage = () => {
   const shelterOptions = ["item 1", "item 2", "item 3", "item 4"];
   const work_learnOptions = ["item 1", "item 2", "item 3", "item 4"];
   const otherOptions = ["item 1", "item 2", "item 3", "item 4"];
-
 
   const toggleDropdown = (key) => {
     setDropdowns((prevState) => ({
@@ -149,8 +153,18 @@ const ServicesPage = () => {
           </TouchableOpacity>
           {dropdowns.Food && (
             <View style={{ paddingHorizontal: 40, marginVertical: 5 }}>
-              <Text style={styles.optionsText}>Item 1</Text>
-              <Text style={styles.optionsText}>Item 2</Text>
+              {foodOptions.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleSelect(option, "Food")}
+                  style={styles.optionsContainer}
+                >
+                  <Text style={styles.optionsText}>{option}</Text>
+                  {selectedOptions.Food.includes(option) && (
+                    <Icon name="check" size={20} style={styles.checkIcon} />
+                  )}
+                </TouchableOpacity>
+              ))}
             </View>
           )}
           <TouchableOpacity
@@ -169,8 +183,18 @@ const ServicesPage = () => {
           </TouchableOpacity>
           {dropdowns.Health && (
             <View style={{ paddingHorizontal: 40, marginVertical: 5 }}>
-              <Text style={styles.optionsText}>Item 1</Text>
-              <Text style={styles.optionsText}>Item 2</Text>
+              {healthOptions.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleSelect(option, "Health")}
+                  style={styles.optionsContainer}
+                >
+                  <Text style={styles.optionsText}>{option}</Text>
+                  {selectedOptions.Health.includes(option) && (
+                    <Icon name="check" size={20} style={styles.checkIcon} />
+                  )}
+                </TouchableOpacity>
+              ))}
             </View>
           )}
           <TouchableOpacity
@@ -189,8 +213,18 @@ const ServicesPage = () => {
           </TouchableOpacity>
           {dropdowns.Hygiene && (
             <View style={{ paddingHorizontal: 40, marginVertical: 5 }}>
-              <Text style={styles.optionsText}>Item 1</Text>
-              <Text style={styles.optionsText}>Item 2</Text>
+              {hygieneOptions.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleSelect(option, "Hygiene")}
+                  style={styles.optionsContainer}
+                >
+                  <Text style={styles.optionsText}>{option}</Text>
+                  {selectedOptions.Hygiene.includes(option) && (
+                    <Icon name="check" size={20} style={styles.checkIcon} />
+                  )}
+                </TouchableOpacity>
+              ))}
             </View>
           )}
           <TouchableOpacity
@@ -209,8 +243,18 @@ const ServicesPage = () => {
           </TouchableOpacity>
           {dropdowns.Shelter && (
             <View style={{ paddingHorizontal: 40, marginVertical: 5 }}>
-              <Text style={styles.optionsText}>Item 1</Text>
-              <Text style={styles.optionsText}>Item 2</Text>
+              {shelterOptions.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleSelect(option, "Shelter")}
+                  style={styles.optionsContainer}
+                >
+                  <Text style={styles.optionsText}>{option}</Text>
+                  {selectedOptions.Shelter.includes(option) && (
+                    <Icon name="check" size={20} style={styles.checkIcon} />
+                  )}
+                </TouchableOpacity>
+              ))}
             </View>
           )}
           <TouchableOpacity
@@ -231,8 +275,18 @@ const ServicesPage = () => {
           </TouchableOpacity>
           {dropdowns.Work_Learn && (
             <View style={{ paddingHorizontal: 40, marginVertical: 5 }}>
-              <Text style={styles.optionsText}>Item 1</Text>
-              <Text style={styles.optionsText}>Item 2</Text>
+              {work_learnOptions.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleSelect(option, "Work_Learn")}
+                  style={styles.optionsContainer}
+                >
+                  <Text style={styles.optionsText}>{option}</Text>
+                  {selectedOptions.Work_Learn.includes(option) && (
+                    <Icon name="check" size={20} style={styles.checkIcon} />
+                  )}
+                </TouchableOpacity>
+              ))}
             </View>
           )}
           <TouchableOpacity
@@ -251,8 +305,18 @@ const ServicesPage = () => {
           </TouchableOpacity>
           {dropdowns.Other && (
             <View style={{ paddingHorizontal: 40, marginVertical: 5 }}>
-              <Text style={styles.optionsText}>Item 1</Text>
-              <Text style={styles.optionsText}>Item 2</Text>
+              {otherOptions.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleSelect(option, "Other")}
+                  style={styles.optionsContainer}
+                >
+                  <Text style={styles.optionsText}>{option}</Text>
+                  {selectedOptions.Other.includes(option) && (
+                    <Icon name="check" size={20} style={styles.checkIcon} />
+                  )}
+                </TouchableOpacity>
+              ))}
             </View>
           )}
         </View>

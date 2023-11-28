@@ -45,7 +45,7 @@ const CreateOrganization = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <View style={{ margin: 40 }}></View>
+      <View style={{ margin: 40 }}/>
       <View style={globalstyles.headerContainer}>
         <Text style={globalstyles.header}>Set up your Organization</Text>
       </View>

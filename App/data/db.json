@@ -1,5 +1,19 @@
 {
   "Accounts": [
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 1,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
+    }
   ],
   "Amenities": [
     {

@@ -3,13 +3,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
-import Onboarding from "./screens/Onboarding";
+import Onboarding from "./onboarding/Onboarding";
 import AppNavigator from "./routes/AppNavigator";
 import Login from "./screens/LoginPage";
-import Register from "./screens/RegisterPage";
+import Register from "./onboarding/RegisterPage";
 import { createStackNavigator } from "@react-navigation/stack";
-import CreateOrganization from "./screens/CreateOrganization";
-import ServicesPage from "./screens/addServicesPage";
+import CreateOrganization from "./onboarding/CreateOrganization";
+import ServicesPage from "./onboarding/addServicesPage";
 
 const Stack = createStackNavigator();
 

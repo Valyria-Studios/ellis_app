@@ -23,8 +23,32 @@ const ServicesPage = () => {
     // Add more dropdowns as needed
   });
 
+  const [selectedOptions, setSelectedOptions] = useState({
+    Community: [],
+    Finance: [],
+    // ... other dropdowns
+  });
+  
+  const handleSelect = (option, category) => {
+    setSelectedOptions(prevOptions => {
+      const categoryOptions = prevOptions[category] || [];
+  
+      if (categoryOptions.includes(option)) {
+        return {
+          ...prevOptions,
+          [category]: categoryOptions.filter(item => item !== option)
+        };
+      } else {
+        return {
+          ...prevOptions,
+          [category]: [...categoryOptions, option]
+        };
+      }
+    });
+  };
+  
+
   const communityOptions = ["item 1", "item 2", "item 3", "item 4"];
-  const [communitySelectedOptions, setCommunitySelectedOptions] = useState([]);
   const financeOptions = ["item 1", "item 2", "item 3", "item 4"];
   const foodOptions = ["item 1", "item 2", "item 3", "item 4"];
   const healthOptions = ["item 1", "item 2", "item 3", "item 4"];
@@ -33,16 +57,6 @@ const ServicesPage = () => {
   const work_learnOptions = ["item 1", "item 2", "item 3", "item 4"];
   const otherOptions = ["item 1", "item 2", "item 3", "item 4"];
 
-  const handleSelect = (option) => {
-    if (!communitySelectedOptions.includes(option)) {
-      setCommunitySelectedOptions([...communitySelectedOptions, option]);
-    } else {
-      // Optional: Remove the option from the selection if it's already selected
-      setCommunitySelectedOptions(
-        communitySelectedOptions.filter((item) => item !== option)
-      );
-    }
-  };
 
   const toggleDropdown = (key) => {
     setDropdowns((prevState) => ({
@@ -80,11 +94,11 @@ const ServicesPage = () => {
               {communityOptions.map((option, index) => (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => handleSelect(option)}
+                  onPress={() => handleSelect(option, "Community")}
                   style={styles.optionsContainer}
                 >
                   <Text style={styles.optionsText}>{option}</Text>
-                  {communitySelectedOptions.includes(option) && (
+                  {selectedOptions.Community.includes(option) && (
                     <Icon name="check" size={20} style={styles.checkIcon} />
                   )}
                 </TouchableOpacity>
@@ -107,8 +121,18 @@ const ServicesPage = () => {
           </TouchableOpacity>
           {dropdowns.Finance && (
             <View style={{ paddingHorizontal: 40, marginVertical: 5 }}>
-              <Text style={styles.optionsText}>Item 1</Text>
-              <Text style={styles.optionsText}>Item 2</Text>
+              {financeOptions.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleSelect(option, "Finance")}
+                  style={styles.optionsContainer}
+                >
+                  <Text style={styles.optionsText}>{option}</Text>
+                  {selectedOptions.Finance.includes(option) && (
+                    <Icon name="check" size={20} style={styles.checkIcon} />
+                  )}
+                </TouchableOpacity>
+              ))}
             </View>
           )}
           <TouchableOpacity

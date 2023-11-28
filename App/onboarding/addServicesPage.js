@@ -397,7 +397,7 @@ const ServicesPage = ({ navigation }) => {
             globalstyles.buttonContainer,
             { backgroundColor: "#10798B", marginTop: 20 },
           ]}
-          onPress={() => navigation.push("Service_Hours")}
+          onPress={() => navigation.push("Service_Hours", {selectedOptions})}
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Next</Text>
         </TouchableOpacity>

@@ -10,7 +10,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const ServicesPage = ({ navigation }) => {
+const ServicesPage = ({ route, navigation }) => {
+  const { userId } = route.params;
+
   const [dropdowns, setDropdowns] = useState({
     Community: false,
     Finance: false,
@@ -397,7 +399,12 @@ const ServicesPage = ({ navigation }) => {
             globalstyles.buttonContainer,
             { backgroundColor: "#10798B", marginTop: 20 },
           ]}
-          onPress={() => navigation.push("Service_Hours", {selectedOptions})}
+          onPress={() =>
+            navigation.push("Service_Hours", {
+              selectedOptions,
+              userId,
+            })
+          }
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Next</Text>
         </TouchableOpacity>

@@ -22,7 +22,7 @@ const CreateOrganization = ({ route, navigation }) => {
     };
 
     try {
-      await fetch(`http://localhost:3000/Accounts/${userId}`, {
+      const response = await fetch(`http://localhost:3000/Accounts/${userId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -30,11 +30,17 @@ const CreateOrganization = ({ route, navigation }) => {
         body: JSON.stringify({ organization: organizationData }),
       });
       // Handle successful addition
-    } catch (error) {
-      console.error("Error adding new organization", error);
-    }
 
-    navigation.push("Services")
+      if (response.ok) {
+        const responseJson = await response.json();
+        const userId = responseJson.id;
+        navigation.navigate("Services", { userId: userId });
+      } else {
+        console.error("HTTP error: " + response.status);
+      }
+    } catch (error) {
+      console.error("Error sending data to API", error);
+    }
   };
 
   const [organization, setOrganization] = useState("");
@@ -45,7 +51,7 @@ const CreateOrganization = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <View style={{ margin: 40 }}/>
+      <View style={{ margin: 40 }} />
       <View style={globalstyles.headerContainer}>
         <Text style={globalstyles.header}>Set up your Organization</Text>
       </View>

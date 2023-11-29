@@ -12,11 +12,53 @@ import globalstyles from "../shared/globalStyles";
 
 const ServiceHours = ({ route }) => {
   const { selectedOptions } = route.params;
-  const [serviceName, setServiceName] = useState("");
-  const [serviceLocation, setServiceLocation] = useState("");
-  const [openingHours, setOpeningHours] = useState("");
-  const [closingHours, setClosingHours] = useState("");
-  const [serviceDescription, setServiceDescription] = useState("");
+  const { userId } = route.params;
+  const [servicesData, setServicesData] = useState({});
+
+  const handleServiceDataChange = (category, option, field, value) => {
+    setServicesData((prevData) => ({
+      ...prevData,
+      [`${category}-${option}`]: {
+        ...prevData[`${category}-${option}`],
+        [field]: value,
+      },
+    }));
+  };
+
+  const postServiceData = async (allServiceDetails) => {
+    try {
+      const response = await fetch(`http://localhost:3000/Accounts/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          // Include other headers as required, like authorization tokens
+        },
+        body: JSON.stringify({ serviceDetails: allServiceDetails }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Success:", data);
+      // Handle success response
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle errors here
+    }
+  };
+
+  const handleSubmit = () => {
+    const allServiceDetails = Object.values(servicesData).reduce(
+      (acc, current) => {
+        return { ...acc, ...current };
+      },
+      {}
+    );
+
+    postServiceData(allServiceDetails);
+  };
 
   return (
     <SafeAreaView style={[globalstyles.container, { marginHorizontal: 5 }]}>
@@ -46,9 +88,17 @@ const ServiceHours = ({ route }) => {
                     { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Service name (optional)"}
-                  value={serviceName}
-                  onChange={setServiceName}
-                  // You can add more props to TextInput as needed
+                  value={
+                    servicesData[`${category}-${option}`]?.serviceName || ""
+                  }
+                  onChangeText={(text) =>
+                    handleServiceDataChange(
+                      category,
+                      option,
+                      "serviceName",
+                      text
+                    )
+                  }
                 />
                 <TextInput
                   style={[
@@ -56,9 +106,17 @@ const ServiceHours = ({ route }) => {
                     { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Location"}
-                  value={serviceLocation}
-                  onChange={setServiceLocation}
-                  // You can add more props to TextInput as needed
+                  value={
+                    servicesData[`${category}-${option}`]?.serviceLocation || ""
+                  }
+                  onChangeText={(text) =>
+                    handleServiceDataChange(
+                      category,
+                      option,
+                      "serviceLocation",
+                      text
+                    )
+                  }
                 />
                 <TextInput
                   style={[
@@ -66,9 +124,17 @@ const ServiceHours = ({ route }) => {
                     { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Opening Hours"}
-                  value={openingHours}
-                  onChange={setOpeningHours}
-                  // You can add more props to TextInput as needed
+                  value={
+                    servicesData[`${category}-${option}`]?.openingHours || ""
+                  }
+                  onChangeText={(text) =>
+                    handleServiceDataChange(
+                      category,
+                      option,
+                      "openingHours",
+                      text
+                    )
+                  }
                 />
                 <TextInput
                   style={[
@@ -76,19 +142,36 @@ const ServiceHours = ({ route }) => {
                     { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Closing Hours"}
-                  value={closingHours}
-                  onChange={setClosingHours}
-                  // You can add more props to TextInput as needed
+                  value={
+                    servicesData[`${category}-${option}`]?.closingHours || ""
+                  }
+                  onChangeText={(text) =>
+                    handleServiceDataChange(
+                      category,
+                      option,
+                      "closingHours",
+                      text
+                    )
+                  }
                 />
                 <TextInput
                   style={[
                     globalstyles.textInput,
                     { height: 45, marginVertical: 5 },
                   ]}
-                  placeholder={"Service description (optional)"}
-                  value={serviceDescription}
-                  onChange={setServiceDescription}
-                  // You can add more props to TextInput as needed
+                  placeholder={"Service descriptoin (optional)"}
+                  value={
+                    servicesData[`${category}-${option}`]?.serviceDescription ||
+                    ""
+                  }
+                  onChangeText={(text) =>
+                    handleServiceDataChange(
+                      category,
+                      option,
+                      "serviceDescription",
+                      text
+                    )
+                  }
                 />
                 <View style={{ marginVertical: 5 }}>
                   <TouchableOpacity style={globalstyles.buttonContainer}>
@@ -114,6 +197,7 @@ const ServiceHours = ({ route }) => {
             globalstyles.buttonContainer,
             { backgroundColor: "#10798B", marginTop: 20, marginBottom: 10 },
           ]}
+          onPress={handleSubmit}
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>

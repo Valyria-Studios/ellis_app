@@ -41,7 +41,6 @@ const Register = ({ navigation }) => {
     } catch (error) {
       console.error("Error sending data to API", error);
 
-      navigation.push("CreateOrganization");
     }
   };
 

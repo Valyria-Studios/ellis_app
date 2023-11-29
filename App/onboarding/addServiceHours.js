@@ -43,7 +43,7 @@ const ServiceHours = ({ route }) => {
                 <TextInput
                   style={[
                     globalstyles.textInput,
-                    { height: 45, paddingVertical: 0 },
+                    { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Service name (optional)"}
                   value={serviceName}
@@ -51,7 +51,10 @@ const ServiceHours = ({ route }) => {
                   // You can add more props to TextInput as needed
                 />
                 <TextInput
-                  style={[globalstyles.textInput, { height: 45 }]}
+                  style={[
+                    globalstyles.textInput,
+                    { height: 45, marginVertical: 5 },
+                  ]}
                   placeholder={"Location"}
                   value={serviceLocation}
                   onChange={setServiceLocation}
@@ -60,7 +63,7 @@ const ServiceHours = ({ route }) => {
                 <TextInput
                   style={[
                     globalstyles.textInput,
-                    { height: 45, paddingVertical: 0 },
+                    { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Opening Hours"}
                   value={openingHours}
@@ -70,7 +73,7 @@ const ServiceHours = ({ route }) => {
                 <TextInput
                   style={[
                     globalstyles.textInput,
-                    { height: 45, paddingVertical: 0 },
+                    { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Closing Hours"}
                   value={closingHours}
@@ -80,13 +83,28 @@ const ServiceHours = ({ route }) => {
                 <TextInput
                   style={[
                     globalstyles.textInput,
-                    { height: 45, paddingVertical: 0 },
+                    { height: 45, marginVertical: 5 },
                   ]}
                   placeholder={"Service description (optional)"}
                   value={serviceDescription}
                   onChange={setServiceDescription}
                   // You can add more props to TextInput as needed
                 />
+                <View style={{ marginVertical: 5 }}>
+                  <TouchableOpacity style={globalstyles.buttonContainer}>
+                    <Text style={globalstyles.buttonText}>
+                      {" "}
+                      Add another location
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{ marginTop: 15 }}>
+                  <TouchableOpacity style={globalstyles.buttonContainer}>
+                    <Text style={globalstyles.buttonText}>
+                      Add another {category.toLowerCase()} service
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             ))
           )}

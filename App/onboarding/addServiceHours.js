@@ -17,14 +17,16 @@ const ServiceHours = ({ route }) => {
           <Text style={globalstyles.subHeader}>Add your service hours</Text>
         </View>
         {/* Display the selected options here */}
-        {Object.entries(selectedOptions).map(([category, options]) => (
-          <View key={category}>
-            <Text>{category}</Text>
-            {options.map((option, index) => (
-              <Text key={index}>{option}</Text>
-            ))}
-          </View>
-        ))}
+        {Object.entries(selectedOptions)
+          .filter(([category, options]) => options.length > 0)
+          .map(([category, options]) => (
+            <View key={category} style={{ flexDirection: "row" }}>
+              <Text>{category}</Text>
+              {options.map((option, index) => (
+                <Text key={index}>{option}</Text>
+              ))}
+            </View>
+          ))}
       </ScrollView>
     </SafeAreaView>
   );

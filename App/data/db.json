@@ -55,6 +55,62 @@
         "website": "",
         "serviceHours": ""
       }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 5,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 6,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 7,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 8,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
     }
   ],
   "Amenities": [

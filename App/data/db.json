@@ -111,6 +111,48 @@
         "website": "",
         "serviceHours": ""
       }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 9,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 10,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 11,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      }
     }
   ],
   "Amenities": [

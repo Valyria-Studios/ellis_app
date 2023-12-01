@@ -11,6 +11,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import CreateOrganization from "./onboarding/CreateOrganization";
 import ServicesPage from "./onboarding/addServicesPage";
 import ServiceHours from "./onboarding/addServiceHours";
+import OnBoardingNavigator from "./routes/OnboardingNavigator";
 
 const Stack = createStackNavigator();
 
@@ -55,38 +56,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Onboarding">
-          <Stack.Screen
-            name="Onboarding"
-            component={Onboarding}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Register"
-            component={Register}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="CreateOrganization"
-            component={CreateOrganization}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Services"
-            component={ServicesPage}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Service_Hours"
-            component={ServiceHours}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
+        <OnBoardingNavigator />
       </NavigationContainer>
     );
   } else {

@@ -39,7 +39,6 @@ const ServiceHours = ({ route }) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
     } catch (error) {
       console.error("Error:", error);
       // Handle errors here
@@ -206,7 +205,6 @@ const ServiceHours = ({ route }) => {
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>
-        <Text>{}</Text>
         <TouchableOpacity style={globalstyles.buttonContainer}>
           <Text style={globalstyles.buttonText}>I'll do this later</Text>
         </TouchableOpacity>

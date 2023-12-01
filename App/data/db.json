@@ -1,148 +1,5 @@
 {
-  "Accounts": [
-    {
-      "name": "",
-      "email": "",
-      "password": "",
-      "agreed": false,
-      "id": 2,
-      "organization": {
-        "organizationName": "",
-        "address": "",
-        "phoneNumber": "",
-        "website": "",
-        "serviceHours": ""
-      },
-      "serviceDetails": {
-        "serviceName": "3",
-        "serviceLocation": "3",
-        "openingHours": "3",
-        "closingHours": "3",
-        "serviceDescription": "3"
-      }
-    },
-    {
-      "name": "",
-      "email": "",
-      "password": "",
-      "agreed": false,
-      "id": 3,
-      "organization": {
-        "organizationName": "",
-        "address": "",
-        "phoneNumber": "",
-        "website": "",
-        "serviceHours": ""
-      },
-      "serviceDetails": {}
-    },
-    {
-      "name": "Test",
-      "email": "Test",
-      "password": "test",
-      "agreed": true,
-      "id": 4,
-      "organization": {
-        "organizationName": "Test",
-        "address": "Test",
-        "phoneNumber": "Test",
-        "website": "Test",
-        "serviceHours": "Test"
-      },
-      "serviceDetails": {}
-    },
-    {
-      "name": "Test",
-      "email": "Test",
-      "password": "test",
-      "agreed": true,
-      "id": 5,
-      "organization": {
-        "organizationName": "Test",
-        "address": "Test",
-        "phoneNumber": "Test",
-        "website": "Test",
-        "serviceHours": "Test"
-      },
-      "serviceDetails": {
-        "Community": {
-          "item 2": {
-            "serviceName": "Thes",
-            "openingHours": "I’ll",
-            "serviceLocation": "Lk",
-            "closingHours": "L",
-            "serviceDescription": "L"
-          }
-        },
-        "Health": {
-          "item 1": {
-            "serviceName": "Hteh",
-            "serviceLocation": "22 2 2  ",
-            "openingHours": "2",
-            "closingHours": "2",
-            "serviceDescription": "2"
-          },
-          "item 4": {
-            "serviceName": "3",
-            "serviceLocation": "3",
-            "openingHours": "3",
-            "closingHours": "3",
-            "serviceDescription": "3"
-          }
-        }
-      }
-    },
-    {
-      "name": "2",
-      "email": "2",
-      "password": "2",
-      "agreed": true,
-      "id": 6,
-      "organization": {
-        "organizationName": "2",
-        "address": "2",
-        "phoneNumber": "2",
-        "website": "22",
-        "serviceHours": "2"
-      },
-      "serviceDetails": {
-        "Community": {
-          "item 2": {
-            "serviceName": "22",
-            "serviceLocation": "22",
-            "openingHours": "2",
-            "closingHours": "2",
-            "serviceDescription": "2"
-          },
-          "item 1": {
-            "serviceName": "2",
-            "serviceLocation": "2",
-            "openingHours": "2",
-            "closingHours": "2",
-            "serviceDescription": "2"
-          }
-        },
-        "Food": {
-          "item 1": {
-            "serviceName": "2",
-            "serviceLocation": "2",
-            "openingHours": "2",
-            "closingHours": "2",
-            "serviceDescription": "2"
-          }
-        },
-        "Shelter": {
-          "item 2": {
-            "serviceName": "2",
-            "serviceLocation": "2",
-            "openingHours": "22",
-            "closingHours": "22",
-            "serviceDescription": "2"
-          }
-        }
-      }
-    }
-  ],
+  "Accounts": [],
   "Amenities": [
     {
       "location": "school",
@@ -151,10 +8,7 @@
       "closingHour": "23:59",
       "distance": "1 mile",
       "address": "123 this place now",
-      "type": [
-        "Shelter",
-        "Learn"
-      ],
+      "type": ["Shelter", "Learn"],
       "availability": "20",
       "image": "../assets/images/location1.jpg",
       "description": [
@@ -172,10 +26,7 @@
       "closingHour": "6: 00 pm",
       "distance": "800 feet",
       "address": "123 your place",
-      "type": [
-        "Health",
-        "Hygiene"
-      ],
+      "type": ["Health", "Hygiene"],
       "availability": "2",
       "image": "../assets/images/location2.jpg",
       "description": [
@@ -191,10 +42,7 @@
       "closingHour": "9:00 pm",
       "distance": "3 miles",
       "address": "123 my house",
-      "type": [
-        "Shop",
-        "Family"
-      ],
+      "type": ["Shop", "Family"],
       "availability": "0",
       "image": "../assets/images/location3.jpg",
       "description": [
@@ -209,10 +57,7 @@
       "closingHour": "4:00 am",
       "distance": "6 mile",
       "address": "123 I don't know",
-      "type": [
-        "Work",
-        "Hygiene"
-      ],
+      "type": ["Work", "Hygiene"],
       "availability": "7",
       "image": "../assets/images/location4.jpg",
       "description": [
@@ -229,10 +74,7 @@
       "closingHour": "5:00 pm",
       "distance": "0.8 mile",
       "address": "123 I don't know",
-      "type": [
-        "Food",
-        "Finance"
-      ],
+      "type": ["Food", "Finance"],
       "availability": "0",
       "image": "../assets/images/location5.jpg",
       "description": [
@@ -248,11 +90,7 @@
       "closingHour": "8:00 pm",
       "distance": "232 feet",
       "address": "123 I don't know",
-      "type": [
-        "Shelter",
-        "Health",
-        "Family"
-      ],
+      "type": ["Shelter", "Health", "Family"],
       "availability": "15",
       "image": "../assets/images/location6.jpg",
       "description": [
@@ -270,10 +108,7 @@
       "closingHour": "7:00 pm",
       "distance": "0.9 mile",
       "address": "123 I don't know",
-      "type": [
-        "Health",
-        "Beauty"
-      ],
+      "type": ["Health", "Beauty"],
       "availability": "4",
       "image": "../assets/images/location7.jpg",
       "description": [
@@ -288,10 +123,7 @@
       "closingHour": "3:00 am",
       "distance": "2 mile",
       "address": "123 I don't know",
-      "type": [
-        "Education",
-        "Learning"
-      ],
+      "type": ["Education", "Learning"],
       "availability": "0",
       "image": "../assets/images/location8.jpg",
       "description": [
@@ -341,11 +173,7 @@
       "location": "home",
       "status": "Requested",
       "recency": "yesterday",
-      "services": [
-        "Haircut",
-        "Financial Aid",
-        "Celebrate Recovery"
-      ],
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "",
       "image": "userImage3",
       "key": "3"
@@ -356,11 +184,7 @@
       "location": "where",
       "status": "Past",
       "recency": "Mar 2024",
-      "services": [
-        "Haircut",
-        "Financial Aid",
-        "Celebrate Recovery"
-      ],
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "Received 3 servies from 1 provider",
       "image": "userImage4",
       "key": "4"
@@ -371,11 +195,7 @@
       "location": "under",
       "status": "Requested",
       "recency": "6 hours ago",
-      "services": [
-        "Haircut",
-        "Financial Aid",
-        "Celebrate Recovery"
-      ],
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "",
       "image": "userImage5",
       "key": "5"
@@ -386,11 +206,7 @@
       "location": "there",
       "status": "Current",
       "recency": "yesterday",
-      "services": [
-        "Haircut",
-        "Financial Aid",
-        "Celebrate Recovery"
-      ],
+      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "Receiving service from 2 providers",
       "image": "userImage6",
       "key": "6"

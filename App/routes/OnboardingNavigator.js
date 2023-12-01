@@ -9,7 +9,7 @@ import ServicesPage from "../onboarding/addServicesPage";
 
 const Stack = createStackNavigator();
 
-const OnBoardingNavigator = () => {
+const OnBoardingNavigator = ({ onCompleteOnboarding }) => {
   return (
     <Stack.Navigator initialRouteName="Onboarding">
       <Stack.Screen
@@ -40,6 +40,7 @@ const OnBoardingNavigator = () => {
       <Stack.Screen
         name="Service_Hours"
         component={ServiceHours}
+        initialParams={{onCompleteOnboarding}}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

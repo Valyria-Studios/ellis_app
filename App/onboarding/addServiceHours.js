@@ -13,6 +13,7 @@ import globalstyles from "../shared/globalStyles";
 const ServiceHours = ({ route }) => {
   const { selectedOptions } = route.params;
   const { userId } = route.params;
+  const { onCompleteOnboarding } = route.params;
   const [servicesData, setServicesData] = useState({});
 
   const handleServiceDataChange = (category, option, field, value) => {
@@ -62,6 +63,7 @@ const ServiceHours = ({ route }) => {
     });
 
     postServiceData(allServiceDetails);
+    onCompleteOnboarding();
   };
 
   return (

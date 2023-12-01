@@ -3,14 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
-import Onboarding from "./onboarding/Onboarding";
-import AppNavigator from "./routes/AppNavigator";
-import Login from "./screens/LoginPage";
-import Register from "./onboarding/RegisterPage";
 import { createStackNavigator } from "@react-navigation/stack";
-import CreateOrganization from "./onboarding/CreateOrganization";
-import ServicesPage from "./onboarding/addServicesPage";
-import ServiceHours from "./onboarding/addServiceHours";
 import OnBoardingNavigator from "./routes/OnboardingNavigator";
 
 const Stack = createStackNavigator();
@@ -30,6 +23,11 @@ const getFonts = () =>
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [onboardingComplete, setOnboardingComplete] = useState(false);
+
+  const handleCompleteOnboarding = () => {
+    setOnboardingComplete(true);
+  };
 
   useEffect(() => {
     (async () => {
@@ -56,7 +54,13 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <OnBoardingNavigator />
+        {onboardingComplete ? (
+          <RootNavigator />
+        ) : (
+          <OnBoardingNavigator
+            onCompleteOnboarding={handleCompleteOnboarding}
+          />
+        )}
       </NavigationContainer>
     );
   } else {

@@ -14,6 +14,79 @@
         "serviceHours": ""
       },
       "serviceDetails": {}
+    },
+    {
+      "name": "Tes",
+      "email": "Tes",
+      "password": "tes",
+      "agreed": true,
+      "id": 2,
+      "organization": {
+        "organizationName": "Tes",
+        "address": "Tes",
+        "phoneNumber": "Tes",
+        "website": "Tes",
+        "serviceHours": "Tes"
+      },
+      "serviceDetails": {
+        "Community": {
+          "item 1": {
+            "serviceName": "Test",
+            "serviceLocation": "Test",
+            "openingHours": "Test",
+            "closingHours": "Test",
+            "serviceDescription": "Test"
+          }
+        },
+        "Health": {
+          "item 1": {
+            "serviceName": "Test",
+            "serviceLocation": "Test",
+            "openingHours": "Test",
+            "closingHours": "Test",
+            "serviceDescription": "Test"
+          }
+        },
+        "Work_Learn": {
+          "item 1": {
+            "serviceName": "Test",
+            "serviceLocation": "Test",
+            "openingHours": "Test",
+            "closingHours": "Test",
+            "serviceDescription": "Test"
+          }
+        }
+      }
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 3,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      },
+      "serviceDetails": {}
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "agreed": false,
+      "id": 4,
+      "organization": {
+        "organizationName": "",
+        "address": "",
+        "phoneNumber": "",
+        "website": "",
+        "serviceHours": ""
+      },
+      "serviceDetails": {}
     }
   ],
   "Amenities": [

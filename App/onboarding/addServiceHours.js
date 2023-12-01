@@ -40,9 +40,6 @@ const ServiceHours = ({ route }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = await response.json();
-      console.log("Success:", data);
-      // Handle success response
     } catch (error) {
       console.error("Error:", error);
       // Handle errors here
@@ -50,12 +47,20 @@ const ServiceHours = ({ route }) => {
   };
 
   const handleSubmit = () => {
-    const allServiceDetails = Object.values(servicesData).reduce(
-      (acc, current) => {
-        return { ...acc, ...current };
-      },
-      {}
-    );
+    let allServiceDetails = {};
+
+    // Loop over each category and option
+    Object.entries(servicesData).forEach(([key, value]) => {
+      const [category, option] = key.split("-");
+
+      // Initialize the category object if not already present
+      if (!allServiceDetails[category]) {
+        allServiceDetails[category] = {};
+      }
+
+      // Add the option data to the category
+      allServiceDetails[category][option] = value;
+    });
 
     postServiceData(allServiceDetails);
   };
@@ -201,6 +206,7 @@ const ServiceHours = ({ route }) => {
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>
+        <Text>{}</Text>
         <TouchableOpacity style={globalstyles.buttonContainer}>
           <Text style={globalstyles.buttonText}>I'll do this later</Text>
         </TouchableOpacity>

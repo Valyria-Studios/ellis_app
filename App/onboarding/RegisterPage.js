@@ -13,14 +13,50 @@ const Register = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const [agreed, setAgreed] = useState(false);
 
   const toggleAgree = () => {
     setAgreed(!agreed);
   };
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async () => {
     const formData = { name, email, password, agreed };
+
+    let valid = true;
+    if (!name) {
+      setNameError("Name is required");
+      valid = false;
+    } else {
+      setNameError("");
+    }
+
+    if (!email) {
+      setEmailError("Email is required");
+      valid = false;
+    } else if (!isValidEmail(email)) {
+      setEmailError("Please enter a vaild email address");
+      valid = false;
+    } else {
+      setEmailError("");
+    }
+
+    if (!password) {
+      setPasswordError("Password is required");
+      valid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    if (!valid) return;
 
     try {
       const response = await fetch("http://localhost:3000/Accounts", {
@@ -34,13 +70,11 @@ const Register = ({ navigation }) => {
         const responseJson = await response.json();
         const userId = responseJson.id;
         navigation.navigate("CreateOrganization", { userId: userId });
-
       } else {
         console.error("HTTP error: " + response.status);
       }
     } catch (error) {
       console.error("Error sending data to API", error);
-
     }
   };
 
@@ -60,12 +94,14 @@ const Register = ({ navigation }) => {
           value={name}
           onChangeText={setName}
         />
+        {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
         <TextInput
           placeholder="Email Address"
           style={globalstyles.textInput}
           value={email}
           onChangeText={setEmail}
         />
+        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
         <TextInput
           placeholder="Password"
           style={globalstyles.textInput}
@@ -73,6 +109,9 @@ const Register = ({ navigation }) => {
           onChangeText={setPassword}
           secureTextEntry={true}
         />
+        {passwordError ? (
+          <Text style={styles.errorText}>{passwordError}</Text>
+        ) : null}
       </View>
       <View style={styles.agreeContainer}>
         <TouchableOpacity
@@ -153,6 +192,11 @@ const styles = StyleSheet.create({
   disabledButton: {
     backgroundColor: "#ccc",
     borderColor: "#ccc",
+  },
+
+  errorText: {
+    color: "red",
+    paddingHorizontal: 15,
   },
 });
 

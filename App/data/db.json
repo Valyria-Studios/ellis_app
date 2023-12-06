@@ -48,6 +48,55 @@
         "website": "Test",
         "serviceHours": "Test"
       }
+    },
+    {
+      "name": "Tes",
+      "email": "Test@gmail.com",
+      "password": "tes",
+      "agreed": true,
+      "id": 7
+    },
+    {
+      "name": "Tes",
+      "email": "Tes@gmail.com",
+      "password": "sat",
+      "agreed": true,
+      "id": 8
+    },
+    {
+      "name": "Test",
+      "email": "Test@mail.com",
+      "password": "sat",
+      "agreed": true,
+      "id": 9
+    },
+    {
+      "name": "Tes",
+      "email": "Tews@email.com",
+      "password": "saw",
+      "agreed": true,
+      "id": 10
+    },
+    {
+      "name": "Tes",
+      "email": "Tes@email.com",
+      "password": "sat",
+      "agreed": true,
+      "id": 11
+    },
+    {
+      "name": "Tes",
+      "email": "Tes@gmail.com",
+      "password": "sam",
+      "agreed": true,
+      "id": 12
+    },
+    {
+      "name": "Test",
+      "email": "Test@email.com",
+      "password": "set",
+      "agreed": true,
+      "id": 13
     }
   ],
   "Amenities": [

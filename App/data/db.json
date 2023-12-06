@@ -1,102 +1,48 @@
 {
   "Accounts": [
     {
-      "name": "Test",
-      "email": "Test@gmail.com",
-      "password": "bob",
-      "agreed": false,
-      "id": 1
-    },
-    {
-      "name": "Name",
-      "email": "Name@email.com",
-      "password": "nametest",
+      "name": "Tacos",
+      "email": "Taco@email.com",
+      "password": "hello",
       "agreed": true,
-      "id": 2
-    },
-    {
-      "name": "Test",
-      "email": "Test@gmail.com",
-      "password": "test",
-      "agreed": true,
-      "id": 3
-    },
-    {
-      "name": "Test",
-      "email": "Test@gmail.com",
-      "password": "test",
-      "agreed": true,
-      "id": 4
-    },
-    {
-      "name": "Tes",
-      "email": "Test@email.com",
-      "password": "test",
-      "agreed": true,
-      "id": 5
-    },
-    {
-      "name": "Test",
-      "email": "Test@gmail.com",
-      "password": "testing",
-      "agreed": true,
-      "id": 6,
+      "id": 1,
       "organization": {
-        "organizationName": "",
-        "address": "Helllo",
-        "phoneNumber": "Testing",
-        "website": "Test",
-        "serviceHours": "Test"
+        "organizationName": "Tacos4you",
+        "locations": [
+          {
+            "address": "Here place",
+            "phoneNumber": "7589587309",
+            "website": "Tacos4you.com",
+            "serviceHours": "12:00 pm - 9:00 pm"
+          },
+          {
+            "address": "There place",
+            "phoneNumber": "4765347231",
+            "website": "Tacos4you.com/there",
+            "serviceHours": "12:00 pm - 9:00 pm"
+          }
+        ]
+      },
+      "serviceDetails": {
+        "Food": {
+          "item 1": {
+            "serviceName": "Here",
+            "serviceLocation": "Here",
+            "openingHours": "Here",
+            "closingHours": "Here",
+            "serviceDescription": "Here"
+          }
+        },
+        "Work_Learn": {
+          "item 1": {
+            "serviceName": "There",
+            "serviceLocation": "There",
+            "openingHours": "There",
+            "closingHours": "There",
+            "serviceDescription": "There"
+          }
+        }
       }
-    },
-    {
-      "name": "Tes",
-      "email": "Test@gmail.com",
-      "password": "tes",
-      "agreed": true,
-      "id": 7
-    },
-    {
-      "name": "Tes",
-      "email": "Tes@gmail.com",
-      "password": "sat",
-      "agreed": true,
-      "id": 8
-    },
-    {
-      "name": "Test",
-      "email": "Test@mail.com",
-      "password": "sat",
-      "agreed": true,
-      "id": 9
-    },
-    {
-      "name": "Tes",
-      "email": "Tews@email.com",
-      "password": "saw",
-      "agreed": true,
-      "id": 10
-    },
-    {
-      "name": "Tes",
-      "email": "Tes@email.com",
-      "password": "sat",
-      "agreed": true,
-      "id": 11
-    },
-    {
-      "name": "Tes",
-      "email": "Tes@gmail.com",
-      "password": "sam",
-      "agreed": true,
-      "id": 12
-    },
-    {
-      "name": "Test",
-      "email": "Test@email.com",
-      "password": "set",
-      "agreed": true,
-      "id": 13
     }
   ],
   "Amenities": [

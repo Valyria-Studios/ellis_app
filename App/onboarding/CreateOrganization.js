@@ -12,14 +12,15 @@ import globalstyles from "../shared/globalStyles";
 
 const CreateOrganization = ({ route, navigation }) => {
   const { userId } = route.params;
+  const [locations, setLocations] = useState([
+    { address: "", phoneNumber: "", website: "", serviceHours: "" },
+  ]);
+  const [organization, setOrganization] = useState("");
 
   const handleSubmit = async () => {
     const organizationData = {
       organizationName: organization,
-      address,
-      phoneNumber,
-      website,
-      serviceHours,
+      locations,
     };
 
     try {
@@ -44,46 +45,44 @@ const CreateOrganization = ({ route, navigation }) => {
     }
   };
 
-  const [organization, setOrganization] = useState("");
-  const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [website, setWebsite] = useState("");
-  const [serviceHours, setServiceHours] = useState("");
-  const [inputs, setInputs] = useState([]);
-
-  const inputFields = [
-    { placeholder: "Address", value: address, onChangeText: setAddress },
-    {
-      placeholder: "Phone Number",
-      value: phoneNumber,
-      onChangeText: setPhoneNumber,
-    },
-    { placeholder: "Website", value: website, onChangeText: setWebsite },
-    {
-      placeholder: "Set Default Service Hours",
-      value: serviceHours,
-      onChangeText: setServiceHours,
-    },
-  ];
-
-  const addNewInput = () => {
-    setInputs([...inputs, ""]); // Add a new empty string for each new input
+  const handleInputChange = (index, field, value) => {
+    const newLocations = [...locations];
+    newLocations[index][field] = value;
+    setLocations(newLocations);
   };
 
-  const textInputComponents = inputs.map((input, index) => (
-    <View>
-      <Text style={styles.subheader2}>Location {index + 1}</Text>
-      {inputFields.map((feild, index) => (
-        <TextInput
-          key={index}
-          style = {globalstyles.textInput}
-          placeholder={feild.placeholder}
-          value={feild.value}
-          onChangeText={feild.onChangeText}
-        />
-      ))}
-    </View>
-  ));
+  const addNewLocation = () => {
+    setLocations([
+      ...locations,
+      { address: "", phoneNumber: "", website: "", serviceHours: "" },
+    ]);
+  };
+
+  const renderLocationInputs = () => {
+    return locations.map((location, locationIndex) => (
+      <View key={locationIndex}>
+        <Text style={styles.subheader2}>
+          {locationIndex === 0
+            ? "Main Location"
+            : `Location ${locationIndex + 1}`}
+        </Text>
+        {Object.keys(location).map(
+          (field, fieldIndex) =>
+            field !== "organization" && (
+              <TextInput
+                key={fieldIndex}
+                style={globalstyles.textInput}
+                placeholder={field}
+                value={location[field]}
+                onChangeText={(value) =>
+                  handleInputChange(locationIndex, field, value)
+                }
+              />
+            )
+        )}
+      </View>
+    ));
+  };
 
   return (
     <ScrollView>
@@ -103,21 +102,11 @@ const CreateOrganization = ({ route, navigation }) => {
             onChangeText={setOrganization}
           />
           <View>
-            <Text style={styles.subheader2}>Main Location</Text>
-            {inputFields.map((field, index) => (
-              <TextInput
-                key={index}
-                style={globalstyles.textInput}
-                placeholder={field.placeholder}
-                value={field.value}
-                onChangeText={field.onChangeText}
-              />
-            ))}
-            {textInputComponents}
+            {renderLocationInputs()}
             <TouchableOpacity
               style={[globalstyles.buttonContainer, { marginTop: 5 }]}
               activeOpacity={0.6}
-              onPress={addNewInput}
+              onPress={addNewLocation}
             >
               <Text style={globalstyles.buttonText}>Add Another Location</Text>
             </TouchableOpacity>

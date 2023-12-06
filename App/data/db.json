@@ -6,6 +6,48 @@
       "password": "bob",
       "agreed": false,
       "id": 1
+    },
+    {
+      "name": "Name",
+      "email": "Name@email.com",
+      "password": "nametest",
+      "agreed": true,
+      "id": 2
+    },
+    {
+      "name": "Test",
+      "email": "Test@gmail.com",
+      "password": "test",
+      "agreed": true,
+      "id": 3
+    },
+    {
+      "name": "Test",
+      "email": "Test@gmail.com",
+      "password": "test",
+      "agreed": true,
+      "id": 4
+    },
+    {
+      "name": "Tes",
+      "email": "Test@email.com",
+      "password": "test",
+      "agreed": true,
+      "id": 5
+    },
+    {
+      "name": "Test",
+      "email": "Test@gmail.com",
+      "password": "testing",
+      "agreed": true,
+      "id": 6,
+      "organization": {
+        "organizationName": "",
+        "address": "Helllo",
+        "phoneNumber": "Testing",
+        "website": "Test",
+        "serviceHours": "Test"
+      }
     }
   ],
   "Amenities": [

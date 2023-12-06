@@ -49,6 +49,21 @@ const CreateOrganization = ({ route, navigation }) => {
   const [website, setWebsite] = useState("");
   const [serviceHours, setServiceHours] = useState("");
 
+  const inputFields = [
+    { placeholder: "Address", value: address, onChangeText: setAddress },
+    {
+      placeholder: "Phone Number",
+      value: phoneNumber,
+      onChangeText: setPhoneNumber,
+    },
+    { placeholder: "Website", value: website, onChangeText: setWebsite },
+    {
+      placeholder: "Set Default Service Hours",
+      value: serviceHours,
+      onChangeText: setServiceHours,
+    },
+  ];
+
   return (
     <SafeAreaView style={globalstyles.container}>
       <View style={{ margin: 40 }} />
@@ -67,30 +82,15 @@ const CreateOrganization = ({ route, navigation }) => {
         />
         <View>
           <Text style={styles.subheader2}>Main Location</Text>
-          <TextInput
-            placeholder="Address"
-            style={globalstyles.textInput}
-            value={address}
-            onChangeText={setAddress}
-          />
-          <TextInput
-            placeholder="Phone Number"
-            style={globalstyles.textInput}
-            value={phoneNumber}
-            onChangeText={setPhoneNumber}
-          />
-          <TextInput
-            placeholder="Website"
-            style={globalstyles.textInput}
-            value={website}
-            onChangeText={setWebsite}
-          />
-          <TextInput
-            placeholder="Set Default Service Hours"
-            style={globalstyles.textInput}
-            value={serviceHours}
-            onChangeText={setServiceHours}
-          />
+          {inputFields.map((field, index) => (
+            <TextInput
+              key={index}
+              style={globalstyles.textInput}
+              placeholder={field.placeholder}
+              value={field.value}
+              onChangeText={field.onChangeText}
+            />
+          ))}
           <TouchableOpacity
             style={[globalstyles.buttonContainer, { marginTop: 5 }]}
             activeOpacity={0.6}

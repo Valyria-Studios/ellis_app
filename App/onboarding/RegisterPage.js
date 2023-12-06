@@ -16,6 +16,7 @@ const Register = ({ navigation }) => {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [agreedError, setAgreedError] = useState("");
 
   const [agreed, setAgreed] = useState(false);
 
@@ -54,6 +55,13 @@ const Register = ({ navigation }) => {
       valid = false;
     } else {
       setPasswordError("");
+    }
+
+    if (!agreed) {
+      setAgreedError("Must accept Terms of Use");
+      valid = false;
+    } else {
+      setAgreedError("");
     }
 
     if (!valid) return;
@@ -123,6 +131,7 @@ const Register = ({ navigation }) => {
           I agree to Ellis' privacy policy and terms of use
         </Text>
       </View>
+      {agreedError ? <Text style={styles.errorText}>{agreedError}</Text> : null}
       <View>
         <TouchableOpacity
           // disabled={!agreed || !name || !email || !password}
@@ -161,7 +170,8 @@ const styles = StyleSheet.create({
   agreeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 20,
+    marginHorizontal: 10,
+    marginVertical: 10,
   },
 
   agreeCircle: {

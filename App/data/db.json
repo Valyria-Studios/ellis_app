@@ -1,6 +1,12 @@
 {
   "Accounts": [
-
+    {
+      "name": "Test",
+      "email": "Test@gmail.com",
+      "password": "bob",
+      "agreed": false,
+      "id": 1
+    }
   ],
   "Amenities": [
     {

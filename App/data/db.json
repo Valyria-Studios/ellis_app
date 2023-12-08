@@ -7,29 +7,11 @@
       "agreed": true,
       "id": 1,
       "organization": {
-        "organizationName": "Daid",
-        "locations": [
-          {
-            "address": "Fads",
-            "phoneNumber": "safafdsfaeafsdaf",
-            "website": "Asdfa",
-            "serviceHours": "Fsad"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Tes@test.com",
-      "password": "test",
-      "agreed": true,
-      "id": 2,
-      "organization": {
         "organizationName": "Test",
-        "locations": [
+        "formattedLocations": [
           {
             "address": "Test",
-            "phoneNumber": "(898) 839-0000",
+            "phoneNumber": "(000) 000-0000",
             "website": "Test",
             "serviceHours": "Test"
           }

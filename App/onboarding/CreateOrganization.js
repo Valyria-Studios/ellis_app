@@ -42,11 +42,14 @@ const CreateOrganization = ({ route, navigation }) => {
           isValid = false;
         }
 
-
         if (location.phoneNumber) {
-          const cleanedPhoneNumber = location.phoneNumber.replace(/[()-\s]/g, '');
+          const cleanedPhoneNumber = location.phoneNumber.replace(
+            /[()-\s]/g,
+            ""
+          );
           if (cleanedPhoneNumber.length !== 10) {
-            newErrors[`location_${index}_phoneNumber`] = "Please enter a valid phone number";
+            newErrors[`location_${index}_phoneNumber`] =
+              "Please enter a valid phone number";
             isValid = false;
           }
         }
@@ -58,9 +61,15 @@ const CreateOrganization = ({ route, navigation }) => {
   };
 
   const handleSubmit = async () => {
+    const formattedLocations = locations.map((location) => ({
+      ...location,
+      phoneNumber: location.phoneNumber
+        ? formatPhoneNumber(location.phoneNumber)
+        : "",
+    }));
     const organizationData = {
       organizationName: organization,
-      locations,
+      formattedLocations,
     };
 
     if (!validateFields()) {
@@ -107,6 +116,21 @@ const CreateOrganization = ({ route, navigation }) => {
       ...locations,
       { address: "", phoneNumber: "", website: "", serviceHours: "" },
     ]);
+  };
+
+  const formatPhoneNumber = (phoneNumber) => {
+    // Remove non-numeric characters
+    const cleaned = ("" + phoneNumber).replace(/\D/g, "");
+
+    // Check if the input is of correct length
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+    if (match) {
+      // Format the number (123) 456-7890
+      return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+
+    return phoneNumber; // Return null if the number is invalid
   };
 
   const formatPlaceholder = (field) => {

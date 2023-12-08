@@ -66,6 +66,13 @@ const ServiceHours = ({ route }) => {
     onCompleteOnboarding();
   };
 
+  const formatCategoryName = (category) => {
+    const nameMap = {
+      Work_Learn: "Work & Learn",
+    };
+    return nameMap[category] || category;
+  };
+
   return (
     <SafeAreaView style={[globalstyles.container, { marginHorizontal: 5 }]}>
       <ScrollView>
@@ -85,9 +92,9 @@ const ServiceHours = ({ route }) => {
                 key={`${category}-${index}`}
                 style={styles.servicesContainer}
               >
-                <Text
-                  style={styles.servicesText}
-                >{`${category} > ${option}`}</Text>
+                <Text style={styles.servicesText}>{`${formatCategoryName(
+                  category
+                )} > ${option}`}</Text>
                 <TextInput
                   style={[
                     globalstyles.textInput,

@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
 import Icon from "@expo/vector-icons/MaterialIcons";
+import { isValid } from "ipaddr.js";
 
 const CreateOrganization = ({ route, navigation }) => {
   const { userId } = route.params;
@@ -17,12 +18,46 @@ const CreateOrganization = ({ route, navigation }) => {
     { address: "", phoneNumber: "", website: "", serviceHours: "" },
   ]);
   const [organization, setOrganization] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validateFields = () => {
+    let isValid = true;
+    const newErrors = {};
+
+    if (organization.trim() === "") {
+      newErrors.organization = "Organization name is required";
+      isValid = false;
+    }
+
+    locations.forEach((location, index) => {
+      Object.keys(location).forEach((key) => {
+        if (location[key].trim() === "") {
+          let errorMessage = `${formatPlaceholder(key)} is required`;
+
+          // Custom error message for 'serviceHours'
+          if (key === "serviceHours") {
+            errorMessage = "Service Hours are required";
+          }
+
+          newErrors[`location_${index}_${key}`] = errorMessage;
+          isValid = false;
+        }
+      });
+    });
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleSubmit = async () => {
     const organizationData = {
       organizationName: organization,
       locations,
     };
+
+    if (!validateFields()) {
+      return;
+    }
 
     try {
       const response = await fetch(`http://localhost:3000/Accounts/${userId}`, {
@@ -86,7 +121,10 @@ const CreateOrganization = ({ route, navigation }) => {
               : `Location ${locationIndex + 1}`}
           </Text>
           {locationIndex !== 0 && (
-            <TouchableOpacity onPress={() => removeLocation(locationIndex)} activeOpacity={0.5}>
+            <TouchableOpacity
+              onPress={() => removeLocation(locationIndex)}
+              activeOpacity={0.5}
+            >
               <Icon
                 name="highlight-remove"
                 size={20}
@@ -98,15 +136,22 @@ const CreateOrganization = ({ route, navigation }) => {
         {Object.keys(location).map(
           (field, fieldIndex) =>
             field !== "organization" && (
-              <TextInput
-                key={fieldIndex}
-                style={globalstyles.textInput}
-                placeholder={formatPlaceholder(field)}
-                value={location[field]}
-                onChangeText={(value) =>
-                  handleInputChange(locationIndex, field, value)
-                }
-              />
+              <View key={fieldIndex}>
+                <TextInput
+                  key={fieldIndex}
+                  style={globalstyles.textInput}
+                  placeholder={formatPlaceholder(field)}
+                  value={location[field]}
+                  onChangeText={(value) =>
+                    handleInputChange(locationIndex, field, value)
+                  }
+                />
+                {errors[`location_${locationIndex}_${field}`] && (
+                  <Text style={styles.errorText}>
+                    {errors[`location_${locationIndex}_${field}`]}
+                  </Text>
+                )}
+              </View>
             )
         )}
       </View>
@@ -115,7 +160,7 @@ const CreateOrganization = ({ route, navigation }) => {
 
   return (
     <ScrollView style={globalstyles.container}>
-      <SafeAreaView >
+      <SafeAreaView>
         <View style={{ margin: 40 }} />
         <View style={globalstyles.headerContainer}>
           <Text style={globalstyles.header}>Set up your Organization</Text>
@@ -130,6 +175,9 @@ const CreateOrganization = ({ route, navigation }) => {
             value={organization}
             onChangeText={setOrganization}
           />
+          {errors.organization && (
+            <Text style={styles.errorText}>{errors.organization}</Text>
+          )}
           <View>
             {renderLocationInputs()}
             <TouchableOpacity
@@ -176,6 +224,11 @@ const styles = StyleSheet.create({
   removeIcon: {
     marginRight: 5,
     color: "#030E07",
+  },
+
+  errorText: {
+    color: "red",
+    paddingHorizontal: 15,
   },
 });
 

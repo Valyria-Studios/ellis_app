@@ -161,6 +161,13 @@
           }
         ]
       }
+    },
+    {
+      "name": "Test",
+      "email": "Test@test.copm",
+      "password": "test",
+      "agreed": true,
+      "id": 10
     }
   ],
   "Amenities": [

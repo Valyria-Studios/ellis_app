@@ -58,6 +58,19 @@ const CreateOrganization = ({ route, navigation }) => {
     ]);
   };
 
+  const formatPlaceholder = (field) => {
+    switch (field) {
+      case "address":
+        return "Address";
+      case "phoneNumber":
+        return "Phone Number";
+      case "website":
+        return "Website";
+      case "serviceHours":
+        return "Service Hours";
+    }
+  };
+
   const renderLocationInputs = () => {
     return locations.map((location, locationIndex) => (
       <View key={locationIndex}>
@@ -72,7 +85,7 @@ const CreateOrganization = ({ route, navigation }) => {
               <TextInput
                 key={fieldIndex}
                 style={globalstyles.textInput}
-                placeholder={field}
+                placeholder={formatPlaceholder(field)}
                 value={location[field]}
                 onChangeText={(value) =>
                   handleInputChange(locationIndex, field, value)

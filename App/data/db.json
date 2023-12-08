@@ -43,6 +43,119 @@
           }
         }
       }
+    },
+    {
+      "name": "Test",
+      "email": "Test@email.com",
+      "password": "test",
+      "agreed": true,
+      "id": 2,
+      "organization": {
+        "organizationName": "Test",
+        "locations": [
+          {
+            "address": "Test",
+            "phoneNumber": "Test",
+            "website": "Test",
+            "serviceHours": "Test"
+          },
+          {
+            "address": "Test1",
+            "phoneNumber": "Test1",
+            "website": "Test1",
+            "serviceHours": "Test1"
+          }
+        ]
+      },
+      "serviceDetails": {
+        "Community": {
+          "item 1": {
+            "serviceName": "Test",
+            "serviceLocation": "Test",
+            "openingHours": "Test",
+            "closingHours": "Test",
+            "serviceDescription": "Test"
+          }
+        },
+        "Food": {
+          "item 2": {
+            "serviceName": "Test",
+            "serviceLocation": "Test",
+            "openingHours": "Test",
+            "closingHours": "Test",
+            "serviceDescription": "Test"
+          }
+        },
+        "Health": {
+          "item 2": {
+            "serviceName": "Test",
+            "serviceLocation": "Test",
+            "openingHours": "Test",
+            "closingHours": "Test",
+            "serviceDescription": "Test"
+          }
+        }
+      }
+    },
+    {
+      "name": "Test",
+      "email": "Test@email.com",
+      "password": "test",
+      "agreed": true,
+      "id": 3,
+      "organization": {
+        "organizationName": "Taco",
+        "locations": [
+          {
+            "address": "Tacos",
+            "phoneNumber": "Tacos",
+            "website": "Taco",
+            "serviceHours": "Tacos"
+          },
+          {
+            "address": "Taco2",
+            "phoneNumber": "Taco2",
+            "website": "Taco2",
+            "serviceHours": "Taco2"
+          }
+        ]
+      },
+      "serviceDetails": {
+        "Food": {
+          "item 1": {
+            "serviceName": "Taco",
+            "serviceLocation": "Teaco",
+            "openingHours": "Tea",
+            "closingHours": "Tea",
+            "serviceDescription": "Tea"
+          },
+          "item 2": {
+            "serviceName": "Tea",
+            "serviceLocation": "Tea",
+            "openingHours": "Tea",
+            "closingHours": "Tea",
+            "serviceDescription": "Tea"
+          }
+        }
+      }
+    },
+    {
+      "name": "Test",
+      "email": "Test@mail.com",
+      "password": "test",
+      "agreed": true,
+      "id": 4,
+      "organization": {
+        "organizationName": "",
+        "locations": [
+          {
+            "address": "",
+            "phoneNumber": "",
+            "website": "",
+            "serviceHours": ""
+          }
+        ]
+      }
     }
   ],
   "Amenities": [

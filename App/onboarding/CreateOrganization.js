@@ -19,6 +19,12 @@ const CreateOrganization = ({ route, navigation }) => {
   const [organization, setOrganization] = useState("");
   const [errors, setErrors] = useState({});
 
+  const isValidUrl = (urlString) => {
+    const regex =
+      /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+    return regex.test(urlString);
+  };
+
   const validateFields = () => {
     let isValid = true;
     const newErrors = {};
@@ -52,6 +58,12 @@ const CreateOrganization = ({ route, navigation }) => {
               "Please enter a valid phone number";
             isValid = false;
           }
+        }
+
+        if (location.website && !isValidUrl(location.website)) {
+          newErrors[`location_${index}_website`] =
+            "Please enter a valid website URL";
+          isValid = false;
         }
       });
     });
@@ -185,6 +197,7 @@ const CreateOrganization = ({ route, navigation }) => {
                     handleInputChange(locationIndex, field, value)
                   }
                   keyboardType={field === "phoneNumber" ? "numeric" : "default"}
+                  autoCapitalize={field === "website" ? "none" : "sentences"}
                 />
                 {errors[`location_${locationIndex}_${field}`] && (
                   <Text style={styles.errorText}>

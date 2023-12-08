@@ -11,8 +11,44 @@
         "formattedLocations": [
           {
             "address": "Test",
-            "phoneNumber": "(000) 000-0000",
-            "website": "Test",
+            "phoneNumber": "(839) 393-9390",
+            "website": "Www.test.com",
+            "serviceHours": "Test"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Test",
+      "email": "Test@test.com",
+      "password": "test",
+      "agreed": true,
+      "id": 2,
+      "organization": {
+        "organizationName": "Test",
+        "formattedLocations": [
+          {
+            "address": "Test",
+            "phoneNumber": "(850) 932-5022",
+            "website": "www.test.com",
+            "serviceHours": "Test"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Tes",
+      "email": "Test@test.com",
+      "password": "ets",
+      "agreed": true,
+      "id": 3,
+      "organization": {
+        "organizationName": "Test",
+        "formattedLocations": [
+          {
+            "address": "Test",
+            "phoneNumber": "(843) 948-4343",
+            "website": "soafjal.com",
             "serviceHours": "Test"
           }
         ]

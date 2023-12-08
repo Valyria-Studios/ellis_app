@@ -53,6 +53,38 @@
           }
         ]
       }
+    },
+    {
+      "name": "Tes",
+      "email": "Test@test.com",
+      "password": "ets",
+      "agreed": true,
+      "id": 4
+    },
+    {
+      "name": "Tes",
+      "email": "Test@test.com",
+      "password": "ets",
+      "agreed": true,
+      "id": 5
+    },
+    {
+      "name": "Test",
+      "email": "Test@test.com",
+      "password": "test",
+      "agreed": true,
+      "id": 6,
+      "organization": {
+        "organizationName": "Test",
+        "formattedLocations": [
+          {
+            "address": "Test",
+            "phoneNumber": "(838) 383-8383",
+            "website": "www.test.com",
+            "serviceHours": "9:00 pm - 3:00 pm"
+          }
+        ]
+      }
     }
   ],
   "Amenities": [

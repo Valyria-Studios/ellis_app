@@ -25,6 +25,11 @@ const CreateOrganization = ({ route, navigation }) => {
     return regex.test(urlString);
   };
 
+  const isValidServiceHours = (hoursString) => {
+    const regex = /^(\d{1,2}:\d{2}\s?[ap]m\s?-\s?\d{1,2}:\d{2}\s?[ap]m)$/;
+    return regex.test(hoursString);
+  };
+
   const validateFields = () => {
     let isValid = true;
     const newErrors = {};
@@ -38,13 +43,19 @@ const CreateOrganization = ({ route, navigation }) => {
       Object.keys(location).forEach((key) => {
         if (location[key].trim() === "") {
           let errorMessage = `${formatPlaceholder(key)} is required`;
-
-          // Custom error message for 'serviceHours'
-          if (key === "serviceHours") {
-            errorMessage = "Service Hours are required";
-          }
-
           newErrors[`location_${index}_${key}`] = errorMessage;
+          isValid = false;
+        }
+
+        if (location.serviceHours.trim() === "") {
+          // Check if serviceHours is empty
+          newErrors[`location_${index}_serviceHours`] =
+            "Service Hours are required";
+          isValid = false;
+        } else if (!isValidServiceHours(location.serviceHours)) {
+          // Validate serviceHours format
+          newErrors[`location_${index}_serviceHours`] =
+            "Please enter service hours in the format '9:00 am - 5:00 pm'";
           isValid = false;
         }
 
@@ -77,6 +88,9 @@ const CreateOrganization = ({ route, navigation }) => {
       ...location,
       phoneNumber: location.phoneNumber
         ? formatPhoneNumber(location.phoneNumber)
+        : "",
+      serviceHours: location.serviceHours
+        ? formatServiceHours(location.serviceHours)
         : "",
     }));
     const organizationData = {
@@ -142,7 +156,24 @@ const CreateOrganization = ({ route, navigation }) => {
       return `(${match[1]}) ${match[2]}-${match[3]}`;
     }
 
-    return phoneNumber; // Return null if the number is invalid
+    return phoneNumber;
+  };
+
+  const formatServiceHours = (hoursString) => {
+    if (!isValidServiceHours(hoursString)) {
+      return hoursString; // or handle invalid format as needed
+    }
+
+    // Extract the parts of the time
+    const match = hoursString.match(
+      /^(\d{1,2}:\d{2})\s?([ap]m)\s?-?\s?(\d{1,2}:\d{2})\s?([ap]m)$/
+    );
+    if (match) {
+      // Reformat to "9:00 am - 5:00 pm"
+      return `${match[1]} ${match[2]} - ${match[3]} ${match[4]}`;
+    }
+
+    return hoursString; // Return the original string if the regex does not match
   };
 
   const formatPlaceholder = (field) => {
@@ -154,7 +185,7 @@ const CreateOrganization = ({ route, navigation }) => {
       case "website":
         return "Website";
       case "serviceHours":
-        return "Service Hours";
+        return "Service Hours (e.g. 9:00 am - 5:00 pm)";
     }
   };
 
@@ -281,7 +312,9 @@ const styles = StyleSheet.create({
 
   errorText: {
     color: "red",
-    paddingHorizontal: 15,
+    marginHorizontal: 15,
+    marginVertical: 5,
+    fontSize: 12,
   },
 });
 

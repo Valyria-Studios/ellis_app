@@ -10,7 +10,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
 import Icon from "@expo/vector-icons/MaterialIcons";
-import { isValid } from "ipaddr.js";
 
 const CreateOrganization = ({ route, navigation }) => {
   const { userId } = route.params;
@@ -41,6 +40,15 @@ const CreateOrganization = ({ route, navigation }) => {
 
           newErrors[`location_${index}_${key}`] = errorMessage;
           isValid = false;
+        }
+
+
+        if (location.phoneNumber) {
+          const cleanedPhoneNumber = location.phoneNumber.replace(/[()-\s]/g, '');
+          if (cleanedPhoneNumber.length !== 10) {
+            newErrors[`location_${index}_phoneNumber`] = "Please enter a valid phone number";
+            isValid = false;
+          }
         }
       });
     });
@@ -85,6 +93,13 @@ const CreateOrganization = ({ route, navigation }) => {
     const newLocations = [...locations];
     newLocations[index][field] = value;
     setLocations(newLocations);
+
+    if (field === "phoneNumber") {
+      // Allow only numeric input
+      if (!/^[\d()-]*$/.test(value)) {
+        return; // Don't update the state if the input is not numeric
+      }
+    }
   };
 
   const addNewLocation = () => {
@@ -145,6 +160,7 @@ const CreateOrganization = ({ route, navigation }) => {
                   onChangeText={(value) =>
                     handleInputChange(locationIndex, field, value)
                   }
+                  keyboardType={field === "phoneNumber" ? "numeric" : "default"}
                 />
                 {errors[`location_${locationIndex}_${field}`] && (
                   <Text style={styles.errorText}>

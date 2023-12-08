@@ -2,172 +2,39 @@
   "Accounts": [
     {
       "name": "Test",
-      "email": "Test@email.com",
+      "email": "Test@test.com",
       "password": "test",
       "agreed": true,
       "id": 1,
       "organization": {
-        "organizationName": "",
+        "organizationName": "Daid",
         "locations": [
           {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
+            "address": "Fads",
+            "phoneNumber": "safafdsfaeafsdaf",
+            "website": "Asdfa",
+            "serviceHours": "Fsad"
           }
         ]
       }
     },
     {
       "name": "Test",
-      "email": "Test@mail.com",
+      "email": "Tes@test.com",
       "password": "test",
       "agreed": true,
       "id": 2,
       "organization": {
-        "organizationName": "",
+        "organizationName": "Test",
         "locations": [
           {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
+            "address": "Test",
+            "phoneNumber": "(898) 839-0000",
+            "website": "Test",
+            "serviceHours": "Test"
           }
         ]
       }
-    },
-    {
-      "name": "Test",
-      "email": "Test@mail.com",
-      "password": "test",
-      "agreed": true,
-      "id": 3,
-      "organization": {
-        "organizationName": "",
-        "locations": [
-          {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Test@test.com",
-      "password": "test",
-      "agreed": true,
-      "id": 4,
-      "organization": {
-        "organizationName": "",
-        "locations": [
-          {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Test@mail.com",
-      "password": "test",
-      "agreed": true,
-      "id": 5,
-      "organization": {
-        "organizationName": "",
-        "locations": [
-          {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Test@test.com",
-      "password": "test",
-      "agreed": true,
-      "id": 6,
-      "organization": {
-        "organizationName": "",
-        "locations": [
-          {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Test@test.com",
-      "password": "test",
-      "agreed": true,
-      "id": 7,
-      "organization": {
-        "organizationName": "",
-        "locations": [
-          {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Test@test.com",
-      "password": "test",
-      "agreed": true,
-      "id": 8,
-      "organization": {
-        "organizationName": "",
-        "locations": [
-          {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Test@test.copm",
-      "password": "test",
-      "agreed": true,
-      "id": 9,
-      "organization": {
-        "organizationName": "",
-        "locations": [
-          {
-            "address": "",
-            "phoneNumber": "",
-            "website": "",
-            "serviceHours": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "Test",
-      "email": "Test@test.copm",
-      "password": "test",
-      "agreed": true,
-      "id": 10
     }
   ],
   "Amenities": [

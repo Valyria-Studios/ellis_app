@@ -114,8 +114,8 @@ const CreateOrganization = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView>
-      <SafeAreaView style={globalstyles.container}>
+    <ScrollView style={globalstyles.container}>
+      <SafeAreaView >
         <View style={{ margin: 40 }} />
         <View style={globalstyles.headerContainer}>
           <Text style={globalstyles.header}>Set up your Organization</Text>

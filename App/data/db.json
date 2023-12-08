@@ -107,6 +107,60 @@
           }
         ]
       }
+    },
+    {
+      "name": "Test",
+      "email": "Test@test.com",
+      "password": "test",
+      "agreed": true,
+      "id": 7,
+      "organization": {
+        "organizationName": "",
+        "locations": [
+          {
+            "address": "",
+            "phoneNumber": "",
+            "website": "",
+            "serviceHours": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "Test",
+      "email": "Test@test.com",
+      "password": "test",
+      "agreed": true,
+      "id": 8,
+      "organization": {
+        "organizationName": "",
+        "locations": [
+          {
+            "address": "",
+            "phoneNumber": "",
+            "website": "",
+            "serviceHours": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "Test",
+      "email": "Test@test.copm",
+      "password": "test",
+      "agreed": true,
+      "id": 9,
+      "organization": {
+        "organizationName": "",
+        "locations": [
+          {
+            "address": "",
+            "phoneNumber": "",
+            "website": "",
+            "serviceHours": ""
+          }
+        ]
+      }
     }
   ],
   "Amenities": [

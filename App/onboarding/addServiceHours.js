@@ -73,9 +73,13 @@ const ServiceHours = ({ route }) => {
     return nameMap[category] || category;
   };
 
+  const categoriesWithSelectionCount = Object.values(selectedOptions).filter(
+    (options) => options.length > 0
+  ).length;
+
   return (
     <SafeAreaView style={[globalstyles.container, { marginHorizontal: 5 }]}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ margin: 40 }} />
         <View style={globalstyles.headerContainer}>
           <Text style={globalstyles.header}>Add service hours</Text>
@@ -189,7 +193,6 @@ const ServiceHours = ({ route }) => {
                 <View style={{ marginVertical: 5 }}>
                   <TouchableOpacity style={globalstyles.buttonContainer}>
                     <Text style={globalstyles.buttonText}>
-                      {" "}
                       Add another location
                     </Text>
                   </TouchableOpacity>
@@ -197,10 +200,14 @@ const ServiceHours = ({ route }) => {
                 <View style={{ marginTop: 15 }}>
                   <TouchableOpacity style={globalstyles.buttonContainer}>
                     <Text style={globalstyles.buttonText}>
-                      Add another {category.toLowerCase()} service
+                      Add another {formatCategoryName(category).toLowerCase()}{" "}
+                      service
                     </Text>
                   </TouchableOpacity>
                 </View>
+                {categoriesWithSelectionCount > 1 && (
+                  <View style={styles.divderline} />
+                )}
               </View>
             ))
           )}
@@ -233,6 +240,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: "gabarito-medium",
     marginBottom: 5,
+  },
+
+  divderline: {
+    marginTop: 20,
+    height: 1,
+    backgroundColor: "#909899",
   },
 });
 

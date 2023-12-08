@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../shared/globalStyles";
+import Icon from "@expo/vector-icons/MaterialIcons";
 
 const CreateOrganization = ({ route, navigation }) => {
   const { userId } = route.params;
@@ -71,14 +72,29 @@ const CreateOrganization = ({ route, navigation }) => {
     }
   };
 
+  const removeLocation = (index) => {
+    setLocations(locations.filter((_, locIndex) => locIndex !== index));
+  };
+
   const renderLocationInputs = () => {
     return locations.map((location, locationIndex) => (
       <View key={locationIndex}>
-        <Text style={styles.subheader2}>
-          {locationIndex === 0
-            ? "Main Location"
-            : `Location ${locationIndex + 1}`}
-        </Text>
+        <View style={styles.locationHeaderContainer}>
+          <Text style={styles.subheader2}>
+            {locationIndex === 0
+              ? "Main Location"
+              : `Location ${locationIndex + 1}`}
+          </Text>
+          {locationIndex !== 0 && (
+            <TouchableOpacity onPress={() => removeLocation(locationIndex)} activeOpacity={0.5}>
+              <Icon
+                name="highlight-remove"
+                size={20}
+                style={styles.removeIcon}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
         {Object.keys(location).map(
           (field, fieldIndex) =>
             field !== "organization" && (
@@ -144,12 +160,22 @@ const CreateOrganization = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  locationHeaderContainer: {
+    paddingTop: 20,
+    paddingBottom: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   subheader2: {
     color: "#030E07",
     fontSize: 18,
     fontFamily: "gabarito-regular",
-    paddingTop: 20,
-    paddingBottom: 5,
+    alignItems: "center",
+  },
+  removeIcon: {
+    marginRight: 5,
+    color: "#030E07",
   },
 });
 

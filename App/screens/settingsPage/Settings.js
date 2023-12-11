@@ -3,14 +3,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../shared/globalStyles";
 import SearchComponent from "../../shared/SearchHeader";
+import Icon from "@expo/vector-icons/MaterialIcons";
 
 export default function Settings() {
   const pages = [
-    { name: "Org Profile", label: "Organization Profile" },
-    { name: "Account", label: "My Account" },
-    { name: "Notifications", label: "Notifications" },
-    { name: "Help", label: "Help" },
-    { name: "Log Out", label: "Log Out" },
+    { name: "Org Profile", label: "Organization Profile", icon: "business" },
+    { name: "Account", label: "My Account", icon: 'admin-panel-settings' },
+    { name: "Notifications", label: "Notifications", icon: 'notifications-none' },
+    { name: "Help", label: "Help", icon: 'info-outline' },
+    { name: "Log Out", label: "Log Out", icon: 'logout' },
   ];
 
   return (
@@ -22,7 +23,13 @@ export default function Settings() {
       <View>
         {pages.map((page, index) => (
           <TouchableOpacity key={index} style={styles.container}>
-            <Text>{page.label}</Text>
+            <View style={styles.optionsContainer}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Icon name={page.icon} size={30} style={styles.icon} />
+                <Text style={styles.optionsText}>{page.label}</Text>
+              </View>
+              <Icon name="keyboard-arrow-right" size={30} style={styles.icon} />
+            </View>
           </TouchableOpacity>
         ))}
       </View>
@@ -33,8 +40,25 @@ export default function Settings() {
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    marginVertical:5,
-    padding: 20,
+    marginVertical: 5,
     borderRadius: 15,
+  },
+
+  optionsContainer: {
+    flexDirection: "row",
+    padding: 15,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  optionsText: {
+    marginLeft: 15,
+    fontSize: 18,
+    fontFamily: "gabarito-regular",
+    color: "#171B1C",
+  },
+
+  icon: {
+    color: "#094852",
   },
 });

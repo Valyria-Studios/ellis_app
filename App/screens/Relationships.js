@@ -83,7 +83,7 @@ const RelationshipPage = ({ navigation }) => {
 
         {/* Favorite People Section */}
         <View style={styles.relationshipsContainer}>
-          <Text style={styles.relationships}>Relationships</Text>
+          <Text style={globalstyles.title}>Relationships</Text>
         </View>
         <View style={styles.favoriteContainer}>
           <Text style={styles.headerText}>Favorites</Text>
@@ -237,12 +237,6 @@ const RelationshipPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   relationshipsContainer: {
     marginVertical: 15,
-  },
-
-  relationships: {
-    fontSize: 40,
-    color: "#094851",
-    fontFamily: "gabarito-bold",
   },
 
   favoriteContainer: {

@@ -85,6 +85,30 @@
           }
         ]
       }
+    },
+    {
+      "name": "Tste",
+      "email": "Test@test.com",
+      "password": "test",
+      "agreed": true,
+      "id": 7,
+      "organization": {
+        "organizationName": "Test",
+        "formattedLocations": [
+          {
+            "address": "Test",
+            "phoneNumber": "(234) 234-2344",
+            "website": "www.test.com",
+            "serviceHours": "9:00 am - 5:00 pm"
+          },
+          {
+            "address": "Test",
+            "phoneNumber": "(234) 242-2342",
+            "website": "www.test2.com",
+            "serviceHours": "9:00 am - 5:00 pm"
+          }
+        ]
+      }
     }
   ],
   "Amenities": [

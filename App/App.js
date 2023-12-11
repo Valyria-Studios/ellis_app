@@ -54,13 +54,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        {onboardingComplete ? (
-          <RootNavigator />
-        ) : (
-          <OnBoardingNavigator
-            onCompleteOnboarding={handleCompleteOnboarding}
-          />
-        )}
+        <RootNavigator />
       </NavigationContainer>
     );
   } else {
@@ -70,6 +64,12 @@ export default function App() {
 
 // return (
 //   <NavigationContainer>
-//     <RootNavigator />
+//     {onboardingComplete ? (
+//       <RootNavigator />
+//     ) : (
+//       <OnBoardingNavigator
+//         onCompleteOnboarding={handleCompleteOnboarding}
+//       />
+//     )}
 //   </NavigationContainer>
 // );

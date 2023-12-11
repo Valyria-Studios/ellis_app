@@ -108,6 +108,13 @@ const globalstyles = StyleSheet.create({
     color: "#030E07",
     marginBottom: 10,
   },
+
+  title: {
+    fontSize: 40,
+    fontFamily: "gabarito-bold",
+    marginTop: 10,
+    color: "#094851",
+  },
 });
 
 export default globalstyles;

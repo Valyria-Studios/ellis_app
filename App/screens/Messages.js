@@ -12,6 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { fetchChats } from "../api/Chats";
 import SearchComponent from "../shared/SearchHeader";
+import globalstyles from "../shared/globalStyles";
 
 const Messages = () => {
   const navigation = useNavigation();
@@ -37,7 +38,7 @@ const Messages = () => {
           searchInput={searchInput}
           setSearchInput={setSearchInput}
         />
-        <Text style={styles.title}>Messages</Text>
+        <Text style={globalstyles.title}>Messages</Text>
       </View>
       <View>
         <FlatList
@@ -70,13 +71,6 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     padding: 15,
     backgroundColor: "#f3f8f9",
-  },
-
-  title: {
-    fontSize: 40,
-    fontWeight: "bold",
-    marginTop: 10,
-    color: "#094851",
   },
 
   container: {

@@ -75,6 +75,7 @@ export default function App({ navigation }) {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {[
             "All",
+            "Favorite",
             "Community",
             "Food",
             "Shelter",
@@ -144,7 +145,7 @@ export default function App({ navigation }) {
           </View>
         </ScrollView>
         <View>
-          <Text style={styles.directory}>Directory</Text>
+          <Text style={globalstyles.title}>Directory</Text>
         </View>
         {filteredAmenities.length > 0 ? (
           filteredAmenities.map((amenity) => (
@@ -274,12 +275,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#094851",
     padding: 10,
-  },
-
-  directory: {
-    fontFamily: "gabarito-bold",
-    fontSize: 40,
-    color: "#094851",
   },
 
   cardHeader: {

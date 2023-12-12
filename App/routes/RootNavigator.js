@@ -4,6 +4,7 @@ import AppNavigator from "./AppNavigator"; // Import your BottomTabNavigator
 import ChatPage from "../screens/ChatPage";
 import AmenityPage from "../screens/AmenityPage";
 import ProfilePage from "../screens/ProfilePage";
+import RequestService from "../screens/RequestServicePage";
 
 const RootStack = createStackNavigator();
 
@@ -48,8 +49,21 @@ const RootNavigator = () => {
             marginLeft: -160,
           },
           headerTitleContainerStyle: { left: 0 },
-          headerTintColor: "#094852"
+          headerTintColor: "#094852",
         })}
+      />
+      <RootStack.Screen
+        name="Request Services Page"
+        component={RequestService}
+        options={{
+          headerTitle: "",
+          headerTintColor: "#094852",
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
       />
     </RootStack.Navigator>
   );

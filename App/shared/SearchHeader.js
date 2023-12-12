@@ -3,8 +3,16 @@ import { View, TextInput } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import globalstyles from "../shared/globalStyles";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SearchComponent = ({ searchInput, setSearchInput }) => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate("Request Services Page");
+  };
+
   return (
     <View style={globalstyles.searchSection}>
       <View style={globalstyles.searchContainer}>
@@ -22,12 +30,14 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
           placeholder="Type in keyword"
         />
       </View>
-      <Fontisto
-        name="nav-icon-grid-a"
-        size={20}
-        color="#094851"
-        style={globalstyles.gridIcon}
-      />
+      <TouchableOpacity activeOpacity={1} onPress={handlePress}>
+        <Fontisto
+          name="nav-icon-grid-a"
+          size={20}
+          color="#094851"
+          style={globalstyles.gridIcon}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

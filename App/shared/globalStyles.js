@@ -30,12 +30,12 @@ const globalstyles = StyleSheet.create({
     padding: 5,
     alignItems: "center",
     flex: 1,
-    height: 50,
     backgroundColor: "white",
   },
 
   searchBar: {
     flex: 1,
+    marginVertical: 10,
     fontSize: 18,
     color: "#999fa0",
   },

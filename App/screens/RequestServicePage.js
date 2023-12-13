@@ -28,7 +28,9 @@ const RequestService = () => {
       </View>
       <View>
         <Text style={[globalstyles.title, {fontSize: 24, marginTop: 5}]}>Frequently Used</Text>
+        {/* some code for showing a list of frequents */}
       </View>
+      
     </View>
   );
 };

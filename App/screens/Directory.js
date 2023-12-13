@@ -65,6 +65,19 @@ export default function App({ navigation }) {
     // No need to call applyFiltersAndSort here because useEffect will trigger it.
   };
 
+  const categories = [
+    "All",
+    "Favorite",
+    "Community",
+    "Food",
+    "Shelter",
+    "Hygiene",
+    "Health",
+    "Work & Learn",
+    "Finance",
+    "Other",
+  ];
+
   return (
     <SafeAreaView style={globalstyles.container}>
       <SearchComponent
@@ -73,18 +86,7 @@ export default function App({ navigation }) {
       />
       <View style={styles.scrollerContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {[
-            "All",
-            "Favorite",
-            "Community",
-            "Food",
-            "Shelter",
-            "Hygiene",
-            "Health",
-            "Work & Learn",
-            "Finance",
-            "Other",
-          ].map((category) => (
+          {categories.map((category) => (
             <TouchableOpacity
               key={category}
               onPress={() => handlePress(category)}

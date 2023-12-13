@@ -115,6 +115,20 @@ const globalstyles = StyleSheet.create({
     marginTop: 10,
     color: "#094851",
   },
+
+  optionsContainer: {
+    flexDirection: "row",
+    padding: 15,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  optionsText: {
+    marginLeft: 15,
+    fontSize: 18,
+    fontFamily: "gabarito-regular",
+    color: "#171B1C",
+  },
 });
 
 export default globalstyles;

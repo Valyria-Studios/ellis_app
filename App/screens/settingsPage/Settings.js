@@ -23,10 +23,10 @@ export default function Settings() {
       <View>
         {pages.map((page, index) => (
           <TouchableOpacity key={index} style={styles.container}>
-            <View style={styles.optionsContainer}>
+            <View style={globalstyles.optionsContainer}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Icon name={page.icon} size={30} style={styles.icon} />
-                <Text style={styles.optionsText}>{page.label}</Text>
+                <Text style={globalstyles.optionsText}>{page.label}</Text>
               </View>
               <Icon name="keyboard-arrow-right" size={30} style={styles.icon} />
             </View>
@@ -43,21 +43,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 15,
   },
-
-  optionsContainer: {
-    flexDirection: "row",
-    padding: 15,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-
-  optionsText: {
-    marginLeft: 15,
-    fontSize: 18,
-    fontFamily: "gabarito-regular",
-    color: "#171B1C",
-  },
-
+  
   icon: {
     color: "#094852",
   },

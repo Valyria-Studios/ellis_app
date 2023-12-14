@@ -5,6 +5,11 @@ import ChatPage from "../screens/ChatPage";
 import AmenityPage from "../screens/AmenityPage";
 import ProfilePage from "../screens/ProfilePage";
 import RequestService from "../screens/RequestServicePage";
+import OrgProfile from "../screens/settingsPage/OrganizationProfile";
+import AccountPage from "../screens/settingsPage/AccountPage";
+import NotificationsPage from "../screens/settingsPage/NotificationsPage";
+import HelpPage from "../screens/settingsPage/HelpPage";
+import LogOutPage from "../screens/settingsPage/LogOutPage";
 
 const RootStack = createStackNavigator();
 
@@ -65,6 +70,19 @@ const RootNavigator = () => {
           },
         }}
       />
+      <RootStack.Screen
+        name="Organization Profile"
+        component={OrgProfile}
+        options={{}}
+      />
+      <RootStack.Screen name="Account" component={AccountPage} options={{}} />
+      <RootStack.Screen
+        name="Notifications"
+        component={NotificationsPage}
+        options={{}}
+      />
+      <RootStack.Screen name="Help" component={HelpPage} options={{}} />
+      <RootStack.Screen name="LogOut" component={LogOutPage} options={{}} />
     </RootStack.Navigator>
   );
 };

@@ -5,14 +5,30 @@ import globalstyles from "../../shared/globalStyles";
 import SearchComponent from "../../shared/SearchHeader";
 import Icon from "@expo/vector-icons/MaterialIcons";
 
-export default function Settings() {
+export default function Settings({ navigation }) {
   const pages = [
-    { name: "Org Profile", label: "Organization Profile", icon: "business" },
-    { name: "Account", label: "My Account", icon: 'admin-panel-settings' },
-    { name: "Notifications", label: "Notifications", icon: 'notifications-none' },
-    { name: "Help", label: "Help", icon: 'info-outline' },
-    { name: "Log Out", label: "Log Out", icon: 'logout' },
+    {
+      label: "Organization Profile",
+      icon: "business",
+      screenName: "Organization Profile",
+    },
+    {
+      label: "My Account",
+      icon: "admin-panel-settings",
+      screenName: "Account",
+    },
+    {
+      label: "Notifications",
+      icon: "notifications-none",
+      screenName: "Notifications",
+    },
+    { label: "Help", icon: "info-outline", screenName: "Help" },
+    { label: "Log Out", icon: "logout", screenName: "LogOut" },
   ];
+
+  const pushPage = (screenName) => {
+    navigation.push(screenName);
+  };
 
   return (
     <SafeAreaView style={globalstyles.container}>
@@ -22,7 +38,11 @@ export default function Settings() {
       </View>
       <View>
         {pages.map((page, index) => (
-          <TouchableOpacity key={index} style={styles.container}>
+          <TouchableOpacity
+            key={index}
+            style={styles.container}
+            onPress={() => pushPage(page.screenName)}
+          >
             <View style={globalstyles.optionsContainer}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Icon name={page.icon} size={30} style={styles.icon} />
@@ -43,7 +63,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 15,
   },
-  
+
   icon: {
     color: "#094852",
   },

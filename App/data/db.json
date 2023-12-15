@@ -1,113 +1,75 @@
 {
   "Accounts": [
     {
-      "name": "Test",
-      "email": "Test@test.com",
-      "password": "test",
+      "name": "Rohit",
+      "email": "Test@gmail.com",
+      "password": "tacos1",
       "agreed": true,
       "id": 1,
       "organization": {
-        "organizationName": "Test",
+        "organizationName": "One Trick",
         "formattedLocations": [
           {
-            "address": "Test",
-            "phoneNumber": "(839) 393-9390",
-            "website": "Www.test.com",
-            "serviceHours": "Test"
+            "address": "Test address",
+            "phoneNumber": "(000) 000-0000",
+            "website": "www.onetrick.com",
+            "serviceHours": "12:00 am - 10:00 pm"
           }
         ]
+      },
+      "serviceDetails": {
+        "Community": {
+          "item 1": {
+            "serviceName": "Test this ",
+            "serviceLocation": "Not here ",
+            "openingHours": "12:00 am",
+            "closingHours": "10:00 pm"
+          }
+        },
+        "Finance": {
+          "item 1": {
+            "serviceName": "Not test",
+            "serviceLocation": "Somewhere over there",
+            "openingHours": "1:00 pm",
+            "closingHours": "12:00 am"
+          }
+        }
       }
     },
     {
-      "name": "Test",
-      "email": "Test@test.com",
-      "password": "test",
+      "name": "Sooruj",
+      "email": "Testing@gmail.com",
+      "password": "tacos2",
       "agreed": true,
       "id": 2,
       "organization": {
-        "organizationName": "Test",
+        "organizationName": "Dancer",
         "formattedLocations": [
           {
-            "address": "Test",
-            "phoneNumber": "(850) 932-5022",
-            "website": "www.test.com",
-            "serviceHours": "Test"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Tes",
-      "email": "Test@test.com",
-      "password": "ets",
-      "agreed": true,
-      "id": 3,
-      "organization": {
-        "organizationName": "Test",
-        "formattedLocations": [
-          {
-            "address": "Test",
-            "phoneNumber": "(843) 948-4343",
-            "website": "soafjal.com",
-            "serviceHours": "Test"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Tes",
-      "email": "Test@test.com",
-      "password": "ets",
-      "agreed": true,
-      "id": 4
-    },
-    {
-      "name": "Tes",
-      "email": "Test@test.com",
-      "password": "ets",
-      "agreed": true,
-      "id": 5
-    },
-    {
-      "name": "Test",
-      "email": "Test@test.com",
-      "password": "test",
-      "agreed": true,
-      "id": 6,
-      "organization": {
-        "organizationName": "Test",
-        "formattedLocations": [
-          {
-            "address": "Test",
-            "phoneNumber": "(838) 383-8383",
-            "website": "www.test.com",
-            "serviceHours": "9:00 pm - 3:00 pm"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Tste",
-      "email": "Test@test.com",
-      "password": "test",
-      "agreed": true,
-      "id": 7,
-      "organization": {
-        "organizationName": "Test",
-        "formattedLocations": [
-          {
-            "address": "Test",
-            "phoneNumber": "(234) 234-2344",
-            "website": "www.test.com",
-            "serviceHours": "9:00 am - 5:00 pm"
-          },
-          {
-            "address": "Test",
-            "phoneNumber": "(234) 242-2342",
-            "website": "www.test2.com",
+            "address": "Testing location",
+            "phoneNumber": "(333) 333-3333",
+            "website": "www.dance.com",
             "serviceHours": "9:00 am - 5:00 pm"
           }
         ]
+      },
+      "serviceDetails": {
+        "Health": {
+          "item 1": {
+            "serviceName": "Dance with Me",
+            "serviceLocation": "Dancing over there",
+            "openingHours": "9:00 am",
+            "closingHours": "5:00 pm"
+          }
+        },
+        "Work_Learn": {
+          "item 1": {
+            "serviceName": "Learn with Me",
+            "serviceLocation": "Learning everywhere",
+            "openingHours": "8:00 am",
+            "closingHours": "10:00 pm"
+          }
+        }
       }
     }
   ],

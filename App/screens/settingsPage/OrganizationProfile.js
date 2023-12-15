@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, ScrollView } from "react-native";
 import globalstyles from "../../shared/globalStyles";
 
 const OrgProfile = () => {
+  const [account, setAccount] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/Accounts")
+      .then((response) => response.json())
+      .then((data) => {
+        setAccount(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <ScrollView style={globalstyles.container}>
       <View>
@@ -12,7 +25,7 @@ const OrgProfile = () => {
         <Text>Some Image</Text>
       </View>
       <View style={{ marginVertical: 10 }}>
-        <Text>Address </Text>
+        <Text>Address</Text>
         <Text>Phone Number</Text>
         <Text>Website</Text>
         <Text>Social Media</Text>

@@ -14,6 +14,7 @@ const OrgProfile = ({ navigation }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editableAddress, setEditableAddress] = useState("");
   const [editablePhoneNumber, setEditablePhoneNumber] = useState("");
+  const [editableWebsite, setEditableWebsite] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3000/Accounts")
@@ -27,6 +28,9 @@ const OrgProfile = ({ navigation }) => {
         setEditablePhoneNumber(
           firstAccount.organization.formattedLocations[0].phoneNumber
         );
+        setEditableWebsite(
+          firstAccount.organization.formattedLocations[0].website
+        ); // Initialize website state
       })
       .catch((error) => {
         console.error(error);
@@ -56,6 +60,7 @@ const OrgProfile = ({ navigation }) => {
               ...account.organization.formattedLocations[0],
               address: editableAddress,
               phoneNumber: editablePhoneNumber,
+              website: editableWebsite,
             },
           ],
         },
@@ -110,6 +115,12 @@ const OrgProfile = ({ navigation }) => {
           style={isEditing ? styles.editable : styles.nonEditable}
         />
         <Text>Website</Text>
+        <TextInput
+          editable={isEditing}
+          onChangeText={setEditableWebsite}
+          value={editableWebsite}
+          style={isEditing ? styles.editable : styles.nonEditable}
+        />
         <Text>Social Media</Text>
         <Text>Tags</Text>
       </View>

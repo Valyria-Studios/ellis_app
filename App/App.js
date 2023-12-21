@@ -5,8 +5,8 @@ import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
 import { createStackNavigator } from "@react-navigation/stack";
 import OnBoardingNavigator from "./routes/OnboardingNavigator";
-import RequestLegalAid from "./screens/RequestLegalAid";
-import LegalQuestions from "./screens/LegalQuestions";
+import RequestLegalAid from "./deprecated/RequestLegalAid";
+import LegalQuestions from "./deprecated/LegalQuestions";
 
 const Stack = createStackNavigator();
 

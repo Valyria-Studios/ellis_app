@@ -7,6 +7,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import OnBoardingNavigator from "./routes/OnboardingNavigator";
 import RequestLegalAid from "./deprecated/RequestLegalAid";
 import LegalQuestions from "./deprecated/LegalQuestions";
+import SelectForms from "./screens/formPages/SelectForms";
+import LegalFormScreen from "./screens/formPages/LegalForm";
+import FoodFormScreen from "./screens/formPages/FoodForm";
 
 const Stack = createStackNavigator();
 
@@ -58,15 +61,22 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Request Legal"
-            component={RequestLegalAid}
+            name="Select Forms"
+            component={SelectForms}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="Questions"
-            component={LegalQuestions}
+            name="Legal Form"
+            component={LegalFormScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Food Form"
+            component={FoodFormScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

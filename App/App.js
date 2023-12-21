@@ -5,6 +5,8 @@ import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
 import { createStackNavigator } from "@react-navigation/stack";
 import OnBoardingNavigator from "./routes/OnboardingNavigator";
+import RequestLegalAid from "./screens/RequestLegalAid";
+import LegalQuestions from "./screens/LegalQuestions";
 
 const Stack = createStackNavigator();
 
@@ -54,13 +56,29 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <RootNavigator />
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Request Legal"
+            component={RequestLegalAid}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Questions"
+            component={LegalQuestions}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     );
   } else {
     return null;
   }
 }
+// <NavigationContainer>
+//   <RootNavigator />
+// </NavigationContainer>
 
 // return (
 //   <NavigationContainer>

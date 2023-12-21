@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Button, Text, CheckBox } from "react-native";
+import { View, Button, Text, SafeAreaView } from "react-native";
+import ChecklistItem from "../shared/CheckBox";
 
 function RequestLegalAid({ navigation }) {
   const [selectedCategories, setSelectedCategories] = useState({
@@ -16,30 +17,34 @@ function RequestLegalAid({ navigation }) {
   };
 
   return (
-    <View>
-      <CheckBox
-        value={selectedCategories.food}
-        onValueChange={() => handleSelectCategory("food")}
-      />
-      <Text>Food</Text>
+    <SafeAreaView>
+      <View>
+        <ChecklistItem
+          value={selectedCategories.food}
+          onToggle={() => handleSelectCategory("food")}
+        />
+        <Text>Food</Text>
 
-      <CheckBox
-        value={selectedCategories.legal}
-        onValueChange={() => handleSelectCategory("legal")}
-      />
-      <Text>Legal</Text>
+        <ChecklistItem
+          value={selectedCategories.legal}
+          onToggle={() => handleSelectCategory("legal")}
+        />
+        <Text>Legal</Text>
 
-      <CheckBox
-        value={selectedCategories.home}
-        onValueChange={() => handleSelectCategory("home")}
-      />
-      <Text>Home</Text>
+        <ChecklistItem
+          value={selectedCategories.home}
+          onToggle={() => handleSelectCategory("home")}
+        />
+        <Text>Home</Text>
 
-      <Button
-        title="Go to Questions"
-        onPress={() => navigation.navigate("Questions", { selectedCategories })}
-      />
-    </View>
+        <Button
+          title="Go to Questions"
+          onPress={() =>
+            navigation.navigate("Questions", { selectedCategories })
+          }
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
-import RootNavigator from "./routes/RootNavigator";
+import RootNavigator from "./App/routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
 import { createStackNavigator } from "@react-navigation/stack";
-import OnBoardingNavigator from "./routes/OnboardingNavigator";
+import OnBoardingNavigator from "./App/routes/OnboardingNavigator";
 
 const Stack = createStackNavigator();
 

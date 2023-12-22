@@ -318,6 +318,18 @@
       "type": "true_false",
       "question": "Humans can breathe normally in space as they do on Earth.",
       "user_answer": ""
+    },
+    {
+      "type": "radio_button",
+      "question": "Which of these is a mammal?",
+      "options": ["Shark", "Dolphin", "Octopus"],
+      "user_answer": ""
+    },
+    {
+      "type": "checkbox",
+      "question": "Select all prime numbers.",
+      "options": ["2", "3", "4", "5", "6", "7"],
+      "user_answer": []
     }
   ],
 
@@ -353,6 +365,18 @@
       "type": "true_false",
       "question": "Hamburgers originated in the United States.",
       "user_answer": ""
+    },
+    {
+      "type": "radio_button",
+      "question": "Which planet is closest to the Sun?",
+      "options": ["Earth", "Venus", "Mercury", "Mars"],
+      "user_answer": ""
+    },
+    {
+      "type": "checkbox",
+      "question": "Select all the colors that are primary colors.",
+      "options": ["Red", "Green", "Blue", "Yellow"],
+      "user_answer": []
     }
   ]
 }

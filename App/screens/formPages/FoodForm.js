@@ -3,6 +3,8 @@ import { ScrollView, Text, SafeAreaView } from "react-native";
 import MultipleChoiceQuestion from "./questions/MultipleChoiceQuestion";
 import TextFieldQuestion from "./questions/TextFieldQuestion";
 import TrueFalseQuestion from "./questions/TrueFalseQuestions";
+import RadioButtonQuestion from "./questions/RadioButtonQuestion";
+import CheckboxQuestion from "./questions/CheckboxQuestion";
 import globalstyles from "../../shared/globalStyles";
 
 const FoodFormScreen = () => {
@@ -37,6 +39,22 @@ const FoodFormScreen = () => {
               case "true_false":
                 return (
                   <TrueFalseQuestion key={index} question={question.question} />
+                );
+              case "radio_button":
+                return (
+                  <RadioButtonQuestion
+                    key={index}
+                    question={question.question}
+                    options={question.options}
+                  />
+                );
+              case "checkbox":
+                return (
+                  <CheckboxQuestion
+                    key={index}
+                    question={question.question}
+                    options={question.options}
+                  />
                 );
               default:
                 return null;

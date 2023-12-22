@@ -129,6 +129,15 @@ const globalstyles = StyleSheet.create({
     fontFamily: "gabarito-regular",
     color: "#171B1C",
   },
+
+  question: {
+    fontSize: 18,
+    fontFamily: "gabarito-regular",
+    color: "#171B1C",
+    marginVertical: 10,
+    marginHorizontal: 5,
+    // Add more styles for the question
+  },
 });
 
 export default globalstyles;

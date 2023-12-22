@@ -1,12 +1,23 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
+import React from "react";
+import { View, Text, Button } from "react-native";
+import globalstyles from "../../../shared/globalStyles";
 
 const TrueFalseQuestion = ({ question }) => {
   return (
     <View>
-      <Text>{question}</Text>
-      <Button title="True" onPress={() => {/* Handle selection */}} />
-      <Button title="False" onPress={() => {/* Handle selection */}} />
+      <Text style={globalstyles.question}>{question}</Text>
+      <Button
+        title="True"
+        onPress={() => {
+          /* Handle selection */
+        }}
+      />
+      <Button
+        title="False"
+        onPress={() => {
+          /* Handle selection */
+        }}
+      />
     </View>
   );
 };

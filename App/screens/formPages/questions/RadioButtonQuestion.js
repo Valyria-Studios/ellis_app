@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import globalstyles from "../../../shared/globalStyles";
 
 const RadioButton = ({ label, selected, onSelect }) => {
   return (
@@ -21,7 +22,7 @@ const RadioButtonQuestion = ({ question, options }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{question}</Text>
+      <Text style={globalstyles.question}>{question}</Text>
       {options.map((option) => (
         <RadioButton
           key={option}

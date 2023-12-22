@@ -26,7 +26,11 @@ const LegalFormScreen = () => {
             switch (question.type) {
               case "text_input":
                 return (
-                  <TextFieldQuestion key={index} question={question.question} />
+                  <TextFieldQuestion
+                    key={index}
+                    question={question.question}
+                    placeholder="Enter Text"
+                  />
                 );
               case "multiple_choice":
                 return (

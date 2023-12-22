@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import Icon from "@expo/vector-icons/MaterialIcons";
+import globalstyles from "../../../shared/globalStyles";
 
 const MultipleChoiceQuestion = ({ question, options }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -14,7 +15,7 @@ const MultipleChoiceQuestion = ({ question, options }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{question}</Text>
+      <Text style={globalstyles.question}>{question}</Text>
       <View style={styles.optionContainer}>
         <RNPickerSelect
           onValueChange={(value) => setSelectedOption(value)}
@@ -36,15 +37,6 @@ const MultipleChoiceQuestion = ({ question, options }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    // Add more styles for the container
-  },
-  question: {
-    fontSize: 16,
-    marginBottom: 5,
-    // Add more styles for the question
-  },
 
   optionContainer: {
     backgroundColor: "#fff",

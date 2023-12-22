@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import globalstyles from "../../../shared/globalStyles";
 
 const CheckboxOption = ({ label, isSelected, onToggle }) => (
   <TouchableOpacity
@@ -26,7 +27,7 @@ const CheckboxQuestion = ({ question, options }) => {
 
   return (
     <View>
-      <Text>{question}</Text>
+      <Text style={globalstyles.question}>{question}</Text>
       {options.map((option) => (
         <CheckboxOption
           key={option}

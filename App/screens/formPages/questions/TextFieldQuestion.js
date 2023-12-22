@@ -6,14 +6,18 @@ const TextFieldQuestion = ({ question, placeholder }) => {
   return (
     <View>
       <Text style={globalstyles.question}>{question}</Text>
-      <TextInput style={styles.textInput} placeholder={placeholder} />
+      <TextInput
+        style={styles.textInput}
+        placeholder={placeholder}
+        multiline={true}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   textInput: {
-    height: 40,
+    height: 75,
     borderColor: "#B5BABB",
     borderRadius: 10,
     borderWidth: 1,

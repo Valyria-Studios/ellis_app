@@ -2,7 +2,13 @@ import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import globalstyles from "../../../shared/globalStyles";
 
-const TextFieldQuestion = ({ question, placeholder }) => {
+const TextFieldQuestion = ({ question, placeholder, onAnswerChange }) => {
+  const handleTextChange = (text) => {
+    if (onAnswerChange) {
+      onAnswerChange(text);
+    }
+  };
+
   return (
     <View>
       <Text style={globalstyles.question}>{question}</Text>
@@ -10,6 +16,7 @@ const TextFieldQuestion = ({ question, placeholder }) => {
         style={styles.textInput}
         placeholder={placeholder}
         multiline={true}
+        onChangeText={handleTextChange}
       />
     </View>
   );

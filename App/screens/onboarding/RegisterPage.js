@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalstyles from "../shared/globalStyles";
+import globalstyles from "../../shared/globalStyles";
 
 const Register = ({ navigation }) => {
   const [name, setName] = useState("");

@@ -20,7 +20,7 @@ const FoodFormScreen = () => {
   // Add code to render legal questions here
   return (
     <SafeAreaView style={globalstyles.container}>
-      <ScrollView style={{ padding: 10 }}>
+      <ScrollView style={{ margin: 10 }}>
         {questions.length > 0 ? (
           questions.map((question, index) => {
             switch (question.type) {

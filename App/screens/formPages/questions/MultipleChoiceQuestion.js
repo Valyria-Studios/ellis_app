@@ -4,7 +4,7 @@ import RNPickerSelect from "react-native-picker-select";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import globalstyles from "../../../shared/globalStyles";
 
-const MultipleChoiceQuestion = ({ question, options }) => {
+const MultipleChoiceQuestion = ({ question, options, onAnswerChange }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const pickerItems = options.map((option, index) => ({
@@ -13,18 +13,25 @@ const MultipleChoiceQuestion = ({ question, options }) => {
     key: index,
   }));
 
+  const handleValueChange = (value) => {
+    setSelectedOption(value);
+    if (onAnswerChange) {
+      onAnswerChange(value);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={globalstyles.question}>{question}</Text>
       <View style={styles.optionContainer}>
         <RNPickerSelect
-          onValueChange={(value) => setSelectedOption(value)}
+          onValueChange={handleValueChange}
           items={pickerItems}
           placeholder={{ label: "Select an option", value: null }}
           style={{
             input: styles.input, // Common style for both iOS and Android
             placeholder: styles.placeholder,
-            icon: styles.icon
+            icon: styles.icon,
           }}
           useNativeAndroidPickerStyle={false}
           Icon={() => (
@@ -37,7 +44,6 @@ const MultipleChoiceQuestion = ({ question, options }) => {
 };
 
 const styles = StyleSheet.create({
-
   optionContainer: {
     backgroundColor: "#fff",
     padding: 15,
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    alignItems: 'center'
+    alignItems: "center",
   },
 
   input: {

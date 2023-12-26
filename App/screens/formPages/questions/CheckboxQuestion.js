@@ -12,16 +12,21 @@ const CheckboxOption = ({ label, isSelected, onToggle }) => (
   </TouchableOpacity>
 );
 
-const CheckboxQuestion = ({ question, options }) => {
+const CheckboxQuestion = ({ question, options, onAnswerChange }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const toggleOption = (option) => {
     setSelectedOptions((prev) => {
-      if (prev.includes(option)) {
-        return prev.filter((item) => item !== option);
-      } else {
-        return [...prev, option];
+      const newSelectedOptions = prev.includes(option)
+        ? prev.filter((item) => item !== option)
+        : [...prev, option];
+
+      // Call onAnswerChange with the new list of selected options
+      if (onAnswerChange) {
+        onAnswerChange(newSelectedOptions);
       }
+
+      return newSelectedOptions;
     });
   };
 

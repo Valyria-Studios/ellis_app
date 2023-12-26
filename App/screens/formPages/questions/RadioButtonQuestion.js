@@ -4,7 +4,11 @@ import globalstyles from "../../../shared/globalStyles";
 
 const RadioButton = ({ label, selected, onSelect }) => {
   return (
-    <TouchableOpacity style={styles.radioButtonContainer} onPress={onSelect} activeOpacity={1}>
+    <TouchableOpacity
+      style={styles.radioButtonContainer}
+      onPress={onSelect}
+      activeOpacity={1}
+    >
       <View style={styles.outerCircle}>
         {selected ? <View style={styles.innerCircle} /> : null}
       </View>
@@ -13,11 +17,14 @@ const RadioButton = ({ label, selected, onSelect }) => {
   );
 };
 
-const RadioButtonQuestion = ({ question, options }) => {
+const RadioButtonQuestion = ({ question, options, onAnswerChange }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleSelect = (option) => {
     setSelectedOption(option);
+    if (onAnswerChange) {
+      onAnswerChange(option);
+    }
   };
 
   return (
@@ -39,12 +46,11 @@ const styles = {
   container: {
     // Container styles
   },
-  question: {
-    // Question text styles
-  },
+
   radioButtonContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 5,
     // Additional styles for radio button container
   },
   outerCircle: {

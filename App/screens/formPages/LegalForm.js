@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, Text, SafeAreaView } from "react-native";
+import { ScrollView, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import MultipleChoiceQuestion from "./questions/MultipleChoiceQuestion";
 import TextFieldQuestion from "./questions/TextFieldQuestion";
 import TrueFalseQuestion from "./questions/TrueFalseQuestions";
@@ -9,6 +9,7 @@ import globalstyles from "../../shared/globalStyles";
 
 const LegalFormScreen = () => {
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:3000/Legal_Form") // Replace with your actual API endpoint
@@ -17,10 +18,34 @@ const LegalFormScreen = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  const handleAnswerChange = (questionId, answer) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: answer,
+    }));
+  };
+
+  // Submit handler
+  const handleSubmit = () => {
+    // Copy the Legal_Form structure from state
+    let updatedLegalForm = [...questions];
+
+    // Update the user_answer field for each question
+    updatedLegalForm = updatedLegalForm.map((question, index) => {
+      return {
+        ...question,
+        user_answer: answers[index] || question.user_answer,
+      };
+    });
+  };
+
   // Add code to render legal questions here
   return (
     <SafeAreaView style={globalstyles.container}>
-      <ScrollView style={{ padding: 10 }}>
+      <ScrollView
+        style={{ marginHorizontal: 20 }}
+        showsVerticalScrollIndicator={false}
+      >
         {questions.length > 0 ? (
           questions.map((question, index) => {
             switch (question.type) {
@@ -30,6 +55,9 @@ const LegalFormScreen = () => {
                     key={index}
                     question={question.question}
                     placeholder="Enter Text"
+                    onAnswerChange={(answer) =>
+                      handleAnswerChange(index, answer)
+                    }
                   />
                 );
               case "multiple_choice":
@@ -38,11 +66,20 @@ const LegalFormScreen = () => {
                     key={index}
                     question={question.question}
                     options={question.options}
+                    onAnswerChange={(answer) =>
+                      handleAnswerChange(index, answer)
+                    }
                   />
                 );
               case "true_false":
                 return (
-                  <TrueFalseQuestion key={index} question={question.question} />
+                  <TrueFalseQuestion
+                    key={index}
+                    question={question.question}
+                    onAnswerChange={(answer) =>
+                      handleAnswerChange(index, answer)
+                    }
+                  />
                 );
               case "radio_button":
                 return (
@@ -50,6 +87,9 @@ const LegalFormScreen = () => {
                     key={index}
                     question={question.question}
                     options={question.options}
+                    onAnswerChange={(answer) =>
+                      handleAnswerChange(index, answer)
+                    }
                   />
                 );
               case "checkbox":
@@ -58,6 +98,9 @@ const LegalFormScreen = () => {
                     key={index}
                     question={question.question}
                     options={question.options}
+                    onAnswerChange={(answer) =>
+                      handleAnswerChange(index, answer)
+                    }
                   />
                 );
               default:
@@ -67,6 +110,16 @@ const LegalFormScreen = () => {
         ) : (
           <Text>Loading...</Text>
         )}
+        <TouchableOpacity
+          // disabled={!serviceLocation || !openingHours || !closingHours}
+          style={[
+            globalstyles.buttonContainer,
+            { marginVertical: 20, borderRadius: 15 },
+          ]}
+          onPress={handleSubmit}
+        >
+          <Text style={globalstyles.buttonText}>Submit</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

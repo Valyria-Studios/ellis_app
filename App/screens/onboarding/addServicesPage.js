@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalstyles from "../shared/globalStyles";
+import globalstyles from "../../shared/globalStyles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const ServicesPage = ({ route, navigation }) => {

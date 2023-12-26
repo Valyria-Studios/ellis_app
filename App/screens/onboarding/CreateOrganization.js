@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalstyles from "../shared/globalStyles";
+import globalstyles from "../../shared/globalStyles";
 import Icon from "@expo/vector-icons/MaterialIcons";
 
 const CreateOrganization = ({ route, navigation }) => {

@@ -71,6 +71,13 @@
           }
         }
       }
+    },
+    {
+      "name": "Test",
+      "email": "Test@email.com",
+      "password": "test",
+      "agreed": true,
+      "id": 3
     }
   ],
   "Amenities": [
@@ -81,7 +88,10 @@
       "closingHour": "23:59",
       "distance": "1 mile",
       "address": "123 this place now",
-      "type": ["Shelter", "Learn"],
+      "type": [
+        "Shelter",
+        "Learn"
+      ],
       "availability": "20",
       "image": "../assets/images/location1.jpg",
       "description": [
@@ -99,7 +109,10 @@
       "closingHour": "6: 00 pm",
       "distance": "800 feet",
       "address": "123 your place",
-      "type": ["Health", "Hygiene"],
+      "type": [
+        "Health",
+        "Hygiene"
+      ],
       "availability": "2",
       "image": "../assets/images/location2.jpg",
       "description": [
@@ -115,7 +128,10 @@
       "closingHour": "9:00 pm",
       "distance": "3 miles",
       "address": "123 my house",
-      "type": ["Shop", "Family"],
+      "type": [
+        "Shop",
+        "Family"
+      ],
       "availability": "0",
       "image": "../assets/images/location3.jpg",
       "description": [
@@ -130,7 +146,10 @@
       "closingHour": "4:00 am",
       "distance": "6 mile",
       "address": "123 I don't know",
-      "type": ["Work", "Hygiene"],
+      "type": [
+        "Work",
+        "Hygiene"
+      ],
       "availability": "7",
       "image": "../assets/images/location4.jpg",
       "description": [
@@ -147,7 +166,10 @@
       "closingHour": "5:00 pm",
       "distance": "0.8 mile",
       "address": "123 I don't know",
-      "type": ["Food", "Finance"],
+      "type": [
+        "Food",
+        "Finance"
+      ],
       "availability": "0",
       "image": "../assets/images/location5.jpg",
       "description": [
@@ -163,7 +185,11 @@
       "closingHour": "8:00 pm",
       "distance": "232 feet",
       "address": "123 I don't know",
-      "type": ["Shelter", "Health", "Family"],
+      "type": [
+        "Shelter",
+        "Health",
+        "Family"
+      ],
       "availability": "15",
       "image": "../assets/images/location6.jpg",
       "description": [
@@ -181,7 +207,10 @@
       "closingHour": "7:00 pm",
       "distance": "0.9 mile",
       "address": "123 I don't know",
-      "type": ["Health", "Beauty"],
+      "type": [
+        "Health",
+        "Beauty"
+      ],
       "availability": "4",
       "image": "../assets/images/location7.jpg",
       "description": [
@@ -196,7 +225,10 @@
       "closingHour": "3:00 am",
       "distance": "2 mile",
       "address": "123 I don't know",
-      "type": ["Education", "Learning"],
+      "type": [
+        "Education",
+        "Learning"
+      ],
       "availability": "0",
       "image": "../assets/images/location8.jpg",
       "description": [
@@ -246,7 +278,11 @@
       "location": "home",
       "status": "Requested",
       "recency": "yesterday",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "",
       "image": "userImage3",
       "key": "3"
@@ -257,7 +293,11 @@
       "location": "where",
       "status": "Past",
       "recency": "Mar 2024",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "Received 3 servies from 1 provider",
       "image": "userImage4",
       "key": "4"
@@ -268,7 +308,11 @@
       "location": "under",
       "status": "Requested",
       "recency": "6 hours ago",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "",
       "image": "userImage5",
       "key": "5"
@@ -279,18 +323,26 @@
       "location": "there",
       "status": "Current",
       "recency": "yesterday",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "Receiving service from 2 providers",
       "image": "userImage6",
       "key": "6"
     }
   ],
-
   "Legal_Form": [
     {
       "type": "multiple_choice",
       "question": "What is the capital of France?",
-      "options": ["Paris", "London", "Berlin", "Madrid"],
+      "options": [
+        "Paris",
+        "London",
+        "Berlin",
+        "Madrid"
+      ],
       "user_answer": ""
     },
     {
@@ -306,7 +358,12 @@
     {
       "type": "multiple_choice",
       "question": "Which element has the atomic number 1?",
-      "options": ["Oxygen", "Hydrogen", "Carbon", "Helium"],
+      "options": [
+        "Oxygen",
+        "Hydrogen",
+        "Carbon",
+        "Helium"
+      ],
       "user_answer": ""
     },
     {
@@ -322,22 +379,37 @@
     {
       "type": "radio_button",
       "question": "Which of these is a mammal?",
-      "options": ["Shark", "Dolphin", "Octopus"],
+      "options": [
+        "Shark",
+        "Dolphin",
+        "Octopus"
+      ],
       "user_answer": ""
     },
     {
       "type": "checkbox",
       "question": "Select all prime numbers.",
-      "options": ["2", "3", "4", "5", "6", "7"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
       "user_answer": []
     }
   ],
-
   "Food_Form": [
     {
       "type": "multiple_choice",
       "question": "Which fruit is known as the 'King of Fruits'?",
-      "options": ["Apple", "Banana", "Mango", "Grapes"],
+      "options": [
+        "Apple",
+        "Banana",
+        "Mango",
+        "Grapes"
+      ],
       "user_answer": ""
     },
     {
@@ -353,7 +425,12 @@
     {
       "type": "multiple_choice",
       "question": "What is sushi traditionally wrapped in?",
-      "options": ["Rice Paper", "Lettuce", "Seaweed", "Tortilla"],
+      "options": [
+        "Rice Paper",
+        "Lettuce",
+        "Seaweed",
+        "Tortilla"
+      ],
       "user_answer": ""
     },
     {
@@ -369,13 +446,23 @@
     {
       "type": "radio_button",
       "question": "Which planet is closest to the Sun?",
-      "options": ["Earth", "Venus", "Mercury", "Mars"],
+      "options": [
+        "Earth",
+        "Venus",
+        "Mercury",
+        "Mars"
+      ],
       "user_answer": ""
     },
     {
       "type": "checkbox",
       "question": "Select all the colors that are primary colors.",
-      "options": ["Red", "Green", "Blue", "Yellow"],
+      "options": [
+        "Red",
+        "Green",
+        "Blue",
+        "Yellow"
+      ],
       "user_answer": []
     }
   ]

@@ -1,11 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Onboarding from "../onboarding/Onboarding";
+import Onboarding from "../screens/onboarding/Onboarding";
 import Login from "../screens/LoginPage";
-import Register from "../onboarding/RegisterPage";
-import CreateOrganization from "../onboarding/CreateOrganization";
-import ServiceHours from "../onboarding/addServiceHours";
-import ServicesPage from "../onboarding/addServicesPage";
+import Register from "../screens/onboarding/RegisterPage";
+import CreateOrganization from "../screens/onboarding/CreateOrganization";
+import ServiceHours from "../screens/onboarding/addServiceHours";
+import ServicesPage from "../screens/onboarding/addServicesPage";
 
 const Stack = createStackNavigator();
 
@@ -40,7 +40,7 @@ const OnBoardingNavigator = ({ onCompleteOnboarding }) => {
       <Stack.Screen
         name="Service_Hours"
         component={ServiceHours}
-        initialParams={{onCompleteOnboarding}}
+        initialParams={{ onCompleteOnboarding }}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

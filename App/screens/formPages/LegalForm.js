@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  ScrollView,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import MultipleChoiceQuestion from "./questions/MultipleChoiceQuestion";
 import TextFieldQuestion from "./questions/TextFieldQuestion";
 import TrueFalseQuestion from "./questions/TrueFalseQuestions";
@@ -46,6 +52,9 @@ const LegalFormScreen = () => {
         style={{ marginHorizontal: 20 }}
         showsVerticalScrollIndicator={false}
       >
+        <View style={{ marginVertical: 10 }}>
+          <Text style={globalstyles.title}>Legal Aid</Text>
+        </View>
         {questions.length > 0 ? (
           questions.map((question, index) => {
             switch (question.type) {

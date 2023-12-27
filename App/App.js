@@ -59,36 +59,13 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Select Forms"
-            component={SelectForms}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Legal Form"
-            component={LegalFormScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Food Form"
-            component={FoodFormScreen}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
+        <RootNavigator />
       </NavigationContainer>
     );
   } else {
     return null;
   }
 }
-// <NavigationContainer>
-//   <RootNavigator />
-// </NavigationContainer>
 
 // return (
 //   <NavigationContainer>
@@ -99,5 +76,31 @@ export default function App() {
 //         onCompleteOnboarding={handleCompleteOnboarding}
 //       />
 //     )}
+//   </NavigationContainer>
+// );
+
+// return (
+//   <NavigationContainer>
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         name="Select Forms"
+//         component={SelectForms}
+//         options={{
+//           headerShown: false,
+//         }}
+//       />
+//       <Stack.Screen
+//         name="Legal Form"
+//         component={LegalFormScreen}
+//         options={{
+//           headerShown: false,
+//         }}
+//       />
+//       <Stack.Screen
+//         name="Food Form"
+//         component={FoodFormScreen}
+//         options={{ headerShown: false }}
+//       />
+//     </Stack.Navigator>
 //   </NavigationContainer>
 // );

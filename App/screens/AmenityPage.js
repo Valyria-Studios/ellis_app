@@ -11,8 +11,9 @@ import getAmenityImage from "../shared/getAmenityImage";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalstyles from "../shared/globalStyles";
+import LegalFormScreen from "./formPages/LegalForm";
 
-function AmenityPage({ route }) {
+function AmenityPage({ route, navigation }) {
   const { amenity } = route.params;
   return (
     <ImageBackground
@@ -74,7 +75,8 @@ function AmenityPage({ route }) {
           {renderButton(
             "Refer a Client",
             styles.referButton,
-            styles.referButtonText
+            styles.referButtonText,
+            () => navigation.navigate("Legal Aid")
           )}
           {renderButton(
             "Check Availability",
@@ -87,9 +89,12 @@ function AmenityPage({ route }) {
   );
 }
 
-function renderButton(text, buttonStyle, textStyle) {
+function renderButton(text, buttonStyle, textStyle, onPress) {
   return (
-    <TouchableOpacity style={[styles.availabilityButton, buttonStyle]}>
+    <TouchableOpacity
+      style={[styles.availabilityButton, buttonStyle]}
+      onPress={onPress}
+    >
       <Text style={[styles.availabilityButtonText, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );

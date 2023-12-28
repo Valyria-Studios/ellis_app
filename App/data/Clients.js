@@ -15,7 +15,7 @@ const Clients = [
       "Sleep",
     ], //should be dependent on the services they signed up for
     providers: "Receiving service from 5 providers", //should be dynamically rendered depending on status
-    image: require("../assets/images/userImage1.jpg"),
+    image: "userImage1",
     key: "1",
 
     // progressbar: 'some code to relate services and completion'
@@ -33,7 +33,7 @@ const Clients = [
       "Housing Documentation",
     ], //should be dependent on the services they signed up for
     providers: "Received 16 services from 5 providers", //should be dynamically rendered depending on status
-    image: require("../assets/images/userImage2.jpg"),
+    image: "userImage2",
 
     key: "2",
 
@@ -47,7 +47,7 @@ const Clients = [
     recency: "yesterday", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
     providers: "", //should be dynamically rendered depending on status
-    image: require("../assets/images/userImage3.jpg"),
+    image: "userImage3",
     key: "3",
 
     // progressbar: 'some code to relate services and completion'
@@ -60,7 +60,7 @@ const Clients = [
     recency: "Mar 2024", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
     providers: "Received 3 servies from 1 provider", //should be dynamically rendered depending on status
-    image: require("../assets/images/userImage4.jpg"),
+    image: "userImage4",
     key: "4",
 
     // progressbar: 'some code to relate services and completion'
@@ -73,7 +73,7 @@ const Clients = [
     recency: "6 hours ago", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
     providers: "", //should be dynamically rendered depending on status
-    image: require("../assets/images/userImage5.jpg"),
+    image: "userImage5",
     key: "5",
 
     // progressbar: 'some code to relate services and completion'
@@ -86,7 +86,7 @@ const Clients = [
     recency: "yesterday", //should be rendered and updated from backend
     services: ["Haircut", "Financial Aid", "Celebrate Recovery"], //should be dependent on the services they signed up for
     providers: "Receiving service from 2 providers", //should be dynamically rendered depending on status
-    image: require("../assets/images/userImage6.jpg"),
+    image: "userImage6",
     key: "6",
 
     // progressbar: 'some code to relate services and completion'

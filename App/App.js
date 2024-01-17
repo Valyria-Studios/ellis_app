@@ -11,6 +11,7 @@ import SelectForms from "./screens/formPages/SelectForms";
 import LegalFormScreen from "./screens/formPages/LegalForm";
 import FoodFormScreen from "./screens/formPages/FoodForm";
 import CreateUser from "./screens/adminPages/createClient";
+import AdminPage from "./screens/adminPages/admins";
 
 const Stack = createStackNavigator();
 
@@ -62,10 +63,37 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
+            name="Profile Admin Settings"
+            component={AdminPage}
+            options={{
+              headerTitleAlign: "left",
+              headerTitleStyle: {
+                fontSize: 24,
+                fontFamily: "gabarito-bold",
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowOpacity: 0,
+              }
+            }}
+          />
+          {/* <Stack.Screen
             name="Create New Client Profile"
             component={CreateUser}
-            options={{headerTitleAlign: "left"}}
-          />
+            options={{
+              headerTitleAlign: "left",
+              headerTitleStyle: {
+                fontSize: 24,
+                fontFamily: "gabarito-bold",
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowOpacity: 0,
+              },
+            }}
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     );

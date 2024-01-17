@@ -7,10 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../shared/globalStyles";
 import Icon from "@expo/vector-icons/MaterialIcons";
-import { Button } from "react-native-paper";
 
 function CreateUser() {
   const [selectedAmenity, setSelectedAmenity] = useState(null);
@@ -26,6 +24,7 @@ function CreateUser() {
         const options = data.map((amenity) => ({
           label: amenity.location,
           value: amenity.key,
+          key: amenity.key,
         }));
         setAmenityOptions(options);
       })
@@ -39,115 +38,115 @@ function CreateUser() {
   };
 
   return (
-      <View style={[globalstyles.container, {marginTop: 15}]}>
-        <Text style={styles.addClient}>You are adding a new client for</Text>
-        <View style={[globalstyles.optionContainer, { marginVertical: 10 }]}>
-          <RNPickerSelect
-            items={amenityOptions}
-            onValueChange={handleValueChange}
-            value={selectedAmenity}
-            placeholder={{ label: "Select an amenity", value: null }}
-            style={{
-              input: globalstyles.input,
-              placeholder: globalstyles.placeholder,
-            }}
-            useNativeAndroidPickerStyle={false}
+    <View style={[globalstyles.container, { paddingTop: 15 }]}>
+      <Text style={styles.addClient}>You are adding a new client for</Text>
+      <View style={[globalstyles.optionContainer, { marginTop: 10 }]}>
+        <RNPickerSelect
+          items={amenityOptions}
+          onValueChange={handleValueChange}
+          value={selectedAmenity}
+          placeholder={{ label: "Select an amenity", value: null }}
+          style={{
+            input: globalstyles.input,
+            placeholder: globalstyles.placeholder,
+          }}
+          useNativeAndroidPickerStyle={false}
+        />
+        <Icon name="keyboard-arrow-right" size={24} color="#094852" />
+      </View>
+      <View>
+        <Text style={styles.header}>Basic Information</Text>
+        <View style={styles.textInputContainer}>
+          <TextInput style={styles.textInput} placeholder="Name" />
+          <TextInput
+            style={styles.textInput}
+            placeholder="Contact Phone Number"
           />
-          <Icon name="keyboard-arrow-right" size={24} color="#094852" />
-        </View>
-        <View>
-          <Text style={styles.header}>Basic Information</Text>
-          <View style={styles.textInputContainer}>
-            <TextInput style={styles.textInput} placeholder="Name" />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Contact Phone Number"
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Contact Email Address"
-            />
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <TextInput
-                style={[styles.textInput, { flex: 1, marginRight: 5 }]}
-                placeholder="Date of Birth (optional)"
-              />
-              <TextInput
-                style={[styles.textInput, { flex: 1, marginLeft: 5 }]}
-                placeholder="Age"
-              />
-            </View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <TextInput
-                style={[styles.textInput, { flex: 1, marginRight: 5 }]}
-                placeholder="Address (optional)"
-              />
-              <TextInput
-                style={[styles.textInput, { flex: 1, marginLeft: 5 }]}
-                placeholder="Neighborhood"
-              />
-            </View>
-            <View style={styles.agreeContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.agreeCircle,
-                  isUnhoused && styles.checkedAgreeCircle,
-                ]}
-                onPress={() => setIsUnhoused(!isUnhoused)}
-                activeOpacity={0.8}
-              />
-              <Text style={styles.agreeText}>Client is currently unhoused</Text>
-            </View>
-          </View>
-        </View>
-        <View>
-          <Text style={styles.header}>Client Consent</Text>
-          <View style={styles.agreeContainer}>
-            <TouchableOpacity
-              style={[
-                styles.agreeCircle,
-                privacyPolicyAgreed && styles.checkedAgreeCircle,
-              ]}
-              onPress={() => setPrivacyPolicyAgreed(!privacyPolicyAgreed)}
-              activeOpacity={0.8}
-            />
-            <Text style={styles.agreeText}>
-              I have been made aware of Ellis' Privacy Policy and Terms of Use
-            </Text>
-          </View>
-          <View style={styles.agreeContainer}>
-            <TouchableOpacity
-              style={[
-                styles.agreeCircle,
-                consentForManagement && styles.checkedAgreeCircle,
-              ]}
-              onPress={() => setConsentForManagement(!consentForManagement)}
-              activeOpacity={0.8}
-            />
-            <Text style={styles.agreeText}>
-              I consent to [Name of staff creating client profile] managing my
-              account for me
-            </Text>
-          </View>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={[
-              globalstyles.buttonContainer,
-              { backgroundColor: "#10798B", marginTop: 20 },
-            ]}
-            activeOpacity={0.8}
+          <TextInput
+            style={styles.textInput}
+            placeholder="Contact Email Address"
+          />
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
-              Create Client Profile
-            </Text>
-          </TouchableOpacity>
+            <TextInput
+              style={[styles.textInput, { flex: 1, marginRight: 5 }]}
+              placeholder="Date of Birth (optional)"
+            />
+            <TextInput
+              style={[styles.textInput, { flex: 1, marginLeft: 5 }]}
+              placeholder="Age"
+            />
+          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <TextInput
+              style={[styles.textInput, { flex: 1, marginRight: 5 }]}
+              placeholder="Address (optional)"
+            />
+            <TextInput
+              style={[styles.textInput, { flex: 1, marginLeft: 5 }]}
+              placeholder="Neighborhood"
+            />
+          </View>
+          <View style={styles.agreeContainer}>
+            <TouchableOpacity
+              style={[
+                styles.agreeCircle,
+                isUnhoused && styles.checkedAgreeCircle,
+              ]}
+              onPress={() => setIsUnhoused(!isUnhoused)}
+              activeOpacity={0.8}
+            />
+            <Text style={styles.agreeText}>Client is currently unhoused</Text>
+          </View>
         </View>
       </View>
+      <View>
+        <Text style={styles.header}>Client Consent</Text>
+        <View style={styles.agreeContainer}>
+          <TouchableOpacity
+            style={[
+              styles.agreeCircle,
+              privacyPolicyAgreed && styles.checkedAgreeCircle,
+            ]}
+            onPress={() => setPrivacyPolicyAgreed(!privacyPolicyAgreed)}
+            activeOpacity={0.8}
+          />
+          <Text style={styles.agreeText}>
+            I have been made aware of Ellis' Privacy Policy and Terms of Use
+          </Text>
+        </View>
+        <View style={styles.agreeContainer}>
+          <TouchableOpacity
+            style={[
+              styles.agreeCircle,
+              consentForManagement && styles.checkedAgreeCircle,
+            ]}
+            onPress={() => setConsentForManagement(!consentForManagement)}
+            activeOpacity={0.8}
+          />
+          <Text style={styles.agreeText}>
+            I consent to [Name of staff creating client profile] managing my
+            account for me
+          </Text>
+        </View>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={[
+            globalstyles.buttonContainer,
+            { backgroundColor: "#10798B", marginTop: 20 },
+          ]}
+          activeOpacity={0.8}
+        >
+          <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+            Create Client Profile
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 

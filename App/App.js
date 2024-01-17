@@ -10,6 +10,7 @@ import LegalQuestions from "./deprecated/LegalQuestions";
 import SelectForms from "./screens/formPages/SelectForms";
 import LegalFormScreen from "./screens/formPages/LegalForm";
 import FoodFormScreen from "./screens/formPages/FoodForm";
+import CreateUser from "./screens/adminPages/createUser";
 
 const Stack = createStackNavigator();
 
@@ -59,7 +60,13 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <RootNavigator />
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Create New Client Profile"
+            component={CreateUser}
+            options={{headerTitleAlign: "left"}}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     );
   } else {

@@ -138,6 +138,26 @@ const globalstyles = StyleSheet.create({
     marginHorizontal: 5,
     // Add more styles for the question
   },
+
+  optionContainer: {
+    flexDirection: 'row',
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  input: {
+    fontSize: 16,
+    fontFamily: "karla-regular",
+    color: "#051A2E",
+  },
+  placeholder: {
+    fontSize: 16,
+    color: "#051A2E",
+    fontFamily: "karla-regular",
+  },
+  
 });
 
 export default globalstyles;

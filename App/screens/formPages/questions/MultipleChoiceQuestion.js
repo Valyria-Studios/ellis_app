@@ -23,14 +23,14 @@ const MultipleChoiceQuestion = ({ question, options, onAnswerChange }) => {
   return (
     <View style={styles.container}>
       <Text style={globalstyles.question}>{question}</Text>
-      <View style={styles.optionContainer}>
+      <View style={globalstyles.optionContainer}>
         <RNPickerSelect
           onValueChange={handleValueChange}
           items={pickerItems}
           placeholder={{ label: "Select an option", value: null }}
           style={{
-            input: styles.input, // Common style for both iOS and Android
-            placeholder: styles.placeholder,
+            input: globalstyles.input, // Common style for both iOS and Android
+            placeholder: globalstyles.placeholder,
             icon: styles.icon,
           }}
           useNativeAndroidPickerStyle={false}
@@ -44,30 +44,11 @@ const MultipleChoiceQuestion = ({ question, options, onAnswerChange }) => {
 };
 
 const styles = StyleSheet.create({
-  optionContainer: {
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 10,
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
   icon: {
     alignItems: "center",
   },
 
-  input: {
-    fontSize: 16,
-    fontFamily: "karla-regular",
-    color: "#051A2E",
-    // Common styles for picker input
-  },
-  placeholder: {
-    fontSize: 16,
-    color: "#051A2E",
-    fontFamily: "karla-regular",
-    // Add more styles for placeholder
-  },
+  
 });
 
 export default MultipleChoiceQuestion;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import globalstyles from "../../shared/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -70,6 +70,67 @@ function AdminPage() {
     }
   };
 
+  const handleAddAdmin = async (memberName, amenityId) => {
+    // Find the specific amenity
+    const amenityToUpdate = amenities.find(
+      (amenity) => amenity.id === amenityId
+    );
+
+    if (!amenityToUpdate) {
+      console.error("Amenity not found");
+      return;
+    }
+
+    // Check if member is already an admin
+    if (amenityToUpdate.team.admins.includes(memberName)) {
+      alert("This member is already an admin.");
+      return;
+    }
+
+    // Update the admins and members lists
+    const updatedAdmins = [...amenityToUpdate.team.admins, memberName];
+    const updatedMembers = amenityToUpdate.team.members.filter(
+      (member) => member !== memberName
+    );
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/Amenities/${amenityId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...amenityToUpdate,
+            team: {
+              admins: updatedAdmins,
+              members: updatedMembers,
+            },
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Update local state
+        setAmenities((prevAmenities) =>
+          prevAmenities.map((amenity) =>
+            amenity.id === amenityId
+              ? {
+                  ...amenity,
+                  team: { admins: updatedAdmins, members: updatedMembers },
+                }
+              : amenity
+          )
+        );
+      } else {
+        throw new Error("Failed to update data on the server");
+      }
+    } catch (error) {
+      console.error("Error updating team data:", error);
+    }
+  };
+
   return (
     <ScrollView>
       <View style={[globalstyles.container, { paddingTop: 10 }]}>
@@ -82,6 +143,20 @@ function AdminPage() {
                 <Button
                   title="Remove"
                   onPress={() => handleMoveToMembers(admin, amenity.id)}
+                />
+              </View>
+            ))}
+          </View>
+        ))}
+        <Text style={globalstyles.header}>Add Admins</Text>
+        {amenities.map((amenity) => (
+          <View key={amenity.id}>
+            {amenity.team.members.map((member, index) => (
+              <View key={index} style={styles.item}>
+                <Text style={styles.memberName}>{member}</Text>
+                <Button
+                  title="Add as Admin"
+                  onPress={() => handleAddAdmin(member, amenity.id)}
                 />
               </View>
             ))}

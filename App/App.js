@@ -63,6 +63,22 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
+            name="Create New Client Profile"
+            component={CreateUser}
+            options={{
+              headerTitleAlign: "left",
+              headerTitleStyle: {
+                fontSize: 24,
+                fontFamily: "gabarito-bold",
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowOpacity: 0,
+              },
+            }}
+          />
+          <Stack.Screen
             name="Profile Admin Settings"
             component={AdminPage}
             options={{
@@ -78,22 +94,6 @@ export default function App() {
               }
             }}
           />
-          {/* <Stack.Screen
-            name="Create New Client Profile"
-            component={CreateUser}
-            options={{
-              headerTitleAlign: "left",
-              headerTitleStyle: {
-                fontSize: 24,
-                fontFamily: "gabarito-bold",
-                color: "#171B1C",
-              },
-              headerStyle: {
-                backgroundColor: "#F3F8F9",
-                shadowOpacity: 0,
-              },
-            }}
-          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     );

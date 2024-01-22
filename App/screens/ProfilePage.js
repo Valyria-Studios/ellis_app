@@ -30,12 +30,13 @@ const checklistItems = [
   "Follow Up",
   "Housing Granted",
 ];
+const tabItems = ["Activity", "Request", "Team", "Forms", "Notes"];
 
 const totalItems = dropdownItems.length * checklistItems.length; // Total number of ChecklistItems
 
 function ProfilePage({ route }) {
   const { client } = route.params;
-  const [selectedItem, setSelectedItem] = useState("Services");
+  const [selectedItem, setSelectedItem] = useState("Activity");
   const [checkedItems, setCheckedItems] = useState(0);
 
   // Callback for when a checklist item is toggled
@@ -46,7 +47,7 @@ function ProfilePage({ route }) {
   };
   const progress = (checkedItems / totalItems) * 100;
 
-  const servicesContent = (
+  const activityContent = (
     <View>
       {dropdownItems.map((dropdownItem) => (
         <Dropdown title={dropdownItem} key={dropdownItem}>
@@ -61,7 +62,31 @@ function ProfilePage({ route }) {
       ))}
     </View>
   );
+  const formContent = <Text>form</Text>;
+  const teamContent = <Text>team</Text>;
+  const requestContent = <Text>request</Text>;
   const notesContent = <Text>notes</Text>;
+
+  let content;
+  switch (selectedItem) {
+    case "Activity":
+      content = activityContent;
+      break;
+    case "Request":
+      content = requestContent;
+      break;
+    case "Team":
+      content = teamContent;
+      break;
+    case "Forms":
+      content = formContent;
+      break;
+    case "Notes":
+      content = notesContent;
+      break;
+    default:
+      content = <Text>Default Content</Text>; // Default case
+  }
 
   return (
     <ImageBackground source={imageMap[client.image]} style={styles.container}>
@@ -106,28 +131,28 @@ function ProfilePage({ route }) {
           </View>
         </View>
         <View style={styles.serviceContainer}>
-          <View style={styles.serviceHeader}>
-            {["Services", "Notes"].map((sortItem) => (
-              <TouchableOpacity
-                key={sortItem}
-                activeOpacity={1}
-                onPress={() => setSelectedItem(sortItem)}
-              >
-                <View
-                  style={
-                    selectedItem === sortItem
-                      ? styles.selectedItemContainer
-                      : styles.serviceItemContainer
-                  }
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={styles.serviceHeader}>
+              {tabItems.map((sortItem) => (
+                <TouchableOpacity
+                  key={sortItem}
+                  activeOpacity={1}
+                  onPress={() => setSelectedItem(sortItem)}
                 >
-                  <Text style={styles.serviceHeaderItems}>{sortItem}</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-          <View style={styles.something}>
-            {selectedItem === "Services" ? servicesContent : notesContent}
-          </View>
+                  <View
+                    style={
+                      selectedItem === sortItem
+                        ? styles.selectedItemContainer
+                        : styles.serviceItemContainer
+                    }
+                  >
+                    <Text style={styles.serviceHeaderItems}>{sortItem}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
+          <View>{content}</View>
         </View>
       </ScrollView>
     </ImageBackground>

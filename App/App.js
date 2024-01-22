@@ -61,40 +61,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Create New Client Profile"
-            component={CreateUser}
-            options={{
-              headerTitleAlign: "left",
-              headerTitleStyle: {
-                fontSize: 24,
-                fontFamily: "gabarito-bold",
-                color: "#171B1C",
-              },
-              headerStyle: {
-                backgroundColor: "#F3F8F9",
-                shadowOpacity: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Profile Admin Settings"
-            component={AdminPage}
-            options={{
-              headerTitleAlign: "left",
-              headerTitleStyle: {
-                fontSize: 24,
-                fontFamily: "gabarito-bold",
-                color: "#171B1C",
-              },
-              headerStyle: {
-                backgroundColor: "#F3F8F9",
-                shadowOpacity: 0,
-              }
-            }}
-          />
-        </Stack.Navigator>
+        <RootNavigator />
       </NavigationContainer>
     );
   } else {
@@ -135,6 +102,45 @@ export default function App() {
 //         name="Food Form"
 //         component={FoodFormScreen}
 //         options={{ headerShown: false }}
+//       />
+//     </Stack.Navigator>
+//   </NavigationContainer>
+// );
+
+// return (
+//   <NavigationContainer>
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         name="Create New Client Profile"
+//         component={CreateUser}
+//         options={{
+//           headerTitleAlign: "left",
+//           headerTitleStyle: {
+//             fontSize: 24,
+//             fontFamily: "gabarito-bold",
+//             color: "#171B1C",
+//           },
+//           headerStyle: {
+//             backgroundColor: "#F3F8F9",
+//             shadowOpacity: 0,
+//           },
+//         }}
+//       />
+//       <Stack.Screen
+//         name="Profile Admin Settings"
+//         component={AdminPage}
+//         options={{
+//           headerTitleAlign: "left",
+//           headerTitleStyle: {
+//             fontSize: 24,
+//             fontFamily: "gabarito-bold",
+//             color: "#171B1C",
+//           },
+//           headerStyle: {
+//             backgroundColor: "#F3F8F9",
+//             shadowOpacity: 0,
+//           }
+//         }}
 //       />
 //     </Stack.Navigator>
 //   </NavigationContainer>

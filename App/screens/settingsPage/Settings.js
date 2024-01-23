@@ -59,9 +59,7 @@ export default function Settings({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
     marginVertical: 5,
-    borderRadius: 15,
   },
 
   icon: {

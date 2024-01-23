@@ -118,6 +118,10 @@ const globalstyles = StyleSheet.create({
 
   optionsContainer: {
     flexDirection: "row",
+    backgroundColor: "#fff",
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: "#B5BABB",
     padding: 15,
     alignItems: "center",
     justifyContent: "space-between",
@@ -140,7 +144,7 @@ const globalstyles = StyleSheet.create({
   },
 
   optionContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: "#fff",
     padding: 15,
     borderRadius: 10,
@@ -157,7 +161,6 @@ const globalstyles = StyleSheet.create({
     color: "#051A2E",
     fontFamily: "karla-regular",
   },
-  
 });
 
 export default globalstyles;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
   Text,
@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Dropdown } from "../shared/Dropdown";
 import ChecklistItem from "../shared/CheckBox";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
 import ProgressBar from "../shared/ProgressBar";
@@ -38,6 +38,23 @@ function ProfilePage({ route }) {
   const { client } = route.params;
   const [selectedItem, setSelectedItem] = useState("Activity");
   const [checkedItems, setCheckedItems] = useState(0);
+  const [notes, setNotes] = useState("");
+  const [selectedNote, setSelectedNote] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/Notes")
+      .then((response) => response.json())
+      .then((json) => setNotes(json))
+      .catch((error) => console.log("error fetching data:", error));
+  }, []);
+
+  const onNotePress = (noteId) => {
+    setSelectedNote(notes[noteId]);
+  };
+
+  const handleBackToNotes = () => {
+    setSelectedNote(null);
+  };
 
   // Callback for when a checklist item is toggled
   const handleChecklistToggle = (isItemChecked) => {
@@ -65,7 +82,51 @@ function ProfilePage({ route }) {
   const formContent = <Text>form</Text>;
   const teamContent = <Text>team</Text>;
   const requestContent = <Text>request</Text>;
-  const notesContent = <Text>notes</Text>;
+  const notesContent = (
+    <View style={{ padding: 10 }}>
+      {selectedNote ? (
+        <View>
+          <TouchableOpacity
+            onPress={handleBackToNotes}
+            style={{ marginBottom: 10 }}
+          >
+            {/* Using an icon for back button, you can customize this */}
+            <MaterialIcons name="keyboard-arrow-left" size={24} color="black" />
+          </TouchableOpacity>
+          {/* Note details */}
+          <View style={{ marginBottom: 10 }}>
+            <Text style={{ fontWeight: "bold" }}>{selectedNote.title}</Text>
+            <Text>{selectedNote.date}</Text>
+            <Text>{selectedNote.content}</Text>
+          </View>
+        </View>
+      ) : // List all notes if none is selected
+      notes.length > 0 ? (
+        notes.map((note, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              globalstyles.optionsContainer,
+              { marginVertical: 2, borderWidth: 0 },
+            ]}
+            onPress={() => onNotePress(index)}
+          >
+            <View>
+              <Text style={styles.noteTitle}>{note.title}</Text>
+              <Text style={styles.noteDate}>{note.date}</Text>
+            </View>
+            <MaterialIcons
+              name="keyboard-arrow-right"
+              size={30}
+              style={{ color: "#094852" }}
+            />
+          </TouchableOpacity>
+        ))
+      ) : (
+        <Text>Loading...</Text>
+      )}
+    </View>
+  );
 
   let content;
   switch (selectedItem) {
@@ -318,6 +379,18 @@ const styles = StyleSheet.create({
     color: "#171B1C",
     fontSize: 16,
     letterSpacing: -0.16,
+  },
+
+  noteTitle: {
+    fontFamily: "gabarito-semibold",
+    fontSize: 18,
+    color: "#094852",
+  },
+
+  noteDate: {
+    fontFamily: "karla-regular",
+    fontSize: 14,
+    color: "#465355",
   },
 });
 

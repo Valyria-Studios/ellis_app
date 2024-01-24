@@ -263,7 +263,11 @@
       ],
       "providers": "Receiving service from 5 providers",
       "image": "userImage1",
-      "key": "1"
+      "team": {
+        "members": ["steve", "gary", "joe"],
+        "admins": ["amber", "america"]
+      },
+      "id": "1"
     },
     {
       "name": "Tim Langston",
@@ -279,7 +283,7 @@
       ],
       "providers": "Received 16 services from 5 providers",
       "image": "userImage2",
-      "key": "2"
+      "id": "2"
     },
     {
       "name": "Oscar Simmons",
@@ -290,7 +294,7 @@
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "",
       "image": "userImage3",
-      "key": "3"
+      "id": "3"
     },
     {
       "name": "Jackie Smith",
@@ -301,7 +305,7 @@
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "Received 3 servies from 1 provider",
       "image": "userImage4",
-      "key": "4"
+      "id": "4"
     },
     {
       "name": "Timothy Sanders",
@@ -312,7 +316,7 @@
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "",
       "image": "userImage5",
-      "key": "5"
+      "id": "5"
     },
     {
       "name": "Simon Baits",
@@ -323,7 +327,7 @@
       "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
       "providers": "Receiving service from 2 providers",
       "image": "userImage6",
-      "key": "6"
+      "id": "6"
     }
   ],
   "Legal_Form": [

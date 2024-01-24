@@ -132,11 +132,11 @@ const RelationshipPage = ({ navigation }) => {
         </View>
         {filteredClients.map((client) => (
           <TouchableOpacity
-            key={client.key}
+            key={client.id}
             onPress={() => navigation.navigate("Profile Page", { client })}
             activeOpacity={1}
           >
-            <Card key={client.key}>
+            <Card key={client.id}>
               <View style={styles.headerContainer}>
                 <View style={styles.header}>
                   <View style={styles.start}>

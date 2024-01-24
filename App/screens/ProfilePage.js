@@ -11,7 +11,11 @@ import {
 } from "react-native";
 import { Dropdown } from "../shared/Dropdown";
 import ChecklistItem from "../shared/CheckBox";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Entypo,
+} from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
 import ProgressBar from "../shared/ProgressBar";
@@ -79,9 +83,91 @@ function ProfilePage({ route }) {
       ))}
     </View>
   );
+
   const formContent = <Text>form</Text>;
-  const teamContent = <Text>team</Text>;
+
+  const teamContent = (
+    // NEED PROFILE PICTURES OF TEAM MEMBERS
+    // NEED TO ADD LOGIC FOR GETTING ROLE, ORGANIZATION, DATE ADDED, AND INTERACTIONS
+    // WHAT DO THE THREE VERTICAL DOTS DO?
+    <View style={{ marginVertical: 5 }}>
+      {client.team.admins.map((admin, index) => (
+        <View style={styles.teamContentContainer}>
+          <View style={{ flexDirection: "row", padding: 10 }}>
+            <View style={styles.profileImage}>
+              <Text>Pic</Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text key={index} style={styles.teamMember}>
+                {admin}
+              </Text>
+              <TouchableOpacity>
+                <Entypo
+                  name="dots-three-vertical"
+                  size={20}
+                  color={"#094852"}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              marginHorizontal: 10,
+              justifyContent: "space-between",
+              paddingBottom: 10,
+            }}
+          >
+            <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                <MaterialIcons
+                  name="business"
+                  size={20}
+                  style={{ marginRight: 3, color: "#094852" }}
+                />
+                <Text style={styles.teamDetails}>organization</Text>
+              </View>
+              <Text style={[styles.details, { margin: 0 }]}>Date Started</Text>
+              <Text style={styles.teamDetails}>*Enter Date Started*</Text>
+            </View>
+            <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                <MaterialIcons
+                  name="person"
+                  size={20}
+                  style={{ marginRight: 3, color: "#094852" }}
+                />
+                <Text style={styles.teamDetails}>*ROLE TYPE GOES HERE*</Text>
+              </View>
+              <Text style={[styles.details, { margin: 0 }]}>Interactions</Text>
+              <Text style={styles.teamDetails}>*Number of Interactions*</Text>
+            </View>
+          </View>
+        </View>
+      ))}
+    </View>
+  );
+
   const requestContent = <Text>request</Text>;
+
   const notesContent = (
     <View style={{ padding: 10 }}>
       {selectedNote ? (
@@ -213,7 +299,7 @@ function ProfilePage({ route }) {
               ))}
             </View>
           </ScrollView>
-          <View>{content}</View>
+          <View style={{ marginHorizontal: 5 }}>{content}</View>
         </View>
       </ScrollView>
     </ImageBackground>
@@ -384,6 +470,7 @@ const styles = StyleSheet.create({
   noteTitle: {
     fontFamily: "gabarito-semibold",
     fontSize: 18,
+    paddingBottom: 5,
     color: "#094852",
   },
 
@@ -391,6 +478,35 @@ const styles = StyleSheet.create({
     fontFamily: "karla-regular",
     fontSize: 14,
     color: "#465355",
+  },
+
+  teamContentContainer: {
+    borderRadius: 5,
+    backgroundColor: "#fff",
+    margin: 5,
+  },
+
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    marginRight: 15,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  teamMember: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#053E5A",
+  },
+
+  teamDetails: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    letterSpacing: -0.16,
+    color: "#171B1C",
   },
 });
 

@@ -1,3 +1,8 @@
+// NEED PROFILE PICTURES OF TEAM MEMBERS
+// NEED TO ADD LOGIC FOR GETTING ROLE, ORGANIZATION, DATE ADDED, AND INTERACTIONS
+// WHAT DO THE THREE VERTICAL DOTS DO?
+// RENDER STATUS LOGIC
+
 import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
@@ -92,7 +97,7 @@ function ProfilePage({ route }) {
     // WHAT DO THE THREE VERTICAL DOTS DO?
     <View style={{ marginVertical: 5 }}>
       {client.team.admins.map((admin, index) => (
-        <View style={styles.teamContentContainer}>
+        <View style={styles.teamContentContainer} key={index}>
           <View style={{ flexDirection: "row", padding: 10 }}>
             <View style={styles.profileImage}>
               <Text>Pic</Text>
@@ -236,6 +241,7 @@ function ProfilePage({ route }) {
   }
 
   return (
+    // RENDER STATUS LOGIC
     <ImageBackground source={imageMap[client.image]} style={styles.container}>
       <View style={styles.overlay} />
       <ScrollView style={styles.scrollView}>
@@ -262,15 +268,49 @@ function ProfilePage({ route }) {
                 <Text style={styles.details}>Location</Text>
                 <Text style={styles.detailsText}>{client.location}</Text>
               </View>
+              <View>
+                <Text style={styles.details}>Status</Text>
+                <Text style={styles.detailsText}>*Render Client Status*</Text>
+              </View>
             </View>
-            <View style={globalstyles.tagContainer}>
-              {client.services && Array.isArray(client.services)
-                ? client.services.map((service, index) => (
-                    <View key={index} style={globalstyles.tagBackground}>
-                      <Text style={globalstyles.individualTags}>{service}</Text>
-                    </View>
-                  ))
-                : null}
+            <View style={styles.manageAccountContainer}>
+              <View style={styles.manageTextContainer}>
+                <Text style={styles.manageText}>You manage this account</Text>
+              </View>
+              <TouchableOpacity>
+                <Text
+                  style={{
+                    fontFamily: "gabarito-regular",
+                    fontSize: 14,
+                    letterSpacing: 0.14,
+                    color: "#094852",
+                  }}
+                >
+                  Change
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <View>
+                <Text style={styles.details}>Activities</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  marginHorizontal: 5,
+                }}
+              >
+                {client.services && Array.isArray(client.services)
+                  ? client.services.map((service, index) => (
+                      <View key={index} style={globalstyles.tagBackground}>
+                        <Text style={globalstyles.individualTags}>
+                          {service}
+                        </Text>
+                      </View>
+                    ))
+                  : null}
+              </View>
             </View>
             <View>
               <ProgressBar progress={progress} />
@@ -367,6 +407,28 @@ const styles = StyleSheet.create({
 
   icon: {
     color: "#ffffff",
+  },
+
+  manageAccountContainer: {
+    marginVertical: 10,
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center",
+  },
+
+  manageTextContainer: {
+    borderRadius: 20,
+    borderWidth: 1,
+    marginRight: 15,
+    padding: 10,
+    borderColor: "#533409",
+    backgroundColor: "#F7DEBA",
+  },
+
+  manageText: {
+    fontFamily: "karla-regular",
+    fontSize: 14,
+    color: "#533409",
   },
 
   detailsContainer: {

@@ -11,6 +11,7 @@ import NotificationsPage from "../screens/settingsPage/NotificationsPage";
 import HelpPage from "../screens/settingsPage/HelpPage";
 import LogOutPage from "../screens/settingsPage/LogOutPage";
 import LegalFormScreen from "../screens/formPages/LegalForm";
+import AdminManagementScreen from "../screens/adminManagement";
 
 const RootStack = createStackNavigator();
 
@@ -85,6 +86,7 @@ const RootNavigator = () => {
       <RootStack.Screen name="Help" component={HelpPage} options={{}} />
       <RootStack.Screen name="LogOut" component={LogOutPage} options={{}} />
       <RootStack.Screen name="Legal Aid" component={LegalFormScreen} options={{}} />
+      <RootStack.Screen name="AdminManagement" component={AdminManagementScreen}/>
     </RootStack.Navigator>
   );
 };

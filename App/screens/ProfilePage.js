@@ -43,7 +43,7 @@ const tabItems = ["Activity", "Request", "Team", "Forms", "Notes"];
 
 const totalItems = dropdownItems.length * checklistItems.length; // Total number of ChecklistItems
 
-function ProfilePage({ route }) {
+function ProfilePage({ route, navigation }) {
   const { client } = route.params;
   const [selectedItem, setSelectedItem] = useState("Activity");
   const [checkedItems, setCheckedItems] = useState(0);
@@ -277,7 +277,11 @@ function ProfilePage({ route }) {
               <View style={styles.manageTextContainer}>
                 <Text style={styles.manageText}>You manage this account</Text>
               </View>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("AdminManagement", { client: client })
+                }
+              >
                 <Text
                   style={{
                     fontFamily: "gabarito-regular",

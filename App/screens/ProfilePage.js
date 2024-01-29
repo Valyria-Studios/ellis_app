@@ -2,6 +2,7 @@
 // NEED TO ADD LOGIC FOR GETTING ROLE, ORGANIZATION, DATE ADDED, AND INTERACTIONS
 // WHAT DO THE THREE VERTICAL DOTS DO?
 // RENDER STATUS LOGIC
+// SHOW STATUS OF REQUESTS UNDER TITLE OF OPTION
 
 import React, { useEffect, useState } from "react";
 import {
@@ -42,19 +43,19 @@ const checklistItems = [
 ];
 const tabItems = ["Activity", "Request", "Team", "Forms", "Notes"];
 const housingStatusItems = [
-  { label: "Submit Request", value: "submit_request" },
-  { label: "Follow up", value: "follow_up" },
-  { label: "Housing Granted", value: "housing_granted" },
+  { label: "Submit Request", value: "Application Submitted" },
+  { label: "Follow up", value: "Following Up" },
+  { label: "Housing Granted", value: "Housing Granted" },
 ];
 const legalAssistanceStatusItems = [
-  { label: "Change Request", value: "submit_request" },
-  { label: "Follow up", value: "follow_up" },
-  { label: "Legal Assistance Granted", value: "housing_granted" },
+  { label: "Change Request", value: "Referral Submitted" },
+  { label: "Follow up", value: "Following Up" },
+  { label: "Legal Assistance Granted", value: "Assistance Granted" },
 ];
 const jobPlacementStatusItems = [
-  { label: "Application Request", value: "submit_request" },
-  { label: "Follow up", value: "follow_up" },
-  { label: "Job Found", value: "housing_granted" },
+  { label: "Application Request", value: "Interview Scheduled" },
+  { label: "Follow up", value: "Following Up" },
+  { label: "Job Found", value: "Job Offered" },
 ];
 
 const totalItems = dropdownItems.length * checklistItems.length; // Total number of ChecklistItems
@@ -192,104 +193,123 @@ function ProfilePage({ route, navigation }) {
 
   const requestContent = (
     <View>
-      {dropdownItems.map((dropdownItem) => (
-        <Dropdown title={dropdownItem} key={dropdownItem}>
-          <View>
-            <View style={{ marginBottom: 15 }}>
-              <TouchableOpacity
-                style={[globalstyles.buttonContainer, { marginBottom: 10 }]}
-              >
-                <Text style={globalstyles.buttonText}>
-                  Browse more housing options
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={globalstyles.buttonContainer}>
-                <Text style={globalstyles.buttonText}>Follow up</Text>
-              </TouchableOpacity>
-            </View>
+      {dropdownItems.map((dropdownItem) => {
+        let statusText;
+        if (dropdownItem === "Housing") {
+          statusText = housingStatus;
+        } else if (dropdownItem === "Legal Assistance") {
+          statusText = legalAssistanceStatus;
+        } else if (dropdownItem === "Job Placement") {
+          statusText = jobPlacementStatus;
+        }
+        return (
+          <Dropdown title={dropdownItem} key={dropdownItem} status={statusText}>
             <View>
-              {dropdownItem === "Housing" && (
-                <RNPickerSelect
-                  items={housingStatusItems}
-                  onValueChange={(value) => setHousingStatus(value)}
-                  value={housingStatus}
-                  placeholder={{ label: "Select an option", value: null }}
-                  style={{
-                    viewContainer: styles.pickerstyle,
-                    inputIOS: styles.input,
-                    inputAndroid: styles.input,
-                    placeholder: styles.placeholder,
-                    iconContainer: {
-                      top: "50%", // Center icon vertically
-                      transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
-                    },
-                  }}
-                  useNativeAndroidPickerStyle={false}
-                  Icon={() => (
-                    <MaterialIcons
-                      name="keyboard-arrow-down"
-                      size={30}
-                      color="#094852"
-                    />
-                  )}
-                />
-              )}
-              {dropdownItem === "Legal Assistance" && (
-                <RNPickerSelect
-                  items={legalAssistanceStatusItems} // You should define this array similar to housingStatusItems
-                  onValueChange={(value) => setLegalAssistanceStatus(value)}
-                  value={legalAssistanceStatus}
-                  placeholder={{ label: "Select an option", value: null }}
-                  style={{
-                    viewContainer: styles.pickerstyle,
-                    inputIOS: styles.input,
-                    inputAndroid: styles.input,
-                    placeholder: styles.placeholder,
-                    iconContainer: {
-                      top: "50%", // Center icon vertically
-                      transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
-                    },
-                  }}
-                  useNativeAndroidPickerStyle={false}
-                  Icon={() => (
-                    <MaterialIcons
-                      name="keyboard-arrow-down"
-                      size={30}
-                      color="#094852"
-                    />
-                  )}
-                />
-              )}
-              {dropdownItem === "Job Placement" && (
-                <RNPickerSelect
-                  items={jobPlacementStatusItems} // You should define this array similar to housingStatusItems
-                  onValueChange={(value) => setJobPlacementStatus(value)}
-                  value={jobPlacementStatus}
-                  placeholder={{ label: "Select an option", value: null }}
-                  style={{
-                    viewContainer: styles.pickerstyle,
-                    inputIOS: styles.input,
-                    inputAndroid: styles.input,
-                    placeholder: styles.placeholder,
-                    iconContainer: {
-                      top: "50%", // Center icon vertically
-                      transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
-                    },
-                  }}
-                  useNativeAndroidPickerStyle={false}
-                  Icon={() => (
-                    <MaterialIcons
-                      name="keyboard-arrow-down"
-                      size={30}
-                      color="#094852"
-                    />
-                  )}
-                />
-              )}
+              <View style={{ marginBottom: 15 }}>
+                <TouchableOpacity
+                  style={[globalstyles.buttonContainer, { marginBottom: 10 }]}
+                >
+                  <Text style={globalstyles.buttonText}>
+                    {`Browse more ${dropdownItem.toLowerCase()} options`}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={globalstyles.buttonContainer}>
+                  <Text style={globalstyles.buttonText}>Follow up</Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                {dropdownItem === "Housing" && (
+                  <RNPickerSelect
+                    items={housingStatusItems}
+                    onValueChange={(value) => setHousingStatus(value)}
+                    value={housingStatus}
+                    placeholder={{
+                      label: "Manually Update Status",
+                      value: null,
+                    }}
+                    style={{
+                      viewContainer: styles.pickerstyle,
+                      inputIOS: styles.input,
+                      inputAndroid: styles.input,
+                      placeholder: styles.placeholder,
+                      iconContainer: {
+                        top: "50%", // Center icon vertically
+                        transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
+                      },
+                    }}
+                    useNativeAndroidPickerStyle={false}
+                    Icon={() => (
+                      <MaterialIcons
+                        name="keyboard-arrow-down"
+                        size={30}
+                        color="#094852"
+                      />
+                    )}
+                  />
+                )}
+                {dropdownItem === "Legal Assistance" && (
+                  <RNPickerSelect
+                    items={legalAssistanceStatusItems} // You should define this array similar to housingStatusItems
+                    onValueChange={(value) => setLegalAssistanceStatus(value)}
+                    value={legalAssistanceStatus}
+                    placeholder={{
+                      label: "Manually Update Status",
+                      value: null,
+                    }}
+                    style={{
+                      viewContainer: styles.pickerstyle,
+                      inputIOS: styles.input,
+                      inputAndroid: styles.input,
+                      placeholder: styles.placeholder,
+                      iconContainer: {
+                        top: "50%", // Center icon vertically
+                        transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
+                      },
+                    }}
+                    useNativeAndroidPickerStyle={false}
+                    Icon={() => (
+                      <MaterialIcons
+                        name="keyboard-arrow-down"
+                        size={30}
+                        color="#094852"
+                      />
+                    )}
+                  />
+                )}
+                {dropdownItem === "Job Placement" && (
+                  <RNPickerSelect
+                    items={jobPlacementStatusItems} // You should define this array similar to housingStatusItems
+                    onValueChange={(value) => setJobPlacementStatus(value)}
+                    value={jobPlacementStatus}
+                    placeholder={{
+                      label: "Manually Update Status",
+                      value: null,
+                    }}
+                    style={{
+                      viewContainer: styles.pickerstyle,
+                      inputIOS: styles.input,
+                      inputAndroid: styles.input,
+                      placeholder: styles.placeholder,
+                      iconContainer: {
+                        top: "50%", // Center icon vertically
+                        transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
+                      },
+                    }}
+                    useNativeAndroidPickerStyle={false}
+                    Icon={() => (
+                      <MaterialIcons
+                        name="keyboard-arrow-down"
+                        size={30}
+                        color="#094852"
+                      />
+                    )}
+                  />
+                )}
+              </View>
             </View>
-          </View>
-        </Dropdown>
-      ))}
+          </Dropdown>
+        );
+      })}
     </View>
   );
 

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export function Dropdown({ title, optionalText, children }) {
+export function Dropdown({ title, status, children }) {
   const [isOpen, setIsOpen] = useState(false);
   const fadeAnim = new Animated.Value(1); // Initial opacity for the first icon
 
@@ -36,8 +36,8 @@ export function Dropdown({ title, optionalText, children }) {
       >
         <View>
           <Text style={styles.dropdownTitle}>{title}</Text>
-          {optionalText && (
-            <Text style={styles.optionalText}> - {optionalText}</Text>
+          {status && (
+            <Text style={styles.status}> Current Status: {status}</Text>
           )}
         </View>
         <View style={{ position: "relative" }}>
@@ -86,5 +86,13 @@ styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 20,
+  },
+
+  status: {
+    color: "#171B1C",
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    letterSpacing: -0.16,
+    paddingTop: 16,
   },
 });

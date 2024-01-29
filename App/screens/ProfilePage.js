@@ -46,6 +46,16 @@ const housingStatusItems = [
   { label: "Follow up", value: "follow_up" },
   { label: "Housing Granted", value: "housing_granted" },
 ];
+const legalAssistanceStatusItems = [
+  { label: "Change Request", value: "submit_request" },
+  { label: "Follow up", value: "follow_up" },
+  { label: "Legal Assistance Granted", value: "housing_granted" },
+];
+const jobPlacementStatusItems = [
+  { label: "Application Request", value: "submit_request" },
+  { label: "Follow up", value: "follow_up" },
+  { label: "Job Found", value: "housing_granted" },
+];
 
 const totalItems = dropdownItems.length * checklistItems.length; // Total number of ChecklistItems
 
@@ -55,6 +65,9 @@ function ProfilePage({ route, navigation }) {
   const [checkedItems, setCheckedItems] = useState(0);
   const [notes, setNotes] = useState("");
   const [selectedNote, setSelectedNote] = useState(null);
+  const [housingStatus, setHousingStatus] = useState(null);
+  const [legalAssistanceStatus, setLegalAssistanceStatus] = useState(null);
+  const [jobPlacementStatus, setJobPlacementStatus] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/Notes")
@@ -195,27 +208,84 @@ function ProfilePage({ route, navigation }) {
               </TouchableOpacity>
             </View>
             <View>
-              <RNPickerSelect
-                items={housingStatusItems}
-                placeholder={{ label: "Select an option", value: null }}
-                style={{
-                  viewContainer: styles.pickerstyle,
-                  input: globalstyles.input, // Common style for both iOS and Android
-                  placeholder: globalstyles.placeholder,
-                  iconContainer: {
-                    top: "50%", // Center icon vertically
-                    transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
-                  },
-                }}
-                useNativeAndroidPickerStyle={false}
-                Icon={() => (
-                  <MaterialIcons
-                    name="keyboard-arrow-down"
-                    size={30}
-                    color="#094852"
-                  />
-                )}
-              />
+              {dropdownItem === "Housing" && (
+                <RNPickerSelect
+                  items={housingStatusItems}
+                  onValueChange={(value) => setHousingStatus(value)}
+                  value={housingStatus}
+                  placeholder={{ label: "Select an option", value: null }}
+                  style={{
+                    viewContainer: styles.pickerstyle,
+                    inputIOS: styles.input,
+                    inputAndroid: styles.input,
+                    placeholder: styles.placeholder,
+                    iconContainer: {
+                      top: "50%", // Center icon vertically
+                      transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
+                    },
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  Icon={() => (
+                    <MaterialIcons
+                      name="keyboard-arrow-down"
+                      size={30}
+                      color="#094852"
+                    />
+                  )}
+                />
+              )}
+              {dropdownItem === "Legal Assistance" && (
+                <RNPickerSelect
+                  items={legalAssistanceStatusItems} // You should define this array similar to housingStatusItems
+                  onValueChange={(value) => setLegalAssistanceStatus(value)}
+                  value={legalAssistanceStatus}
+                  placeholder={{ label: "Select an option", value: null }}
+                  style={{
+                    viewContainer: styles.pickerstyle,
+                    inputIOS: styles.input,
+                    inputAndroid: styles.input,
+                    placeholder: styles.placeholder,
+                    iconContainer: {
+                      top: "50%", // Center icon vertically
+                      transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
+                    },
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  Icon={() => (
+                    <MaterialIcons
+                      name="keyboard-arrow-down"
+                      size={30}
+                      color="#094852"
+                    />
+                  )}
+                />
+              )}
+              {dropdownItem === "Job Placement" && (
+                <RNPickerSelect
+                  items={jobPlacementStatusItems} // You should define this array similar to housingStatusItems
+                  onValueChange={(value) => setJobPlacementStatus(value)}
+                  value={jobPlacementStatus}
+                  placeholder={{ label: "Select an option", value: null }}
+                  style={{
+                    viewContainer: styles.pickerstyle,
+                    inputIOS: styles.input,
+                    inputAndroid: styles.input,
+                    placeholder: styles.placeholder,
+                    iconContainer: {
+                      top: "50%", // Center icon vertically
+                      transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
+                    },
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  Icon={() => (
+                    <MaterialIcons
+                      name="keyboard-arrow-down"
+                      size={30}
+                      color="#094852"
+                    />
+                  )}
+                />
+              )}
             </View>
           </View>
         </Dropdown>
@@ -601,7 +671,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     margin: 5,
   },
-
   profileImage: {
     width: 40,
     height: 40,
@@ -627,13 +696,25 @@ const styles = StyleSheet.create({
 
   pickerstyle: {
     flex: 1,
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 10,
     justifyContent: "space-between",
     alignContent: "center",
     borderWidth: 1,
     borderRadius: 10,
     borderColor: "#B5BABB",
+  },
+
+  input: {
+    fontSize: 16,
+    fontFamily: "karla-regular",
+    color: "#094852",
+  },
+
+  placeholder: {
+    fontSize: 16,
+    color: "#094852",
+    fontFamily: "karla-regular",
   },
 });
 

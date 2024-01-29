@@ -85,8 +85,31 @@ const RootNavigator = () => {
       />
       <RootStack.Screen name="Help" component={HelpPage} options={{}} />
       <RootStack.Screen name="LogOut" component={LogOutPage} options={{}} />
-      <RootStack.Screen name="Legal Aid" component={LegalFormScreen} options={{}} />
-      <RootStack.Screen name="AdminManagement" component={AdminManagementScreen}/>
+      <RootStack.Screen
+        name="Legal Aid"
+        component={LegalFormScreen}
+        options={{}}
+      />
+      <RootStack.Screen
+        name="Profile Admin Settings"
+        component={AdminManagementScreen}
+        options={{
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
+      />
     </RootStack.Navigator>
   );
 };

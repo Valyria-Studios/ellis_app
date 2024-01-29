@@ -419,7 +419,7 @@ function ProfilePage({ route, navigation }) {
               </View>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("AdminManagement", { client: client })
+                  navigation.navigate("Profile Admin Settings", { client: client })
                 }
               >
                 <Text

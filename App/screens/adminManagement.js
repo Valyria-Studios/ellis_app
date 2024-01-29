@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import globalstyles from "../shared/globalStyles";
 
 const AdminManagementScreen = ({ route, navigation }) => {
   const { client } = route.params;
@@ -48,15 +49,31 @@ const AdminManagementScreen = ({ route, navigation }) => {
     }
   };
   return (
-    <View style={styles.container}>
+    <View style={globalstyles.container}>
+      <Text style={styles.header}>Current Admins</Text>
       {currentClient.team.admins.map((admin, index) => (
         <View key={index} style={styles.adminRow}>
-          <Text style={styles.adminText}>{admin}</Text>
-          <TouchableOpacity
-            onPress={() => handleMoveToMembers(admin)}
+          <View
+            style={{
+              flex: 1,
+              borderRadius: 10,
+              paddingVertical: 10,
+              backgroundColor: "#E7F2F3",
+            }}
           >
-            <Text style={styles.removeText}>Remove</Text>
-          </TouchableOpacity>
+            <Text style={styles.adminText}>{admin}</Text>
+          </View>
+          <View
+            style={{
+              paddingLeft: 10,
+              paddingVertical: 11,
+              backgroundColor: "#F3F8F9",
+            }}
+          >
+            <TouchableOpacity onPress={() => handleMoveToMembers(admin)}>
+              <Text style={styles.removeText}>Remove</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       ))}
     </View>
@@ -64,8 +81,11 @@ const AdminManagementScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // styles
+  header: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#030E07",
+    marginBottom: 5,
   },
   adminRow: {
     flexDirection: "row",
@@ -74,10 +94,14 @@ const styles = StyleSheet.create({
     // more styles
   },
   adminText: {
-    // styles
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    letterSpacing: -0.16,
+    color: "#171B1C",
+    paddingLeft: 5,
   },
   removeText: {
-    color: "red",
+    color: "#094852",
     // more styles
   },
 });

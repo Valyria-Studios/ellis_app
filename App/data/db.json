@@ -346,13 +346,14 @@
       "providers": "Receiving service from 5 providers",
       "image": "userImage1",
       "team": {
-        "admins": [],
+        "admins": [
+          "amber"
+        ],
         "members": [
-          "joe",
-          "amber",
           "america",
           "steve",
-          "gary"
+          "gary",
+          "joe"
         ]
       },
       "id": "1"

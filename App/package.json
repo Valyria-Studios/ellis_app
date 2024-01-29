@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.8",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-picker/picker": "^2.6.1",
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.18",

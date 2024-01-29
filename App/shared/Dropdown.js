@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export function Dropdown({ title, children }) {
+export function Dropdown({ title, optionalText, children }) {
   const [isOpen, setIsOpen] = useState(false);
   const fadeAnim = new Animated.Value(1); // Initial opacity for the first icon
 
@@ -34,7 +34,12 @@ export function Dropdown({ title, children }) {
         activeOpacity={0.3}
         style={styles.dropdownHeader}
       >
-        <Text style={styles.dropdownTitle}>{title}</Text>
+        <View>
+          <Text style={styles.dropdownTitle}>{title}</Text>
+          {optionalText && (
+            <Text style={styles.optionalText}> - {optionalText}</Text>
+          )}
+        </View>
         <View style={{ position: "relative" }}>
           <Animated.View style={{ position: "absolute", opacity: fadeAnim }}>
             <MaterialIcons name="keyboard-arrow-down" size={24} />

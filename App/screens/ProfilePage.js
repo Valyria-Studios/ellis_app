@@ -24,6 +24,7 @@ import {
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
 import ProgressBar from "../shared/ProgressBar";
+import RNPickerSelect from "react-native-picker-select";
 
 if (
   Platform.OS === "android" &&
@@ -40,6 +41,11 @@ const checklistItems = [
   "Housing Granted",
 ];
 const tabItems = ["Activity", "Request", "Team", "Forms", "Notes"];
+const housingStatusItems = [
+  { label: "Submit Request", value: "submit_request" },
+  { label: "Follow up", value: "follow_up" },
+  { label: "Housing Granted", value: "housing_granted" },
+];
 
 const totalItems = dropdownItems.length * checklistItems.length; // Total number of ChecklistItems
 
@@ -171,7 +177,51 @@ function ProfilePage({ route, navigation }) {
     </View>
   );
 
-  const requestContent = <Text>request</Text>;
+  const requestContent = (
+    <View>
+      {dropdownItems.map((dropdownItem) => (
+        <Dropdown title={dropdownItem} key={dropdownItem}>
+          <View>
+            <View style={{ marginBottom: 15 }}>
+              <TouchableOpacity
+                style={[globalstyles.buttonContainer, { marginBottom: 10 }]}
+              >
+                <Text style={globalstyles.buttonText}>
+                  Browse more housing options
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={globalstyles.buttonContainer}>
+                <Text style={globalstyles.buttonText}>Follow up</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <RNPickerSelect
+                items={housingStatusItems}
+                placeholder={{ label: "Select an option", value: null }}
+                style={{
+                  viewContainer: styles.pickerstyle,
+                  input: globalstyles.input, // Common style for both iOS and Android
+                  placeholder: globalstyles.placeholder,
+                  iconContainer: {
+                    top: "50%", // Center icon vertically
+                    transform: [{ translateY: -14 }], // Adjust this value to fine-tune the vertical positioning
+                  },
+                }}
+                useNativeAndroidPickerStyle={false}
+                Icon={() => (
+                  <MaterialIcons
+                    name="keyboard-arrow-down"
+                    size={30}
+                    color="#094852"
+                  />
+                )}
+              />
+            </View>
+          </View>
+        </Dropdown>
+      ))}
+    </View>
+  );
 
   const notesContent = (
     <View style={{ padding: 10 }}>
@@ -573,6 +623,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: -0.16,
     color: "#171B1C",
+  },
+
+  pickerstyle: {
+    flex: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    justifyContent: "space-between",
+    alignContent: "center",
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#B5BABB",
   },
 });
 

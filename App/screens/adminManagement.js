@@ -1,10 +1,63 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+  TextInput,
+  FlatList,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 
-const AdminManagementScreen = ({ route, navigation }) => {
+const AdminManagementScreen = ({ route }) => {
   const { client } = route.params;
   const [currentClient, setCurrentClient] = useState(client); // Use the passed client
+  const [clients, setClients] = useState([]);
+  const [filteredClients, setFilteredClients] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch("http://localhost:3000/Clients");
+        if (!response.ok) {
+          throw new Error("Something went wrong!");
+        }
+        const data = await response.json();
+        setClients(data);
+        setFilteredClients(data); // Initially, no filter is applied
+      } catch (error) {
+        setError(error.message);
+      }
+      setIsLoading(false);
+    };
+
+    fetchClients();
+  }, []);
+
+  useEffect(() => {
+    // Start by excluding the current client
+    const clientsExcludingCurrent = clients.filter(
+      (client) => client.id !== currentClient.id
+    );
+
+    // If there's a search query, filter the already-excluded list based on the query
+    if (searchQuery.trim() !== "") {
+      const lowercasedQuery = searchQuery.toLowerCase();
+      const filtered = clientsExcludingCurrent.filter((client) =>
+        client.name.toLowerCase().includes(lowercasedQuery)
+      );
+      setFilteredClients(filtered);
+    } else {
+      // If there's no search query, use the list that already excludes the current client
+      setFilteredClients(clientsExcludingCurrent);
+    }
+  }, [searchQuery, clients, currentClient.id]);
 
   const handleMoveToMembers = async (adminName) => {
     // Update the admins and members lists
@@ -48,34 +101,113 @@ const AdminManagementScreen = ({ route, navigation }) => {
       console.error("Error updating team data:", error);
     }
   };
+  const handleAddToAdmins = async (newAdmin) => {
+    // Prevent adding if the client is already an admin
+    if (currentClient.team.admins.includes(newAdmin.name)) {
+      alert(`${newAdmin.name} is already an admin.`);
+      return;
+    }
+
+    const updatedAdmins = [...currentClient.team.admins, newAdmin.name];
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/Clients/${currentClient.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...currentClient,
+            team: {
+              ...currentClient.team,
+              admins: updatedAdmins,
+            },
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Update local state
+        const newClientData = await response.json();
+        setCurrentClient(newClientData);
+      } else {
+        throw new Error("Failed to update data on the server");
+      }
+    } catch (error) {
+      console.error("Error adding to team admins:", error);
+    }
+  };
+
+  if (isLoading) {
+    return <ActivityIndicator />; // Or some loading component
+  }
+
+  if (error) {
+    return <Text>Error: {error}</Text>;
+  }
   return (
     <View style={globalstyles.container}>
-      <Text style={styles.header}>Current Admins</Text>
-      {currentClient.team.admins.map((admin, index) => (
-        <View key={index} style={styles.adminRow}>
-          <View
-            style={{
-              flex: 1,
-              borderRadius: 10,
-              paddingVertical: 10,
-              backgroundColor: "#E7F2F3",
-            }}
-          >
-            <Text style={styles.adminText}>{admin}</Text>
+      <View style={{ marginBottom: 10 }}>
+        <Text style={[styles.header, { marginTop: 25 }]}>Current Admins</Text>
+        {currentClient.team.admins.map((admin, index) => (
+          <View key={index} style={styles.adminRow}>
+            <View
+              style={{
+                flex: 1,
+                borderRadius: 10,
+                paddingVertical: 10,
+                backgroundColor: "#E7F2F3",
+              }}
+            >
+              <Text style={styles.adminText}>{admin}</Text>
+            </View>
+            <View
+              style={{
+                paddingLeft: 10,
+                paddingVertical: 11,
+                backgroundColor: "#F3F8F9",
+              }}
+            >
+              <TouchableOpacity onPress={() => handleMoveToMembers(admin)}>
+                <Text style={styles.removeText}>Remove</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View
-            style={{
-              paddingLeft: 10,
-              paddingVertical: 11,
-              backgroundColor: "#F3F8F9",
-            }}
-          >
-            <TouchableOpacity onPress={() => handleMoveToMembers(admin)}>
-              <Text style={styles.removeText}>Remove</Text>
+        ))}
+      </View>
+      <Text style={styles.header}>Add new admin</Text>
+      <View style={[globalstyles.searchContainer, { flex: 0, padding: 5 }]}>
+        <Ionicons
+          name="search-outline"
+          size={25}
+          color="#465355"
+          style={[globalstyles.searchIcon, { borderColor: "#B5BABB" }]}
+        />
+        <TextInput
+          style={styles.searchBar}
+          placeholder="Type team member name"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+      </View>
+      {searchQuery.trim() !== "" && filteredClients.length > 0 ? (
+        <FlatList
+          data={filteredClients}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.clientItem}
+              onPress={() => handleAddToAdmins(item)}
+            >
+              <Text style={styles.clientName}>{item.name}</Text>
             </TouchableOpacity>
-          </View>
-        </View>
-      ))}
+          )}
+        />
+      ) : searchQuery.trim() !== "" && filteredClients.length === 0 ? (
+        <Text style={styles.noResultsText}>No clients found.</Text>
+      ) : null}
     </View>
   );
 };
@@ -91,6 +223,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 10,
     // more styles
   },
   adminText: {
@@ -103,6 +236,16 @@ const styles = StyleSheet.create({
   removeText: {
     color: "#094852",
     // more styles
+  },
+
+  searchBar: {
+    flex: 1,
+    marginVertical: 6,
+    fontSize: 18,
+    color: "#909899",
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    letterSpacing: -0.16,
   },
 });
 

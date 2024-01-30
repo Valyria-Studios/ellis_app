@@ -4,7 +4,7 @@
 // RENDER STATUS LOGIC
 // SHOW STATUS OF REQUESTS UNDER TITLE OF OPTION
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   ImageBackground,
   Text,
@@ -26,6 +26,7 @@ import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
 import ProgressBar from "../shared/ProgressBar";
 import RNPickerSelect from "react-native-picker-select";
+import { useFocusEffect } from "@react-navigation/native";
 
 if (
   Platform.OS === "android" &&
@@ -69,6 +70,7 @@ function ProfilePage({ route, navigation }) {
   const [housingStatus, setHousingStatus] = useState(null);
   const [legalAssistanceStatus, setLegalAssistanceStatus] = useState(null);
   const [jobPlacementStatus, setJobPlacementStatus] = useState(null);
+  const [clientData, setClientData] = useState(route.params.client);
 
   useEffect(() => {
     fetch("http://localhost:3000/Notes")
@@ -76,6 +78,24 @@ function ProfilePage({ route, navigation }) {
       .then((json) => setNotes(json))
       .catch((error) => console.log("error fetching data:", error));
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchUpdatedClientData = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/Clients/${clientData.id}`
+          );
+          const updatedClientData = await response.json();
+          setClientData(updatedClientData); // Update your state with the latest data
+        } catch (error) {
+          console.error("Error fetching updated client data:", error);
+        }
+      };
+
+      fetchUpdatedClientData();
+    }, [])
+  );
 
   const onNotePress = (noteId) => {
     setSelectedNote(notes[noteId]);
@@ -116,7 +136,7 @@ function ProfilePage({ route, navigation }) {
     // NEED TO ADD LOGIC FOR GETTING ROLE, ORGANIZATION, DATE ADDED, AND INTERACTIONS
     // WHAT DO THE THREE VERTICAL DOTS DO?
     <View style={{ marginVertical: 5 }}>
-      {client.team.admins.map((admin, index) => (
+      {clientData.team.admins.map((admin, index) => (
         <View style={styles.teamContentContainer} key={index}>
           <View style={{ flexDirection: "row", padding: 10 }}>
             <View style={styles.profileImage}>
@@ -419,7 +439,9 @@ function ProfilePage({ route, navigation }) {
               </View>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("Profile Admin Settings", { client: client })
+                  navigation.navigate("Profile Admin Settings", {
+                    client: client,
+                  })
                 }
               >
                 <Text

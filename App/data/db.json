@@ -346,14 +346,19 @@
       "providers": "Receiving service from 5 providers",
       "image": "userImage1",
       "team": {
-        "admins": [],
+        "admins": [
+          "Jackie Smith",
+          "Timothy Sanders"
+        ],
         "members": [
           "america",
           "steve",
           "gary",
           "joe",
           "Jackie Smith",
-          "amber"
+          "amber",
+          "Jackie Smith",
+          "Tim Langston"
         ]
       },
       "id": "1"

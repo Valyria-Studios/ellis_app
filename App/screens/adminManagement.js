@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
+import { useFocusEffect } from "@react-navigation/native";
 
 const AdminManagementScreen = ({ route }) => {
   const { client } = route.params;
@@ -19,6 +20,30 @@ const AdminManagementScreen = ({ route }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Inside your AdminManagementScreen component
+  useFocusEffect(
+    useCallback(() => {
+      const fetchCurrentClientData = async () => {
+        setIsLoading(true);
+        try {
+          const response = await fetch(
+            `http://localhost:3000/Clients/${client.id}`
+          );
+          if (!response.ok) {
+            throw new Error("Something went wrong!");
+          }
+          const updatedClientData = await response.json();
+          setCurrentClient(updatedClientData);
+        } catch (error) {
+          setError(error.message);
+        }
+        setIsLoading(false);
+      };
+
+      fetchCurrentClientData();
+    }, [])
+  );
 
   useEffect(() => {
     const fetchClients = async () => {

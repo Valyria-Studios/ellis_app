@@ -1,3 +1,5 @@
+//Need all Options for Service Categories
+
 import React from "react";
 import {
   View,
@@ -12,81 +14,60 @@ import renderIcon from "../../shared/RenderIconFunction";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const RequestService = ({ navigation }) => {
+  //Need all Options for Service Categories
   const serviceCategories = [
     {
       name: "Food",
       icon: "clinic-medical",
       library: "FontAwesome5",
-      options: ["Emergency Food", "Groceries (Food Pantry)"],
+      options: [
+        "Emergency Food",
+        "Food Benefits",
+        "Food Delivery",
+        "Food Pantry",
+        "Meals",
+      ],
     },
     {
       name: "Health",
       icon: "brain",
       library: "FontAwesome5",
       options: [
-        { name: "Urgent Care" },
-        {
-          name: "Mental Health Urgent Care",
-          icon: "clinic-medical",
-          library: "FontAwesome5",
-        },
-        {
-          name: "Mental Health Services",
-          icon: "brain",
-          library: "FontAwesome5",
-        },
-        { name: "Women's Health", icon: "md-female", library: "Ionicons" },
+        "Urgent Care",
+        "Mental Health Urgent Care",
+        "Mental Health Services",
+        "Women's Health",
       ],
     },
     {
       name: "Housing",
       icon: "home",
       library: "Ionicons",
-      options: [
-        {
-          name: "Temporary Housing",
-          icon: "home-search-outline",
-          library: "MaterialCommunityIcons",
-        },
-        {
-          name: "Permanent Supportive Housing",
-          icon: "home",
-          library: "FontAwesome5",
-        },
-      ],
+      options: ["Temporary Housing", "Permanent Supportive Housing"],
     },
     {
       name: "Hygiene",
       icon: "brain",
       library: "FontAwesome5",
+      options: [],
     },
     {
       name: "Learn",
       icon: "briefcase",
       library: "Feather",
+      options: [],
     },
     {
       name: "Legal",
       icon: "briefcase",
       library: "Feather",
-      options: [
-        { name: "Civil Litigation", icon: "groups", library: "MaterialIcons" },
-        {
-          name: "Criminal Defense",
-          icon: "briefcase-outline",
-          library: "MaterialCommunityIcons",
-        },
-        {
-          name: "Evicition Prevention",
-          icon: "bed-king-outline",
-          library: "MaterialCommunityIcons",
-        },
-      ],
+      options: ["Civil Litigation", "Criminal Defense", "Eviction Prevention"],
     },
     {
       name: "Money",
       icon: "briefcase",
       library: "Feather",
+      options: [],
     },
   ];
 

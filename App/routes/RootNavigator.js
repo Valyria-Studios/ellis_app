@@ -4,7 +4,7 @@ import AppNavigator from "./AppNavigator"; // Import your BottomTabNavigator
 import ChatPage from "../screens/ChatPage";
 import AmenityPage from "../screens/AmenityPage";
 import ProfilePage from "../screens/ProfilePage";
-import RequestService from "../screens/RequestServicePage";
+import RequestService from "../screens/requestServicePages/RequestServicePage";
 import OrgProfile from "../screens/settingsPage/OrganizationProfile";
 import AccountPage from "../screens/settingsPage/AccountPage";
 import NotificationsPage from "../screens/settingsPage/NotificationsPage";
@@ -12,6 +12,9 @@ import HelpPage from "../screens/settingsPage/HelpPage";
 import LogOutPage from "../screens/settingsPage/LogOutPage";
 import LegalFormScreen from "../screens/formPages/LegalForm";
 import AdminManagementScreen from "../screens/adminManagement";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
+import ServiceDetails from "../screens/requestServicePages/ServiceDetails";
 
 const RootStack = createStackNavigator();
 
@@ -57,6 +60,17 @@ const RootNavigator = () => {
           },
           headerTitleContainerStyle: { left: 0 },
           headerTintColor: "#094852",
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => {
+                // Your code to handle the press, e.g., open a menu or navigate
+                console.log("Three vertical dots pressed");
+              }}
+              style={{ paddingRight: 10 }} // Add padding if needed
+            >
+              <Ionicons name="ellipsis-vertical" size={25} color="#094852" />
+            </TouchableOpacity>
+          ),
         })}
       />
       <RootStack.Screen
@@ -109,6 +123,27 @@ const RootNavigator = () => {
             elevation: 0,
           },
         }}
+      />
+      <RootStack.Screen
+        name="Service Details"
+        component={ServiceDetails}
+        options={({ route }) => ({
+          headerTitle: route.params.category.name,
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        })}
       />
     </RootStack.Navigator>
   );

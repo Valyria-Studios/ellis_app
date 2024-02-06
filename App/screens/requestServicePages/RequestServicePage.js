@@ -7,29 +7,24 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import globalstyles from "../shared/globalStyles";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import globalstyles from "../../shared/globalStyles";
+import renderIcon from "../../shared/RenderIconFunction";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-const RequestService = () => {
+const RequestService = ({ navigation }) => {
   const serviceCategories = [
     {
       name: "Food",
-      options: [
-        { name: "Emergency Food", icon: "bento", library: "MaterialIcons" },
-        {
-          name: "Groceries (Food Pantry)",
-          icon: "local-grocery-store",
-          library: "MaterialIcons",
-        },
-      ],
+      icon: "clinic-medical",
+      library: "FontAwesome5",
+      options: ["Emergency Food", "Groceries (Food Pantry)"],
     },
     {
       name: "Health",
+      icon: "brain",
+      library: "FontAwesome5",
       options: [
-        { name: "Urgent Care", icon: "star-of-life", library: "FontAwesome5" },
+        { name: "Urgent Care" },
         {
           name: "Mental Health Urgent Care",
           icon: "clinic-medical",
@@ -45,6 +40,8 @@ const RequestService = () => {
     },
     {
       name: "Housing",
+      icon: "home",
+      library: "Ionicons",
       options: [
         {
           name: "Temporary Housing",
@@ -59,7 +56,19 @@ const RequestService = () => {
       ],
     },
     {
+      name: "Hygiene",
+      icon: "brain",
+      library: "FontAwesome5",
+    },
+    {
+      name: "Learn",
+      icon: "briefcase",
+      library: "Feather",
+    },
+    {
       name: "Legal",
+      icon: "briefcase",
+      library: "Feather",
       options: [
         { name: "Civil Litigation", icon: "groups", library: "MaterialIcons" },
         {
@@ -74,28 +83,12 @@ const RequestService = () => {
         },
       ],
     },
+    {
+      name: "Money",
+      icon: "briefcase",
+      library: "Feather",
+    },
   ];
-
-  const renderIcon = (iconName, library) => {
-    switch (library) {
-      case "Ionicons":
-        return <Ionicons name={iconName} size={20} style={styles.icon} />;
-      case "MaterialIcons":
-        return <MaterialIcons name={iconName} size={20} style={styles.icon} />;
-      case "FontAwesome5":
-        return <FontAwesome5 name={iconName} size={20} style={styles.icon} />;
-      case "MaterialCommunityIcons":
-        return (
-          <MaterialCommunityIcons
-            name={iconName}
-            size={20}
-            style={styles.icon}
-          />
-        );
-      default:
-        return null;
-    }
-  };
 
   return (
     <ScrollView
@@ -127,24 +120,31 @@ const RequestService = () => {
           <Text style={styles.subHeader}>Frequently Used</Text>
           {/* some code for showing a list of frequents */}
         </View>
+        <Text style={styles.subHeader}>Services</Text>
         {serviceCategories.map((category, index) => (
-          <View key={index}>
-            <Text style={styles.subHeader}>{category.name}</Text>
-            {category.options.map((options, idx) => (
-              <View style={{ marginHorizontal: 10 }}>
-                <TouchableOpacity key={idx} style={styles.container}>
-                  <View
-                    style={[
-                      globalstyles.optionsContainer,
-                      { paddingVertical: 16, justifyContent: "flex-start" },
-                    ]}
-                  >
-                    {renderIcon(options.icon, options.library)}
-                    <Text style={globalstyles.optionsText}>{options.name}</Text>
-                  </View>
-                </TouchableOpacity>
+          <View key={index} style={styles.container}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Service Details", { category })
+              }
+            >
+              <View
+                style={[
+                  globalstyles.optionsContainer,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                <View style={{ flexDirection: "row" }}>
+                  {renderIcon(category.icon, category.library, styles.icon)}
+                  <Text style={globalstyles.optionsText}>{category.name}</Text>
+                </View>
+                <MaterialIcons
+                  name="keyboard-arrow-right"
+                  size={30}
+                  style={{ color: "#094852" }}
+                />
               </View>
-            ))}
+            </TouchableOpacity>
           </View>
         ))}
       </View>

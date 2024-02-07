@@ -15,6 +15,7 @@ const ServiceDetails = ({ route, navigation }) => {
       {category.options &&
         category.options.map((option, index) => (
           <TouchableOpacity
+          activeOpacity={0.8}
             key={index}
             style={styles.container}
             onPress={() => handleOptionPress(option)}

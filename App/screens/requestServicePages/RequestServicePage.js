@@ -102,12 +102,11 @@ const RequestService = ({ navigation }) => {
         </View>
         <Text style={styles.subHeader}>Services</Text>
         {serviceCategories.map((category, index) => (
-          <View key={index} style={styles.container}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Service Details", { category })
-              }
-            >
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate("Service Details", { category })}
+          >
+            <View key={index} style={styles.container}>
               <View
                 style={[
                   globalstyles.optionsContainer,
@@ -124,8 +123,8 @@ const RequestService = ({ navigation }) => {
                   style={{ color: "#094852" }}
                 />
               </View>
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>

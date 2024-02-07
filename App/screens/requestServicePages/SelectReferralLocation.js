@@ -11,7 +11,7 @@ import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
 import { MaterialIcons, Octicons, Feather } from "@expo/vector-icons";
 
-const SelectReferralLocation = ({ route }) => {
+const SelectReferralLocation = ({ route, navigation }) => {
   const { option, categoryName } = route.params;
   const [amenities, setAmenities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +39,7 @@ const SelectReferralLocation = ({ route }) => {
   return (
     <View style={globalstyles.container}>
       {amenities.map((amenity, index) => (
-        <TouchableOpacity key={index}>
+        <TouchableOpacity key={index} activeOpacity={0.8}>
           <Card>
             <View
               style={{

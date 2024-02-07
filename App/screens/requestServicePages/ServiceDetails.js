@@ -7,7 +7,7 @@ const ServiceDetails = ({ route, navigation }) => {
   const { category } = route.params;
 
   const handleOptionPress = (option) => {
-    navigation.navigate("Referral Location", { option });
+    navigation.navigate("Referral Location", { option, categoryName: category.name });
   };
 
   return (

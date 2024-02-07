@@ -7,7 +7,9 @@ const ServiceDetails = ({ route, navigation }) => {
   const { category } = route.params;
 
   return (
-    <View style={[globalstyles.container, { paddingTop: 15 }]}>
+    <View
+      style={[globalstyles.container, { paddingTop: 15, paddingHorizontal: 5 }]}
+    >
       {category.options &&
         category.options.map((option, index) => (
           <TouchableOpacity
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: "#094852",
+    paddingLeft: 10,
   },
 });
 

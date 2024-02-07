@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
@@ -37,101 +38,106 @@ const SelectReferralLocation = ({ route, navigation }) => {
   }
 
   return (
-    <View style={globalstyles.container}>
-      {amenities.map((amenity, index) => (
-        <TouchableOpacity
-          key={index}
-          activeOpacity={0.8}
-          onPress={() =>
-            navigation.navigate("Select Client With Location", {
-              option,
-              selectedAmenity: amenity,
-            })
-          }
-        >
-          <Card>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Text style={styles.optionText}>{option}</Text>
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color={"#094852"}
-              />
-            </View>
-            <View>
-              <Text style={styles.title}>{amenity.location}</Text>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={[globalstyles.container, { paddingHorizontal: 5 }]}
+    >
+      <View>
+        {amenities.map((amenity, index) => (
+          <TouchableOpacity
+            key={index}
+            activeOpacity={0.8}
+            onPress={() =>
+              navigation.navigate("Select Client With Location", {
+                option,
+                selectedAmenity: amenity,
+              })
+            }
+          >
+            <Card>
               <View
                 style={{
                   flexDirection: "row",
-                  marginTop: 5,
+                  justifyContent: "space-between",
                   alignItems: "center",
                 }}
               >
-                <Octicons name="location" size={18} color={"#094852"} />
-                <Text style={styles.amenityText}>{amenity.address}</Text>
+                <Text style={styles.optionText}>{option}</Text>
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color={"#094852"}
+                />
+              </View>
+              <View>
+                <Text style={styles.title}>{amenity.location}</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginTop: 5,
+                    alignItems: "center",
+                  }}
+                >
+                  <Octicons name="location" size={18} color={"#094852"} />
+                  <Text style={styles.amenityText}>{amenity.address}</Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginTop: 5,
+                    alignItems: "center",
+                  }}
+                >
+                  <Feather name="clock" size={16} color={"#094852"} />
+                  <Text style={styles.amenityText}>
+                    {amenity.operationalHours}
+                  </Text>
+                </View>
               </View>
               <View
                 style={{
                   flexDirection: "row",
-                  marginTop: 5,
+                  justifyContent: "space-between",
                   alignItems: "center",
+                  marginTop: 10,
                 }}
               >
-                <Feather name="clock" size={16} color={"#094852"} />
-                <Text style={styles.amenityText}>
-                  {amenity.operationalHours}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginTop: 10,
-              }}
-            >
-              <View
-                style={[
-                  styles.enrollmentContainer,
-                  amenity.availability === "0"
-                    ? styles.waitlistContainer
-                    : styles.enrollmentContainer,
-                ]}
-              >
-                <Text
+                <View
                   style={[
-                    styles.cardAvailabilityText,
+                    styles.enrollmentContainer,
                     amenity.availability === "0"
-                      ? styles.waitlistText
-                      : styles.enrollmentText,
+                      ? styles.waitlistContainer
+                      : styles.enrollmentContainer,
                   ]}
                 >
-                  {amenity.availability === "0"
-                    ? "Waitlist"
-                    : "Enrollment Available"}
-                </Text>
+                  <Text
+                    style={[
+                      styles.cardAvailabilityText,
+                      amenity.availability === "0"
+                        ? styles.waitlistText
+                        : styles.enrollmentText,
+                    ]}
+                  >
+                    {amenity.availability === "0"
+                      ? "Waitlist"
+                      : "Enrollment Available"}
+                  </Text>
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <MaterialIcons
+                    name="app-registration"
+                    size={16}
+                    color={"#094852"}
+                    style={{ paddingRight: 5 }}
+                  />
+                  <Text style={styles.referText}>Refer</Text>
+                </View>
               </View>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <MaterialIcons
-                  name="app-registration"
-                  size={16}
-                  color={"#094852"}
-                  style={{ paddingRight: 5 }}
-                />
-                <Text style={styles.referText}>Refer</Text>
-              </View>
-            </View>
-          </Card>
-        </TouchableOpacity>
-      ))}
-    </View>
+            </Card>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </ScrollView>
   );
 };
 

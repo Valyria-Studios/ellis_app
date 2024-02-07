@@ -73,7 +73,7 @@ const RequestService = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={globalstyles.container}
+      style={[globalstyles.container, { paddingHorizontal: 5 }]}
       showsVerticalScrollIndicator={false}
     >
       <View>
@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
 
   icon: {
     color: "#094852",
+    paddingLeft: 10,
   },
 });
 

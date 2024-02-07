@@ -1,3 +1,5 @@
+// NEED ALL OPTIONS FOR EACH PICKER
+
 import React, { useState } from "react";
 import {
   View,
@@ -12,9 +14,15 @@ import RNPickerSelect from "react-native-picker-select";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const EnrollmentForm = () => {
-  const [referralType, setReferralType] = useState();
+  const [referralType, setReferralType] = useState("New");
   const [nameVerified, setNameVerified] = useState();
   const [addressVerified, setAddressVerified] = useState();
+  const [basicProfileInformation, setBasicProfileInformation] = useState();
+  const [householdInformation, setHouseholdInformation] = useState();
+  const [demographicInformation, setDemographicInformation] = useState();
+  const [alternateInformation, setAlternateInformation] = useState();
+  const [communicationConsent, setCommunicationConsent] = useState();
+  const [certification, setCertification] = useState();
   const [patronProfile, setPatronProfile] = useState();
   const [consent, setConsent] = useState();
 
@@ -24,9 +32,16 @@ const EnrollmentForm = () => {
       showsVerticalScrollIndicator={false}
     >
       <View>
-        <Text>Referral Type</Text>
+        <View>
+          <Text style={styles.captionText}>
+            Leave the field below blank to leave the form for the organization
+            to fill out.
+          </Text>
+        </View>
+        <Text style={styles.header}>Referral Type</Text>
         <View style={styles.pickerContainer}>
           <RNPickerSelect
+            value={referralType}
             onValueChange={(value) => setReferralType(value)}
             items={[
               {
@@ -40,16 +55,7 @@ const EnrollmentForm = () => {
               },
               // Add more options as needed
             ]}
-            style={{
-              inputIOS: styles.input,
-              inputAndroid: styles.input,
-              placeholder: styles.input,
-              iconContainer: {
-                top: "50%",
-                right: 10,
-                transform: [{ translateY: -12 }], // Adjust based on your icon size
-              },
-            }}
+            style={pickerSelectStyles}
             placeholder={{ label: "New Applicant", value: "New" }}
             useNativeAndroidPickerStyle={false}
             Icon={() => (
@@ -63,27 +69,183 @@ const EnrollmentForm = () => {
         </View>
       </View>
       <View>
-        <Text>Required Verification</Text>
-        <Text>Name verified by ID?</Text>
-        <Text>Dropdown options</Text>
-        <Text>Address verified by ID or mail?</Text>
-        <Text>Dropdown options</Text>
+        <Text style={styles.header}>Required Verification</Text>
+        <Text style={styles.subheader}>Name verified by ID?</Text>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={nameVerified}
+            onValueChange={(value) => setNameVerified(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Select an option", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
+        <Text style={styles.subheader}>Address verified by ID or mail?</Text>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={addressVerified}
+            onValueChange={(value) => setAddressVerified(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Select an option", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
       </View>
       <View>
-        <Text>Patron Profile</Text>
-        <Text>Dropdown Options</Text>
-        <Text>Dropdown Options</Text>
-        <Text>Dropdown Options</Text>
-        <Text>Dropdown Options</Text>
+        <Text style={styles.header}>Patron Profile</Text>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={basicProfileInformation}
+            onValueChange={(value) => setBasicProfileInformation(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Basic Profile Information", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={householdInformation}
+            onValueChange={(value) => setHouseholdInformation(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Household Information", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={demographicInformation}
+            onValueChange={(value) => setDemographicInformation(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Demographic Information", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={alternateInformation}
+            onValueChange={(value) => setAlternateInformation(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Alternate Information", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
       </View>
       <View>
-        <Text>Consent</Text>
-        <Text>Dropdown Options</Text>
-        <Text>Dropdown Options</Text>
+        <Text style={styles.header}>Consent</Text>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={communicationConsent}
+            onValueChange={(value) => setCommunicationConsent(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Communication Consent", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            value={certification}
+            onValueChange={(value) => setCertification(value)}
+            items={[
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            style={pickerSelectStyles}
+            placeholder={{ label: "Certification", value: null }}
+            useNativeAndroidPickerStyle={false}
+            Icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={24}
+                color="#094852"
+              />
+            )}
+          />
+        </View>
       </View>
       <View>
-        <Text>Notes</Text>
-        <TextInput />
+        <Text style={styles.header}>Notes</Text>
+        <TextInput
+          style={styles.textInput}
+          placeholder={"Enter notes here"}
+          multiline={true}
+        />
       </View>
       <TouchableOpacity
         style={[
@@ -101,6 +263,37 @@ const EnrollmentForm = () => {
 };
 
 const styles = StyleSheet.create({
+  captionText: {
+    marginTop: 15,
+    marginBottom: 10,
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#094852",
+  },
+
+  header: {
+    fontFamily: "gabarito-semibold",
+    fontSize: 24,
+    color: "#094852",
+    marginVertical: 10,
+  },
+
+  subheader: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#171B1C",
+    marginBottom: 5,
+  },
+
+  textInput: {
+    height: 100,
+    borderColor: "#B5BABB",
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingLeft: 10,
+    backgroundColor: "#FFFFFF",
+  },
+
   pickerContainer: {
     borderWidth: 1,
     borderColor: "#B5BABB",
@@ -115,6 +308,17 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-regular",
     color: "#030E07",
     fontSize: 18,
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: styles.input,
+  inputAndroid: styles.input,
+  placeholder: styles.input,
+  iconContainer: {
+    top: "50%",
+    right: 10,
+    transform: [{ translateY: -12 }],
   },
 });
 

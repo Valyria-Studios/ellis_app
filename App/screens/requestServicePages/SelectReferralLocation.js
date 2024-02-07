@@ -39,7 +39,16 @@ const SelectReferralLocation = ({ route, navigation }) => {
   return (
     <View style={globalstyles.container}>
       {amenities.map((amenity, index) => (
-        <TouchableOpacity key={index} activeOpacity={0.8}>
+        <TouchableOpacity
+          key={index}
+          activeOpacity={0.8}
+          onPress={() =>
+            navigation.navigate("Select Client With Location", {
+              option,
+              selectedAmenity: amenity,
+            })
+          }
+        >
           <Card>
             <View
               style={{
@@ -106,7 +115,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
                 >
                   {amenity.availability === "0"
                     ? "Waitlist"
-                    : `${amenity.availability} Services Available`}
+                    : "Enrollment Available"}
                 </Text>
               </View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>

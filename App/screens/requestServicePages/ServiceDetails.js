@@ -6,19 +6,20 @@ import globalstyles from "../../shared/globalStyles";
 const ServiceDetails = ({ route, navigation }) => {
   const { category } = route.params;
 
-  const handleOptionPress = (option) => {
-    navigation.navigate("Referral Location", { option, categoryName: category.name });
-  };
-
   return (
     <View style={[globalstyles.container, { paddingTop: 15 }]}>
       {category.options &&
         category.options.map((option, index) => (
           <TouchableOpacity
-          activeOpacity={0.8}
+            activeOpacity={0.8}
             key={index}
             style={styles.container}
-            onPress={() => handleOptionPress(option)}
+            onPress={() =>
+              navigation.navigate("Referral Location", {
+                option,
+                categoryName: category.name,
+              })
+            }
           >
             <View
               style={[

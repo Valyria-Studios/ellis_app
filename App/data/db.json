@@ -111,7 +111,7 @@
       "closingHour": "6: 00 pm",
       "distance": "800 feet",
       "address": "123 your place",
-      "type": ["Health", "Hygiene"],
+      "type": ["Health", "Hygiene", "Food"],
       "availability": "2",
       "image": "../assets/images/location2.jpg",
       "description": [

@@ -77,7 +77,14 @@ const RootNavigator = () => {
         name="Request Services Page"
         component={RequestService}
         options={{
-          headerTitle: "",
+          headerTitle: "Service Directory",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
           headerTintColor: "#094852",
           headerStyle: {
             backgroundColor: "#F3F8F9",

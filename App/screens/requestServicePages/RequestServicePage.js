@@ -77,9 +77,6 @@ const RequestService = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
     >
       <View>
-        <Text style={[globalstyles.title, { fontSize: 36 }]}>
-          Service Requests
-        </Text>
         <View style={[globalstyles.searchSection, { marginVertical: 15 }]}>
           <View style={globalstyles.searchContainer}>
             <Ionicons
@@ -98,7 +95,9 @@ const RequestService = ({ navigation }) => {
           </View>
         </View>
         <View>
-          <Text style={styles.subHeader}>Frequently Used</Text>
+          <Text style={[styles.subHeader, { marginTop: 0 }]}>
+            Frequently Used
+          </Text>
           {/* some code for showing a list of frequents */}
         </View>
         <Text style={styles.subHeader}>Services</Text>

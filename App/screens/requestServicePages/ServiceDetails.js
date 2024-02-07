@@ -3,27 +3,33 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import renderIcon from "../../shared/RenderIconFunction";
 import globalstyles from "../../shared/globalStyles";
 
-const ServiceDetails = ({ route }) => {
+const ServiceDetails = ({ route, navigation }) => {
   const { category } = route.params;
+
+  const handleOptionPress = (option) => {
+    navigation.navigate("Referral Location", { option });
+  };
 
   return (
     <View style={[globalstyles.container, { paddingTop: 15 }]}>
       {category.options &&
         category.options.map((option, index) => (
-          <View key={index}>
-            <TouchableOpacity style={styles.container}>
-              <View
-                style={[
-                  globalstyles.optionsContainer,
-                  { flexDirection: "row", justifyContent: "flex-start" },
-                ]}
-              >
-                {renderIcon(category.icon, category.library, styles.icon)}
-                {/* Use the same icon as the category */}
-                <Text style={globalstyles.optionsText}>{option}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            key={index}
+            style={styles.container}
+            onPress={() => handleOptionPress(option)}
+          >
+            <View
+              style={[
+                globalstyles.optionsContainer,
+                { flexDirection: "row", justifyContent: "flex-start" },
+              ]}
+            >
+              {renderIcon(category.icon, category.library, styles.icon)}
+              {/* Use the same icon as the category */}
+              <Text style={globalstyles.optionsText}>{option}</Text>
+            </View>
+          </TouchableOpacity>
         ))}
     </View>
   );

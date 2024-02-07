@@ -15,6 +15,7 @@ import AdminManagementScreen from "../screens/adminManagement";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import ServiceDetails from "../screens/requestServicePages/ServiceDetails";
+import SelectReferralLocation from "../screens/requestServicePages/SelectReferralLocation";
 
 const RootStack = createStackNavigator();
 
@@ -136,6 +137,27 @@ const RootNavigator = () => {
         component={ServiceDetails}
         options={({ route }) => ({
           headerTitle: route.params.category.name,
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        })}
+      />
+      <RootStack.Screen
+        name="Referral Location"
+        component={SelectReferralLocation}
+        options={({ route }) => ({
+          headerTitle: route.params.option,
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

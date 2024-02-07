@@ -48,7 +48,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
             key={index}
             activeOpacity={0.8}
             onPress={() =>
-              navigation.navigate("Select Client With Location", {
+              navigation.navigate("Enrollment Form", {
                 option,
                 selectedAmenity: amenity,
               })

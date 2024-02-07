@@ -14,6 +14,14 @@ import { Feather, Octicons, Ionicons } from "@expo/vector-icons";
 import imageMap from "../../shared/getProfileImage";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// onPress={() =>
+//   navigation.navigate("Select Client With Location", {
+//     option,
+//     selectedAmenity: amenity,
+//   })
+// }
+
+
 const SelectClientWithLocation = ({ route }) => {
   const { option, selectedAmenity } = route.params;
   const [clients, setClients] = useState([]);

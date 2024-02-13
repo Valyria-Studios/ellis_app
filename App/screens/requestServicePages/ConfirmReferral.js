@@ -1,28 +1,57 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import globalstyles from "../../shared/globalStyles";
 
 const ConfirmReferral = ({ route, navigation }) => {
-  const { client, option, referralType, nameVerified, addressVerified, basicProfileInformation, householdInformation, demographicInformation, alternateInformation, communicationConsent, certification, notes } = route.params;
+  const {
+    client,
+    option,
+    referralType,
+    nameVerified,
+    addressVerified,
+    basicProfileInformation,
+    householdInformation,
+    demographicInformation,
+    alternateInformation,
+    communicationConsent,
+    certification,
+    notes,
+  } = route.params;
 
   return (
     <ScrollView style={globalstyles.container}>
       <View style={styles.section}>
-        <Text style={styles.header}>Confirmation</Text>
+        <Text style={styles.header}>Please confirm patron information.</Text>
         <Text style={styles.subheader}>Referral Type: {referralType}</Text>
         <Text style={styles.info}>Name Verified: {nameVerified}</Text>
         <Text style={styles.info}>Address Verified: {addressVerified}</Text>
-        <Text style={styles.info}>Basic Profile Information: {basicProfileInformation}</Text>
-        <Text style={styles.info}>Household Information: {householdInformation}</Text>
-        <Text style={styles.info}>Demographic Information: {demographicInformation}</Text>
-        <Text style={styles.info}>Alternate Information: {alternateInformation}</Text>
-        <Text style={styles.info}>Communication Consent: {communicationConsent}</Text>
+        <Text style={styles.info}>
+          Basic Profile Information: {basicProfileInformation}
+        </Text>
+        <Text style={styles.info}>
+          Household Information: {householdInformation}
+        </Text>
+        <Text style={styles.info}>
+          Demographic Information: {demographicInformation}
+        </Text>
+        <Text style={styles.info}>
+          Alternate Information: {alternateInformation}
+        </Text>
+        <Text style={styles.info}>
+          Communication Consent: {communicationConsent}
+        </Text>
         <Text style={styles.info}>Certification: {certification}</Text>
         <Text style={styles.info}>Notes: {notes}</Text>
       </View>
       <TouchableOpacity
         style={[globalstyles.buttonContainer, styles.button]}
-        onPress={() => navigation.navigate("Home")} // Adjust as needed
+        onPress={() => navigation.navigate("Referral Sent")}
       >
         <Text style={globalstyles.buttonText}>Confirm Referral</Text>
       </TouchableOpacity>
@@ -35,13 +64,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 15,
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#094852",
+    marginBottom: 10,
   },
   subheader: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 10,
   },
   info: {

@@ -24,6 +24,7 @@ const EnrollmentForm = ({ route, navigation }) => {
   const [demographicInformation, setDemographicInformation] = useState();
   const [alternateInformation, setAlternateInformation] = useState();
   const [communicationConsent, setCommunicationConsent] = useState();
+  const [notes, setNotes] = useState("");
   const [certification, setCertification] = useState();
   const [patronProfile, setPatronProfile] = useState();
   const [consent, setConsent] = useState();
@@ -246,6 +247,8 @@ const EnrollmentForm = ({ route, navigation }) => {
         <TextInput
           style={styles.textInput}
           placeholder={"Enter notes here"}
+          value={notes}
+          onChangeText={setNotes}
           multiline={true}
         />
       </View>
@@ -267,19 +270,28 @@ const EnrollmentForm = ({ route, navigation }) => {
               },
             ]}
             activeOpacity={0.6}
+            onPress={() =>
+              navigation.navigate("Confirm Referral", {
+                client: client,
+                option: option,
+                referralType: referralType,
+                nameVerified: nameVerified,
+                addressVerified: addressVerified,
+                basicProfileInformation: basicProfileInformation,
+                householdInformation: householdInformation,
+                demographicInformation: demographicInformation,
+                alternateInformation: alternateInformation,
+                communicationConsent: communicationConsent,
+                certification: certification,
+                notes: notes,
+              })
+            }
           >
             <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
               Create Referral
             </Text>
           </TouchableOpacity>
-          <Text
-            style={styles.skipText}
-            onPress={() =>
-              navigation.navigate("Confirm Referral", option, client)
-            }
-          >
-            Skip
-          </Text>
+          <Text style={styles.skipText}>Skip</Text>
         </SafeAreaView>
       </View>
     </ScrollView>

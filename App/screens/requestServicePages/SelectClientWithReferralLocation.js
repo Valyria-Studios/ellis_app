@@ -14,7 +14,7 @@ import { Feather, Octicons, Ionicons } from "@expo/vector-icons";
 import imageMap from "../../shared/getProfileImage";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const SelectClientWithLocation = ({ route }) => {
+const SelectClientWithLocation = ({ route, navigation }) => {
   const { option, selectedAmenity } = route.params;
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
@@ -124,9 +124,7 @@ const SelectClientWithLocation = ({ route }) => {
             color="#465355"
             style={[globalstyles.searchIcon, { borderColor: "#465355" }]}
           />
-          <View
-            style={styles.searchWrapper}
-          >
+          <View style={styles.searchWrapper}>
             <TextInput
               style={styles.searchBar}
               placeholder={
@@ -199,6 +197,7 @@ const SelectClientWithLocation = ({ route }) => {
             { backgroundColor: "#10798B", marginTop: 20 },
           ]}
           activeOpacity={0.6}
+          onPress={() => navigation.navigate("Enrollment Form", { selectedClient, option })}
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Next</Text>
         </TouchableOpacity>

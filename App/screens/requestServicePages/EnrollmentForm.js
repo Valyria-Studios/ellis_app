@@ -12,8 +12,10 @@ import globalstyles from "../../shared/globalStyles";
 import { TextInput } from "react-native-gesture-handler";
 import RNPickerSelect from "react-native-picker-select";
 import { MaterialIcons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const EnrollmentForm = () => {
+const EnrollmentForm = ({ route, navigation }) => {
+  const { client, option } = route.params;
   const [referralType, setReferralType] = useState("New");
   const [nameVerified, setNameVerified] = useState();
   const [addressVerified, setAddressVerified] = useState();
@@ -247,17 +249,39 @@ const EnrollmentForm = () => {
           multiline={true}
         />
       </View>
-      <TouchableOpacity
-        style={[
-          globalstyles.buttonContainer,
-          { backgroundColor: "#10798B", marginTop: 20 },
-        ]}
-        activeOpacity={0.6}
+      <View
+        style={{
+          justifyContent: "center",
+        }}
       >
-        <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
-          Create Referral
-        </Text>
-      </TouchableOpacity>
+        <SafeAreaView>
+          <TouchableOpacity
+            style={[
+              globalstyles.buttonContainer,
+              {
+                backgroundColor: "#10798B",
+                borderColor: "#FFFFFF",
+                marginTop: 20,
+                marginBottom: 5,
+                margin: 0,
+              },
+            ]}
+            activeOpacity={0.6}
+          >
+            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+              Create Referral
+            </Text>
+          </TouchableOpacity>
+          <Text
+            style={styles.skipText}
+            onPress={() =>
+              navigation.navigate("Confirm Referral", option, client)
+            }
+          >
+            Skip
+          </Text>
+        </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };
@@ -308,6 +332,14 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-regular",
     color: "#030E07",
     fontSize: 18,
+  },
+
+  skipText: {
+    fontFamily: "karla-semibold",
+    fontSize: 16,
+    alignSelf: "center",
+    color: "#094852",
+    textDecorationLine: "underline",
   },
 });
 

@@ -80,6 +80,8 @@ const globalstyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 12,
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 2, height: 2 },
   },
 
   buttonText: {

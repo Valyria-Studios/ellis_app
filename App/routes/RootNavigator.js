@@ -18,6 +18,7 @@ import ServiceDetails from "../screens/requestServicePages/ServiceDetails";
 import SelectReferralLocation from "../screens/requestServicePages/SelectReferralLocation";
 import SelectClientWithLocation from "../screens/requestServicePages/SelectClientWithReferralLocation";
 import EnrollmentForm from "../screens/requestServicePages/EnrollmentForm";
+import ConfirmReferral from "../screens/requestServicePages/ConfirmReferral";
 
 const RootStack = createStackNavigator();
 
@@ -209,7 +210,7 @@ const RootNavigator = () => {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
+            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -217,6 +218,26 @@ const RootNavigator = () => {
             elevation: 0,
           },
         })}
+      />
+      <RootStack.Screen
+        name="Confirm Referral"
+        component={ConfirmReferral}
+        options={{
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
       />
     </RootStack.Navigator>
   );

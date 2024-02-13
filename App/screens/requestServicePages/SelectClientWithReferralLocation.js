@@ -14,20 +14,13 @@ import { Feather, Octicons, Ionicons } from "@expo/vector-icons";
 import imageMap from "../../shared/getProfileImage";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// onPress={() =>
-//   navigation.navigate("Select Client With Location", {
-//     option,
-//     selectedAmenity: amenity,
-//   })
-// }
-
-
 const SelectClientWithLocation = ({ route }) => {
   const { option, selectedAmenity } = route.params;
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedClient, setSelectedClient] = useState(null);
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -60,6 +53,17 @@ const SelectClientWithLocation = ({ route }) => {
 
     setFilteredClients(filtered);
   }, [searchQuery, clients]);
+
+  const handleSelectClient = (client) => {
+    setSelectedClient(client); // Save the selected client
+    setSearchQuery(""); // Optionally update the search query to show the selected client's name
+    // You might want to clear the searchQuery or keep it, depending on your UX design
+  };
+
+  const clearSelection = () => {
+    setSelectedClient(null);
+    setSearchQuery(""); // Keep or remove, depending on desired behavior post-clear
+  };
 
   return (
     <View
@@ -120,12 +124,33 @@ const SelectClientWithLocation = ({ route }) => {
             color="#465355"
             style={[globalstyles.searchIcon, { borderColor: "#465355" }]}
           />
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Type name to pull up existing client"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
+          <View
+            style={styles.searchWrapper}
+          >
+            <TextInput
+              style={styles.searchBar}
+              placeholder={
+                selectedClient ? "" : "Type name to pull up existing client"
+              }
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              editable={!selectedClient} // Consider making it not editable if a client is selected
+            />
+
+            {selectedClient && (
+              <View style={styles.selectedClientContainer}>
+                <Text style={styles.selectedClientName}>
+                  {selectedClient.name}
+                </Text>
+                <TouchableOpacity
+                  onPress={clearSelection}
+                  style={styles.removeButton}
+                >
+                  <Feather name="x" size={20} color="black" />
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
         </View>
         <View
           style={[
@@ -140,7 +165,7 @@ const SelectClientWithLocation = ({ route }) => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.clientItem}
-                onPress={() => console.log("Client selected:", item.name)}
+                onPress={() => handleSelectClient(item)}
               >
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Image
@@ -224,6 +249,27 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 25,
     marginRight: 15,
+  },
+
+  searchWrapper: {
+    flex: 1,
+    flexDirection: "row",
+    alignContent: "center",
+  },
+
+  selectedClientContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+  },
+  selectedClientName: {
+    fontSize: 16,
+  },
+  removeButton: {
+    marginLeft: 10,
   },
 
   searchBar: {

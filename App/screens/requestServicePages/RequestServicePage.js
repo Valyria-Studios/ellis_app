@@ -103,6 +103,7 @@ const RequestService = ({ navigation }) => {
         <Text style={styles.subHeader}>Services</Text>
         {serviceCategories.map((category, index) => (
           <TouchableOpacity
+            key={index}
             activeOpacity={0.7}
             onPress={() => navigation.navigate("Service Details", { category })}
           >

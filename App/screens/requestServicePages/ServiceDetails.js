@@ -30,7 +30,6 @@ const ServiceDetails = ({ route, navigation }) => {
               ]}
             >
               {renderIcon(category.icon, category.library, styles.icon)}
-              {/* Use the same icon as the category */}
               <Text style={globalstyles.optionsText}>{option}</Text>
             </View>
           </TouchableOpacity>

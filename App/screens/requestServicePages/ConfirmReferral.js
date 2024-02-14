@@ -1,4 +1,4 @@
-// Logic for Household number, people in applicants household, and mailing address needed
+// Logic for Houehold, Demographic, and Alternate Information Needed
 
 import React from "react";
 import {
@@ -316,10 +316,73 @@ const ConfirmReferral = ({ route, navigation }) => {
               </View>
             </View>
           </Card>
+          <Card>
+            <View>
+              <Text style={styles.cardHeader}>Demographic Information</Text>
+            </View>
+            <View style={[globalstyles.detailsContainer, {}]}>
+              <View
+                style={[
+                  globalstyles.detailsContainer,
+                  {
+                    flexDirection: "column",
+                  },
+                ]}
+              >
+                <View style={{ marginBottom: 20 }}>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5, color: "#909899" },
+                    ]}
+                  >
+                    Race or Ethnicity
+                  </Text>
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      { marginBottom: 0, marginHorizontal: 0 },
+                    ]}
+                  >
+                    Asian; Black, African American; Hispanic, Latino/a or
+                    Spanish Origin; Native Hawaiian or Pacific Islander
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5, color: "#909899" },
+                    ]}
+                  >
+                    Sexual orientation
+                  </Text>
+                  <Text
+                    style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
+                  >
+                    Questioning/Unsure
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5, color: "#909899" },
+                    ]}
+                  >
+                    Households have
+                  </Text>
+                  <Text
+                    style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
+                  >
+                    A veteran; a disabled person. 3 children under 18; a single
+                    parent
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </Card>
         </View>
-        <Text style={styles.info}>
-          Household Information: {householdInformation}
-        </Text>
         <Text style={styles.info}>
           Demographic Information: {demographicInformation}
         </Text>

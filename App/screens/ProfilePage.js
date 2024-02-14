@@ -408,7 +408,7 @@ function ProfilePage({ route, navigation }) {
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
             <View style={styles.header}>
-              <Text style={styles.clientName}>{client.name}</Text>
+              <Text style={styles.clientName}>{client.fullName}</Text>
               <View style={styles.iconSpacing}>
                 <View style={styles.iconsContainer}>
                   <MaterialCommunityIcons
@@ -419,18 +419,18 @@ function ProfilePage({ route, navigation }) {
                 </View>
               </View>
             </View>
-            <View style={styles.detailsContainer}>
+            <View style={globalstyles.detailsContainer}>
               <View>
-                <Text style={styles.details}>Age</Text>
-                <Text style={styles.detailsText}>{client.age}</Text>
+                <Text style={globalstyles.details}>Age</Text>
+                <Text style={globalstyles.detailsText}>{client.age}</Text>
               </View>
               <View>
-                <Text style={styles.details}>Location</Text>
-                <Text style={styles.detailsText}>{client.location}</Text>
+                <Text style={globalstyles.details}>Location</Text>
+                <Text style={globalstyles.detailsText}>{client.address}</Text>
               </View>
               <View>
-                <Text style={styles.details}>Status</Text>
-                <Text style={styles.detailsText}>*Render Client Status*</Text>
+                <Text style={globalstyles.details}>Status</Text>
+                <Text style={globalstyles.detailsText}>*Render Client Status*</Text>
               </View>
             </View>
             <View style={styles.manageAccountContainer}>
@@ -595,31 +595,6 @@ const styles = StyleSheet.create({
     fontFamily: "karla-regular",
     fontSize: 14,
     color: "#533409",
-  },
-
-  detailsContainer: {
-    flex: 1,
-    flexDirection: "row",
-  },
-
-  details: {
-    color: "#465355",
-    margin: 10,
-    fontFamily: "gabarito-regular",
-    fontSize: 12,
-    fontWeight: 400,
-    letterSpacing: 2.4,
-    textTransform: "uppercase",
-  },
-
-  detailsText: {
-    fontFamily: "karla-regular",
-    fontSize: 16,
-    letterSpacing: -0.16,
-    fontWeight: 400,
-    color: "#171B1C",
-    marginBottom: 10,
-    marginHorizontal: 10,
   },
 
   clientName: {

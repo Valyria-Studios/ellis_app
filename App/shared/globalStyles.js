@@ -163,6 +163,38 @@ const globalstyles = StyleSheet.create({
     color: "#051A2E",
     fontFamily: "karla-regular",
   },
+
+  detailsContainer: {
+    flex: 1,
+    flexDirection: "row",
+  },
+
+  details: {
+    color: "#465355",
+    margin: 10,
+    fontFamily: "gabarito-regular",
+    fontSize: 12,
+    fontWeight: 400,
+    letterSpacing: 2.4,
+    textTransform: "uppercase",
+  },
+
+  detailsText: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    letterSpacing: -0.16,
+    fontWeight: 400,
+    color: "#171B1C",
+    marginBottom: 10,
+    marginHorizontal: 10,
+  },
+
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    marginRight: 15,
+  },
 });
 
 export default globalstyles;

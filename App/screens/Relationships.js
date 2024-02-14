@@ -30,7 +30,7 @@ const RelationshipPage = ({ navigation }) => {
         if (searchInput) {
           // If there's a search input, filter based on the search input and the status.
           filtered = filtered.filter((client) =>
-            client.name.toLowerCase().includes(searchInput.toLowerCase())
+            client.fullName.toLowerCase().includes(searchInput.toLowerCase())
           );
         }
         if (filter && filter !== "all") {
@@ -50,7 +50,7 @@ const RelationshipPage = ({ navigation }) => {
 
     if (text) {
       filtered = allClients.filter((client) =>
-        client.name.toLowerCase().includes(text.toLowerCase())
+        client.fullName.toLowerCase().includes(text.toLowerCase())
       );
     } else {
       filtered = allClients;
@@ -142,10 +142,10 @@ const RelationshipPage = ({ navigation }) => {
                   <View style={styles.start}>
                     <Image
                       source={imageMap[client.image]}
-                      style={styles.profileImage}
+                      style={globalstyles.profileImage}
                     />
                     <View>
-                      <Text style={styles.name}>{client.name}</Text>
+                      <Text style={styles.name}>{client.fullName}</Text>
                       <Text style={styles.recency}>
                         {client.status === "Requested"
                           ? `Requested service ${client.recency}`
@@ -300,13 +300,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-  },
-
-  profileImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 50,
-    marginRight: 15,
   },
 
   name: {

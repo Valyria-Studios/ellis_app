@@ -5,9 +5,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
+import imageMap from "../../shared/getProfileImage";
 
 const ConfirmReferral = ({ route, navigation }) => {
   const {
@@ -31,7 +33,204 @@ const ConfirmReferral = ({ route, navigation }) => {
         <Text style={styles.header}>Please confirm patron information.</Text>
         <View style={styles.basicProfileInformationContainer}>
           <Card>
-            <Text style={styles.info}>Basic Profile Information: {selectedClient.name}</Text>
+            <View>
+              <Text style={styles.cardHeader}>Basic Profile Information</Text>
+            </View>
+            <View style={[globalstyles.detailsContainer, { marginBottom: 15 }]}>
+              <Image
+                source={imageMap[selectedClient.image]}
+                style={[
+                  globalstyles.profileImage,
+                  {
+                    width: 80,
+                    height: 80,
+                    borderWidth: 1,
+                    borderColor: "black",
+                  },
+                ]}
+              />
+              <View>
+                <Text
+                  style={[
+                    globalstyles.details,
+                    { marginTop: 0, marginBottom: 5 },
+                  ]}
+                >
+                  Age
+                </Text>
+                <Text style={globalstyles.detailsText}>
+                  {selectedClient.age}
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={[
+                    globalstyles.details,
+                    { marginTop: 0, marginBottom: 5 },
+                  ]}
+                >
+                  Location
+                </Text>
+                <Text style={globalstyles.detailsText}>
+                  {selectedClient.location}
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={[
+                    globalstyles.details,
+                    { marginTop: 0, marginBottom: 5 },
+                  ]}
+                >
+                  Gender
+                </Text>
+                <Text style={globalstyles.detailsText}>
+                  {selectedClient.gender}
+                </Text>
+              </View>
+            </View>
+            <View
+              style={[
+                globalstyles.detailsContainer,
+                { justifyContent: "space-between", marginBottom: 15 },
+              ]}
+            >
+              <View>
+                <Text style={[globalstyles.details, { margin: 0 }]}>
+                  First Name
+                </Text>
+                <Text
+                  style={[
+                    globalstyles.detailsText,
+                    { marginBottom: 0, marginHorizontal: 0 },
+                  ]}
+                >
+                  {selectedClient.firstName}
+                </Text>
+              </View>
+              <View>
+                <Text style={[globalstyles.details, { margin: 0 }]}>
+                  Middle Name
+                </Text>
+                <Text
+                  style={[
+                    globalstyles.detailsText,
+                    { marginBottom: 0, marginHorizontal: 0 },
+                  ]}
+                >
+                  {selectedClient.middleName}
+                </Text>
+              </View>
+              <View>
+                <Text style={[globalstyles.details, { margin: 0 }]}>
+                  Last Name
+                </Text>
+                <Text
+                  style={[
+                    globalstyles.detailsText,
+                    { marginBottom: 0, marginHorizontal: 0 },
+                  ]}
+                >
+                  {selectedClient.lastName}
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <View
+                style={[
+                  globalstyles.detailsContainer,
+                  {
+                    flexDirection: "column",
+                    marginBottom: 15,
+                  },
+                ]}
+              >
+                <View style={{ marginBottom: 20 }}>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5 },
+                    ]}
+                  >
+                    Birth Date
+                  </Text>
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      { marginBottom: 0, marginHorizontal: 0 },
+                    ]}
+                  >
+                    {selectedClient.birthday}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5 },
+                    ]}
+                  >
+                    Primary Phone
+                  </Text>
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      { marginBottom: 0, marginHorizontal: 0 },
+                    ]}
+                  >
+                    {selectedClient.phoneNumber}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={[
+                  globalstyles.detailsContainer,
+                  {
+                    flexDirection: "column",
+                    marginBottom: 15,
+                  },
+                ]}
+              >
+                <View style={{ marginBottom: 20 }}>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5 },
+                    ]}
+                  >
+                    Primary Language
+                  </Text>
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      { marginBottom: 0, marginHorizontal: 0 },
+                    ]}
+                  >
+                    {selectedClient.primaryLanguage}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5 },
+                    ]}
+                  >
+                    Email
+                  </Text>
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      { marginBottom: 0, marginHorizontal: 0 },
+                    ]}
+                  >
+                    {selectedClient.email}
+                  </Text>
+                </View>
+              </View>
+            </View>
           </Card>
         </View>
         <Text style={styles.info}>
@@ -62,22 +261,25 @@ const styles = StyleSheet.create({
   basicProfileInformationContainer: {
     marginHorizontal: -10,
   },
-
   header: {
     fontFamily: "karla-regular",
     fontSize: 16,
     color: "#094852",
     marginBottom: 10,
   },
-  subheader: {
-    fontSize: 20,
-    fontWeight: "600",
+
+  cardHeader: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#030E07",
     marginBottom: 10,
   },
+
   info: {
     fontSize: 18,
     marginBottom: 5,
   },
+
   button: {
     marginHorizontal: 50,
     marginTop: 20,

@@ -48,7 +48,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
       searchQuery.trim() === ""
         ? []
         : clients.filter((client) =>
-            client.name.toLowerCase().includes(searchQuery.toLowerCase())
+            client.fullName.toLowerCase().includes(searchQuery.toLowerCase())
           );
 
     setFilteredClients(filtered);
@@ -138,7 +138,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
             {selectedClient && (
               <View style={styles.selectedClientContainer}>
                 <Text style={styles.selectedClientName}>
-                  {selectedClient.name}
+                  {selectedClient.fullName}
                 </Text>
                 <TouchableOpacity
                   onPress={clearSelection}
@@ -170,7 +170,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
                     source={imageMap[item.image]}
                     style={styles.profileImage}
                   />
-                  <Text style={styles.clientName}>{item.name}</Text>
+                  <Text style={styles.clientName}>{item.fullName}</Text>
                 </View>
               </TouchableOpacity>
             )}
@@ -197,7 +197,12 @@ const SelectClientWithLocation = ({ route, navigation }) => {
             { backgroundColor: "#10798B", marginTop: 20 },
           ]}
           activeOpacity={0.6}
-          onPress={() => navigation.navigate("Enrollment Form", { selectedClient: selectedClient, option })}
+          onPress={() =>
+            navigation.navigate("Enrollment Form", {
+              selectedClient: selectedClient,
+              option,
+            })
+          }
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Next</Text>
         </TouchableOpacity>
@@ -307,7 +312,7 @@ const styles = StyleSheet.create({
   // Add to your StyleSheet to style the floating FlatList container
   floatingListContainer: {
     position: "absolute",
-    top: 270, // Adjust this value based on the search bar's height + marginTop
+    top: 260, // Adjust this value based on the search bar's height + marginTop
     left: 0,
     right: 0,
     backgroundColor: "white", // or any color that matches your theme

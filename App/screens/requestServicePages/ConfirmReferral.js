@@ -1,3 +1,5 @@
+// Logic for Household number, people in applicants household, and mailing address needed
+
 import React from "react";
 import {
   View,
@@ -227,6 +229,88 @@ const ConfirmReferral = ({ route, navigation }) => {
                     ]}
                   >
                     {selectedClient.email}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </Card>
+          <Card>
+            <View>
+              <Text style={styles.cardHeader}>Household Information</Text>
+            </View>
+            <View style={[globalstyles.detailsContainer, {}]}>
+              <View
+                style={[
+                  globalstyles.detailsContainer,
+                  {
+                    flexDirection: "column",
+                  },
+                ]}
+              >
+                <View style={{ marginBottom: 20 }}>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5, color: "#909899" },
+                    ]}
+                  >
+                    Residential Address
+                  </Text>
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      { marginBottom: 0, marginHorizontal: 0 },
+                    ]}
+                  >
+                    {selectedClient.address}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5, color: "#909899" },
+                    ]}
+                  >
+                    # of households at the address
+                  </Text>
+                  <Text
+                    style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
+                  >
+                    20
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5, color: "#909899" },
+                    ]}
+                  >
+                    # of People in Applicant's Household
+                  </Text>
+                  <Text
+                    style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
+                  >
+                    3
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 5, color: "#909899" },
+                    ]}
+                  >
+                    Mailing Address
+                  </Text>
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      { marginBottom: 0, marginHorizontal: 0 },
+                    ]}
+                  >
+                    Same as residential
                   </Text>
                 </View>
               </View>

@@ -12,6 +12,7 @@ import {
 import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
 import imageMap from "../../shared/getProfileImage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ConfirmReferral = ({ route, navigation }) => {
   const {
@@ -518,25 +519,37 @@ const ConfirmReferral = ({ route, navigation }) => {
             </View>
           </Card>
         </View>
-        <Text style={styles.info}>
-          Alternate Information: {alternateInformation}
-        </Text>
       </View>
-      <TouchableOpacity
-        style={[globalstyles.buttonContainer, styles.button]}
-        onPress={() => navigation.navigate("Referral Sent")}
-      >
-        <Text style={globalstyles.buttonText}>Confirm Referral</Text>
-      </TouchableOpacity>
+      <SafeAreaView style={{ marginTop: 0, paddingTop: 0 }}>
+        <TouchableOpacity
+          style={[
+            globalstyles.buttonContainer,
+            {
+              backgroundColor: "#10798B",
+              borderColor: "#FFFFFF",
+              marginBottom: 5,
+              margin: 0,
+            },
+          ]}
+          activeOpacity={0.6}
+          onPress={() =>
+            navigation.navigate("Referral Sent", {
+              selectedClient: selectedClient,
+              option: option,
+            })
+          }
+        >
+          <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+            Confirm Referral
+          </Text>
+        </TouchableOpacity>
+        <Text style={styles.saveDraft}>Save Draft</Text>
+      </SafeAreaView>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  section: {
-    marginVertical: 10,
-  },
-
   cardContainer: {
     marginHorizontal: -10,
   },
@@ -554,14 +567,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  info: {
-    fontSize: 18,
-    marginBottom: 5,
-  },
-
-  button: {
-    marginHorizontal: 50,
-    marginTop: 20,
+  saveDraft: {
+    fontFamily: "karla-semibold",
+    fontSize: 16,
+    alignSelf: "center",
+    color: "#094852",
+    textDecorationLine: "underline",
   },
 });
 

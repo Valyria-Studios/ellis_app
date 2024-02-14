@@ -243,7 +243,7 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Referral Sent"
         component={ReferralSent}
-        options={{
+        options={({ navigation }) => ({
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
@@ -251,14 +251,21 @@ const RootNavigator = () => {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
             shadowColor: "transparent",
             elevation: 0,
           },
-        }}
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.popToTop()} // Navigates to the first screen in the stack
+              style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning
+            >
+              <Ionicons name="close" size={30} color="#094852" />
+            </TouchableOpacity>
+          ),
+        })}
       />
     </RootStack.Navigator>
   );

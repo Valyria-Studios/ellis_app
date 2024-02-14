@@ -7,10 +7,11 @@ import {
   ScrollView,
 } from "react-native";
 import globalstyles from "../../shared/globalStyles";
+import Card from "../../shared/Card";
 
 const ConfirmReferral = ({ route, navigation }) => {
   const {
-    client,
+    selectedClient,
     option,
     referralType,
     nameVerified,
@@ -28,12 +29,11 @@ const ConfirmReferral = ({ route, navigation }) => {
     <ScrollView style={globalstyles.container}>
       <View style={styles.section}>
         <Text style={styles.header}>Please confirm patron information.</Text>
-        <Text style={styles.subheader}>Referral Type: {referralType}</Text>
-        <Text style={styles.info}>Name Verified: {nameVerified}</Text>
-        <Text style={styles.info}>Address Verified: {addressVerified}</Text>
-        <Text style={styles.info}>
-          Basic Profile Information: {basicProfileInformation}
-        </Text>
+        <View style={styles.basicProfileInformationContainer}>
+          <Card>
+            <Text style={styles.info}>Basic Profile Information: {selectedClient.name}</Text>
+          </Card>
+        </View>
         <Text style={styles.info}>
           Household Information: {householdInformation}
         </Text>
@@ -43,11 +43,6 @@ const ConfirmReferral = ({ route, navigation }) => {
         <Text style={styles.info}>
           Alternate Information: {alternateInformation}
         </Text>
-        <Text style={styles.info}>
-          Communication Consent: {communicationConsent}
-        </Text>
-        <Text style={styles.info}>Certification: {certification}</Text>
-        <Text style={styles.info}>Notes: {notes}</Text>
       </View>
       <TouchableOpacity
         style={[globalstyles.buttonContainer, styles.button]}
@@ -63,6 +58,11 @@ const styles = StyleSheet.create({
   section: {
     marginVertical: 10,
   },
+
+  basicProfileInformationContainer: {
+    marginHorizontal: -10,
+  },
+
   header: {
     fontFamily: "karla-regular",
     fontSize: 16,

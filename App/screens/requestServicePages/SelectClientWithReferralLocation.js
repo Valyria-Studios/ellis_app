@@ -197,7 +197,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
             { backgroundColor: "#10798B", marginTop: 20 },
           ]}
           activeOpacity={0.6}
-          onPress={() => navigation.navigate("Enrollment Form", { selectedClient, option })}
+          onPress={() => navigation.navigate("Enrollment Form", { selectedClient: selectedClient, option })}
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>Next</Text>
         </TouchableOpacity>

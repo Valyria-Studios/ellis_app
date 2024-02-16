@@ -13,7 +13,10 @@ import globalstyles from "../../shared/globalStyles";
 import renderIcon from "../../shared/RenderIconFunction";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-const ServiceDirectory = ({ navigation }) => {
+const ServiceDirectory = ({ route, navigation }) => {
+  const client = route.params?.client;
+  console.log(client);
+
   //Need all Options for Service Categories
   const serviceCategories = [
     {

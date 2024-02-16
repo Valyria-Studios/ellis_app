@@ -62,7 +62,7 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Profile Page"
         component={ProfilePage}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           headerTitle: route.params.client.fullName,
           headerTitleStyle: {
             color: "#171B1C",
@@ -88,17 +88,17 @@ const RootNavigator = () => {
                 }}
               >
                 <MenuOption
-                  onSelect={() => navigation.push("SendMessagePage")}
+                  onSelect={() => navigation.navigate("SendMessagePage")}
                   text="Send Message"
                   style={styles.menuOption}
                 />
                 <MenuOption
-                  onSelect={() => navigation.push("ReferToServicePage")}
+                  onSelect={() => navigation.navigate("Request Services Page", {client: route.params.client})}
                   text="Refer to service"
                   style={styles.menuOption}
                 />
                 <MenuOption
-                  onSelect={() => navigation.push("RemoveClientPage")}
+                  onSelect={() => navigation.navigate("RemoveClientPage")}
                   text="Remove as client"
                   style={[styles.menuOption, { borderBottomWidth: 0 }]}
                 />
@@ -119,6 +119,7 @@ const RootNavigator = () => {
             color: "#171B1C",
             left: -180,
           },
+          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerStyle: {
             backgroundColor: "#F3F8F9",

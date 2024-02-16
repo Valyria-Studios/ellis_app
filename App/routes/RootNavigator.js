@@ -4,7 +4,7 @@ import AppNavigator from "./AppNavigator"; // Import your BottomTabNavigator
 import ChatPage from "../screens/ChatPage";
 import AmenityPage from "../screens/AmenityPage";
 import ProfilePage from "../screens/ProfilePage";
-import RequestService from "../screens/requestServicePages/RequestServicePage";
+import ServiceDirectory from "../screens/requestServicePages/ServiceDirectory";
 import OrgProfile from "../screens/settingsPage/OrganizationProfile";
 import AccountPage from "../screens/settingsPage/AccountPage";
 import NotificationsPage from "../screens/settingsPage/NotificationsPage";
@@ -13,13 +13,19 @@ import LogOutPage from "../screens/settingsPage/LogOutPage";
 import LegalFormScreen from "../screens/formPages/LegalForm";
 import AdminManagementScreen from "../screens/adminManagement";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import ServiceDetails from "../screens/requestServicePages/ServiceDetails";
 import SelectReferralLocation from "../screens/requestServicePages/SelectReferralLocation";
 import SelectClientWithLocation from "../screens/requestServicePages/SelectClientWithReferralLocation";
 import EnrollmentForm from "../screens/requestServicePages/EnrollmentForm";
 import ConfirmReferral from "../screens/requestServicePages/ConfirmReferral";
 import ReferralSent from "../screens/requestServicePages/ReferralSent";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 const RootStack = createStackNavigator();
 
@@ -57,7 +63,7 @@ const RootNavigator = () => {
         name="Profile Page"
         component={ProfilePage}
         options={({ route }) => ({
-          headerTitle: route.params.client.name,
+          headerTitle: route.params.client.fullName,
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,
@@ -66,21 +72,44 @@ const RootNavigator = () => {
           headerTitleContainerStyle: { left: 0 },
           headerTintColor: "#094852",
           headerRight: () => (
-            <TouchableOpacity
-              onPress={() => {
-                // Your code to handle the press, e.g., open a menu or navigate
-                console.log("Three vertical dots pressed");
-              }}
-              style={{ paddingRight: 10 }} // Add padding if needed
-            >
-              <Ionicons name="ellipsis-vertical" size={25} color="#094852" />
-            </TouchableOpacity>
+            <Menu>
+              <MenuTrigger>
+                <Ionicons
+                  name="ellipsis-vertical"
+                  size={24}
+                  style={{ paddingRight: 10, color: "#094852" }}
+                />
+              </MenuTrigger>
+              <MenuOptions
+                optionsContainerStyle={{
+                  marginTop: 30,
+                  width: 150,
+                  padding: 5,
+                }}
+              >
+                <MenuOption
+                  onSelect={() => navigation.push("SendMessagePage")}
+                  text="Send Message"
+                  style={styles.menuOption}
+                />
+                <MenuOption
+                  onSelect={() => navigation.push("ReferToServicePage")}
+                  text="Refer to service"
+                  style={styles.menuOption}
+                />
+                <MenuOption
+                  onSelect={() => navigation.push("RemoveClientPage")}
+                  text="Remove as client"
+                  style={[styles.menuOption, { borderBottomWidth: 0 }]}
+                />
+              </MenuOptions>
+            </Menu>
           ),
         })}
       />
       <RootStack.Screen
         name="Request Services Page"
-        component={RequestService}
+        component={ServiceDirectory}
         options={{
           headerTitle: "Service Directory",
           headerTitleAlign: "left",
@@ -270,5 +299,13 @@ const RootNavigator = () => {
     </RootStack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  menuOption: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#dedede",
+    padding: 10,
+  },
+});
 
 export default RootNavigator;

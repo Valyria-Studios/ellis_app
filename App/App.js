@@ -12,6 +12,7 @@ import LegalFormScreen from "./screens/formPages/LegalForm";
 import FoodFormScreen from "./screens/formPages/FoodForm";
 import CreateUser from "./screens/adminPages/createClient";
 import AdminPage from "./screens/adminPages/admins";
+import { MenuProvider } from "react-native-popup-menu";
 
 const Stack = createStackNavigator();
 
@@ -61,7 +62,9 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <NavigationContainer>
-        <RootNavigator />
+        <MenuProvider>
+          <RootNavigator />
+        </MenuProvider>
       </NavigationContainer>
     );
   } else {

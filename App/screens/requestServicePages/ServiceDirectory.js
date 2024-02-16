@@ -13,7 +13,7 @@ import globalstyles from "../../shared/globalStyles";
 import renderIcon from "../../shared/RenderIconFunction";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-const RequestService = ({ navigation }) => {
+const ServiceDirectory = ({ navigation }) => {
   //Need all Options for Service Categories
   const serviceCategories = [
     {
@@ -153,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RequestService;
+export default ServiceDirectory;

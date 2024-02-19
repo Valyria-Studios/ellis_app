@@ -1,6 +1,8 @@
 // NEED PROFILE PICTURES OF TEAM MEMBERS
 // NEED TO ADD LOGIC FOR GETTING ROLE, ORGANIZATION, DATE ADDED, AND INTERACTIONS
 // SHOW PAST ACTIVITY IN ACTIVITY TAB LOGIC
+// SHOW LOGIC FOR DATE SUBMITTED IN FORM TAB
+// RENDER IMAGE OF SUBMITTED BY IN FORM TAB
 // RENDER STATUS LOGIC
 // SHOW STATUS OF REQUESTS UNDER TITLE OF OPTION
 
@@ -14,6 +16,7 @@ import {
   TouchableOpacity,
   UIManager,
   Platform,
+  Image,
 } from "react-native";
 import { Dropdown } from "../shared/Dropdown";
 import ChecklistItem from "../shared/CheckBox";
@@ -21,12 +24,14 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
   Entypo,
+  Ionicons,
 } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
 import ProgressBar from "../shared/ProgressBar";
 import RNPickerSelect from "react-native-picker-select";
 import { useFocusEffect } from "@react-navigation/native";
+import Card from "../shared/Card";
 
 if (
   Platform.OS === "android" &&
@@ -78,8 +83,8 @@ function ProfilePage({ route, navigation }) {
       .then((response) => response.json())
       .then((json) => setForms(json))
       .catch((error) => console.log("error fetching data:", error));
-    }, []);
-    
+  }, []);
+
   // Filter forms for the current profile
   const filteredForms = forms.filter((form) => form.for === client.fullName);
 
@@ -141,22 +146,77 @@ function ProfilePage({ route, navigation }) {
   );
 
   const formContent = (
-    <Text>
+    <Card>
       <View>
         {filteredForms.map((form, index) => (
-          <View
-            key={index}
-            style={{ padding: 10, borderWidth: 1, marginBottom: 10 }}
-          >
-            <Text style={{ fontWeight: "bold" }}>{form.name}</Text>
-            <Text>Date: {form.date}</Text>
-            <Text>Submitted by: {form.submittedBy}</Text>
-            <Text>Status: {form.status}</Text>
-            <Text>{form.content}</Text>
+          <View key={index}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginBottom: 10,
+              }}
+            >
+              <Text style={styles.formHeader}>{form.name}</Text>
+              <View
+                style={[
+                  styles.manageTextContainer,
+                  { backgroundColor: "#E7F2F3", borderColor: "#10798B" },
+                ]}
+              >
+                <Text style={[styles.manageText, { color: "#094852" }]}>
+                  {form.status}
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <View>
+                <Text
+                  style={[
+                    globalstyles.details,
+                    { margin: 0, marginBottom: 1, marginRight: 10 },
+                  ]}
+                >
+                  Date Submitted
+                </Text>
+                <Text>{form.date}</Text>
+              </View>
+              <View>
+                <Text
+                  style={[globalstyles.details, { margin: 0, marginBottom: 1 }]}
+                >
+                  Submitted By
+                </Text>
+                <View style={styles.peopleContainer}>
+                  <Ionicons
+                    name="person-circle-outline"
+                    size={24}
+                    style={{ marginRight: 5 }}
+                  />
+                  <Text
+                    style={[
+                      globalstyles.detailsText,
+                      {
+                        marginHorizontal: 0,
+                        marginBottom: 0,
+                        flexShrink: 1,
+                      },
+                    ]}
+                  >
+                    {form.submittedBy}
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
         ))}
       </View>
-    </Text>
+    </Card>
   );
 
   const teamContent = (
@@ -762,6 +822,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#094852",
     fontFamily: "karla-regular",
+  },
+
+  formHeader: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#053E5A",
+  },
+
+  peopleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 20,
+    backgroundColor: "#E7F2F3",
+    padding: 5,
   },
 });
 

@@ -1,6 +1,6 @@
 // NEED PROFILE PICTURES OF TEAM MEMBERS
 // NEED TO ADD LOGIC FOR GETTING ROLE, ORGANIZATION, DATE ADDED, AND INTERACTIONS
-// WHAT DO THE THREE VERTICAL DOTS DO?
+// SHOW PAST ACTIVITY IN ACTIVITY TAB LOGIC
 // RENDER STATUS LOGIC
 // SHOW STATUS OF REQUESTS UNDER TITLE OF OPTION
 
@@ -71,6 +71,17 @@ function ProfilePage({ route, navigation }) {
   const [legalAssistanceStatus, setLegalAssistanceStatus] = useState(null);
   const [jobPlacementStatus, setJobPlacementStatus] = useState(null);
   const [clientData, setClientData] = useState(route.params.client);
+  const [forms, setForms] = useState([]); // Placeholder for forms data state
+
+  useEffect(() => {
+    fetch("http://localhost:3000/Forms")
+      .then((response) => response.json())
+      .then((json) => setForms(json))
+      .catch((error) => console.log("error fetching data:", error));
+    }, []);
+    
+  // Filter forms for the current profile
+  const filteredForms = forms.filter((form) => form.for === client.fullName);
 
   useEffect(() => {
     fetch("http://localhost:3000/Notes")
@@ -129,7 +140,24 @@ function ProfilePage({ route, navigation }) {
     </View>
   );
 
-  const formContent = <Text>form</Text>;
+  const formContent = (
+    <Text>
+      <View>
+        {filteredForms.map((form, index) => (
+          <View
+            key={index}
+            style={{ padding: 10, borderWidth: 1, marginBottom: 10 }}
+          >
+            <Text style={{ fontWeight: "bold" }}>{form.name}</Text>
+            <Text>Date: {form.date}</Text>
+            <Text>Submitted by: {form.submittedBy}</Text>
+            <Text>Status: {form.status}</Text>
+            <Text>{form.content}</Text>
+          </View>
+        ))}
+      </View>
+    </Text>
+  );
 
   const teamContent = (
     // NEED PROFILE PICTURES OF TEAM MEMBERS
@@ -430,7 +458,9 @@ function ProfilePage({ route, navigation }) {
               </View>
               <View>
                 <Text style={globalstyles.details}>Status</Text>
-                <Text style={globalstyles.detailsText}>*Render Client Status*</Text>
+                <Text style={globalstyles.detailsText}>
+                  *Render Client Status*
+                </Text>
               </View>
             </View>
             <View style={styles.manageAccountContainer}>

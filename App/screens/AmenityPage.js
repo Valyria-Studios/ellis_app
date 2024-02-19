@@ -8,10 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import getAmenityImage from "../shared/getAmenityImage";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+  FontAwesome5,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
-import LegalFormScreen from "./formPages/LegalForm";
 
 function AmenityPage({ route, navigation }) {
   const { amenity } = route.params;
@@ -66,37 +68,23 @@ function AmenityPage({ route, navigation }) {
         </View>
       </ScrollView>
       <View style={styles.availabilityContainer}>
-        <Text style={styles.availability}>
-          {amenity.availability !== "0"
-            ? `${amenity.availability} Available services`
-            : `No Services Available`}
-        </Text>
         <View style={styles.availabilityButtonContainer}>
-          {renderButton(
-            "Refer a Client",
-            styles.referButton,
-            styles.referButtonText,
-            () => navigation.navigate("Legal Aid")
-          )}
-          {renderButton(
-            "Check Availability",
-            styles.checkAvailabilityButton,
-            styles.checkAvailabilityButtonText
-          )}
+          <TouchableOpacity activeOpacity={0.9}>
+            <View style={styles.iconsContainer}>
+              <MaterialCommunityIcons
+                name="message"
+                size={20}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.referButton} activeOpacity={0.9} onPress={() => (navigation.navigate("Select Client", {amenity}))}>
+            <MaterialIcons name="app-registration" size={18} color="#FFFFFF" />
+            <Text style={styles.referButtonText}>Refer</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
-  );
-}
-
-function renderButton(text, buttonStyle, textStyle, onPress) {
-  return (
-    <TouchableOpacity
-      style={[styles.availabilityButton, buttonStyle]}
-      onPress={onPress}
-    >
-      <Text style={[styles.availabilityButtonText, textStyle]}>{text}</Text>
-    </TouchableOpacity>
   );
 }
 
@@ -125,7 +113,7 @@ const styles = StyleSheet.create({
   mainText: {
     padding: 10,
     borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.9)",
+    backgroundColor: "rgba(255,255,255,1)",
   },
 
   header: {
@@ -140,20 +128,18 @@ const styles = StyleSheet.create({
   },
 
   iconsContainer: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#10798a",
-    borderColor: "#10798a",
+    width: 50,
+    height: 50,
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
     margin: 5,
-    borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 50,
   },
 
   icon: {
-    color: "#ffffff",
+    color: "#10798B",
   },
 
   locationText: {
@@ -169,10 +155,6 @@ const styles = StyleSheet.create({
     bottom: 50,
     zIndex: 10,
     width: 400,
-    borderRadius: 35,
-    backgroundColor: "rgba(255,255,255,1)", // you can change this
-    justifyContent: "center",
-    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 8, // This will add shadow to the right of the container
@@ -193,6 +175,7 @@ const styles = StyleSheet.create({
 
   availabilityButtonContainer: {
     flexDirection: "row",
+    justifyContent: "flex-end",
   },
 
   availabilityButton: {
@@ -210,12 +193,22 @@ const styles = StyleSheet.create({
   },
 
   referButton: {
+    flexDirection: "row",
     backgroundColor: "#10798a",
-    borderColor: "#10798a",
+    borderColor: "#FFFFFF",
+    borderWidth: 1,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 5,
+    paddingHorizontal: 15,
   },
 
   referButtonText: {
+    fontFamily: "gabarito-semibold",
+    fontSize: 16,
     color: "#ffffff",
+    marginLeft: 5,
   },
 
   checkAvailabilityButton: {

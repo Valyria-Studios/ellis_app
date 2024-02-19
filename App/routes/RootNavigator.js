@@ -26,6 +26,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
+import SelectClient from "../screens/requestServicePages/SelectClient";
 
 const RootStack = createStackNavigator();
 
@@ -93,7 +94,11 @@ const RootNavigator = () => {
                   style={styles.menuOption}
                 />
                 <MenuOption
-                  onSelect={() => navigation.navigate("Request Services Page", {client: route.params.client})}
+                  onSelect={() =>
+                    navigation.navigate("Request Services Page", {
+                      client: route.params.client,
+                    })
+                  }
                   text="Refer to service"
                   style={styles.menuOption}
                 />
@@ -296,6 +301,26 @@ const RootNavigator = () => {
             </TouchableOpacity>
           ),
         })}
+      />
+      <RootStack.Screen
+        name="Select Client"
+        component={SelectClient}
+        options={{
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#094852",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
       />
     </RootStack.Navigator>
   );

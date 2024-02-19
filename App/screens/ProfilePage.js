@@ -171,7 +171,6 @@ function ProfilePage({ route, navigation }) {
             <View
               style={{
                 justifyContent: "space-between",
-                flex: 0.5,
               }}
             >
               <View>
@@ -698,7 +697,15 @@ function ProfilePage({ route, navigation }) {
                         : styles.serviceItemContainer
                     }
                   >
-                    <Text style={styles.serviceHeaderItems}>{sortItem}</Text>
+                    <Text
+                      style={
+                        selectedItem === sortItem
+                          ? styles.selectedServiceHeaderItems
+                          : styles.serviceHeaderItems
+                      }
+                    >
+                      {sortItem}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               ))}
@@ -829,9 +836,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 
-  serviceHeaderItems: {
+  selectedServiceHeaderItems: {
     fontSize: 24,
     color: "#094852",
+    fontFamily: "gabarito-medium",
+  },
+
+  serviceHeaderItems: {
+    fontSize: 24,
+    color: "#465355",
     fontFamily: "gabarito-medium",
   },
 
@@ -940,6 +953,7 @@ const styles = StyleSheet.create({
   },
 
   peopleContainer: {
+    alignSelf: "baseline",
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 20,

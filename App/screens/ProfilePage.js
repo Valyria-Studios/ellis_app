@@ -1,8 +1,9 @@
 // NEED PROFILE PICTURES OF TEAM MEMBERS
 // NEED TO ADD LOGIC FOR GETTING ROLE, ORGANIZATION, DATE ADDED, AND INTERACTIONS
+// RETREVIAL LOGIC FOR ACTIVITY CONTENT
 // SHOW PAST ACTIVITY IN ACTIVITY TAB LOGIC
-// SHOW LOGIC FOR DATE SUBMITTED IN FORM TAB
-// RENDER IMAGE OF SUBMITTED BY IN FORM TAB
+// SHOW LOGIC FOR DATE SUBMITTED IN FORM CONTENT
+// RENDER IMAGE OF SUBMITTED BY IN FORM CONTENT
 // RENDER STATUS LOGIC
 // SHOW STATUS OF REQUESTS UNDER TITLE OF OPTION
 
@@ -25,6 +26,8 @@ import {
   MaterialIcons,
   Entypo,
   Ionicons,
+  AntDesign,
+  FontAwesome5,
 } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
@@ -121,6 +124,29 @@ function ProfilePage({ route, navigation }) {
     setSelectedNote(null);
   };
 
+  const activities = [
+    {
+      activity: "Legal Appointment",
+      providedBy: "Simon Baits",
+      company: "YWAM San Francisco",
+    },
+    {
+      activity: "Therapist Session",
+      providedBy: "Simon Baits",
+      company: "YWAM San Francisco",
+    },
+    {
+      activity: "Shower",
+      providedBy: "Simon Baits",
+      company: "YWAM San Francisco",
+    },
+    {
+      activity: "Haircut",
+      providedBy: "Simon Baits",
+      company: "YWAM San Francisco",
+    },
+  ];
+
   // Callback for when a checklist item is toggled
   const handleChecklistToggle = (isItemChecked) => {
     setCheckedItems((prevCount) =>
@@ -131,16 +157,99 @@ function ProfilePage({ route, navigation }) {
 
   const activityContent = (
     <View>
-      {dropdownItems.map((dropdownItem) => (
-        <Dropdown title={dropdownItem} key={dropdownItem}>
-          {checklistItems.map((checkListItem) => (
-            <ChecklistItem
-              title={checkListItem}
-              key={checkListItem}
-              onToggle={handleChecklistToggle}
-            />
-          ))}
-        </Dropdown>
+      {activities.map((activity, index) => (
+        <Card key={index}>
+          <View style={{ flex: 1, marginBottom: 5 }}>
+            <Text style={styles.tabHeader}>{activity.activity}</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <View
+              style={{
+                justifyContent: "space-between",
+                flex: 0.5,
+              }}
+            >
+              <View>
+                <Text style={styles.time}>Today, 11:00 am</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginRight: 10,
+                  }}
+                >
+                  <AntDesign
+                    name="star"
+                    size={20}
+                    style={{ color: "#094852", paddingRight: 5 }}
+                  />
+                  <Text style={[styles.time, { color: "#465355" }]}>5</Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FontAwesome5
+                    name="history"
+                    size={20}
+                    style={{ color: "#094852", paddingRight: 5 }}
+                  />
+                  <Text style={[styles.time, { color: "#465355" }]}>25</Text>
+                </View>
+              </View>
+            </View>
+            <View>
+              <Text
+                style={[
+                  globalstyles.details,
+                  {
+                    margin: 0,
+                  },
+                ]}
+              >
+                Provided by
+              </Text>
+              <View style={[styles.peopleContainer, { marginVertical: 5 }]}>
+                <Ionicons
+                  name="person-circle-outline"
+                  size={24}
+                  style={{ marginRight: 5 }}
+                />
+                <Text
+                  style={[
+                    globalstyles.detailsText,
+                    {
+                      marginHorizontal: 0,
+                      marginBottom: 0,
+                      flexShrink: 1,
+                    },
+                  ]}
+                >
+                  {activity.providedBy}
+                </Text>
+              </View>
+              <Text style={[styles.time, { color: "#465355" }]}>
+                {activity.company}
+              </Text>
+            </View>
+          </View>
+        </Card>
       ))}
     </View>
   );
@@ -157,7 +266,7 @@ function ProfilePage({ route, navigation }) {
                 marginBottom: 10,
               }}
             >
-              <Text style={styles.formHeader}>{form.name}</Text>
+              <Text style={styles.tabHeader}>{form.name}</Text>
               <View
                 style={[
                   styles.manageTextContainer,
@@ -824,7 +933,7 @@ const styles = StyleSheet.create({
     fontFamily: "karla-regular",
   },
 
-  formHeader: {
+  tabHeader: {
     fontFamily: "gabarito-regular",
     fontSize: 18,
     color: "#053E5A",
@@ -836,6 +945,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#E7F2F3",
     padding: 5,
+  },
+
+  time: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#465355",
   },
 });
 

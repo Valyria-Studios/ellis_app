@@ -77,7 +77,7 @@ const SelectClient = ({ route, navigation }) => {
     >
       <View>
         <Text style={styles.questionText}>
-          Refer a client to YWAM San Francisco
+          Refer a client to {amenity.location}
         </Text>
         <View
           style={[

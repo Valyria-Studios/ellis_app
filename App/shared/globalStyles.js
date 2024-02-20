@@ -46,8 +46,6 @@ const globalstyles = StyleSheet.create({
 
   tagContainer: {
     flexDirection: "row",
-    flexWrap: "wrap", // in case there are many types and they need to wrap to the next line
-    marginTop: 10,
   },
 
   tagBackground: {
@@ -67,9 +65,9 @@ const globalstyles = StyleSheet.create({
   },
 
   cardDetails: {
-    fontFamily: "karla-regular",
-    color: "#202425",
-    fontSize: 14,
+    fontFamily: "gabarito-regular",
+    color: "#094852",
+    fontSize: 18,
   },
 
   buttonContainer: {

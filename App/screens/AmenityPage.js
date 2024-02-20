@@ -6,17 +6,27 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import getAmenityImage from "../shared/getAmenityImage";
 import {
-  FontAwesome5,
+  Octicons,
   MaterialCommunityIcons,
   MaterialIcons,
+  Ionicons,
 } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
+import SocialMediaLinks from "../shared/SocialMediaIcon";
 
 function AmenityPage({ route, navigation }) {
   const { amenity } = route.params;
+
+  const openWebsite = () => {
+    Linking.openURL(`${amenity.website}`).catch((err) =>
+      console.error("An error occurred", err)
+    );
+  };
+
   return (
     <ImageBackground
       source={getAmenityImage(amenity.location)}
@@ -28,41 +38,77 @@ function AmenityPage({ route, navigation }) {
           <View style={styles.mainText}>
             <View style={styles.header}>
               <Text style={styles.locationText}>{amenity.location}</Text>
-              <View style={styles.iconSpacing}>
-                <View style={styles.iconsContainer}>
-                  <FontAwesome5
-                    name="phone-alt"
-                    size={18}
-                    style={styles.icon}
-                  />
-                </View>
-                <View style={styles.iconsContainer}>
-                  <MaterialCommunityIcons
-                    name="message"
-                    size={18}
-                    style={styles.icon}
-                  />
-                </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                <Octicons
+                  name="location"
+                  size={20}
+                  style={{ marginRight: 10, color: "#094852" }}
+                />
+                <Text style={globalstyles.cardDetails}>{amenity.address}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                <MaterialIcons
+                  name="schedule"
+                  size={20}
+                  style={{ marginRight: 7, color: "#094852" }}
+                />
+                <Text style={globalstyles.cardDetails}>
+                  {amenity.operationalHours}
+                </Text>
+              </View>
+              <View style={globalstyles.tagContainer}>
+                <TouchableOpacity activeOpacity={0.7}>
+                  <View style={[styles.buttonContainer, { marginRight: 10 }]}>
+                    <MaterialCommunityIcons
+                      name="arrow-right-top-bold"
+                      size={15}
+                      color="#094852"
+                      style={{ paddingRight: 5 }}
+                    />
+                    <Text style={styles.buttonText}>Get Directions</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.7}>
+                  <View style={styles.buttonContainer}>
+                    <MaterialCommunityIcons
+                      name="phone-outline"
+                      size={15}
+                      color="#094852"
+                      style={{ paddingRight: 5 }}
+                    />
+                    <Text style={styles.buttonText}>Call</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
-            <Text style={globalstyles.cardDetails}>
-              {amenity.address}
-              {"\n"}
-              {amenity.distance}
-              {"\n"}
-              {amenity.operationalHours}
-            </Text>
-            <View style={globalstyles.tagContainer}>
-              {amenity.type && Array.isArray(amenity.type)
-                ? amenity.type.map((type, index) => (
-                    <View key={index} style={globalstyles.tagBackground}>
-                      <Text style={globalstyles.individualTags}>{type}</Text>
-                    </View>
-                  ))
-                : null}
-            </View>
-            <View>
-              <Text>{amenity.description}</Text>
+            <View style={{ marginBottom: 10 }}>
+              <Text
+                style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
+              >
+                About the organization
+              </Text>
+              <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
+                {amenity.description}
+              </Text>
+              <TouchableOpacity
+                onPress={openWebsite}
+                style={{ alignSelf: "baseline" }}
+              >
+                <Text style={styles.websiteText}>Website</Text>
+              </TouchableOpacity>
+              <SocialMediaLinks socialMedia={amenity.socialMedia} />
             </View>
           </View>
         </View>
@@ -78,7 +124,11 @@ function AmenityPage({ route, navigation }) {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.referButton} activeOpacity={0.9} onPress={() => (navigation.navigate("Select Client", {amenity}))}>
+          <TouchableOpacity
+            style={styles.referButton}
+            activeOpacity={0.9}
+            onPress={() => navigation.navigate("Select Client", { amenity })}
+          >
             <MaterialIcons name="app-registration" size={18} color="#FFFFFF" />
             <Text style={styles.referButtonText}>Refer</Text>
           </TouchableOpacity>
@@ -117,9 +167,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    marginBottom: 30,
   },
 
   iconSpacing: {
@@ -162,15 +210,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 3.84,
-  },
-
-  availability: {
-    margin: 15,
-    fontFamily: "gabarito-regular",
-    color: "#545e60",
-    fontSize: 14,
-    letterSpacing: 2,
-    textTransform: "uppercase",
   },
 
   availabilityButtonContainer: {
@@ -218,6 +257,29 @@ const styles = StyleSheet.create({
 
   checkAvailabilityButtonText: {
     color: "#094851",
+  },
+
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#E7F2F3",
+    borderRadius: 20,
+  },
+
+  buttonText: {
+    fontFamily: "gabarito-regular",
+    fontSize: 16,
+    color: "#094852",
+  },
+
+  websiteText: {
+    textDecorationLine: "underline",
+    color: "#10798B",
+    fontFamily: "karla-semibold",
+    fontSize: 16,
+    paddingBottom: 10,
   },
 });
 

@@ -98,6 +98,9 @@
         "LinkedIn": "link6"
       },
       "type": ["Shelter", "Learn"],
+      "languages": [
+        "English, Spanish, French, Korean, Mandarin Chinese, Arabic, Hindi, Malagasy"
+      ],
       "availability": "20",
       "image": "../assets/images/location1.jpg",
       "description": [
@@ -128,6 +131,9 @@
         "X": "link4"
       },
       "type": ["Health", "Hygiene", "Food"],
+      "languages": [
+        "English, Spanish, French, Korean, Mandarin Chinese"
+      ],
       "availability": "2",
       "image": "../assets/images/location2.jpg",
       "description": [
@@ -157,6 +163,9 @@
         "LinkedIn": "link6"
       },
       "type": ["Shop", "Family"],
+      "languages": [
+        "English, Mandarin Chinese, Arabic, Hindi, Malagasy"
+      ],
       "availability": "0",
       "image": "../assets/images/location3.jpg",
       "description": [
@@ -186,6 +195,9 @@
         "LinkedIn": "link6"
       },
       "type": ["Work", "Hygiene"],
+      "languages": [
+        "English, Spanish, French, Korean, Arabic, Hindi, Malagasy"
+      ],
       "availability": "7",
       "image": "../assets/images/location4.jpg",
       "description": [
@@ -216,6 +228,9 @@
         "LinkedIn": "link6"
       },
       "type": ["Food", "Finance"],
+      "languages": [
+        "English, Spanish, Korean, Mandarin Chinese, Arabic, Hindi, Malagasy"
+      ],
       "availability": "0",
       "image": "../assets/images/location5.jpg",
       "description": [
@@ -245,6 +260,9 @@
         "LinkedIn": "link6"
       },
       "type": ["Shelter", "Health", "Family"],
+      "languages": [
+        "English, French, Korean, Mandarin Chinese, Arabic, Hindi, Malagasy"
+      ],
       "availability": "15",
       "image": "../assets/images/location6.jpg",
       "description": [
@@ -276,6 +294,9 @@
         "LinkedIn": "link6"
       },
       "type": ["Health", "Beauty"],
+      "languages": [
+        "English, Spanish"
+      ],
       "availability": "4",
       "image": "../assets/images/location7.jpg",
       "description": [
@@ -304,6 +325,9 @@
         "LinkedIn": "link6"
       },
       "type": ["Education", "Learning"],
+      "languages": [
+        "English, Spanish, Arabic, Hindi, Malagasy"
+      ],
       "availability": "0",
       "image": "../assets/images/location8.jpg",
       "description": [

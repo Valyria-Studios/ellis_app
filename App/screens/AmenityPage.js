@@ -93,7 +93,7 @@ function AmenityPage({ route, navigation }) {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={{ marginBottom: 10 }}>
+            <View style={{ marginBottom: 30 }}>
               <Text
                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
               >
@@ -109,6 +109,16 @@ function AmenityPage({ route, navigation }) {
                 <Text style={styles.websiteText}>Website</Text>
               </TouchableOpacity>
               <SocialMediaLinks socialMedia={amenity.socialMedia} />
+            </View>
+            <View>
+              <Text
+                style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
+              >
+                Language
+              </Text>
+              <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
+                {amenity.languages}
+              </Text>
             </View>
           </View>
         </View>

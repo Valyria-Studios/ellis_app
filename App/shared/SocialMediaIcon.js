@@ -35,16 +35,15 @@ const SocialMediaLinks = ({ socialMedia }) => {
   };
 
   return (
-    <View
-      style={{ flexDirection: "row", alignItems: "center", marginBottom: 20 }}
-    >
-      {Object.entries(socialMedia).map(([key, value]) => {
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      {Object.entries(socialMedia).map(([key, value], index) => {
         const { icon, library: IconComponent, size } = getSocialMediaIcon(key);
+        const iconStyle = index === 0 ? {marginRight: 10} : {marginHorizontal: 10}
         return (
           <TouchableOpacity
             key={key}
             onPress={() => openLink(value)}
-            style={{ marginHorizontal: 10 }}
+            style={iconStyle}
           >
             <IconComponent name={icon} size={size} color="#1A3E2F" />
           </TouchableOpacity>

@@ -101,6 +101,64 @@
       "languages": [
         "English, Spanish, French, Korean, Mandarin Chinese, Arabic, Hindi, Malagasy"
       ],
+      "services": [
+        {
+          "name": "Bathroom",
+          "type": "Service",
+          "daysOpen": "Monday-Friday",
+          "operationalHours": "10:30 am - 4:00 pm",
+          "availability": "20"
+        },
+        {
+          "name": "Bible Study",
+          "type": "Activity",
+          "daysOpen": "Monday-Wednesday",
+          "operationalHours": "10:30 am - 11:30 am",
+          "availability": "10"
+        },
+        {
+          "name": "Clothing Distribution",
+          "type": "Service",
+          "daysOpen": "Monday-Wednesday",
+          "operationalHours": "1:30 pm - 4:00 pm",
+          "availability": "10"
+        },
+        {
+          "name": "Food Pantry",
+          "type": "Service",
+          "daysOpen": "Thursday",
+          "operationalHours": "1:30 pm - 3:30 pm",
+          "availability": "0"
+        },
+        {
+          "name": "Haircuts",
+          "type": "Service",
+          "daysOpen": "Wednesday",
+          "operationalHours": "11:30 am - 1:30 pm",
+          "availability": "3"
+        },
+        {
+          "name": "Hot Chocolate Outreach",
+          "type": "Activity",
+          "daysOpen": "Friday",
+          "operationalHours": "7:30 pm - 8:30 pm",
+          "availability": "2"
+        },
+        {
+          "name": "Pop-up Church",
+          "type": "Activity",
+          "daysOpen": "Sunday",
+          "operationalHours": "7:30 pm - 8:30 am",
+          "availability": "40"
+        },
+        {
+          "name": "Showers",
+          "type": "Activity",
+          "daysOpen": "Monday-Wednesday",
+          "operationalHours": "1:30 pm - 4:30 pm",
+          "availability": "0"
+        }
+      ],
       "availability": "20",
       "image": "../assets/images/location1.jpg",
       "description": [
@@ -131,9 +189,7 @@
         "X": "link4"
       },
       "type": ["Health", "Hygiene", "Food"],
-      "languages": [
-        "English, Spanish, French, Korean, Mandarin Chinese"
-      ],
+      "languages": ["English, Spanish, French, Korean, Mandarin Chinese"],
       "availability": "2",
       "image": "../assets/images/location2.jpg",
       "description": [
@@ -163,9 +219,7 @@
         "LinkedIn": "link6"
       },
       "type": ["Shop", "Family"],
-      "languages": [
-        "English, Mandarin Chinese, Arabic, Hindi, Malagasy"
-      ],
+      "languages": ["English, Mandarin Chinese, Arabic, Hindi, Malagasy"],
       "availability": "0",
       "image": "../assets/images/location3.jpg",
       "description": [
@@ -294,9 +348,7 @@
         "LinkedIn": "link6"
       },
       "type": ["Health", "Beauty"],
-      "languages": [
-        "English, Spanish"
-      ],
+      "languages": ["English, Spanish"],
       "availability": "4",
       "image": "../assets/images/location7.jpg",
       "description": [
@@ -325,9 +377,7 @@
         "LinkedIn": "link6"
       },
       "type": ["Education", "Learning"],
-      "languages": [
-        "English, Spanish, Arabic, Hindi, Malagasy"
-      ],
+      "languages": ["English, Spanish, Arabic, Hindi, Malagasy"],
       "availability": "0",
       "image": "../assets/images/location8.jpg",
       "description": [

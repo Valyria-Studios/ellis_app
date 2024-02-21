@@ -1,3 +1,5 @@
+// Logic for Similar Amenities needed
+
 import React from "react";
 import {
   ImageBackground,
@@ -6,6 +8,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Linking,
 } from "react-native";
 import getAmenityImage from "../shared/getAmenityImage";
@@ -27,13 +30,19 @@ function AmenityPage({ route, navigation }) {
     );
   };
 
+  const scrollViewRef = React.useRef();
+
   return (
     <ImageBackground
       source={getAmenityImage(amenity.location)}
       style={styles.container}
     >
       <View style={styles.overlay} />
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={{ flexGrow: 1 }}
+        style={styles.scrollView}
+      >
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
             <View style={styles.header}>
@@ -110,7 +119,7 @@ function AmenityPage({ route, navigation }) {
               </TouchableOpacity>
               <SocialMediaLinks socialMedia={amenity.socialMedia} />
             </View>
-            <View>
+            <View style={{ marginBottom: 15 }}>
               <Text
                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
               >
@@ -120,6 +129,82 @@ function AmenityPage({ route, navigation }) {
                 {amenity.languages}
               </Text>
             </View>
+            {amenity.services.map((service, index) => (
+              <View key={index} style={styles.serviceCard}>
+                <Text
+                  style={[
+                    globalstyles.details,
+                    { margin: 0, marginBottom: 10 },
+                  ]}
+                >
+                  {service.type}
+                </Text>
+                <Text style={styles.serviceCardHeader}>{service.name}</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <MaterialIcons
+                    name="schedule"
+                    size={20}
+                    style={{ marginRight: 7, color: "#094852" }}
+                  />
+                  <Text style={globalstyles.cardDetails}>
+                    {service.daysOpen}, {service.operationalHours}
+                  </Text>
+                </View>
+                {service.availability > 0 ? (
+                  service.availability <= 10 ? (
+                    <View style={styles.serviceLowContainer}>
+                      <Text
+                        style={{
+                          color: "#533409",
+                          fontFamily: "karla-regular",
+                          fontSize: 14,
+                        }}
+                      >
+                        Low Availability
+                      </Text>
+                    </View>
+                  ) : (
+                    <View style={styles.serviceAvailabeContainer}>
+                      <Text
+                        style={{
+                          color: "#094852",
+                          fontFamily: "karla-regular",
+                          fontSize: 14,
+                        }}
+                      >
+                        Enrollment Available
+                      </Text>
+                    </View>
+                  )
+                ) : (
+                  <View style={styles.noServiceContainer}>
+                    <Text
+                      style={{
+                        color: "#465355",
+                        fontFamily: "karla-regular",
+                        fontSize: 14,
+                      }}
+                    >
+                      No Enrolloment Available
+                    </Text>
+                  </View>
+                )}
+              </View>
+            ))}
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() =>
+                scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })
+              }
+            >
+              <Text style={styles.scrollToTopButton}>Back to top</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -290,6 +375,55 @@ const styles = StyleSheet.create({
     fontFamily: "karla-semibold",
     fontSize: 16,
     paddingBottom: 10,
+  },
+
+  serviceCard: {
+    backgroundColor: "#F3F8F9",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 5,
+  },
+
+  serviceCardHeader: {
+    fontFamily: "gabarito-semibold",
+    fontSize: 24,
+    color: "#094852",
+    marginBottom: 10,
+  },
+
+  serviceAvailabeContainer: {
+    backgroundColor: "#E7F2F3",
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor: "#4094A2",
+    alignSelf: "baseline",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  serviceLowContainer: {
+    backgroundColor: "#FBEFDD",
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor: "#ECAD53",
+    alignSelf: "baseline",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  noServiceContainer: {
+    backgroundColor: "#DADDDD",
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor: "#B5BABB",
+    alignSelf: "baseline",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+
+  scrollToTopButton: {
+    fontFamily: "gabarito-regular",
+    fontSize: 16,
+    color: "#094852",
+    
   },
 });
 

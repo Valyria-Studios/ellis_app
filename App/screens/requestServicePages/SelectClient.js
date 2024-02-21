@@ -171,8 +171,8 @@ const SelectClient = ({ route, navigation }) => {
           ]}
           activeOpacity={0.6}
           onPress={() =>
-            navigation.navigate("Enrollment Form", {
-              selectedClient: selectedClient,
+            navigation.navigate("Select Referral", {
+              selectedClient: clients,
               amenity,
             })
           }

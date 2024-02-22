@@ -28,6 +28,8 @@ import {
 } from "react-native-popup-menu";
 import SelectClient from "../screens/requestServicePages/SelectClient";
 import SelectReferralFor from "../screens/requestServicePages/SelectReferralFor";
+import ReferToPerson from "../screens/requestServicePages/ReferToPerson";
+import ReferToService from "../screens/requestServicePages/ReferToService";
 
 const RootStack = createStackNavigator();
 
@@ -344,6 +346,48 @@ const RootNavigator = () => {
             elevation: 0,
           },
         }}
+      />
+      <RootStack.Screen
+        name="Refer to Person"
+        component={ReferToPerson}
+        options={({ route }) => ({
+          headerTitle: `Refer to ${route.params.teamMember}`,
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#094852",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        })}
+      />
+      <RootStack.Screen
+        name="Refer to Service"
+        component={ReferToService}
+        options={({ route }) => ({
+          headerTitle: `${route.params.service.name}`,
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#094852",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        })}
       />
     </RootStack.Navigator>
   );

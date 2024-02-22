@@ -172,7 +172,7 @@ const SelectClient = ({ route, navigation }) => {
           activeOpacity={0.6}
           onPress={() =>
             navigation.navigate("Select Referral For", {
-              selectedClient: clients,
+              selectedClient: selectedClient,
               amenity,
             })
           }

@@ -328,6 +328,7 @@ const RootNavigator = () => {
         name="Select Referral For"
         component={SelectReferralFor}
         options={{
+          headerTitle: "Select Referral",
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

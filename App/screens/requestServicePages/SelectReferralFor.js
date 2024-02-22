@@ -24,12 +24,13 @@ const SelectReferralFor = ({ route }) => {
             onValueChange={(value) => setSelectedTeamMember(value)}
             items={teamOptions}
             style={pickerSelectStyles}
-            placeholder={{ label: "Select a team member...", value: null }}
+            placeholder={{ label: "Select Staff Member", value: null }}
             Icon={() => (
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={24}
                 color="#094852"
+                style={{ marginRight: -10 }}
               />
             )}
           />
@@ -38,20 +39,34 @@ const SelectReferralFor = ({ route }) => {
       <View style={{ flex: 1 }}>
         <Text style={styles.header}>Refer to a service</Text>
         <Text style={styles.caption}>
-          The client you’re referring is eligible for these services:
+          The client you're referring is eligible for these services:
         </Text>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View>
             {amenity.services.map((service, index) => (
               <View key={index} style={styles.serviceCard}>
-                <Text
-                  style={[
-                    globalstyles.details,
-                    { margin: 0, marginBottom: 10 },
-                  ]}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
                 >
-                  {service.type}
-                </Text>
+                  <Text
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, marginBottom: 10 },
+                    ]}
+                  >
+                    {service.type}
+                  </Text>
+                  <MaterialIcons
+                    name="keyboard-arrow-down"
+                    size={26}
+                    color="#094852"
+                    style={{ marginRight: 0 }}
+                  />
+                </View>
                 <Text style={styles.serviceCardHeader}>{service.name}</Text>
                 <View
                   style={{
@@ -69,45 +84,68 @@ const SelectReferralFor = ({ route }) => {
                     {service.daysOpen}, {service.operationalHours}
                   </Text>
                 </View>
-                {service.availability > 0 ? (
-                  service.availability <= 10 ? (
-                    <View style={styles.serviceLowContainer}>
-                      <Text
-                        style={{
-                          color: "#533409",
-                          fontFamily: "karla-regular",
-                          fontSize: 14,
-                        }}
-                      >
-                        Low Availability
-                      </Text>
-                    </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  {service.availability > 0 ? (
+                    service.availability <= 10 ? (
+                      <View style={styles.serviceLowContainer}>
+                        <Text
+                          style={{
+                            color: "#533409",
+                            fontFamily: "karla-regular",
+                            fontSize: 14,
+                          }}
+                        >
+                          Low Availability
+                        </Text>
+                      </View>
+                    ) : (
+                      <View style={styles.serviceAvailabeContainer}>
+                        <Text
+                          style={{
+                            color: "#094852",
+                            fontFamily: "karla-regular",
+                            fontSize: 14,
+                          }}
+                        >
+                          Enrollment Available
+                        </Text>
+                      </View>
+                    )
                   ) : (
-                    <View style={styles.serviceAvailabeContainer}>
+                    <View style={styles.noServiceContainer}>
                       <Text
                         style={{
-                          color: "#094852",
+                          color: "#465355",
                           fontFamily: "karla-regular",
                           fontSize: 14,
                         }}
                       >
-                        Enrollment Available
+                        No Enrolloment Available
                       </Text>
                     </View>
-                  )
-                ) : (
-                  <View style={styles.noServiceContainer}>
-                    <Text
-                      style={{
-                        color: "#465355",
-                        fontFamily: "karla-regular",
-                        fontSize: 14,
-                      }}
-                    >
-                      No Enrolloment Available
-                    </Text>
+                  )}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginRight: 10,
+                    }}
+                  >
+                    <MaterialIcons
+                      name="app-registration"
+                      size={16}
+                      color={"#094852"}
+                      style={{ paddingRight: 5 }}
+                    />
+                    <Text style={styles.referText}>Refer</Text>
                   </View>
-                )}
+                </View>
               </View>
             ))}
           </View>
@@ -205,8 +243,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   pickerContainer: {
-    borderWidth: 1,
-    borderColor: "#B5BABB",
     borderRadius: 10,
     backgroundColor: "#FFFFFF",
     paddingHorizontal: 10,

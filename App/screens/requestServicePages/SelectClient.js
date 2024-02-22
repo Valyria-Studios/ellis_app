@@ -171,7 +171,7 @@ const SelectClient = ({ route, navigation }) => {
           ]}
           activeOpacity={0.6}
           onPress={() =>
-            navigation.navigate("Select Referral", {
+            navigation.navigate("Select Referral For", {
               selectedClient: clients,
               amenity,
             })
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
   // Add to your StyleSheet to style the floating FlatList container
   floatingListContainer: {
     position: "absolute",
-    top: 260, // Adjust this value based on the search bar's height + marginTop
+    top: 95, // Adjust this value based on the search bar's height + marginTop
     left: 0,
     right: 0,
     backgroundColor: "white", // or any color that matches your theme

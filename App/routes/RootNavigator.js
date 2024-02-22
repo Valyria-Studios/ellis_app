@@ -27,6 +27,7 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import SelectClient from "../screens/requestServicePages/SelectClient";
+import SelectReferralFor from "../screens/requestServicePages/SelectReferralFor";
 
 const RootStack = createStackNavigator();
 
@@ -49,8 +50,8 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Amenity Page"
         component={AmenityPage}
-        options={({ route }) => ({
-          headerTitle: route.params.amenity.location,
+        options={{
+          headerTitle: "",
           headerTitleStyle: {
             color: "#171b1c",
             fontSize: 28,
@@ -58,7 +59,8 @@ const RootNavigator = () => {
           },
           headerTitleContainerStyle: { left: 0 },
           headerTintColor: "#094852",
-        })}
+          headerTransparent: true,
+        }}
       />
       <RootStack.Screen
         name="Profile Page"
@@ -305,6 +307,26 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Select Client"
         component={SelectClient}
+        options={{
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#094852",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
+      />
+      <RootStack.Screen
+        name="Select Referral For"
+        component={SelectReferralFor}
         options={{
           headerBackTitle: " ",
           headerTintColor: "#094852",

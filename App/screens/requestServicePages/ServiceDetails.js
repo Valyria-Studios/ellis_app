@@ -4,7 +4,8 @@ import renderIcon from "../../shared/RenderIconFunction";
 import globalstyles from "../../shared/globalStyles";
 
 const ServiceDetails = ({ route, navigation }) => {
-  const { category } = route.params;
+  const { category, client } = route.params;
+  console.log(client)
 
   return (
     <View
@@ -20,6 +21,7 @@ const ServiceDetails = ({ route, navigation }) => {
               navigation.navigate("Referral Location", {
                 option,
                 categoryName: category.name,
+                client
               })
             }
           >

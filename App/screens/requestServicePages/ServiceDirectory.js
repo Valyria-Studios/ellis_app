@@ -15,7 +15,6 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const ServiceDirectory = ({ route, navigation }) => {
   const client = route.params?.client;
-  console.log(client);
 
   //Need all Options for Service Categories
   const serviceCategories = [
@@ -108,7 +107,7 @@ const ServiceDirectory = ({ route, navigation }) => {
           <TouchableOpacity
             key={index}
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("Service Details", { category })}
+            onPress={() => navigation.navigate("Service Details", { category, client })}
           >
             <View key={index} style={styles.container}>
               <View

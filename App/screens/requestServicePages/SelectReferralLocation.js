@@ -13,7 +13,7 @@ import Card from "../../shared/Card";
 import { MaterialIcons, Octicons, Feather } from "@expo/vector-icons";
 
 const SelectReferralLocation = ({ route, navigation }) => {
-  const { option, categoryName } = route.params;
+  const { option, categoryName, client } = route.params;
   const [amenities, setAmenities] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -33,6 +33,24 @@ const SelectReferralLocation = ({ route, navigation }) => {
       });
   }, [categoryName]); // Dependency array to re-fetch if categoryName changes
 
+  const handleOptionSelect = (amenity) => {
+    // Check if a client is already selected
+    if (client) {
+      // If a client is selected, navigate to a specific page, passing the selected client and amenity
+      navigation.navigate("Enrollment Form", {
+        selectedClient: client,
+        selectedAmenity: amenity,
+        option: option,
+      });
+    } else {
+      // If no client is selected, follow the normal flow (e.g., show details or a confirmation step)
+      navigation.navigate("Select Client With Location", {
+        option,
+        selectedAmenity: amenity,
+      });
+    }
+  };
+
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
@@ -43,16 +61,16 @@ const SelectReferralLocation = ({ route, navigation }) => {
       style={[globalstyles.container, { paddingHorizontal: 5 }]}
     >
       <View>
+        {client && (
+          <Text style={styles.caption}>
+            Recommended services based on {client.fullName} profile:
+          </Text>
+        )}
         {amenities.map((amenity, index) => (
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
-            onPress={() =>
-              navigation.navigate("Select Client With Location", {
-                option,
-                selectedAmenity: amenity,
-              })
-            }
+            onPress={() => handleOptionSelect(amenity)}
           >
             <Card>
               <View
@@ -142,6 +160,15 @@ const SelectReferralLocation = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  caption: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#094852",
+    marginHorizontal: 5,
+    marginVertical: 10,
+    letterSpacing: -0.7,
+  },
+
   optionText: {
     fontFamily: "gabarito-regular",
     fontSize: 12,

@@ -13,7 +13,7 @@ import globalstyles from "../../shared/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ReferToPerson = ({ route }) => {
+const ReferToPerson = ({ route, navigation }) => {
   const { teamMember, selectedClient } = route.params;
   const [reason, setReason] = useState("");
 
@@ -232,7 +232,13 @@ const ReferToPerson = ({ route }) => {
               },
             ]}
             activeOpacity={0.6}
-            onPress={() => navigation.navigate("Confirm Referral", {})}
+            onPress={() =>
+              navigation.navigate("Referral Sent", {
+                reason,
+                teamMember,
+                selectedClient,
+              })
+            }
           >
             <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
               Send

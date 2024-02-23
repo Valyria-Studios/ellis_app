@@ -6,7 +6,8 @@ import imageMap from "../../shared/getProfileImage";
 import globalstyles from "../../shared/globalStyles";
 
 const ReferralSent = ({ route }) => {
-  const { selectedClient, options } = route.params;
+  const { selectedClient, options, reason, teamMember } = route.params;
+
   return (
     <View style={globalstyles.container}>
       <Card>
@@ -122,6 +123,12 @@ const ReferralSent = ({ route }) => {
           </View>
         </View>
       </Card>
+      {reason && (
+        <View style={styles.reasonContainer}>
+          <Text style={styles.reasonHeader}>Reason for referral</Text>
+          <Text style={styles.reasonText}>{reason}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -154,6 +161,26 @@ const styles = StyleSheet.create({
     color: "#094852",
     fontFamily: "karla-regular",
     fontSize: 14,
+  },
+
+  reasonContainer: {
+    borderRadius: 20,
+    paddingTop: 15,
+    padding: 10,
+    backgroundColor: "#ffffff",
+  },
+
+  reasonHeader: {
+    fontFamily: "gabarito-semibold",
+    fontSize: 18,
+    color: "#030E07",
+    marginBottom: 15,
+  },
+
+  reasonText: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#171B1C",
   },
 });
 

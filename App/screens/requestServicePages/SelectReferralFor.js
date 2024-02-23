@@ -213,7 +213,7 @@ const SelectReferralFor = ({ route, navigation }) => {
       <TouchableOpacity
         style={[
           globalstyles.buttonContainer,
-          { backgroundColor: "#10798B", marginTop: 20 },
+          { backgroundColor: "#10798B", marginTop: 0 },
         ]}
         activeOpacity={0.6}
         onPress={handleNextPress}

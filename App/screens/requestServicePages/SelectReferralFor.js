@@ -49,6 +49,7 @@ const SelectReferralFor = ({ route, navigation }) => {
       navigation.navigate("Refer to Service", {
         service: selectedService,
         selectedClient: selectedClient,
+        amenity: amenity
       });
     } else {
       // Optionally handle the case where neither is selected

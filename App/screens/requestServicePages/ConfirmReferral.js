@@ -18,6 +18,8 @@ const ConfirmReferral = ({ route, navigation }) => {
   const {
     selectedClient,
     option,
+    amenity,
+    service,
     referralType,
     nameVerified,
     addressVerified,

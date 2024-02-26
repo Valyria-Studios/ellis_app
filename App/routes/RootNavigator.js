@@ -379,7 +379,7 @@ const RootNavigator = () => {
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
-            color: "#094852",
+            color: "#171B1C",
             left: -190,
           },
           headerStyle: {
@@ -387,6 +387,7 @@ const RootNavigator = () => {
             shadowColor: "transparent",
             elevation: 0,
           },
+          headerTransparent: true,
         })}
       />
     </RootStack.Navigator>

@@ -13,7 +13,7 @@ import FoodFormScreen from "./screens/formPages/FoodForm";
 import CreateUser from "./screens/adminPages/createClient";
 import AdminPage from "./screens/adminPages/admins";
 import { MenuProvider } from "react-native-popup-menu";
-import { FloatingActionMenu } from "./routes/TestingNavi";
+
 
 const Stack = createStackNavigator();
 

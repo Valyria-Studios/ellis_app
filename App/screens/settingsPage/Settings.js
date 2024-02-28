@@ -4,8 +4,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../shared/globalStyles";
 import SearchComponent from "../../shared/SearchHeader";
 import Icon from "@expo/vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Settings({ navigation }) {
+export default function Settings() {
+  const navigation = useNavigation();
   const pages = [
     {
       label: "Organization Profile",

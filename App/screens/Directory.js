@@ -18,8 +18,10 @@ import {
   applyFiltersAndSort,
   applyCategoryFilter,
 } from "../filtering/amenityFilter";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Directory({ navigation }) {
+export default function Directory() {
+  const navigation = useNavigation();
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState([]);
   const [sortCriteria, setSortCriteria] = useState(null);

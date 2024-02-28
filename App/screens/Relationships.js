@@ -13,8 +13,10 @@ import Card from "../shared/Card";
 import globalstyles from "../shared/globalStyles";
 import imageMap from "../shared/getProfileImage";
 import ProgressBar from "../shared/ProgressBar";
+import { useNavigation } from "@react-navigation/native";
 
-const RelationshipPage = ({ navigation }) => {
+const RelationshipPage = () => {
+  const navigation = useNavigation();
   const [filter, setFilter] = useState("all"); // default filter
   const [searchInput, setSearchInput] = useState("");
   const [filteredClients, setFilteredClients] = useState([]);

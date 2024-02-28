@@ -30,7 +30,7 @@ import SelectClient from "../screens/requestServicePages/SelectClient";
 import SelectReferralFor from "../screens/requestServicePages/SelectReferralFor";
 import ReferToPerson from "../screens/requestServicePages/ReferToPerson";
 import ReferToService from "../screens/requestServicePages/ReferToService";
-import MainScreenContainer from "./testScreen";
+import MainScreenContainer from "./MainScreenContainer";
 
 const RootStack = createStackNavigator();
 
@@ -38,15 +38,19 @@ const RootNavigator = () => {
   return (
     <RootStack.Navigator>
       <RootStack.Screen
-        name=" "
+        name="MainScreen"
         component={MainScreenContainer}
-        options={{ headerShown: false }} // Hide header for the MainApp
+        options={{
+          headerShown: false,
+          headerBackTitle: " ",
+        }} // Hide header for the MainApp
       />
       <RootStack.Screen
         name="ChatPage"
         component={ChatPage}
         options={({ route }) => ({
           headerTitle: route.params.chatIdentifier || "Chat",
+          headerBackTitle: " ",
           headerTintColor: "black",
         })}
       />
@@ -55,6 +59,7 @@ const RootNavigator = () => {
         component={AmenityPage}
         options={{
           headerTitle: "",
+          headerBackTitle: " ",
           headerTitleStyle: {
             color: "#171b1c",
             fontSize: 28,
@@ -70,6 +75,7 @@ const RootNavigator = () => {
         component={ProfilePage}
         options={({ route, navigation }) => ({
           headerTitle: route.params.client.fullName,
+          headerBackTitle: " ",
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,

@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Messages from "../screens/Messages";
 import Settings from "../screens/settingsPage/Settings";
-import Relationships from "../screens/Relationships";
+import RelationshipPage from "../screens/Relationships";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Directory from "../screens/Directory";
 import ChatPage from "../screens/ChatPage";
@@ -54,7 +54,7 @@ const AppNavigator = () => {
       />
       <Tab.Screen
         name="Relationships"
-        component={Relationships}
+        component={RelationshipPage}
         options={{ headerShown: false }}
       />
       <Tab.Screen

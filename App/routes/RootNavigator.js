@@ -30,6 +30,7 @@ import SelectClient from "../screens/requestServicePages/SelectClient";
 import SelectReferralFor from "../screens/requestServicePages/SelectReferralFor";
 import ReferToPerson from "../screens/requestServicePages/ReferToPerson";
 import ReferToService from "../screens/requestServicePages/ReferToService";
+import MainScreenContainer from "./testScreen";
 
 const RootStack = createStackNavigator();
 
@@ -38,7 +39,7 @@ const RootNavigator = () => {
     <RootStack.Navigator>
       <RootStack.Screen
         name=" "
-        component={AppNavigator}
+        component={MainScreenContainer}
         options={{ headerShown: false }} // Hide header for the MainApp
       />
       <RootStack.Screen

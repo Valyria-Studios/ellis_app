@@ -19,7 +19,7 @@ import {
   applyCategoryFilter,
 } from "../filtering/amenityFilter";
 
-export default function App({ navigation }) {
+export default function Directory({ navigation }) {
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState([]);
   const [sortCriteria, setSortCriteria] = useState(null);

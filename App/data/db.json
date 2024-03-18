@@ -97,7 +97,10 @@
         "TikTok": "link5",
         "LinkedIn": "link6"
       },
-      "type": ["Shelter", "Learn"],
+      "type": [
+        "Shelter",
+        "Learn"
+      ],
       "languages": [
         "English, Spanish, French, Korean, Mandarin Chinese, Arabic, Hindi, Malagasy"
       ],
@@ -168,8 +171,15 @@
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "admins": ["john", "joe"],
-        "members": ["oscar", "pam", "jane"]
+        "admins": [
+          "john",
+          "joe"
+        ],
+        "members": [
+          "oscar",
+          "pam",
+          "jane"
+        ]
       },
       "id": "1",
       "key": "1"
@@ -188,8 +198,14 @@
         "Facebook": "LInk3",
         "X": "link4"
       },
-      "type": ["Health", "Hygiene", "Food"],
-      "languages": ["English, Spanish, French, Korean, Mandarin Chinese"],
+      "type": [
+        "Health",
+        "Hygiene",
+        "Food"
+      ],
+      "languages": [
+        "English, Spanish, French, Korean, Mandarin Chinese"
+      ],
       "availability": "2",
       "image": "../assets/images/location2.jpg",
       "description": [
@@ -197,8 +213,15 @@
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "admins": ["john", "harry"],
-        "members": ["pie", "lol", "joe"]
+        "admins": [
+          "john",
+          "harry"
+        ],
+        "members": [
+          "pie",
+          "lol",
+          "joe"
+        ]
       },
       "id": "2"
     },
@@ -218,16 +241,28 @@
         "TikTok": "link5",
         "LinkedIn": "link6"
       },
-      "type": ["Shop", "Family"],
-      "languages": ["English, Mandarin Chinese, Arabic, Hindi, Malagasy"],
+      "type": [
+        "Shop",
+        "Family"
+      ],
+      "languages": [
+        "English, Mandarin Chinese, Arabic, Hindi, Malagasy"
+      ],
       "availability": "0",
       "image": "../assets/images/location3.jpg",
       "description": [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "admins": ["amber"],
-        "members": ["john", "mate", "star", "sir"]
+        "admins": [
+          "amber"
+        ],
+        "members": [
+          "john",
+          "mate",
+          "star",
+          "sir"
+        ]
       },
       "id": "3",
       "key": "3"
@@ -248,7 +283,10 @@
         "TikTok": "link5",
         "LinkedIn": "link6"
       },
-      "type": ["Work", "Hygiene"],
+      "type": [
+        "Work",
+        "Hygiene"
+      ],
       "languages": [
         "English, Spanish, French, Korean, Arabic, Hindi, Malagasy"
       ],
@@ -260,8 +298,15 @@
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "members": ["gary", "pink", "pam"],
-        "admins": ["sam", "liv"]
+        "members": [
+          "gary",
+          "pink",
+          "pam"
+        ],
+        "admins": [
+          "sam",
+          "liv"
+        ]
       },
       "id": "4"
     },
@@ -281,7 +326,10 @@
         "TikTok": "link5",
         "LinkedIn": "link6"
       },
-      "type": ["Food", "Finance"],
+      "type": [
+        "Food",
+        "Finance"
+      ],
       "languages": [
         "English, Spanish, Korean, Mandarin Chinese, Arabic, Hindi, Malagasy"
       ],
@@ -292,8 +340,15 @@
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "admins": ["timmy", "zoe", "hate"],
-        "members": ["john", "care"]
+        "admins": [
+          "timmy",
+          "zoe",
+          "hate"
+        ],
+        "members": [
+          "john",
+          "care"
+        ]
       },
       "id": "5"
     },
@@ -313,7 +368,11 @@
         "TikTok": "link5",
         "LinkedIn": "link6"
       },
-      "type": ["Shelter", "Health", "Family"],
+      "type": [
+        "Shelter",
+        "Health",
+        "Family"
+      ],
       "languages": [
         "English, French, Korean, Mandarin Chinese, Arabic, Hindi, Malagasy"
       ],
@@ -326,8 +385,15 @@
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "admins": ["america", "jane", "oscar"],
-        "members": ["john", "liv"]
+        "admins": [
+          "america",
+          "jane",
+          "oscar"
+        ],
+        "members": [
+          "john",
+          "liv"
+        ]
       },
       "id": "6"
     },
@@ -347,16 +413,28 @@
         "TikTok": "link5",
         "LinkedIn": "link6"
       },
-      "type": ["Health", "Beauty"],
-      "languages": ["English, Spanish"],
+      "type": [
+        "Health",
+        "Beauty"
+      ],
+      "languages": [
+        "English, Spanish"
+      ],
       "availability": "4",
       "image": "../assets/images/location7.jpg",
       "description": [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "members": ["whatever", "andrew", "pam"],
-        "admins": ["ashe", "jane"]
+        "members": [
+          "whatever",
+          "andrew",
+          "pam"
+        ],
+        "admins": [
+          "ashe",
+          "jane"
+        ]
       },
       "id": "7"
     },
@@ -376,8 +454,13 @@
         "TikTok": "link5",
         "LinkedIn": "link6"
       },
-      "type": ["Education", "Learning"],
-      "languages": ["English, Spanish, Arabic, Hindi, Malagasy"],
+      "type": [
+        "Education",
+        "Learning"
+      ],
+      "languages": [
+        "English, Spanish, Arabic, Hindi, Malagasy"
+      ],
       "availability": "0",
       "image": "../assets/images/location8.jpg",
       "description": [
@@ -385,8 +468,15 @@
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       ],
       "team": {
-        "members": ["john", "oscar", "steve"],
-        "admins": ["joe", "tom"]
+        "members": [
+          "john",
+          "oscar",
+          "steve"
+        ],
+        "admins": [
+          "joe",
+          "tom"
+        ]
       },
       "id": "8"
     }
@@ -417,7 +507,9 @@
       "providers": "Receiving service from 5 providers",
       "image": "userImage1",
       "team": {
-        "admins": ["Tim Langston", "Oscar Simmons"],
+        "admins": [
+          "Oscar Simmons"
+        ],
         "members": [
           "america",
           "steve",
@@ -428,7 +520,8 @@
           "Jackie Smith",
           "Tim Langston",
           "Timothy Sanders",
-          "Jackie Smith"
+          "Jackie Smith",
+          "Tim Langston"
         ]
       },
       "id": "1"
@@ -475,7 +568,11 @@
       "address": "home",
       "status": "Requested",
       "recency": "yesterday",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "",
       "image": "userImage3",
       "team": {
@@ -498,7 +595,11 @@
       "address": "where",
       "status": "Past",
       "recency": "Mar 2024",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "Received 3 servies from 1 provider",
       "image": "userImage4",
       "team": {
@@ -521,7 +622,11 @@
       "address": "under",
       "status": "Requested",
       "recency": "6 hours ago",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "",
       "image": "userImage5",
       "team": {
@@ -544,7 +649,11 @@
       "address": "there",
       "status": "Current",
       "recency": "yesterday",
-      "services": ["Haircut", "Financial Aid", "Celebrate Recovery"],
+      "services": [
+        "Haircut",
+        "Financial Aid",
+        "Celebrate Recovery"
+      ],
       "providers": "Receiving service from 2 providers",
       "image": "userImage6",
       "team": {
@@ -558,7 +667,12 @@
     {
       "type": "multiple_choice",
       "question": "What is the capital of France?",
-      "options": ["Paris", "London", "Berlin", "Madrid"],
+      "options": [
+        "Paris",
+        "London",
+        "Berlin",
+        "Madrid"
+      ],
       "user_answer": ""
     },
     {
@@ -574,7 +688,12 @@
     {
       "type": "multiple_choice",
       "question": "Which element has the atomic number 1?",
-      "options": ["Oxygen", "Hydrogen", "Carbon", "Helium"],
+      "options": [
+        "Oxygen",
+        "Hydrogen",
+        "Carbon",
+        "Helium"
+      ],
       "user_answer": ""
     },
     {
@@ -590,13 +709,24 @@
     {
       "type": "radio_button",
       "question": "Which of these is a mammal?",
-      "options": ["Shark", "Dolphin", "Octopus"],
+      "options": [
+        "Shark",
+        "Dolphin",
+        "Octopus"
+      ],
       "user_answer": ""
     },
     {
       "type": "checkbox",
       "question": "Select all prime numbers.",
-      "options": ["2", "3", "4", "5", "6", "7"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
       "user_answer": []
     }
   ],
@@ -604,7 +734,12 @@
     {
       "type": "multiple_choice",
       "question": "Which fruit is known as the 'King of Fruits'?",
-      "options": ["Apple", "Banana", "Mango", "Grapes"],
+      "options": [
+        "Apple",
+        "Banana",
+        "Mango",
+        "Grapes"
+      ],
       "user_answer": ""
     },
     {
@@ -620,7 +755,12 @@
     {
       "type": "multiple_choice",
       "question": "What is sushi traditionally wrapped in?",
-      "options": ["Rice Paper", "Lettuce", "Seaweed", "Tortilla"],
+      "options": [
+        "Rice Paper",
+        "Lettuce",
+        "Seaweed",
+        "Tortilla"
+      ],
       "user_answer": ""
     },
     {
@@ -636,13 +776,23 @@
     {
       "type": "radio_button",
       "question": "Which planet is closest to the Sun?",
-      "options": ["Earth", "Venus", "Mercury", "Mars"],
+      "options": [
+        "Earth",
+        "Venus",
+        "Mercury",
+        "Mars"
+      ],
       "user_answer": ""
     },
     {
       "type": "checkbox",
       "question": "Select all the colors that are primary colors.",
-      "options": ["Red", "Green", "Blue", "Yellow"],
+      "options": [
+        "Red",
+        "Green",
+        "Blue",
+        "Yellow"
+      ],
       "user_answer": []
     }
   ],

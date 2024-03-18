@@ -40,10 +40,6 @@ const globalstyles = StyleSheet.create({
     color: "#999fa0",
   },
 
-  gridIcon: {
-    paddingLeft: 20,
-  },
-
   tagContainer: {
     flexDirection: "row",
   },

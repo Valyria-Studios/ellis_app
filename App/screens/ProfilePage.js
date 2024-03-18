@@ -626,9 +626,7 @@ function ProfilePage({ route, navigation }) {
               </View>
               <View>
                 <Text style={globalstyles.details}>Status</Text>
-                <Text style={globalstyles.detailsText}>
-                  *Render Client Status*
-                </Text>
+                <Text style={globalstyles.detailsText}>Unhoused</Text>
               </View>
             </View>
             <View style={styles.manageAccountContainer}>
@@ -656,7 +654,7 @@ function ProfilePage({ route, navigation }) {
             </View>
             <View>
               <View>
-                <Text style={styles.details}>Activities</Text>
+                <Text style={globalstyles.details}>Activities</Text>
               </View>
               <View
                 style={{

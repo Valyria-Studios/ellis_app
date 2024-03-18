@@ -1,5 +1,7 @@
-import React from "react";
-import { View, TextInput } from "react-native";
+// RENDER PROFILE PAGE DEPENDING ON THE USER, PROBABLY A CONTEXT THING
+
+import React, { useState, useEffect } from "react";
+import { View, TextInput, Image } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import globalstyles from "../shared/globalStyles";
@@ -8,10 +10,19 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SearchComponent = ({ searchInput, setSearchInput }) => {
   const navigation = useNavigation();
+  const [client, setClient] = useState();
 
   const handlePress = () => {
-    navigation.navigate("Request Services Page");
+    navigation.navigate("Profile Page", { client: client[0] });
   };
+
+  useEffect(() => {
+    fetch("http://localhost:3000/Clients")
+      .then((response) => response.json())
+      .then((data) => {
+        setClient(data);
+      });
+  }, []);
 
   return (
     <View style={globalstyles.searchSection}>
@@ -31,11 +42,9 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
         />
       </View>
       <TouchableOpacity activeOpacity={1} onPress={handlePress}>
-        <Fontisto
-          name="nav-icon-grid-a"
-          size={20}
-          color="#094851"
-          style={globalstyles.gridIcon}
+        <Image
+          source={require("../assets/images/userImage1.jpg")}
+          style={[globalstyles.profileImage, { marginLeft: 10 }]}
         />
       </TouchableOpacity>
     </View>

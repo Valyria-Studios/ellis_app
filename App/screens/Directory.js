@@ -19,6 +19,7 @@ import {
   applyCategoryFilter,
 } from "../filtering/amenityFilter";
 import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Directory() {
   const navigation = useNavigation();
@@ -105,7 +106,7 @@ export default function Directory() {
                   selectedItem === sortItem
                     ? styles.selectedItemContainer
                     : styles.serviceItemContainer,
-                  { marginRight: 10 },
+                  { marginRight: 15 },
                 ]}
               >
                 <Text
@@ -122,16 +123,55 @@ export default function Directory() {
           ))}
         </View>
         <View>
-          <Text style={styles.sectionHeader}>My Engagement</Text>
-          <Text> Scrollable Content Card Options</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <MaterialIcons
+              name="drag-indicator"
+              size={14}
+              color={"#909899"}
+              style={{ marginRight: 2 }}
+            />
+            <Text style={styles.sectionHeader}>My Engagement</Text>
+          </View>
+          <Text>Scrollable Content Card Options</Text>
         </View>
         <View>
-          <Text>My Upcoming Activities</Text>
-          <Text> Scrollable Content Card Options</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <MaterialIcons
+              name="drag-indicator"
+              size={14}
+              color={"#909899"}
+              style={{ marginRight: 2 }}
+            />
+            <Text style={styles.sectionHeader}>My Upcoming Activities</Text>
+          </View>
+          <Text>Scrollable Content Card Options</Text>
         </View>
         <View>
-          <Text>Recent Referrals</Text>
-          <Text> Scrollable Content Card Options</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <MaterialIcons
+              name="drag-indicator"
+              size={14}
+              color={"#909899"}
+              style={{ marginRight: 2 }}
+            />
+            <Text style={styles.sectionHeader}>Recent Referrals</Text>
+          </View>
+          <Text>Scrollable Content Card Options</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -141,13 +181,8 @@ export default function Directory() {
 const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: "row",
-  },
-
-  tab: {
-    padding: 10,
-    fontFamily: "gabarito-semibold",
-    fontSize: 24,
-    color: "#10798B",
+    alignItems: "center",
+    marginLeft: 2,
   },
 
   serviceItemContainer: {
@@ -172,5 +207,11 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-semibold",
   },
 
-  
+  sectionHeader: {
+    fontFamily: "gabarito-regular",
+    fontSize: 12,
+    color: "#465355",
+    textTransform: "uppercase",
+    letterSpacing: "2%",
+  },
 });

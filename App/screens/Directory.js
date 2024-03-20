@@ -8,9 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../shared/Card";
-// import Amenities from "../api/Amenities";
 import SearchComponent from "../shared/SearchHeader";
-import getAmenityImage from "../shared/getAmenityImage";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 import globalstyles from "../shared/globalStyles";
 import { filterOpenNowAmenities } from "../filtering/openNowFilter";
@@ -122,11 +120,12 @@ export default function Directory() {
             </TouchableOpacity>
           ))}
         </View>
-        <View>
+        <View style={styles.sectionHeaderContainer}>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
+              marginBottom: 5,
             }}
           >
             <MaterialIcons
@@ -137,13 +136,27 @@ export default function Directory() {
             />
             <Text style={styles.sectionHeader}>My Engagement</Text>
           </View>
-          <Text>Scrollable Content Card Options</Text>
+          <View style={{ flexDirection: "row" }}>
+            <View style={styles.cards}>
+              <Text>8 clients</Text>
+              <Text>This Year</Text>
+            </View>
+            <View style={styles.cards}>
+              <Text>3 Services</Text>
+              <Text>This Month</Text>
+            </View>
+            <View style={styles.cards}>
+              <Text>21 hours</Text>
+              <Text>This Week</Text>
+            </View>
+          </View>
         </View>
-        <View>
+        <View style={styles.sectionHeaderContainer}>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
+              marginBottom: 5,
             }}
           >
             <MaterialIcons
@@ -154,13 +167,44 @@ export default function Directory() {
             />
             <Text style={styles.sectionHeader}>My Upcoming Activities</Text>
           </View>
-          <Text>Scrollable Content Card Options</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={{ flexDirection: "row" }}>
+              <View style={styles.cards}>
+                <View>
+                  <Text>Transitional Housing DAO meeting</Text>
+                </View>
+                <View>
+                  <Text>Location</Text>
+                  <Text>Time</Text>
+                </View>
+              </View>
+              <View style={styles.cards}>
+                <View>
+                  <Text>March Street Outreach in Tenderloin</Text>
+                </View>
+                <View>
+                  <Text>Location</Text>
+                  <Text>Time</Text>
+                </View>
+              </View>
+              <View style={styles.cards}>
+                <View>
+                  <Text>Community Volunteers</Text>
+                </View>
+                <View>
+                  <Text>Location</Text>
+                  <Text>Time</Text>
+                </View>
+              </View>
+            </View>
+          </ScrollView>
         </View>
-        <View>
+        <View style={styles.sectionHeaderContainer}>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
+              marginBottom: 5,
             }}
           >
             <MaterialIcons
@@ -171,7 +215,43 @@ export default function Directory() {
             />
             <Text style={styles.sectionHeader}>Recent Referrals</Text>
           </View>
-          <Text>Scrollable Content Card Options</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={{ flexDirection: "row" }}>
+              <View style={styles.cards}>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Profile Picture</Text>
+                  <Text>Client Name</Text>
+                </View>
+                <View>
+                  <Text>Service</Text>
+                  <Text>Time</Text>
+                  <Text>Status</Text>
+                </View>
+              </View>
+              <View style={styles.cards}>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Profile Picture</Text>
+                  <Text>Client Name</Text>
+                </View>
+                <View>
+                  <Text>Service</Text>
+                  <Text>Time</Text>
+                  <Text>Status</Text>
+                </View>
+              </View>
+              <View style={styles.cards}>
+                <View style={{ flexDirection: "row" }}>
+                  <Text>Profile Picture</Text>
+                  <Text>Client Name</Text>
+                </View>
+                <View>
+                  <Text>Service</Text>
+                  <Text>Time</Text>
+                  <Text>Status</Text>
+                </View>
+              </View>
+            </View>
+          </ScrollView>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -183,6 +263,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginLeft: 2,
+    marginVertical: 20,
   },
 
   serviceItemContainer: {
@@ -212,6 +293,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#465355",
     textTransform: "uppercase",
-    letterSpacing: "2%",
+    letterSpacing: 2,
+  },
+
+  sectionHeaderContainer: {
+    marginBottom: 15,
+  },
+
+  cards: {
+    backgroundColor: "#ffffff",
+    width: 160,
+    padding: 10,
+    flex: 1,
+    margin: 2,
+    borderRadius: 10,
+    justifyContent: "space-between",
+    height: 190,
   },
 });

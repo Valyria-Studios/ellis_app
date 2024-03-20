@@ -22,10 +22,13 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Directory() {
   const navigation = useNavigation();
+  const [selectedItem, setSelectedItem] = useState("Me");
   const [searchInput, setSearchInput] = useState("");
   const [filteredAmenities, setFilteredAmenities] = useState([]);
   const [sortCriteria, setSortCriteria] = useState(null);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
+
+  const tabItems = ["Me", "Valyria Studios"];
 
   useEffect(() => {
     fetch("http://localhost:3000/Amenities")
@@ -82,246 +85,92 @@ export default function Directory() {
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <SearchComponent
-        searchInput={searchInput}
-        setSearchInput={handleSearchChange}
-      />
-      <View style={styles.scrollerContainer}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {categories.map((category) => (
+      <ScrollView>
+        <SearchComponent
+          searchInput={searchInput}
+          setSearchInput={handleSearchChange}
+        />
+        <View>
+          <Text style={globalstyles.title}>Dashboard</Text>
+        </View>
+        <View style={styles.tabContainer}>
+          {tabItems.map((sortItem) => (
             <TouchableOpacity
-              key={category}
-              onPress={() => handlePress(category)}
+              key={sortItem}
               activeOpacity={1}
+              onPress={() => setSelectedItem(sortItem)}
             >
               <View
                 style={[
-                  styles.scrollerItemContainer,
-                  category === selectedCategoryFilter &&
-                    styles.selectedCategoryContainer,
+                  selectedItem === sortItem
+                    ? styles.selectedItemContainer
+                    : styles.serviceItemContainer,
+                  { marginRight: 10 },
                 ]}
               >
                 <Text
-                  style={[
-                    styles.scrollerItems,
-                    category === selectedCategoryFilter &&
-                      styles.selectedScrollerItem,
-                  ]}
+                  style={
+                    selectedItem === sortItem
+                      ? styles.selectedServiceHeaderItems
+                      : styles.serviceHeaderItems
+                  }
                 >
-                  {category}
+                  {sortItem}
                 </Text>
               </View>
             </TouchableOpacity>
           ))}
-        </ScrollView>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={styles.sortByContainer}>
-            <Text style={styles.sortBy}>Sort by</Text>
-            {["Availability", "Distance", "Open Now", "Type"].map(
-              (sortItem) => (
-                <TouchableOpacity
-                  key={sortItem}
-                  onPress={() => handleSortPress(sortItem)}
-                  activeOpacity={1}
-                >
-                  <View
-                    style={[
-                      styles.sortByItemContainer,
-                      sortItem === sortCriteria &&
-                        styles.activeSortByItemContainer,
-                    ]}
-                    key={sortItem}
-                  >
-                    <Text
-                      style={[
-                        styles.sortByItems,
-                        sortItem === sortCriteria && styles.activeSortByItems,
-                      ]}
-                    >
-                      {sortItem}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )
-            )}
-          </View>
-        </ScrollView>
-        <View>
-          <Text style={globalstyles.title}>Directory</Text>
         </View>
-        {filteredAmenities.length > 0 ? (
-          filteredAmenities.map((amenity) => (
-            <TouchableOpacity
-              key={amenity.key}
-              onPress={() => navigation.navigate("Amenity Page", { amenity })}
-              activeOpacity={1}
-            >
-              <Card key={amenity.key} image={getAmenityImage(amenity.location)}>
-                <View style={styles.cardHeader}>
-                  <Text style={styles.cardLocation}>{amenity.location}</Text>
-                  <View
-                    style={[
-                      styles.cardAvailabilityContainer,
-                      amenity.availability === "0"
-                        ? styles.noAvailability
-                        : styles.cardAvailabilityContainer,
-                    ]}
-                  >
-                    <Text style={styles.cardAvailabilityText}>
-                      {amenity.availability === "0"
-                        ? "Unavailable"
-                        : `${amenity.availability} Services Available`}
-                    </Text>
-                  </View>
-                </View>
-                <Text style={globalstyles.cardDetails}>
-                  {amenity.address}
-                  {"\n"}
-                  {amenity.distance}
-                  {"\n"}
-                  {amenity.operationalHours}
-                </Text>
-                <View style={globalstyles.tagContainer}>
-                  {amenity.type && Array.isArray(amenity.type)
-                    ? amenity.type.map((type, index) => (
-                        <View key={index} style={globalstyles.tagBackground}>
-                          <Text style={globalstyles.individualTags}>
-                            {type}
-                          </Text>
-                        </View>
-                      ))
-                    : null}
-                </View>
-              </Card>
-            </TouchableOpacity>
-          ))
-        ) : (
-          <View style={styles.noAmenitesContainer}>
-            <Text style={styles.noAmenitiesText}>No Amenities Available</Text>
-          </View>
-        )}
+        <View>
+          <Text style={styles.sectionHeader}>My Engagement</Text>
+          <Text> Scrollable Content Card Options</Text>
+        </View>
+        <View>
+          <Text>My Upcoming Activities</Text>
+          <Text> Scrollable Content Card Options</Text>
+        </View>
+        <View>
+          <Text>Recent Referrals</Text>
+          <Text> Scrollable Content Card Options</Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollerContainer: {
-    paddingVertical: 10,
-  },
-
-  scrollerItemContainer: {
-    borderWidth: 2,
-    borderColor: "transparent",
-    borderRadius: 25,
-    marginTop: 5,
-    marginHorizontal: 5, // Added this for spacing between items
-  },
-
-  selectedCategoryContainer: {
-    borderColor: "#ebae52",
-    backgroundColor: "#ffffff", // Adjust this to your desired background color
-  },
-
-  scrollerItems: {
-    textAlign: "center",
-    fontSize: 30,
-    fontFamily: "gabarito-medium",
-    padding: 10,
-    color: "#094851",
-  },
-
-  selectedScrollerItem: {
-    color: "#533509",
-  },
-
-  activeSortByItemContainer: {
-    margin: 5,
-    borderWidth: 2,
-    borderRadius: 10,
-    borderColor: "#c9cdcd",
-    backgroundColor: "#c9cdcd",
-  },
-
-  activeSortByItems: {
-    fontFamily: "karla-regular",
-    fontSize: 16,
-    color: "#094851",
-    padding: 10,
-  },
-
-  sortByContainer: {
-    marginVertical: 15,
+  tabContainer: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
 
-  sortBy: {
+  tab: {
+    padding: 10,
     fontFamily: "gabarito-semibold",
-    fontSize: 20,
-    color: "#171b1c",
-    paddingRight: 10,
+    fontSize: 24,
+    color: "#10798B",
   },
 
-  sortByItemContainer: {
-    margin: 5,
-    borderWidth: 2,
-    borderRadius: 10,
-    borderColor: "#c9cdcd",
-    backgroundColor: "#ffffff",
+  serviceItemContainer: {
+    marginVertical: 10,
   },
 
-  sortByItems: {
-    fontFamily: "karla-regular",
-    fontSize: 16,
-    color: "#094851",
-    padding: 10,
+  selectedItemContainer: {
+    borderBottomWidth: 2,
+    borderColor: "#10798B",
+    marginVertical: 10,
   },
 
-  cardHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  selectedServiceHeaderItems: {
+    fontSize: 24,
+    color: "#10798B",
+    fontFamily: "gabarito-semibold",
   },
 
-  cardAvailabilityContainer: {
-    width: "auto",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25,
-    padding: 10,
-    backgroundColor: "#10798a",
+  serviceHeaderItems: {
+    fontSize: 24,
+    color: "#465355",
+    fontFamily: "gabarito-semibold",
   },
 
-  noAvailability: {
-    color: "#e4eff1",
-    backgroundColor: "grey",
-  },
-
-  cardAvailabilityText: {
-    fontFamily: "karla-regular",
-    fontSize: 14,
-    color: "#e3eff1",
-  },
-
-  cardLocation: {
-    fontFamily: "gabarito-regular",
-    color: "#094851",
-    fontSize: 20,
-    paddingBottom: 10,
-  },
-
-  noAmenitesContainer: {
-    marginVertical: 200,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  noAmenitiesText: {
-    fontSize: 30,
-    fontFamily: "gabarito-regular",
-    color: "#094851",
-  },
+  
 });

@@ -44,7 +44,10 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
       <TouchableOpacity activeOpacity={1} onPress={handlePress}>
         <Image
           source={require("../assets/images/userImage1.jpg")}
-          style={[globalstyles.profileImage, { marginLeft: 10 }]}
+          style={[
+            globalstyles.profileImage,
+            { marginLeft: 10, width: 45, height: 45 },
+          ]}
         />
       </TouchableOpacity>
     </View>

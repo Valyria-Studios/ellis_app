@@ -3,10 +3,10 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default FloatingActionMenu = (props) => {
-  const [isSelected, setIsSelected] = useState("Directory");
+  const [isSelected, setIsSelected] = useState("Home");
 
   const menuItems = [
-    { name: "Directory", icon: "compass" },
+    { name: "Home", icon: "compass" },
     { name: "Relationships", icon: "person-circle-outline" },
     { name: "Messages", icon: "chatbox-outline" },
     { name: "Settings", icon: "settings-outline" },
@@ -19,6 +19,9 @@ export default FloatingActionMenu = (props) => {
 
   return (
     <View style={styles.container}>
+      <View>
+        <Text>button</Text>
+      </View>
       <View style={styles.menu}>
         {menuItems.map((item, index) => (
           <TouchableOpacity
@@ -43,6 +46,9 @@ export default FloatingActionMenu = (props) => {
           </TouchableOpacity>
         ))}
       </View>
+      <TouchableOpacity>
+        <Text>other button</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -51,8 +57,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     position: "absolute",
+    justifyContent: "space-between",
     bottom: 40,
     left: 20,
+    right: 20,
     alignItems: "center",
   },
 

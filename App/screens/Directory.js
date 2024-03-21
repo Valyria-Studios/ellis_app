@@ -17,7 +17,7 @@ import {
   applyCategoryFilter,
 } from "../filtering/amenityFilter";
 import { useNavigation } from "@react-navigation/native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Octicons } from "@expo/vector-icons";
 
 export default function Directory() {
   const navigation = useNavigation();
@@ -138,16 +138,40 @@ export default function Directory() {
           </View>
           <View style={{ flexDirection: "row" }}>
             <View style={styles.cards}>
-              <Text>8 clients</Text>
-              <Text>This Year</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "baseline",
+                }}
+              >
+                <Text style={styles.number}>8</Text>
+                <Text style={styles.numberText}>clients</Text>
+              </View>
+              <Text style={styles.cardSubText}>This Year</Text>
             </View>
             <View style={styles.cards}>
-              <Text>3 Services</Text>
-              <Text>This Month</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "baseline",
+                }}
+              >
+                <Text style={styles.number}>3</Text>
+                <Text style={styles.numberText}>services</Text>
+              </View>
+              <Text style={styles.cardSubText}>This Month</Text>
             </View>
             <View style={styles.cards}>
-              <Text>21 hours</Text>
-              <Text>This Week</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "baseline",
+                }}
+              >
+                <Text style={styles.number}>21</Text>
+                <Text style={styles.numberText}>hours</Text>
+              </View>
+              <Text style={styles.cardSubText}>This Week</Text>
             </View>
           </View>
         </View>
@@ -171,29 +195,69 @@ export default function Directory() {
             <View style={{ flexDirection: "row" }}>
               <View style={styles.cards}>
                 <View>
-                  <Text>Transitional Housing DAO meeting</Text>
+                  <Text style={styles.activityText}>
+                    Transitional Housing DAO meeting
+                  </Text>
                 </View>
                 <View>
-                  <Text>Location</Text>
-                  <Text>Time</Text>
+                  <View style={styles.subTextContainer}>
+                    <Octicons name="location" size={12} style={styles.icon} />
+                    <Text style={styles.cardSubText}>Location</Text>
+                  </View>
+                  <View>
+                    <View style={styles.subTextContainer}>
+                      <MaterialIcons
+                        name="access-time"
+                        size={12}
+                        style={styles.icon}
+                      />
+                      <Text style={styles.cardSubText}>Time</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
               <View style={styles.cards}>
                 <View>
-                  <Text>March Street Outreach in Tenderloin</Text>
+                  <Text style={styles.activityText}>
+                    March Street Outreach in Tenderloin
+                  </Text>
                 </View>
                 <View>
-                  <Text>Location</Text>
-                  <Text>Time</Text>
+                  <View style={styles.subTextContainer}>
+                    <Octicons name="location" size={12} style={styles.icon} />
+                    <Text style={styles.cardSubText}>Location</Text>
+                  </View>
+                  <View>
+                    <View style={styles.subTextContainer}>
+                      <MaterialIcons
+                        name="access-time"
+                        size={12}
+                        style={styles.icon}
+                      />
+                      <Text style={styles.cardSubText}>Time</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
               <View style={styles.cards}>
                 <View>
-                  <Text>Community Volunteers</Text>
+                  <Text style={styles.activityText}>Community Volunteers</Text>
                 </View>
                 <View>
-                  <Text>Location</Text>
-                  <Text>Time</Text>
+                  <View style={styles.subTextContainer}>
+                    <Octicons name="location" size={12} style={styles.icon} />
+                    <Text style={styles.cardSubText}>Location</Text>
+                  </View>
+                  <View>
+                    <View style={styles.subTextContainer}>
+                      <MaterialIcons
+                        name="access-time"
+                        size={12}
+                        style={styles.icon}
+                      />
+                      <Text style={styles.cardSubText}>Time</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>
@@ -216,16 +280,23 @@ export default function Directory() {
             <Text style={styles.sectionHeader}>Recent Referrals</Text>
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", paddingBottom: 50 }}>
               <View style={styles.cards}>
                 <View style={{ flexDirection: "row" }}>
                   <Text>Profile Picture</Text>
                   <Text>Client Name</Text>
                 </View>
                 <View>
-                  <Text>Service</Text>
-                  <Text>Time</Text>
-                  <Text>Status</Text>
+                  <Text style={styles.cardSubText}>Referral</Text>
+                  <View style={styles.subTextContainer}>
+                    <MaterialIcons
+                      name="access-time"
+                      size={12}
+                      style={styles.icon}
+                    />
+                    <Text style={styles.cardSubText}>Time</Text>
+                  </View>
+                  <Text style={styles.cardSubText}>Status</Text>
                 </View>
               </View>
               <View style={styles.cards}>
@@ -234,9 +305,16 @@ export default function Directory() {
                   <Text>Client Name</Text>
                 </View>
                 <View>
-                  <Text>Service</Text>
-                  <Text>Time</Text>
-                  <Text>Status</Text>
+                  <Text style={styles.cardSubText}>Referral</Text>
+                  <View style={styles.subTextContainer}>
+                    <MaterialIcons
+                      name="access-time"
+                      size={12}
+                      style={styles.icon}
+                    />
+                    <Text style={styles.cardSubText}>Time</Text>
+                  </View>
+                  <Text style={styles.cardSubText}>Status</Text>
                 </View>
               </View>
               <View style={styles.cards}>
@@ -245,9 +323,16 @@ export default function Directory() {
                   <Text>Client Name</Text>
                 </View>
                 <View>
-                  <Text>Service</Text>
-                  <Text>Time</Text>
-                  <Text>Status</Text>
+                  <Text style={styles.cardSubText}>Referral</Text>
+                  <View style={styles.subTextContainer}>
+                    <MaterialIcons
+                      name="access-time"
+                      size={12}
+                      style={styles.icon}
+                    />
+                    <Text style={styles.cardSubText}>Time</Text>
+                  </View>
+                  <Text style={styles.cardSubText}>Status</Text>
                 </View>
               </View>
             </View>
@@ -303,11 +388,46 @@ const styles = StyleSheet.create({
   cards: {
     backgroundColor: "#ffffff",
     width: 160,
-    padding: 10,
+    padding: 20,
     flex: 1,
     margin: 2,
     borderRadius: 10,
     justifyContent: "space-between",
     height: 190,
+  },
+
+  number: {
+    fontFamily: "gabarito-semibold",
+    fontSize: 24,
+    color: "#094852",
+  },
+
+  numberText: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#094852",
+    marginLeft: 5,
+  },
+
+  cardSubText: {
+    fontFamily: "karla-regular",
+    fontSize: 14,
+    color: "#465355",
+  },
+
+  activityText: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#094852",
+  },
+
+  subTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  icon: {
+    color: "#094852",
+    paddingRight: 5,
   },
 });

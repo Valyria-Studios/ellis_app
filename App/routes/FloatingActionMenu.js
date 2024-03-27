@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 
 export default FloatingActionMenu = (props) => {
+  const navigation = useNavigation();
   const [isSelected, setIsSelected] = useState("Home");
 
   const menuItems = [
@@ -19,9 +22,9 @@ export default FloatingActionMenu = (props) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>button</Text>
-      </View>
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Feather name="plus" size={24} color={"#094852"} />
+      </TouchableOpacity>
       <View style={styles.menu}>
         {menuItems.map((item, index) => (
           <TouchableOpacity
@@ -30,7 +33,7 @@ export default FloatingActionMenu = (props) => {
               styles.menuItem,
               item.name === isSelected && styles.selectedMenuItem,
             ]}
-            onPress={() => handlePress(item.name, item.icon)}
+            onPress={() => handlePress(item.name)}
           >
             <Ionicons
               name={item.icon}
@@ -46,8 +49,12 @@ export default FloatingActionMenu = (props) => {
           </TouchableOpacity>
         ))}
       </View>
-      <TouchableOpacity>
-        <Text>other button</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Request Services Page")}
+        style={styles.buttonContainer}
+        activeOpacity={1}
+      >
+        <MaterialCommunityIcons name="dots-grid" size={24} color={"#094852"} />
       </TouchableOpacity>
     </View>
   );
@@ -67,47 +74,57 @@ const styles = StyleSheet.create({
   menu: {
     flexDirection: "row",
     borderWidth: 1,
-    backgroundColor: "#F3F8F9",
+    backgroundColor: "#FFFFFF",
     borderColor: "#10798B",
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000", // Shadow color
+    shadowOffset: { width: 0, height: 3 }, // Shadow offset
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 4, // Shadow blur radius
+    elevation: 5, // For Android elevation
   },
 
   menuItem: {
     marginHorizontal: 5,
-    marginVertical: 3,
+    marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
 
   selectedMenuItem: {
     padding: 10,
     borderRadius: 50,
     backgroundColor: "#10798B",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   menuItemText: {
     color: "#FFFFFF",
     fontFamily: "gabarito-bold",
     fontSize: 18,
-    marginLeft: 5,
+    marginHorizontal: 5,
   },
 
   icon: {
     color: "#094852",
   },
 
-  fab: {
-    backgroundColor: "#007AFF",
-    borderRadius: 28,
+  buttonContainer: {
+    borderWidth: 1,
+    borderRadius: 25,
     padding: 10,
-    justifyContent: "baseline",
-    flexDirection: "row",
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
-    elevation: 4,
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    shadowOffset: { height: 2, width: 0 },
+    justifyContent: "center",
+    borderColor: "#10798B",
+    shadowColor: "#000", // Shadow color
+    shadowOffset: { width: 0, height: 3 }, // Shadow offset
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 4, // Shadow blur radius
+    elevation: 5, // For Android elevation
   },
 });

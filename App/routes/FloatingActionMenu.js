@@ -26,7 +26,7 @@ export default FloatingActionMenu = (props) => {
   const featherMenuItems = [
     { name: "Client", page: "Create New Client" },
     { name: "Service", page: "" },
-    { name: "Note", page: "Create Note" },
+    { name: "Note", page: "Create a Note" },
   ];
 
   const handlePress = (itemName) => {
@@ -37,6 +37,11 @@ export default FloatingActionMenu = (props) => {
 
   const toggleFeatherMenu = () => {
     setIsMenuVisible(!isMenuVisible);
+  };
+
+  const handleNavigation = (itemName) => {
+    navigation.navigate(itemName);
+    setIsMenuVisible(false);
   };
 
   return (
@@ -60,7 +65,7 @@ export default FloatingActionMenu = (props) => {
                     paddingRight: 125,
                     paddingVertical: 10,
                   }}
-                  onPress={() => handlePress(item.name)}
+                  onPress={() => handleNavigation(item.page)}
                 >
                   <View style={styles.modalMenuItem}>
                     <Text style={styles.modalMenuText}>{item.name}</Text>

@@ -31,6 +31,8 @@ import SelectReferralFor from "../screens/requestServicePages/SelectReferralFor"
 import ReferToPerson from "../screens/requestServicePages/ReferToPerson";
 import ReferToService from "../screens/requestServicePages/ReferToService";
 import MainScreenContainer from "./MainScreenContainer";
+import CreateNote from "../screens/CreateNote";
+import CreateClient from "../screens/CreateClient";
 
 const RootStack = createStackNavigator();
 
@@ -380,6 +382,48 @@ const RootNavigator = () => {
         component={ReferToService}
         options={({ route }) => ({
           headerTitle: `${route.params.service.name}`,
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerTransparent: true,
+        })}
+      />
+      <RootStack.Screen
+        name="Create a Note"
+        component={CreateNote}
+        options={({ route }) => ({
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerTransparent: true,
+        })}
+      />
+      <RootStack.Screen
+        name="Create New Client"
+        component={CreateClient}
+        options={({ route }) => ({
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

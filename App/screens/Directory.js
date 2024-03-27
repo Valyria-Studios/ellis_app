@@ -1,3 +1,5 @@
+// Logic for each card, getting the activities to show up, getting referrals, getting engagements.
+
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -5,9 +7,9 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Card from "../shared/Card";
 import SearchComponent from "../shared/SearchHeader";
 import { getSortedAmenities } from "../filtering/sortByFiltering";
 import globalstyles from "../shared/globalStyles";
@@ -84,7 +86,7 @@ export default function Directory() {
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <SearchComponent
           searchInput={searchInput}
           setSearchInput={handleSearchChange}
@@ -282,57 +284,78 @@ export default function Directory() {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={{ flexDirection: "row", paddingBottom: 50 }}>
               <View style={styles.cards}>
-                <View style={{ flexDirection: "row" }}>
-                  <Text>Profile Picture</Text>
-                  <Text>Client Name</Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Image
+                    source={require("../assets/images/userImage1.jpg")}
+                    style={styles.profileImage}
+                  />
+                  <Text style={styles.name}>Chris A.</Text>
                 </View>
-                <View>
-                  <Text style={styles.cardSubText}>Referral</Text>
+                <View style={styles.subContainer}>
+                  <Text style={[styles.cardSubText, { fontSize: 16 }]}>
+                    Shelter
+                  </Text>
                   <View style={styles.subTextContainer}>
                     <MaterialIcons
                       name="access-time"
                       size={12}
                       style={styles.icon}
                     />
-                    <Text style={styles.cardSubText}>Time</Text>
+                    <Text style={styles.cardSubText}>Today, 6pm</Text>
                   </View>
-                  <Text style={styles.cardSubText}>Status</Text>
+                  <View style={styles.status}>
+                    <Text style={styles.statusText}>Pending</Text>
+                  </View>
                 </View>
               </View>
               <View style={styles.cards}>
-                <View style={{ flexDirection: "row" }}>
-                  <Text>Profile Picture</Text>
-                  <Text>Client Name</Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Image
+                    source={require("../assets/images/userImage2.jpg")}
+                    style={styles.profileImage}
+                  />
+                  <Text style={styles.name}>Rob B.</Text>
                 </View>
-                <View>
-                  <Text style={styles.cardSubText}>Referral</Text>
+                <View style={styles.subContainer}>
+                  <Text style={[styles.cardSubText, { fontSize: 16 }]}>
+                    Coding Class
+                  </Text>
                   <View style={styles.subTextContainer}>
                     <MaterialIcons
                       name="access-time"
                       size={12}
                       style={styles.icon}
                     />
-                    <Text style={styles.cardSubText}>Time</Text>
+                    <Text style={styles.cardSubText}>Today, 12pm</Text>
                   </View>
-                  <Text style={styles.cardSubText}>Status</Text>
+                  <View style={styles.status}>
+                    <Text style={styles.statusText}>Pending</Text>
+                  </View>
                 </View>
               </View>
               <View style={styles.cards}>
-                <View style={{ flexDirection: "row" }}>
-                  <Text>Profile Picture</Text>
-                  <Text>Client Name</Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Image
+                    source={require("../assets/images/userImage3.jpg")}
+                    style={styles.profileImage}
+                  />
+                  <Text style={styles.name}>Julia C.</Text>
                 </View>
-                <View>
-                  <Text style={styles.cardSubText}>Referral</Text>
+                <View style={styles.subContainer}>
+                  <Text style={[styles.cardSubText, { fontSize: 16 }]}>
+                    Eviction Defense
+                  </Text>
                   <View style={styles.subTextContainer}>
                     <MaterialIcons
                       name="access-time"
                       size={12}
                       style={styles.icon}
                     />
-                    <Text style={styles.cardSubText}>Time</Text>
+                    <Text style={styles.cardSubText}>Yesterday</Text>
                   </View>
-                  <Text style={styles.cardSubText}>Status</Text>
+                  <View style={styles.status}>
+                    <Text style={styles.statusText}>Complete</Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -387,7 +410,7 @@ const styles = StyleSheet.create({
 
   cards: {
     backgroundColor: "#ffffff",
-    width: 160,
+    width: 180,
     padding: 20,
     flex: 1,
     margin: 2,
@@ -429,5 +452,40 @@ const styles = StyleSheet.create({
   icon: {
     color: "#094852",
     paddingRight: 5,
+  },
+
+  status: {
+    marginTop: 5,
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    backgroundColor: "#E7F2F3",
+    alignSelf: "baseline",
+    borderColor: "#B5BABB",
+  },
+
+  statusText: {
+    color: "#094852",
+    fontFamily: "karla-regular",
+    fontSize: 12,
+  },
+
+  subContainer: {
+    flex: 0.6,
+    justifyContent: "space-between",
+  },
+
+  profileImage: {
+    width: 32,
+    height: 32,
+    borderRadius: 50,
+    marginRight: 5,
+  },
+
+  name: {
+    fontFamily: "gabarito-regular",
+    fontSize: 18,
+    color: "#053E5A",
   },
 });

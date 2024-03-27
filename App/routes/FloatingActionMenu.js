@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Modal,
+  TouchableWithoutFeedback,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
@@ -7,6 +14,7 @@ import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 export default FloatingActionMenu = (props) => {
   const navigation = useNavigation();
   const [isSelected, setIsSelected] = useState("Home");
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const menuItems = [
     { name: "Home", icon: "compass" },
@@ -15,16 +23,54 @@ export default FloatingActionMenu = (props) => {
     { name: "Settings", icon: "settings-outline" },
   ];
 
+  const featherMenuItems = [
+    { name: "Client", page: "Create New Client" },
+    { name: "Service", page: "" },
+    { name: "Note", page: "Create Note" },
+  ];
+
   const handlePress = (itemName) => {
     setIsSelected(itemName);
     props.onItemSelect(itemName);
+    setIsMenuVisible(false); // Close the menu
+  };
+
+  const toggleFeatherMenu = () => {
+    setIsMenuVisible(!isMenuVisible);
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.buttonContainer}>
+      <TouchableOpacity
+        onPress={toggleFeatherMenu}
+        style={styles.buttonContainer}
+      >
         <Feather name="plus" size={24} color={"#094852"} />
       </TouchableOpacity>
+      <Modal visible={isMenuVisible} transparent animationType="fade">
+        <TouchableWithoutFeedback onPress={() => setIsMenuVisible(false)}>
+          <View style={styles.overlay}>
+            <View style={styles.menuContainer}>
+              <Text style={styles.modalHeader}>Add a new...</Text>
+              {featherMenuItems.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={{
+                    paddingHorizontal: 100,
+                    paddingRight: 125,
+                    paddingVertical: 10,
+                  }}
+                  onPress={() => handlePress(item.name)}
+                >
+                  <View style={styles.modalMenuItem}>
+                    <Text style={styles.modalMenuText}>{item.name}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
       <View style={styles.menu}>
         {menuItems.map((item, index) => (
           <TouchableOpacity
@@ -71,6 +117,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)", // Semi-transparent background
+  },
+
+  menuContainer: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    padding: 10,
+    marginHorizontal: 20,
+    position: "absolute",
+    bottom: 100,
+  },
+
+  modalMenuItem: {
+    marginVertical: 5,
+    marginLeft: -80,
+  },
+
+  modalHeader: {
+    fontSize: 18,
+    fontFamily: "gabarito-semibold",
+    color: "#094852",
+  },
+
   menu: {
     flexDirection: "row",
     borderWidth: 1,
@@ -107,6 +178,12 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-bold",
     fontSize: 18,
     marginHorizontal: 5,
+  },
+
+  modalMenuText: {
+    color: "#030E07",
+    fontFamily: "karla-regular",
+    fontSize: 16,
   },
 
   icon: {

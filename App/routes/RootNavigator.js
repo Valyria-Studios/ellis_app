@@ -402,23 +402,23 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Create a Note"
         component={CreateNote}
-        options={({ route }) => ({
-          headerBackTitle: " ",
-          headerTintColor: "#094852",
+        options={{
+          headerTitle: "New Note",
           headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
+            left: -180,
           },
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
           headerStyle: {
-            backgroundColor: "#F3F8F9",
+            backgroundColor: "#FFFFFF",
             shadowColor: "transparent",
             elevation: 0,
           },
-          headerTransparent: true,
-        })}
+        }}
       />
       <RootStack.Screen
         name="Create New Client"

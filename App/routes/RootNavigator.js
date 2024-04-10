@@ -424,6 +424,7 @@ const RootNavigator = () => {
         name="Create New Client"
         component={CreateClient}
         options={({ route }) => ({
+          headerTitle: "Create New Client Profile",
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

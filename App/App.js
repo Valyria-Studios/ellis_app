@@ -10,8 +10,6 @@ import LegalQuestions from "./deprecated/LegalQuestions";
 import SelectForms from "./screens/formPages/SelectForms";
 import LegalFormScreen from "./screens/formPages/LegalForm";
 import FoodFormScreen from "./screens/formPages/FoodForm";
-import CreateUser from "./screens/adminPages/createClient";
-import AdminPage from "./screens/adminPages/admins";
 import { MenuProvider } from "react-native-popup-menu";
 
 

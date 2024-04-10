@@ -24,7 +24,7 @@ function CreateClient() {
       .then((data) => {
         const options = data.map((amenity) => ({
           label: amenity.location,
-          value: amenity.key,
+          value: amenity.location,
           key: amenity.key,
         }));
         setAmenityOptions(options);

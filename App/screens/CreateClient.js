@@ -1,3 +1,5 @@
+// LOGIC FOR PUSHING PAGE
+
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,

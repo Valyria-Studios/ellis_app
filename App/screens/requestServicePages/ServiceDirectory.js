@@ -1,4 +1,5 @@
 //Need all Options for Service Categories
+// Frequency logic
 
 import React from "react";
 import {

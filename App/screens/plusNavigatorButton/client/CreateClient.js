@@ -9,11 +9,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import globalstyles from "../shared/globalStyles";
+import globalstyles from "../../../shared/globalStyles";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-function CreateClient() {
+const CreateClient = ({ navigation }) => {
   const [selectedAmenity, setSelectedAmenity] = useState(null);
   const [amenityOptions, setAmenityOptions] = useState({});
   const [isUnhoused, setIsUnhoused] = useState(false);
@@ -45,18 +45,22 @@ function CreateClient() {
       <View style={{ marginTop: 60 }}>
         <Text style={styles.addClient}>You are adding a new client for</Text>
         <View style={[globalstyles.optionContainer, { marginTop: 10 }]}>
-          <RNPickerSelect
-            items={amenityOptions}
-            onValueChange={handleValueChange}
-            value={selectedAmenity}
-            placeholder={{ label: "Select an amenity", value: null }}
-            style={{
-              input: globalstyles.input,
-              placeholder: globalstyles.placeholder,
-            }}
-            useNativeAndroidPickerStyle={false}
-          />
-          <Icon name="keyboard-arrow-right" size={24} color="#094852" />
+          <View>
+            <RNPickerSelect
+              items={amenityOptions}
+              onValueChange={handleValueChange}
+              value={selectedAmenity}
+              placeholder={{ label: "Select an amenity", value: null }}
+              style={{
+                input: globalstyles.input,
+                placeholder: globalstyles.placeholder,
+              }}
+              useNativeAndroidPickerStyle={false}
+            />
+          </View>
+          <View>
+            <Icon name="keyboard-arrow-right" size={24} color="#094852" />
+          </View>
         </View>
         <View>
           <Text style={styles.header}>Basic Information</Text>
@@ -139,6 +143,9 @@ function CreateClient() {
         </View>
         <View>
           <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Client Information", { selectedAmenity })
+            }
             style={[
               globalstyles.buttonContainer,
               { backgroundColor: "#10798B", marginTop: 20 },
@@ -153,7 +160,7 @@ function CreateClient() {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   addClient: {

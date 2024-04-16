@@ -31,8 +31,9 @@ import SelectReferralFor from "../screens/requestServicePages/SelectReferralFor"
 import ReferToPerson from "../screens/requestServicePages/ReferToPerson";
 import ReferToService from "../screens/requestServicePages/ReferToService";
 import MainScreenContainer from "./MainScreenContainer";
-import CreateNote from "../screens/CreateNote";
-import CreateClient from "../screens/CreateClient";
+import CreateNote from "../screens/plusNavigatorButton/notes/CreateNote";
+import CreateClient from "../screens/plusNavigatorButton/client/CreateClient";
+import ClientInformation from "../screens/plusNavigatorButton/client/ClientInformation";
 
 const RootStack = createStackNavigator();
 
@@ -425,6 +426,28 @@ const RootNavigator = () => {
         component={CreateClient}
         options={({ route }) => ({
           headerTitle: "Create New Client Profile",
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerTransparent: true,
+        })}
+      />
+      <RootStack.Screen
+        name="Client Information"
+        component={ClientInformation}
+        options={({ route }) => ({
+          headerTitle: "Add Client Information",
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

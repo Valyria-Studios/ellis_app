@@ -9,7 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalstyles from "../shared/globalStyles";
+import globalstyles from "../../../shared/globalStyles";
 import { TextInput } from "react-native-gesture-handler";
 import { EvilIcons, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
@@ -72,7 +72,6 @@ const CreateNote = () => {
       client: selectedClient,
       date: formattedDate,
     };
-    console.log(newNote);
     try {
       const response = await fetch("http://localhost:3000/Notes", {
         method: "POST",

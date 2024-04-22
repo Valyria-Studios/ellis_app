@@ -34,6 +34,7 @@ import MainScreenContainer from "./MainScreenContainer";
 import CreateNote from "../screens/plusNavigatorButton/notes/CreateNote";
 import CreateClient from "../screens/plusNavigatorButton/client/CreateClient";
 import ClientInformation from "../screens/plusNavigatorButton/client/ClientInformation";
+import NoteDetails from "../screens/plusNavigatorButton/notes/NoteDetails";
 
 const RootStack = createStackNavigator();
 
@@ -420,6 +421,27 @@ const RootNavigator = () => {
             elevation: 0,
           },
         }}
+      />
+      <RootStack.Screen
+        name="Note Details"
+        component={NoteDetails}
+        options={({ route }) => ({
+          headerTitle: `${route.params.note.title} Notes`,
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        })}
       />
       <RootStack.Screen
         name="Create New Client"

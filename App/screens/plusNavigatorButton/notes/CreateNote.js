@@ -14,7 +14,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { EvilIcons, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
 
-const CreateNote = () => {
+const CreateNote = ({navigation}) => {
   const [selectedClient, setSelectedClient] = useState("");
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
@@ -84,7 +84,7 @@ const CreateNote = () => {
         const responseJson = await response.json();
         console.log("Note added successfully:", responseJson);
         // Optionally, handle navigation or state updates here
-        // navigation.navigate("NoteDetails", { noteId: responseJson.id });
+        navigation.navigate("Note Details", { note: newNote });
       } else {
         console.error("HTTP error: " + response.status + " during adding note");
       }

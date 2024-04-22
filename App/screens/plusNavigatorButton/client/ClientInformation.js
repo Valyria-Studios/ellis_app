@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import globalstyles from "../../../shared/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -71,6 +71,19 @@ const ClientInformation = () => {
           </View>
         </View>
       ))}
+      <View>
+        <TouchableOpacity
+          style={[
+            globalstyles.buttonContainer,
+            { marginTop: 20 },
+          ]}
+          activeOpacity={0.8}
+        >
+          <Text style={[globalstyles.buttonText]}>
+            Next
+          </Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

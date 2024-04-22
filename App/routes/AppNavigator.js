@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Messages from "../screens/Messages";
@@ -14,6 +14,7 @@ const AppNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        lazy: true,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName, IconComponent;
 

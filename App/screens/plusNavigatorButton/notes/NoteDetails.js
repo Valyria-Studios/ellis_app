@@ -7,14 +7,14 @@ const NoteDetails = ({ route }) => {
   const { note } = route.params;
 
   return (
-    <SafeAreaView style={[globalstyles.container, {backgroundColor: "#FFFFFF"}]}>
-      <ScrollView>
-        <Text style={styles.date}>{note.date}</Text>
-        <Text style={styles.content}>{note.content}</Text>
-        <Text style={styles.detail}>Client: {note.client}</Text>
-        <Text style={styles.detail}>Topic Tags: {note.topics}</Text>
-        <Text style={styles.detail}>Assigned to: {note.teamMember}</Text>
-      </ScrollView>
+    <SafeAreaView
+      style={[globalstyles.container, { backgroundColor: "#FFFFFF" }]}
+    >
+      <Text style={styles.date}>{note.date}</Text>
+      <Text style={styles.content}>note: {note.content}</Text>
+      <Text style={styles.detail}>Client: {note.client}</Text>
+      <Text style={styles.detail}>Topic Tags: {note.topics}</Text>
+      <Text style={styles.detail}>Assigned to: {note.teamMember}</Text>
     </SafeAreaView>
   );
 };

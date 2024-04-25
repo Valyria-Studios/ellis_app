@@ -10,7 +10,7 @@ const NoteDetails = ({ route }) => {
     <SafeAreaView
       style={[globalstyles.container, { backgroundColor: "#FFFFFF" }]}
     >
-      <Text style={styles.date}>{note.date}</Text>
+      <Text style={styles.date}>Created: {note.date}</Text>
       <Text style={styles.content}>note: {note.content}</Text>
       <Text style={styles.detail}>Client: {note.client}</Text>
       <Text style={styles.detail}>Topic Tags: {note.topics}</Text>

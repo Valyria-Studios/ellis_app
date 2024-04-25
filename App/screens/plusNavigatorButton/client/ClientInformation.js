@@ -5,7 +5,7 @@ import globalstyles from "../../../shared/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RNPickerSelect from "react-native-picker-select";
 
-const ClientInformation = () => {
+const ClientInformation = ({ navigation }) => {
   const [selectedValues, setSelectedValues] = useState({
     pronouns: null,
     language: null,
@@ -73,15 +73,15 @@ const ClientInformation = () => {
       ))}
       <View>
         <TouchableOpacity
-          style={[
-            globalstyles.buttonContainer,
-            { marginTop: 20 },
-          ]}
+          style={[globalstyles.buttonContainer, { marginTop: 20 }]}
           activeOpacity={0.8}
+          onPress={() =>
+            navigation.navigate("Request Services Page", {
+              headerTitle: "Make a Referral",
+            })
+          } // Use navigation prop to navigate
         >
-          <Text style={[globalstyles.buttonText]}>
-            Next
-          </Text>
+          <Text style={[globalstyles.buttonText]}>Next</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

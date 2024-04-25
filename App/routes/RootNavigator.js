@@ -130,8 +130,8 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Request Services Page"
         component={ServiceDirectory}
-        options={{
-          headerTitle: "Service Directory",
+        options={({route}) => ({
+          headerTitle: route.params.headerTitle || "Service Directory", // Default title if no parameter provided
           headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
@@ -146,7 +146,7 @@ const RootNavigator = () => {
             shadowColor: "transparent",
             elevation: 0,
           },
-        }}
+        })}
       />
       <RootStack.Screen
         name="Organization Profile"

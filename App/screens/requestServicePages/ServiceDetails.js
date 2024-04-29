@@ -1,5 +1,5 @@
 // Need to replace AsyncStorage with cloud storage
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import renderIcon from "../../shared/RenderIconFunction";
 import globalstyles from "../../shared/globalStyles";
@@ -8,11 +8,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const ServiceDetails = ({ route, navigation }) => {
   const { category, client } = route.params;
 
-  const updateUsageFrequency = async (optionName) => {
+  const updateUsageFrequency = async (optionName, categoryName) => {
+    const key = `${categoryName}:${optionName}`; // Create a unique key for each option within its category
     try {
-      const currentCount = await AsyncStorage.getItem(optionName);
+      const currentCount = await AsyncStorage.getItem(key);
       const newCount = currentCount ? JSON.parse(currentCount) + 1 : 1;
-      await AsyncStorage.setItem(optionName, JSON.stringify(newCount));
+      await AsyncStorage.setItem(key, JSON.stringify(newCount));
     } catch (error) {
       console.error("Failed to update frequency count", error);
     }
@@ -29,7 +30,7 @@ const ServiceDetails = ({ route, navigation }) => {
             key={index}
             style={styles.container}
             onPress={() => {
-              updateUsageFrequency(option);
+              updateUsageFrequency(option, category.name);
               navigation.navigate("Referral Location", {
                 option,
                 categoryName: category.name,

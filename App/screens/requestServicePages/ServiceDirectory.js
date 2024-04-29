@@ -25,13 +25,16 @@ const ServiceDirectory = ({ route, navigation }) => {
     try {
       const keys = await AsyncStorage.getAllKeys();
       const stores = await AsyncStorage.multiGet(keys);
-      let freqs = stores.map(([key, value]) => ({
-        option: key,
-        count: JSON.parse(value),
-      }));
-      // Sort by count descending and get top items
+      let freqs = stores.map(([key, value]) => {
+        const [categoryName, optionName] = key.split(":");
+        return {
+          option: optionName,
+          categoryName: categoryName,
+          count: JSON.parse(value),
+        };
+      });
       freqs.sort((a, b) => b.count - a.count);
-      setFrequentServices(freqs.slice(0, 5)); // Top 5 items
+      setFrequentServices(freqs.slice(0, 5));
     } catch (error) {
       console.error("Failed to load frequencies", error);
     }
@@ -129,9 +132,20 @@ const ServiceDirectory = ({ route, navigation }) => {
           </Text>
           {frequentServices.map((item, index) => (
             <View key={index} style={styles.frequentItem}>
-              <Text>
-                {item.option} - Used {item.count} times
-              </Text>
+              <TouchableOpacity
+                key={index}
+                onPress={() =>
+                  navigation.navigate("Referral Location", {
+                    option: item.option,
+                    categoryName: item.categoryName,
+                    client: client, // Ensure you have the client data needed, if not, it may need to be handled appropriately
+                  })
+                }
+              >
+                <Text>
+                  {item.option} - Used {item.count} times
+                </Text>
+              </TouchableOpacity>
             </View>
           ))}
         </View>

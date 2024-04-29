@@ -1,7 +1,7 @@
 //Need all Options for Service Categories
-// Frequency logic
+// Replace asyncStorage with cloud storage
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,9 +13,35 @@ import {
 import globalstyles from "../../shared/globalStyles";
 import renderIcon from "../../shared/RenderIconFunction";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
 
 const ServiceDirectory = ({ route, navigation }) => {
   const client = route.params?.client;
+  const [frequentServices, setFrequentServices] = useState([]);
+  const isFocused = useIsFocused();
+
+  const loadFrequentServices = async () => {
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      const stores = await AsyncStorage.multiGet(keys);
+      let freqs = stores.map(([key, value]) => ({
+        option: key,
+        count: JSON.parse(value),
+      }));
+      // Sort by count descending and get top items
+      freqs.sort((a, b) => b.count - a.count);
+      setFrequentServices(freqs.slice(0, 5)); // Top 5 items
+    } catch (error) {
+      console.error("Failed to load frequencies", error);
+    }
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      loadFrequentServices();
+    }
+  }, [isFocused]);
 
   //Need all Options for Service Categories
   const serviceCategories = [
@@ -101,14 +127,22 @@ const ServiceDirectory = ({ route, navigation }) => {
           <Text style={[styles.subHeader, { marginTop: 0 }]}>
             Frequently Used
           </Text>
-          {/* some code for showing a list of frequents */}
+          {frequentServices.map((item, index) => (
+            <View key={index} style={styles.frequentItem}>
+              <Text>
+                {item.option} - Used {item.count} times
+              </Text>
+            </View>
+          ))}
         </View>
         <Text style={styles.subHeader}>Services</Text>
         {serviceCategories.map((category, index) => (
           <TouchableOpacity
             key={index}
             activeOpacity={0.7}
-            onPress={() => navigation.navigate("Service Details", { category, client })}
+            onPress={() =>
+              navigation.navigate("Service Details", { category, client })
+            }
           >
             <View key={index} style={styles.container}>
               <View

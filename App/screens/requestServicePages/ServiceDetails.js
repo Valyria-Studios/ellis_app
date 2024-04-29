@@ -1,11 +1,22 @@
+// Need to replace AsyncStorage with cloud storage
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import renderIcon from "../../shared/RenderIconFunction";
 import globalstyles from "../../shared/globalStyles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ServiceDetails = ({ route, navigation }) => {
   const { category, client } = route.params;
-  console.log(client)
+
+  const updateUsageFrequency = async (optionName) => {
+    try {
+      const currentCount = await AsyncStorage.getItem(optionName);
+      const newCount = currentCount ? JSON.parse(currentCount) + 1 : 1;
+      await AsyncStorage.setItem(optionName, JSON.stringify(newCount));
+    } catch (error) {
+      console.error("Failed to update frequency count", error);
+    }
+  };
 
   return (
     <View
@@ -17,13 +28,14 @@ const ServiceDetails = ({ route, navigation }) => {
             activeOpacity={0.8}
             key={index}
             style={styles.container}
-            onPress={() =>
+            onPress={() => {
+              updateUsageFrequency(option);
               navigation.navigate("Referral Location", {
                 option,
                 categoryName: category.name,
-                client
-              })
-            }
+                client,
+              });
+            }}
           >
             <View
               style={[

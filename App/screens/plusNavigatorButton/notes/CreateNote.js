@@ -48,7 +48,6 @@ const CreateNote = ({ navigation }) => {
       setShowTags(false);
     }
   };
-
   const handleSelectTag = (tag) => {
     const index = selectedTags.findIndex((t) => t.id === tag.id);
     if (index >= 0) {

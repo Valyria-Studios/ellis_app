@@ -131,7 +131,7 @@ const RootNavigator = () => {
         name="Request Services Page"
         component={ServiceDirectory}
         options={({route}) => ({
-          headerTitle: route.params.headerTitle || "Service Directory", // Default title if no parameter provided
+          headerTitle: route.params && route.params.headerTitle ? route.params.headerTitle : "Service Directory",
           headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
@@ -404,8 +404,8 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Create a Note"
         component={CreateNote}
-        options={{
-          headerTitle: "New Note",
+        options={({route}) => ({
+          headerTitle: route.params && route.params.headerTitle ? route.params.headerTitle : "New Note",
           headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
@@ -420,7 +420,7 @@ const RootNavigator = () => {
             shadowColor: "transparent",
             elevation: 0,
           },
-        }}
+        })}
       />
       <RootStack.Screen
         name="Note Details"

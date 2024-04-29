@@ -8,8 +8,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const ServiceDetails = ({ route, navigation }) => {
   const { category, client } = route.params;
 
-  const updateUsageFrequency = async (optionName, categoryName) => {
-    const key = `${categoryName}:${optionName}`; // Create a unique key for each option within its category
+  const updateUsageFrequency = async (optionName, categoryName, categoryIcon, catergoryLibrary) => {
+    const key = `${categoryName}:${optionName}:${categoryIcon}:${catergoryLibrary}`; // Create a unique key for each option within its category
+    console.log("key", key)
     try {
       const currentCount = await AsyncStorage.getItem(key);
       const newCount = currentCount ? JSON.parse(currentCount) + 1 : 1;
@@ -30,7 +31,7 @@ const ServiceDetails = ({ route, navigation }) => {
             key={index}
             style={styles.container}
             onPress={() => {
-              updateUsageFrequency(option, category.name);
+              updateUsageFrequency(option, category.name, category.icon, category.library);
               navigation.navigate("Referral Location", {
                 option,
                 categoryName: category.name,
@@ -44,7 +45,7 @@ const ServiceDetails = ({ route, navigation }) => {
                 { flexDirection: "row", justifyContent: "flex-start" },
               ]}
             >
-              {renderIcon(category.icon, category.library, styles.icon)}
+              {renderIcon(category.icon, category.library, styles.icon, 20)}
               <Text style={globalstyles.optionsText}>{option}</Text>
             </View>
           </TouchableOpacity>

@@ -26,10 +26,13 @@ const ServiceDirectory = ({ route, navigation }) => {
       const keys = await AsyncStorage.getAllKeys();
       const stores = await AsyncStorage.multiGet(keys);
       let freqs = stores.map(([key, value]) => {
-        const [categoryName, optionName] = key.split(":");
+        const [categoryName, optionName, categoryIcon, catergoryLibrary] =
+          key.split(":");
         return {
           option: optionName,
           categoryName: categoryName,
+          icon: categoryIcon,
+          catergoryLibrary: catergoryLibrary,
           count: JSON.parse(value),
         };
       });
@@ -39,6 +42,8 @@ const ServiceDirectory = ({ route, navigation }) => {
       console.error("Failed to load frequencies", error);
     }
   };
+
+  // console.log("frequentServices", frequentServices)
 
   useEffect(() => {
     if (isFocused) {
@@ -130,8 +135,8 @@ const ServiceDirectory = ({ route, navigation }) => {
           <Text style={[styles.subHeader, { marginTop: 0 }]}>
             Frequently Used
           </Text>
-          {frequentServices.map((item, index) => (
-            <View key={index} style={styles.frequentItem}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {frequentServices.map((item, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() =>
@@ -141,13 +146,30 @@ const ServiceDirectory = ({ route, navigation }) => {
                     client: client, // Ensure you have the client data needed, if not, it may need to be handled appropriately
                   })
                 }
+                style={styles.frequentContainer}
               >
-                <Text>
-                  {item.option} - Used {item.count} times
-                </Text>
+                <View>
+                  <Text style={styles.frequentHeader}>{item.categoryName}</Text>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: 30,
+                  }}
+                >
+                  {renderIcon(
+                    item.icon,
+                    item.catergoryLibrary,
+                    styles.frequentIcon,
+                    26
+                  )}
+                  <Text style={styles.frequentOption}>{item.option}</Text>
+                </View>
               </TouchableOpacity>
-            </View>
-          ))}
+            ))}
+          </ScrollView>
         </View>
         <Text style={styles.subHeader}>Services</Text>
         {serviceCategories.map((category, index) => (
@@ -166,12 +188,12 @@ const ServiceDirectory = ({ route, navigation }) => {
                 ]}
               >
                 <View style={{ flexDirection: "row" }}>
-                  {renderIcon(category.icon, category.library, styles.icon)}
+                  {renderIcon(category.icon, category.library, styles.icon, 20)}
                   <Text style={globalstyles.optionsText}>{category.name}</Text>
                 </View>
                 <MaterialIcons
                   name="keyboard-arrow-right"
-                  size={30}
+                  size={28}
                   style={{ color: "#094852" }}
                 />
               </View>
@@ -196,11 +218,48 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 15,
     backgroundColor: "#fff",
+    borderColor: "#B5BABB"
   },
 
   icon: {
     color: "#094852",
     paddingLeft: 10,
+  },
+
+  frequentHeader: {
+    fontFamily: "gabarito-regular",
+    fontSize: 10,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    color: "#465355",
+    textAlign: "left",
+  },
+
+  frequentIcon: {
+    color: "#094852",
+  },
+
+  frequentContainer: {
+    flexDirection: "column",
+    flex: 1,
+    justifyContent: "space-between",
+    margin: 5,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 15,
+    width: 125,
+    height: 175,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#B5BABB',
+  },
+
+  frequentOption: {
+    color: "#171B1C",
+    fontSize: 18,
+    flexWrap: "wrap",
+    flexShrink: 1,
+    textAlign: "center",
+    fontFamily: "gabarito-semibold",
   },
 });
 

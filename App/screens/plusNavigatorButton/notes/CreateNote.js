@@ -1,4 +1,5 @@
 // LOGIC TO SEND TO NEXT PAGE
+// TAGS LOGIC HAS BEEN HIDDEN FOR NOW (YAN ADVICE)
 
 import React, { useState, useEffect } from "react";
 import {
@@ -11,7 +12,12 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../../shared/globalStyles";
 import { TextInput } from "react-native-gesture-handler";
-import { EvilIcons, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  EvilIcons,
+  Ionicons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { format } from "date-fns";
 
 const CreateNote = ({ navigation }) => {
@@ -194,7 +200,7 @@ const CreateNote = ({ navigation }) => {
             onChangeText={setNote}
           />
         </View>
-        <View style={styles.textInputContainer}>
+        {/* <View style={styles.textInputContainer}>
           <MaterialIcons
             name="label-outline"
             size={20}
@@ -233,12 +239,12 @@ const CreateNote = ({ navigation }) => {
                   onPress={() => handleRemoveTag(tag.id)}
                   style={styles.removeTag}
                 >
-                  <Ionicons name="close-circle" size={16} color="#ff0000" />
+                  <AntDesign name="close" size={14} color="#094852" />
                 </TouchableOpacity>
               </View>
             ))}
           </View>
-        )}
+        )} */}
         <View style={styles.textInputContainer}>
           <Ionicons
             name="person-outline"
@@ -327,15 +333,24 @@ const styles = StyleSheet.create({
   tag: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#FFFFFF",
+    borderColor: "#B5BABB",
+    borderWidth: 1,
     borderRadius: 10,
-    padding: 5,
+    paddingHorizontal: 5,
     marginRight: 5,
-    marginBottom: 5,
+    marginBottom: 10,
+    justifyContent: 'center',
   },
+
   tagText: {
     marginRight: 5,
+    paddingLeft: 5,
+    color: "#094852",
+    fontFamily: 'karla-regular',
+    fontSize: 16,
   },
+
   removeTag: {
     padding: 5,
   },

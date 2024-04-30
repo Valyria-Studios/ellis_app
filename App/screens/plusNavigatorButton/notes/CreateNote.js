@@ -114,7 +114,8 @@ const CreateNote = ({ navigation }) => {
       topics: selectedTags.map((tag) => tag.name),
       teamMember: teamMember,
       client: selectedClient,
-      date: formattedDate,
+      dateCreated: formattedDate,
+      lastEdited: formattedDate,
     };
     try {
       const response = await fetch("http://localhost:3000/Notes", {
@@ -340,14 +341,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     marginRight: 5,
     marginBottom: 10,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 
   tagText: {
     marginRight: 5,
     paddingLeft: 5,
     color: "#094852",
-    fontFamily: 'karla-regular',
+    fontFamily: "karla-regular",
     fontSize: 16,
   },
 

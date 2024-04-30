@@ -5,18 +5,23 @@ import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../../shared/globalStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { format } from "date-fns";
 
 const NoteDetails = ({ route }) => {
   const { note } = route.params;
+  const [currentNote, setCurrentNote] = useState(note);
   const [editMode, setEditMode] = useState(false);
   const [editedContent, setEditedContent] = useState(note.content);
   const [editedTeamMember, setEditedTeamMember] = useState(note.teamMember);
 
   const handleUpdateNote = async () => {
+    const now = new Date();
+    const editDate = format(now, "p, PP"); // Formats the current date and time
     const updatedNote = {
       ...note,
       content: editedContent,
       teamMember: editedTeamMember,
+      lastEdited: editDate,
       // Additional fields can be updated here if needed
     };
 
@@ -29,8 +34,10 @@ const NoteDetails = ({ route }) => {
         body: JSON.stringify(updatedNote),
       });
       if (response.ok) {
-        const responseJson = await response.json();
-        console.log("Note updated successfully:", responseJson);
+        const updatedNote = await response.json();
+        console.log("Note updated successfully:", updatedNote);
+        setCurrentNote(updatedNote);
+        setEditMode(false);
       } else {
         console.error(
           "HTTP error: " + response.status + " during updating note"
@@ -39,7 +46,6 @@ const NoteDetails = ({ route }) => {
     } catch (error) {
       console.error("Error sending data to API", error);
     }
-    setEditMode(false);
   };
 
   return (
@@ -50,11 +56,11 @@ const NoteDetails = ({ route }) => {
         <View style={styles.dateContainer}>
           <View>
             <Text style={styles.dateHeader}>Created</Text>
-            <Text style={styles.date}>{note.date}</Text>
+            <Text style={styles.date}>{currentNote.dateCreated}</Text>
           </View>
           <View>
             <Text style={styles.dateHeader}>Last edited</Text>
-            <Text style={styles.date}>{note.date}</Text>
+            <Text style={styles.date}>{currentNote.lastEdited}</Text>
           </View>
         </View>
         {/* <View style={{ flexDirection: "row" }}>
@@ -64,7 +70,6 @@ const NoteDetails = ({ route }) => {
           </View>
         ))}
       </View> */}
-        <Text style={styles.detail}>Assigned to: {note.teamMember}</Text>
         {editMode ? (
           <TextInput
             value={editedTeamMember}
@@ -72,9 +77,8 @@ const NoteDetails = ({ route }) => {
             style={styles.input}
           />
         ) : (
-          <Text style={styles.content}>{note.teamMember}</Text>
+          <Text style={styles.content}>{currentNote.teamMember}</Text>
         )}
-        <Text style={styles.detail}>Note:</Text>
         {editMode ? (
           <TextInput
             value={editedContent}
@@ -83,7 +87,7 @@ const NoteDetails = ({ route }) => {
             multiline
           />
         ) : (
-          <Text style={styles.content}>{note.content}</Text>
+          <Text style={styles.content}>{currentNote.content}</Text>
         )}
         <View>
           <TouchableOpacity

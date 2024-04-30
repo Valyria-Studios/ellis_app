@@ -128,7 +128,7 @@ const CreateNote = ({ navigation }) => {
         const responseJson = await response.json();
         console.log("Note added successfully:", responseJson);
         // Optionally, handle navigation or state updates here
-        navigation.navigate("Note Details", { note: newNote });
+        navigation.navigate("Note Details", { note: responseJson });
       } else {
         console.error("HTTP error: " + response.status + " during adding note");
       }

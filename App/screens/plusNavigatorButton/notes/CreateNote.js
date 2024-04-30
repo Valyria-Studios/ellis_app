@@ -107,7 +107,7 @@ const CreateNote = ({ navigation }) => {
 
   const handleSaveNote = async () => {
     const now = new Date();
-    const formattedDate = format(now, "PPpp"); // Formats the current date and time
+    const formattedDate = format(now, "p, PP"); // Formats the current date and time
     const newNote = {
       title: title,
       content: note,

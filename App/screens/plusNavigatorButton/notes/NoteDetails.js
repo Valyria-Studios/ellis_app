@@ -1,16 +1,17 @@
 // TAGS ARE COMMENTED OUT
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../../shared/globalStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { format } from "date-fns";
 
-const NoteDetails = ({ route }) => {
+const NoteDetails = ({ route, navigation }) => {
   const { note } = route.params;
   const [currentNote, setCurrentNote] = useState(note);
   const [editMode, setEditMode] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(note.title);
   const [editedContent, setEditedContent] = useState(note.content);
   const [editedTeamMember, setEditedTeamMember] = useState(note.teamMember);
 
@@ -19,6 +20,7 @@ const NoteDetails = ({ route }) => {
     const editDate = format(now, "p, PP"); // Formats the current date and time
     const updatedNote = {
       ...note,
+      title: editedTitle, // Update title
       content: editedContent,
       teamMember: editedTeamMember,
       lastEdited: editDate,
@@ -38,6 +40,9 @@ const NoteDetails = ({ route }) => {
         console.log("Note updated successfully:", updatedNote);
         setCurrentNote(updatedNote);
         setEditMode(false);
+        navigation.setOptions({
+          headerTitle: `${updatedNote.title} Notes`,
+        });
       } else {
         console.error(
           "HTTP error: " + response.status + " during updating note"
@@ -70,6 +75,13 @@ const NoteDetails = ({ route }) => {
           </View>
         ))}
       </View> */}
+        {editMode && (
+          <TextInput
+            value={editedTitle}
+            onChangeText={setEditedTitle}
+            style={styles.input}
+          />
+        )}
         {editMode ? (
           <TextInput
             value={editedTeamMember}

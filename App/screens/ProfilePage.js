@@ -532,7 +532,12 @@ function ProfilePage({ route, navigation }) {
     <View style={{ padding: 10 }}>
       <View style={{ marginBottom: 10 }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Create a Note", { headerTitle: `New Note for ${client.fullName}` })}
+          onPress={() =>
+            navigation.navigate("Create a Note", {
+              headerTitle: `New Note for ${client.fullName}`,
+              clientName: client.fullName
+            })
+          }
           style={[
             globalstyles.buttonContainer,
             { backgroundColor: "#FFFFFF", borderRadius: 15, shadowOpacity: 0 },

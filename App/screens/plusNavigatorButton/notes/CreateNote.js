@@ -20,8 +20,9 @@ import {
 } from "@expo/vector-icons";
 import { format } from "date-fns";
 
-const CreateNote = ({ navigation }) => {
+const CreateNote = ({ route, navigation }) => {
   const [selectedClient, setSelectedClient] = useState("");
+  const [showClientSearch, setShowClientSearch] = useState(false);
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
   const [title, setTitle] = useState("");
@@ -40,6 +41,15 @@ const CreateNote = ({ navigation }) => {
     { id: 3, name: "Follow-up" },
     { id: 4, name: "Meeting" },
   ];
+
+  useEffect(() => {
+    // If there's a client name passed, set it
+    if (route.params?.clientName) {
+      setSelectedClient(route.params.clientName);
+    } else {
+      setShowClientSearch(true);
+    }
+  }, [route.params?.clientName]);
 
   const handleSearchTag = (text) => {
     setTagSearch(text);
@@ -102,6 +112,7 @@ const CreateNote = ({ navigation }) => {
 
   const handleSelectClient = (client) => {
     setSelectedClient(client.fullName);
+    setShowClientSearch(false);
     setShowClients(false); // Hide the list
   };
 
@@ -146,22 +157,24 @@ const CreateNote = ({ navigation }) => {
       ]}
     >
       <View style={{ flex: 1 }}>
-        <View style={styles.textInputContainer}>
-          <EvilIcons
-            name="search"
-            size={24}
-            color="#828B89"
-            style={{ paddingLeft: 10 }}
-          />
-          <TextInput
-            blurOnSubmit={true}
-            style={styles.textInput}
-            placeholder="Select Client"
-            value={selectedClient}
-            onChangeText={setSelectedClient}
-            onFocus={() => setShowClients(true)} // Show the list when input is focused
-          />
-        </View>
+        {showClientSearch && (
+          <View style={styles.textInputContainer}>
+            <EvilIcons
+              name="search"
+              size={24}
+              color="#828B89"
+              style={{ paddingLeft: 10 }}
+            />
+            <TextInput
+              blurOnSubmit={true}
+              style={styles.textInput}
+              placeholder="Select Client"
+              value={selectedClient}
+              onChangeText={setSelectedClient}
+              onFocus={() => setShowClients(true)} // Show the list when input is focused
+            />
+          </View>
+        )}
         {showClients && filteredClients.length > 0 && (
           <FlatList
             data={filteredClients}
@@ -177,6 +190,7 @@ const CreateNote = ({ navigation }) => {
             style={[styles.clientList, { maxHeight: 200 }]}
           />
         )}
+
         <View style={styles.textInputContainer}>
           <TextInput
             blurOnSubmit={true}

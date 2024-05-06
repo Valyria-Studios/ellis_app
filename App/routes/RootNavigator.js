@@ -130,8 +130,11 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Request Services Page"
         component={ServiceDirectory}
-        options={({route}) => ({
-          headerTitle: route.params && route.params.headerTitle ? route.params.headerTitle : "Service Directory",
+        options={({ route }) => ({
+          headerTitle:
+            route.params && route.params.headerTitle
+              ? route.params.headerTitle
+              : "Service Directory",
           headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
@@ -404,8 +407,11 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Create a Note"
         component={CreateNote}
-        options={({route}) => ({
-          headerTitle: route.params && route.params.headerTitle ? route.params.headerTitle : "New Note",
+        options={({ route }) => ({
+          headerTitle:
+            route.params && route.params.headerTitle
+              ? route.params.headerTitle
+              : "New Note",
           headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
@@ -441,6 +447,34 @@ const RootNavigator = () => {
             shadowColor: "transparent",
             elevation: 0,
           },
+          headerRight: () => (
+            <Menu>
+              <MenuTrigger>
+                <Ionicons
+                  name="ellipsis-vertical"
+                  size={24}
+                  style={{ paddingRight: 10, color: "#094852" }}
+                />
+              </MenuTrigger>
+              <MenuOptions
+                optionsContainerStyle={{
+                  marginTop: 30,
+                  width: 150,
+                  padding: 5,
+                }}
+              >
+                <MenuOption text="Edit Note" style={styles.noteOptionEdit} />
+                <MenuOption
+                  text="Delete Note"
+                  style={styles.noteOptionDelete}
+                  onSelect={() => {
+                    // Call the confirmDelete function passed via navigation params
+                    route.params.confirmDelete && route.params.confirmDelete();
+                  }}
+                />
+              </MenuOptions>
+            </Menu>
+          ),
         })}
       />
       <RootStack.Screen
@@ -495,6 +529,20 @@ const styles = StyleSheet.create({
   menuOption: {
     borderBottomWidth: 1,
     borderBottomColor: "#dedede",
+    padding: 10,
+  },
+
+  noteOptionEdit: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#094852", // Set a specific color for Edit Note
+    padding: 10,
+  },
+
+  noteOptionDelete: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+    color: "#FF6347", // Set a specific color for Delete Note (e.g., a red color)
     padding: 10,
   },
 });

@@ -1,7 +1,14 @@
 // TAGS ARE COMMENTED OUT
 
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../../shared/globalStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -52,6 +59,49 @@ const NoteDetails = ({ route, navigation }) => {
       console.error("Error sending data to API", error);
     }
   };
+
+  const confirmDelete = () => {
+    Alert.alert(
+      "Delete Note",
+      "Are you sure you want to delete this note?",
+      [
+        {
+          text: "No, keep note",
+          onPress: () => console.log("Deletion cancelled"),
+          style: "cancel",
+        },
+        {
+          text: "Yes, confirm delete",
+          onPress: () => deleteNote(),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const deleteNote = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/Notes/${route.params.note.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        console.log("Note deleted successfully");
+        navigation.goBack();
+      } else {
+        throw new Error("Failed to delete the note");
+      }
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+  };
+
+  // Ensure these functions are set when the component mounts
+  useEffect(() => {
+    navigation.setParams({ confirmDelete });
+  }, []);
 
   return (
     <SafeAreaView
@@ -115,7 +165,7 @@ const NoteDetails = ({ route, navigation }) => {
             activeOpacity={0.6}
           >
             <Text style={[globalstyles.buttonText]}>
-              {editMode ? "Save Changes" : "Edit Note"}
+              {editMode ? "Save Note" : "Edit Note"}
             </Text>
           </TouchableOpacity>
         </View>

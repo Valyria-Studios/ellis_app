@@ -1,4 +1,3 @@
-// LOGIC TO SEND TO NEXT PAGE
 // TAGS LOGIC HAS BEEN HIDDEN FOR NOW (YAN ADVICE)
 
 import React, { useState, useEffect } from "react";

@@ -535,7 +535,7 @@ function ProfilePage({ route, navigation }) {
           onPress={() =>
             navigation.navigate("Create a Note", {
               headerTitle: `New Note for ${client.fullName}`,
-              clientName: client.fullName
+              clientName: client.fullName,
             })
           }
           style={[
@@ -614,24 +614,27 @@ function ProfilePage({ route, navigation }) {
 
   return (
     // RENDER STATUS LOGIC
-    <ImageBackground source={imageMap[client.image]} style={styles.container}>
-      <View style={styles.overlay} />
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.centerCard}>
-          <View style={styles.mainText}>
-            <View style={styles.header}>
-              <Text style={styles.clientName}>{client.fullName}</Text>
-              <View style={styles.iconSpacing}>
-                <View style={styles.iconsContainer}>
-                  <MaterialCommunityIcons
-                    name="message"
-                    size={18}
-                    style={styles.icon}
-                  />
-                </View>
-              </View>
-            </View>
-            <View style={globalstyles.detailsContainer}>
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.mainText}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "space-evenly",
+          }}
+        >
+          <View>
+            <Image
+              source={imageMap[client.image]}
+              style={[
+                globalstyles.profileImage,
+                { width: 80, height: 80, marginRight: 0 },
+              ]}
+            />
+          </View>
+          <View>
+            <View style={{ flexDirection: "row" }}>
               <View>
                 <Text style={globalstyles.details}>Age</Text>
                 <Text style={globalstyles.detailsText}>{client.age}</Text>
@@ -668,88 +671,70 @@ function ProfilePage({ route, navigation }) {
                 </Text>
               </TouchableOpacity>
             </View>
-            <View>
-              <View>
-                <Text style={globalstyles.details}>Activities</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  marginHorizontal: 5,
-                }}
-              >
-                {client.services && Array.isArray(client.services)
-                  ? client.services.map((service, index) => (
-                      <View key={index} style={globalstyles.tagBackground}>
-                        <Text style={globalstyles.individualTags}>
-                          {service}
-                        </Text>
-                      </View>
-                    ))
-                  : null}
-              </View>
-            </View>
-            <View>
-              <ProgressBar progress={progress} />
-            </View>
           </View>
         </View>
-        <View style={styles.serviceContainer}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={styles.serviceHeader}>
-              {tabItems.map((sortItem) => (
-                <TouchableOpacity
-                  key={sortItem}
-                  activeOpacity={1}
-                  onPress={() => setSelectedItem(sortItem)}
+        <View>
+          <View>
+            <Text style={[globalstyles.details, {margin: 0, marginBottom: 10}]}>Activities</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              // marginHorizontal: 5,
+            }}
+          >
+            {client.services && Array.isArray(client.services)
+              ? client.services.map((service, index) => (
+                  <View key={index} style={globalstyles.tagBackground}>
+                    <Text style={globalstyles.individualTags}>{service}</Text>
+                  </View>
+                ))
+              : null}
+          </View>
+        </View>
+        <View>
+          <Text style={[globalstyles.details, {margin: 0, marginTop: 15, marginBottom: 10}]}>Service Progress</Text>
+          <ProgressBar progress={progress} />
+        </View>
+      </View>
+      <View style={styles.serviceContainer}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.serviceHeader}>
+            {tabItems.map((sortItem) => (
+              <TouchableOpacity
+                key={sortItem}
+                activeOpacity={1}
+                onPress={() => setSelectedItem(sortItem)}
+              >
+                <View
+                  style={
+                    selectedItem === sortItem
+                      ? styles.selectedItemContainer
+                      : styles.serviceItemContainer
+                  }
                 >
-                  <View
+                  <Text
                     style={
                       selectedItem === sortItem
-                        ? styles.selectedItemContainer
-                        : styles.serviceItemContainer
+                        ? styles.selectedServiceHeaderItems
+                        : styles.serviceHeaderItems
                     }
                   >
-                    <Text
-                      style={
-                        selectedItem === sortItem
-                          ? styles.selectedServiceHeaderItems
-                          : styles.serviceHeaderItems
-                      }
-                    >
-                      {sortItem}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
-          <View style={{ marginHorizontal: 5 }}>{content}</View>
-        </View>
-      </ScrollView>
-    </ImageBackground>
+                    {sortItem}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
+        <View style={{ marginHorizontal: 5 }}>{content}</View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    resizeMode: "cover",
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-  },
-
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(255,255,255, 0.4)",
-  },
-
-  centerCard: {
-    marginTop: 350,
-    zIndex: 2,
-  },
-
   scrollView: {
     flex: 1,
   },

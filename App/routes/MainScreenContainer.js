@@ -4,7 +4,7 @@ import FloatingActionMenu from "./FloatingActionMenu";
 import Messages from "../screens/Messages";
 import Settings from "../screens/settingsPage/Settings";
 import RelationshipPage from "../screens/Relationships";
-import Directory from "../screens/Directory";
+import Directory from "../screens/directoryPages/Directory";
 
 
 const MainScreenContainer = () => {

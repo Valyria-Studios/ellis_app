@@ -35,6 +35,9 @@ import CreateNote from "../screens/plusNavigatorButton/notes/CreateNote";
 import CreateClient from "../screens/plusNavigatorButton/client/CreateClient";
 import ClientInformation from "../screens/plusNavigatorButton/client/ClientInformation";
 import NoteDetails from "../screens/plusNavigatorButton/notes/NoteDetails";
+import MyHours from "../screens/directoryPages/myHours";
+import MyServices from "../screens/directoryPages/myServices";
+import MyClients from "../screens/directoryPages/myClients";
 
 const RootStack = createStackNavigator();
 
@@ -48,6 +51,66 @@ const RootNavigator = () => {
           headerShown: false,
           headerBackTitle: " ",
         }} // Hide header for the MainApp
+      />
+      <RootStack.Screen
+        name="My Clients"
+        component={MyClients}
+        options={{
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
+      />
+      <RootStack.Screen
+        name="My Services"
+        component={MyServices}
+        options={{
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
+      />
+      <RootStack.Screen
+        name="My Hours"
+        component={MyHours}
+        options={{
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -180,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
       />
       <RootStack.Screen
         name="ChatPage"

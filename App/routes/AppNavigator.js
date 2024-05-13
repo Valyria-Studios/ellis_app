@@ -5,7 +5,7 @@ import Messages from "../screens/Messages";
 import Settings from "../screens/settingsPage/Settings";
 import RelationshipPage from "../screens/Relationships";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Directory from "../screens/Directory";
+import Directory from "../screens/directoryPages/Directory";
 import ChatPage from "../screens/ChatPage";
 
 const Tab = createBottomTabNavigator();

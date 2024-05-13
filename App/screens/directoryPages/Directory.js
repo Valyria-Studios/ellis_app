@@ -10,14 +10,14 @@ import {
   Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import SearchComponent from "../shared/SearchHeader";
-import { getSortedAmenities } from "../filtering/sortByFiltering";
-import globalstyles from "../shared/globalStyles";
-import { filterOpenNowAmenities } from "../filtering/openNowFilter";
+import SearchComponent from "../../shared/SearchHeader";
+import { getSortedAmenities } from "../../filtering/sortByFiltering";
+import globalstyles from "../../shared/globalStyles";
+import { filterOpenNowAmenities } from "../../filtering/openNowFilter";
 import {
   applyFiltersAndSort,
   applyCategoryFilter,
-} from "../filtering/amenityFilter";
+} from "../../filtering/amenityFilter";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Octicons } from "@expo/vector-icons";
 
@@ -139,7 +139,12 @@ export default function Directory() {
             <Text style={styles.sectionHeader}>My Engagement</Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <View style={styles.cards}>
+            <TouchableOpacity
+              style={styles.cards}
+              onPress={() => {
+                navigation.navigate("My Clients");
+              }}
+            >
               <View
                 style={{
                   flexDirection: "row",
@@ -150,8 +155,13 @@ export default function Directory() {
                 <Text style={styles.numberText}>clients</Text>
               </View>
               <Text style={styles.cardSubText}>This Year</Text>
-            </View>
-            <View style={styles.cards}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cards}
+              onPress={() => {
+                navigation.navigate("My Services");
+              }}
+            >
               <View
                 style={{
                   flexDirection: "row",
@@ -162,8 +172,13 @@ export default function Directory() {
                 <Text style={styles.numberText}>services</Text>
               </View>
               <Text style={styles.cardSubText}>This Month</Text>
-            </View>
-            <View style={styles.cards}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cards}
+              onPress={() => {
+                navigation.navigate("My Hours");
+              }}
+            >
               <View
                 style={{
                   flexDirection: "row",
@@ -174,7 +189,7 @@ export default function Directory() {
                 <Text style={styles.numberText}>hours</Text>
               </View>
               <Text style={styles.cardSubText}>This Week</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.sectionHeaderContainer}>
@@ -286,7 +301,7 @@ export default function Directory() {
               <View style={styles.cards}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Image
-                    source={require("../assets/images/userImage1.jpg")}
+                    source={require("../../assets/images/userImage1.jpg")}
                     style={styles.profileImage}
                   />
                   <Text style={styles.name}>Chris A.</Text>
@@ -311,7 +326,7 @@ export default function Directory() {
               <View style={styles.cards}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Image
-                    source={require("../assets/images/userImage2.jpg")}
+                    source={require("../../assets/images/userImage2.jpg")}
                     style={styles.profileImage}
                   />
                   <Text style={styles.name}>Rob B.</Text>
@@ -336,7 +351,7 @@ export default function Directory() {
               <View style={styles.cards}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Image
-                    source={require("../assets/images/userImage3.jpg")}
+                    source={require("../../assets/images/userImage3.jpg")}
                     style={styles.profileImage}
                   />
                   <Text style={styles.name}>Julia C.</Text>

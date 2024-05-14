@@ -9,34 +9,59 @@ const ClientInformation = ({ navigation }) => {
   const [selectedValues, setSelectedValues] = useState({
     pronouns: null,
     language: null,
+    ethnicity: null,
+    sexual_orientation: null,
   });
 
   const demographicInfo = [
     {
       name: "Select Gender Pronouns",
+      key: "pronouns",
       options: [
-        { label: "He/Him/His", value: "He/Him/His" },
-        { label: "She/Her/Hers", value: "She/Her/Hers" },
-        { label: "They/Them/Theirs", value: "They/Them/Theirs" },
-        { label: "Prefer not to say", value: "Prefer not to say" },
+        "He/Him/His",
+        "She/Her/Hers",
+        "They/Them/Theirs",
+        "Prefer not to say",
       ],
     },
     {
       name: "Select Language",
+      key: "language",
+      options: ["English", "Spanish", "French", "Mandarin"],
+    },
+    {
+      name: "Select your Ethnicity",
+      key: "ethnicity",
       options: [
-        { label: "English", value: "English" },
-        { label: "Spanish", value: "Spanish" },
-        { label: "French", value: "French" },
-        { label: "Mandarin", value: "Mandarin" },
+        "American Indian or Alaskan Native",
+        "Black or African American",
+        "Hispanic, Latino, or Spanish",
+        "Middle Eastern or North African",
+        "Native Hawaiian/Other Pacific Islander",
+        "White",
+      ],
+    },
+    {
+      name: "Select your Sexual Orientation/Identity",
+      key: "sexual_orientation",
+      options: [
+        "Bisexual",
+        "Gay/Lesbian/Same-Gender Loving",
+        "Questioning/Unsure",
+        "Straight/Heterosexual",
+        "Not Listed",
+        "Decline to Answer",
       ],
     },
   ];
 
-  const handleValueChange = (value, index) => {
-    const key = index === 0 ? "pronouns" : "language";
-    setSelectedValues((prev) => ({ ...prev, [key]: value }));
+  const createOptions = (options) => {
+    return options.map((option) => ({ label: option, value: option }));
   };
 
+  const handleValueChange = (value, key) => {
+    setSelectedValues((prev) => ({ ...prev, [key]: value }));
+  };
   return (
     <SafeAreaView style={globalstyles.container}>
       <View style={{ marginTop: 60 }} />
@@ -51,8 +76,11 @@ const ClientInformation = ({ navigation }) => {
           >
             <View>
               <RNPickerSelect
-                onValueChange={(value) => handleValueChange(value, index)}
-                items={category.options}
+                key={index}
+                onValueChange={(value) =>
+                  handleValueChange(value, category.key)
+                }
+                items={createOptions(category.options)}
                 placeholder={{ label: `${category.name}`, value: null }}
                 style={{
                   input: globalstyles.input,

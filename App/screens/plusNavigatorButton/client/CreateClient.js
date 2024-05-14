@@ -47,6 +47,7 @@ const CreateClient = ({ navigation }) => {
         <View style={[globalstyles.optionContainer, { marginTop: 10 }]}>
           <View>
             <RNPickerSelect
+              key={amenityOptions.key}
               items={amenityOptions}
               onValueChange={handleValueChange}
               value={selectedAmenity}

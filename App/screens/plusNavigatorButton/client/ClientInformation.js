@@ -23,6 +23,10 @@ const ClientInformation = ({ navigation }) => {
     disability: null,
     fosterCare: null,
     singleParent: null,
+    school: null,
+    degree: null,
+    employmentStatus: null,
+    fullTime: null,
   });
 
   const demographicInfo = [
@@ -67,7 +71,7 @@ const ClientInformation = ({ navigation }) => {
     },
   ];
 
-  const yesNoQuestions = [
+  const demographicQuestions = [
     {
       name: "Are you currently in the military or a veteran?",
       key: "military",
@@ -86,6 +90,52 @@ const ClientInformation = ({ navigation }) => {
       key: "fosterCare",
     },
     { name: "Are you a single parent?", key: "singleParent" },
+  ];
+
+  const educationAndEmployment = [
+    {
+      name: "Are you currently in school?",
+      key: "school",
+      options: [
+        "In School, High School",
+        "In School, Alternative School",
+        "In School, Postsecondary School",
+        "Not in School, High School Graduate",
+        "Not in School, High School Dropout",
+      ],
+    },
+    {
+      name: "What is your highest level of education?",
+      key: "degree",
+      options: [
+        "No schooling completed",
+        "12th Grade - NO DIPLOMA",
+        "High School Diploma",
+        "GED or Equivalent",
+        "Certificate of Attendance/Completion",
+        "Post-Secondary Technical",
+        "Some College, No Degree",
+        "Associate's Degree",
+        "Bachelor's Degree",
+        "Degree Beyond a Bachelor's Degree",
+      ],
+    },
+    {
+      name: "What is your current employment status?",
+      key: "employmentStatus",
+      options: [
+        "Working Full Time",
+        "Working Part Time (less than 32 hours)",
+        "Not Working",
+        "Never Worked",
+        "Other",
+      ],
+    },
+    {
+      name: "Are you seeking full-time employment?",
+      key: "fullTime",
+      options: ["Yes", "No", "Not Applicable"],
+    },
   ];
 
   const createOptions = (options) => {
@@ -137,7 +187,7 @@ const ClientInformation = ({ navigation }) => {
             </View>
           </View>
         ))}
-        {yesNoQuestions.map((question, index) => (
+        {demographicQuestions.map((question, index) => (
           <View key={index} style={styles.yesNoContainer}>
             <Text style={globalstyles.input}>{question.name}</Text>
             <View style={styles.yesNoButtons}>
@@ -167,6 +217,41 @@ const ClientInformation = ({ navigation }) => {
                   <View style={styles.radioButtonInner} />
                 )}
               </TouchableOpacity>
+            </View>
+          </View>
+        ))}
+        <View style={styles.divderLines} />
+        <Text style={styles.subHeader}>Education and Employment</Text>
+        {educationAndEmployment.map((category, index) => (
+          <View key={index} style={styles.container}>
+            <View
+              style={[
+                globalstyles.optionsContainer,
+                { justifyContent: "space-between", borderWidth: 0 },
+              ]}
+            >
+              <View>
+                <RNPickerSelect
+                  key={index}
+                  onValueChange={(value) =>
+                    handleValueChange(value, category.key)
+                  }
+                  items={createOptions(category.options)}
+                  placeholder={{ label: `${category.name}`, value: null }}
+                  style={{
+                    input: globalstyles.input,
+                    placeholder: globalstyles.placeholder,
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                />
+              </View>
+              <View>
+                <MaterialIcons
+                  name="keyboard-arrow-right"
+                  size={30}
+                  style={[styles.icon, { color: "#094852" }]}
+                />
+              </View>
             </View>
           </View>
         ))}
@@ -240,6 +325,17 @@ const styles = StyleSheet.create({
   icon: {
     color: "#094852",
     paddingLeft: 10,
+  },
+  divderLines: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#909899",
+  },
+  educationEmploymentText: {
+    flexShrink: 1,
+    flexWrap: "wrap",
+    fontSize: 16,
+    color: "#030E07",
   },
 });
 

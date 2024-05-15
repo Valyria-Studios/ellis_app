@@ -529,6 +529,34 @@
       "notes": {
         "hello": "hello"
       },
+      "engagements": {
+        "hours": {
+          "title": "some title",
+          "time": 8,
+          "date": "April 21st, 2:36 PM",
+          "rating": "something"
+        },
+        "services": {
+          "title": "some title",
+          "time": 8,
+          "date": "April 21st, 2:36 PM",
+          "rating": "something"
+        },
+        "clients": [
+          {
+            "clientId": "3",
+            "relationship": "added"
+          },
+          {
+            "clientId": "5",
+            "relationship": "added"
+          },
+          {
+            "clientId": "4",
+            "relationship": "added"
+          }
+        ]
+      },
       "id": "1"
     },
     {

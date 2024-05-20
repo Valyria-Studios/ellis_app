@@ -66,7 +66,6 @@ const RootNavigator = () => {
             left: -180,
           },
           headerStyle: {
-            backgroundColor: "#F3F8F9",
             shadowColor: "transparent",
             elevation: 0,
           },
@@ -86,7 +85,6 @@ const RootNavigator = () => {
             left: -180,
           },
           headerStyle: {
-            backgroundColor: "#F3F8F9",
             shadowColor: "transparent",
             elevation: 0,
           },
@@ -106,7 +104,6 @@ const RootNavigator = () => {
             left: -180,
           },
           headerStyle: {
-            backgroundColor: "#F3F8F9",
             shadowColor: "transparent",
             elevation: 0,
           },

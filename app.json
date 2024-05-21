@@ -1,9 +1,37 @@
 {
   "expo": {
+    "name": "App",
+    "slug": "ellis-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mpatel31.App"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
     "extra": {
       "eas": {
-        "projectId": "3bc4ca0f-0fec-4aa3-9e17-a170bcb7e713"
+        "projectId": "2d4a8ef2-a0bb-4fe0-bfe2-894723f3cbfc"
       }
-    }
+    },
+    "owner": "valyria"
   }
 }

@@ -16,14 +16,7 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {
-      "android": {
-        "image": "latest"
-      },
-      "ios": {
-        "image": "latest"
-      }
-    }
+    "production": {}
   },
   "submit": {
     "production": {}

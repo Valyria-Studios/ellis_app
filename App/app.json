@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "App",
-    "slug": "App",
+    "slug": "ellis-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,9 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "f3bd58e6-9c2e-408e-a407-bbc0b7d4dc7c"
+        "projectId": "2d4a8ef2-a0bb-4fe0-bfe2-894723f3cbfc"
       }
     },
-    "owner": "mpatel31"
+    "owner": "valyria"
   }
 }

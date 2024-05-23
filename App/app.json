@@ -32,6 +32,15 @@
         "projectId": "2d4a8ef2-a0bb-4fe0-bfe2-894723f3cbfc"
       }
     },
-    "owner": "valyria"
+    "owner": "valyria",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2d4a8ef2-a0bb-4fe0-bfe2-894723f3cbfc"
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

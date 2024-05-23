@@ -13,7 +13,7 @@ import imageMap from "../../shared/getProfileImage";
 import globalstyles from "../../shared/globalStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const MyClients = () => {
+const MyClients = ({ navigation }) => {
   const [engagementClients, setEngagementClients] = useState([]);
 
   useEffect(() => {
@@ -39,13 +39,17 @@ const MyClients = () => {
       .catch((error) => console.error("Error fetching client data:", error));
   }, []);
 
+  const handleClientPress = (client) => {
+    navigation.navigate("Profile Page", { client }); // Navigate to the ProfilePage with client data
+  };
+
   const renderEngagementClientItem = ({ item }) => (
     <View style={styles.clientItem}>
       <View style={{ flexDirection: "row" }}>
         <Image source={imageMap[item.image]} style={styles.profileImage} />
         <View style={styles.clientHeader}>
           <Text style={styles.clientName}>{item.fullName}</Text>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => handleClientPress(item)}>
             <MaterialIcons name="more-vert" size={24} color="#666" />
           </TouchableWithoutFeedback>
         </View>
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   description: {
-    fontFamily: 'karla-regular',
+    fontFamily: "karla-regular",
     fontSize: 16,
     color: "#171B1C",
   },

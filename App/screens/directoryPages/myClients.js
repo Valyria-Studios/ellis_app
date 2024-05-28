@@ -36,6 +36,7 @@ const MyClients = ({ navigation }) => {
               return {
                 ...client,
                 dateAdded: engagementClient.dateAdded,
+                interactions: engagementClient.interactions,
               };
             }
           );
@@ -137,9 +138,14 @@ const MyClients = ({ navigation }) => {
           </Text>
           <Text style={styles.description}>{item.dateAdded}</Text>
         </View>
-        <Text style={[globalstyles.details, { margin: 0, letterSpacing: 1.5 }]}>
-          Interactions
-        </Text>
+        <View>
+          <Text
+            style={[globalstyles.details, { margin: 0, letterSpacing: 1.5 }]}
+          >
+            Interactions
+          </Text>
+          <Text style={styles.description}>{item.interactions}</Text>
+        </View>
       </View>
     </View>
   );
@@ -194,7 +200,7 @@ const styles = StyleSheet.create({
 const optionsStyles = {
   optionsContainer: {
     padding: 10,
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#FFFFFF",
     borderRadius: 5,
     width: 150,
   },

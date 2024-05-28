@@ -1,3 +1,5 @@
+// LOGIC FOR INTERACTIONS (HOW THEY ARE INCREASED, NOTES, REFERRALS, ETC)
+
 import React, { useEffect, useState } from "react";
 import {
   Text,
@@ -59,16 +61,34 @@ const AddClientToEngagement = ({ route }) => {
   );
 
   // Function to add selected client to the engagements
-  const addClientToEngagement = async () => {
+  const addClient = async () => {
     if (selectedClient) {
+      const existingClient = clientData.engagements.clients.find(
+        (client) => client.clientId === selectedClient.id
+      );
+
+      let updatedClients;
+      if (existingClient) {
+        updatedClients = clientData.engagements.clients.map((client) =>
+          client.clientId === selectedClient.id
+            ? { ...client, interactions: (client.interactions || 0) + 1 }
+            : client
+        );
+      } else {
+        updatedClients = [
+          ...clientData.engagements.clients,
+          {
+            clientId: selectedClient.id,
+            relationship: "added",
+            interactions: 1,
+          },
+        ];
+      }
+
       try {
-        console.log("Adding client with ID:", selectedClient.id);
         const updatedEngagements = {
           ...clientData.engagements,
-          clients: [
-            ...clientData.engagements.clients,
-            { clientId: selectedClient.id, relationship: "added" },
-          ],
+          clients: updatedClients,
         };
         const response = await fetch(
           `http://localhost:3000/Clients/${clientId}`,
@@ -86,6 +106,7 @@ const AddClientToEngagement = ({ route }) => {
         if (response.ok) {
           const updatedClientData = await response.json();
           setClientData(updatedClientData);
+          fetchEngagementClients(updatedClientData.engagements.clients);
         } else {
           console.error("Error adding client to engagements");
         }
@@ -115,7 +136,7 @@ const AddClientToEngagement = ({ route }) => {
           </TouchableOpacity>
         )}
       />
-      <TouchableOpacity onPress={addClientToEngagement} style={styles.button}>
+      <TouchableOpacity onPress={addClient} style={styles.button}>
         <Text style={styles.buttonText}>Add Client to Engagement</Text>
       </TouchableOpacity>
       <Text style={styles.subHeader}>Engagement Clients</Text>

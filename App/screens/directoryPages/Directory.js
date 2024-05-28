@@ -18,7 +18,7 @@ import {
   applyFiltersAndSort,
   applyCategoryFilter,
 } from "../../filtering/amenityFilter";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Octicons } from "@expo/vector-icons";
 
 export default function Directory() {
@@ -29,6 +29,7 @@ export default function Directory() {
   const [sortCriteria, setSortCriteria] = useState(null);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
   const [clientCount, setClientCount] = useState(0);
+  const isFocused = useIsFocused();
 
   const tabItems = ["Me", "Valyria Studios"];
 
@@ -51,22 +52,24 @@ export default function Directory() {
   }, [searchInput, selectedCategoryFilter, sortCriteria]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/Clients")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && data.length > 0) {
-          const firstClient = data[0];
-          if (firstClient.engagements && firstClient.engagements.clients) {
-            setClientCount(firstClient.engagements.clients.length);
+    if (isFocused) {
+      fetch("http://localhost:3000/Clients")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data && data.length > 0) {
+            const firstClient = data[0];
+            if (firstClient.engagements && firstClient.engagements.clients) {
+              setClientCount(firstClient.engagements.clients.length);
+            } else {
+              setClientCount(0);
+            }
           } else {
             setClientCount(0);
           }
-        } else {
-          setClientCount(0);
-        }
-      })
-      .catch((error) => console.error("Error fetching client data:", error));
-  }, []);
+        })
+        .catch((error) => console.error("Error fetching client data:", error));
+    }
+  }, [isFocused]);
 
   const handlePress = (category) => {
     setSelectedCategoryFilter((prevCategory) =>

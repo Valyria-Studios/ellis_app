@@ -542,7 +542,32 @@
           "date": "April 21st, 2:36 PM",
           "rating": "something"
         },
-        "clients": []
+        "clients": [
+          {
+            "clientId": "2",
+            "relationship": "added",
+            "dateAdded": "April 1st, 2021",
+            "interactions": 3
+          },
+          {
+            "clientId": "4",
+            "relationship": "added",
+            "dateAdded": "March 16th, 2024",
+            "interactions": 4
+          },
+          {
+            "clientId": "5",
+            "relationship": "added",
+            "dateAdded": "January 21st, 2023",
+            "interactions": 6
+          },
+          {
+            "clientId": "6",
+            "relationship": "added",
+            "dateAdded": "May 6th, 2022",
+            "interactions": 2
+          }
+        ]
       },
       "id": "1"
     },

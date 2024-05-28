@@ -38,6 +38,7 @@ import NoteDetails from "../screens/plusNavigatorButton/notes/NoteDetails";
 import MyHours from "../screens/directoryPages/myHours";
 import MyServices from "../screens/directoryPages/myServices";
 import MyClients from "../screens/directoryPages/myClients";
+import AddClientToEngagement from "../data/testAddClient";
 
 const RootStack = createStackNavigator();
 

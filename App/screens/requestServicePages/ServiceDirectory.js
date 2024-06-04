@@ -133,7 +133,7 @@ const ServiceDirectory = ({ route, navigation }) => {
         </View>
         <View>
           <Text style={[styles.subHeader, { marginTop: 0 }]}>
-            Frequently Used
+            Recently Viewed
           </Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {frequentServices.map((item, index) => (

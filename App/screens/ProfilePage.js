@@ -675,7 +675,11 @@ function ProfilePage({ route, navigation }) {
         </View>
         <View>
           <View>
-            <Text style={[globalstyles.details, {margin: 0, marginBottom: 10}]}>Activities</Text>
+            <Text
+              style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
+            >
+              Activities
+            </Text>
           </View>
           <View
             style={{
@@ -694,7 +698,14 @@ function ProfilePage({ route, navigation }) {
           </View>
         </View>
         <View>
-          <Text style={[globalstyles.details, {margin: 0, marginTop: 15, marginBottom: 10}]}>Service Progress</Text>
+          <Text
+            style={[
+              globalstyles.details,
+              { margin: 0, marginTop: 15, marginBottom: 10 },
+            ]}
+          >
+            Service Progress
+          </Text>
           <ProgressBar progress={progress} />
         </View>
       </View>
@@ -737,6 +748,7 @@ function ProfilePage({ route, navigation }) {
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
+    backgroundColor: "#F3F8F9",
   },
 
   mainText: {

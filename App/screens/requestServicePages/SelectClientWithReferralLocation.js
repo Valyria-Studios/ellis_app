@@ -21,6 +21,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchClients = async () => {

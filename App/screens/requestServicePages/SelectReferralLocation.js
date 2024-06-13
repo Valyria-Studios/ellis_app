@@ -17,7 +17,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/Amenities")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities")
       .then((response) => response.json())
       .then((data) => {
         const filteredAmenities = data.filter((amenity) =>

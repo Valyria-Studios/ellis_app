@@ -20,7 +20,9 @@ const AddClientToEngagement = ({ route }) => {
 
   // Fetch the main client's data
   useEffect(() => {
-    fetch(`http://localhost:3000/Clients/${clientId}`)
+    fetch(
+      `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientId}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -37,9 +39,9 @@ const AddClientToEngagement = ({ route }) => {
 
   const fetchEngagementClients = (engagementClients) => {
     const fetchPromises = engagementClients.map((client) =>
-      fetch(`http://localhost:3000/Clients/${client.clientId}`).then(
-        (response) => response.json()
-      )
+      fetch(
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${client.clientId}`
+      ).then((response) => response.json())
     );
 
     Promise.all(fetchPromises)
@@ -50,7 +52,7 @@ const AddClientToEngagement = ({ route }) => {
   };
   // Fetch all clients
   useEffect(() => {
-    fetch("http://localhost:3000/Clients")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
       .then((response) => response.json())
       .then((data) => setAllClients(data))
       .catch((error) => console.error("Error fetching clients:", error));
@@ -91,7 +93,7 @@ const AddClientToEngagement = ({ route }) => {
           clients: updatedClients,
         };
         const response = await fetch(
-          `http://localhost:3000/Clients/${clientId}`,
+          `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientId}`,
           {
             method: "PATCH",
             headers: {

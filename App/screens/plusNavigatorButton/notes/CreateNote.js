@@ -82,7 +82,9 @@ const CreateNote = ({ route, navigation }) => {
     const fetchClients = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:3000/Clients");
+        const response = await fetch(
+          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients"
+        );
         if (!response.ok) {
           throw new Error("Something went wrong!");
         }
@@ -128,13 +130,16 @@ const CreateNote = ({ route, navigation }) => {
       lastEdited: formattedDate,
     };
     try {
-      const response = await fetch("http://localhost:3000/Notes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newNote),
-      });
+      const response = await fetch(
+        "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Notes",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newNote),
+        }
+      );
       if (response.ok) {
         const responseJson = await response.json();
         console.log("Note added successfully:", responseJson);

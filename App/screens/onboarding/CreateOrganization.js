@@ -103,13 +103,16 @@ const CreateOrganization = ({ route, navigation }) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/Accounts/${userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ organization: organizationData }),
-      });
+      const response = await fetch(
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Accounts/${userId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ organization: organizationData }),
+        }
+      );
       // Handle successful addition
 
       if (response.ok) {

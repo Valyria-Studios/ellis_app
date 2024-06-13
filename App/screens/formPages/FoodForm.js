@@ -11,7 +11,7 @@ const FoodFormScreen = () => {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/Food_Form") // Replace with your actual API endpoint
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Food_Form") // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => setQuestions(data))
       .catch((error) => console.error("Error fetching data:", error));

@@ -1,4 +1,5 @@
 // Logic for each card, getting the activities to show up, getting referrals, getting engagements.
+// LOGIC FOR WHICH ACCOUNT LOGGED IN
 
 import React, { useState, useEffect } from "react";
 import {
@@ -34,7 +35,7 @@ export default function Directory() {
   const tabItems = ["Me", "Valyria Studios"];
 
   useEffect(() => {
-    fetch("http://localhost:3000/Amenities")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities")
       .then((response) => response.json())
       .then((data) => {
         const result = applyFiltersAndSort(
@@ -53,7 +54,7 @@ export default function Directory() {
 
   useEffect(() => {
     if (isFocused) {
-      fetch("http://localhost:3000/Clients")
+      fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
         .then((response) => response.json())
         .then((data) => {
           if (data && data.length > 0) {

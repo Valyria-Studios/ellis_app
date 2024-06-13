@@ -21,7 +21,7 @@ const MyClients = ({ navigation }) => {
   const [engagementClients, setEngagementClients] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/Clients")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
       .then((response) => response.json())
       .then((data) => {
         if (data && data.length > 0) {
@@ -51,7 +51,9 @@ const MyClients = ({ navigation }) => {
   const removeClient = async (engagementClientId) => {
     try {
       // Fetch all clients
-      const response = await fetch("http://localhost:3000/Clients");
+      const response = await fetch(
+        "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients"
+      );
       const clients = await response.json();
 
       // Find the client that contains the engagement to be deleted
@@ -78,13 +80,16 @@ const MyClients = ({ navigation }) => {
         };
 
         // Send PUT request to update the specific client
-        await fetch(`http://localhost:3000/Clients/${clientToUpdate.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedClientData),
-        });
+        await fetch(
+          `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientToUpdate.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedClientData),
+          }
+        );
 
         // Update the local state
         setEngagementClients((prevClients) =>

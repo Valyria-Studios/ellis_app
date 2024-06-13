@@ -31,7 +31,7 @@ const CreateClient = ({ navigation }) => {
   const [neighborhood, setNeighborhood] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/Amenities") // Replace with your actual API endpoint
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities") // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
         const options = data.map((amenity) => ({
@@ -95,7 +95,7 @@ const CreateClient = ({ navigation }) => {
       id: "",
     };
 
-    fetch("http://localhost:3000/clients", {
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/clients", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

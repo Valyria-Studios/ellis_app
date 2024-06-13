@@ -28,14 +28,17 @@ const ServiceHours = ({ route }) => {
 
   const postServiceData = async (allServiceDetails) => {
     try {
-      const response = await fetch(`http://localhost:3000/Accounts/${userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          // Include other headers as required, like authorization tokens
-        },
-        body: JSON.stringify({ serviceDetails: allServiceDetails }),
-      });
+      const response = await fetch(
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Accounts/${userId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            // Include other headers as required, like authorization tokens
+          },
+          body: JSON.stringify({ serviceDetails: allServiceDetails }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

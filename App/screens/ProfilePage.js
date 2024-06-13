@@ -82,7 +82,7 @@ function ProfilePage({ route, navigation }) {
   const [forms, setForms] = useState([]); // Placeholder for forms data state
 
   useEffect(() => {
-    fetch("http://localhost:3000/Forms")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Forms")
       .then((response) => response.json())
       .then((json) => setForms(json))
       .catch((error) => console.log("error fetching data:", error));
@@ -92,7 +92,7 @@ function ProfilePage({ route, navigation }) {
   const filteredForms = forms.filter((form) => form.for === client.fullName);
 
   useEffect(() => {
-    fetch("http://localhost:3000/Notes")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Notes")
       .then((response) => response.json())
       .then((json) => setNotes(json))
       .catch((error) => console.log("error fetching data:", error));
@@ -103,7 +103,7 @@ function ProfilePage({ route, navigation }) {
       const fetchUpdatedClientData = async () => {
         try {
           const response = await fetch(
-            `http://localhost:3000/Clients/${clientData.id}`
+            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}`
           );
           const updatedClientData = await response.json();
           setClientData(updatedClientData); // Update your state with the latest data

@@ -7,7 +7,7 @@ function AdminPage() {
   const [amenities, setAmenities] = useState([]); // State to hold the list of amenities
 
   useEffect(() => {
-    fetch("http://localhost:3000/Amenities")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities")
       .then((response) => response.json())
       .then((data) => {
         setAmenities(data); // Store the amenities data
@@ -34,7 +34,7 @@ function AdminPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/Amenities/${amenityId}`,
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities/${amenityId}`,
         {
           method: "PATCH",
           headers: {
@@ -95,7 +95,7 @@ function AdminPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/Amenities/${amenityId}`,
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities/${amenityId}`,
         {
           method: "PATCH",
           headers: {

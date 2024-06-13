@@ -27,7 +27,9 @@ const SelectClientWithLocation = ({ route, navigation }) => {
     const fetchClients = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:3000/Clients");
+        const response = await fetch(
+          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients"
+        );
         if (!response.ok) {
           throw new Error("Something went wrong!");
         }

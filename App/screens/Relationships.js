@@ -23,7 +23,7 @@ const RelationshipPage = () => {
   const [allClients, setAllClients] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/Clients")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
       .then((response) => response.json())
       .then((data) => {
         setAllClients(data);

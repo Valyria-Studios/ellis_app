@@ -67,13 +67,16 @@ const Register = ({ navigation }) => {
     if (!valid) return;
 
     try {
-      const response = await fetch("http://localhost:3000/Accounts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Accounts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (response.ok) {
         const responseJson = await response.json();
         const userId = responseJson.id;

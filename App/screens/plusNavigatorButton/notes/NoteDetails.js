@@ -35,13 +35,16 @@ const NoteDetails = ({ route, navigation }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/Notes/${note.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedNote),
-      });
+      const response = await fetch(
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Notes/${note.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedNote),
+        }
+      );
       if (response.ok) {
         const updatedNote = await response.json();
         console.log("Note updated successfully:", updatedNote);
@@ -82,7 +85,7 @@ const NoteDetails = ({ route, navigation }) => {
   const deleteNote = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/Notes/${route.params.note.id}`,
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Notes/${route.params.note.id}`,
         {
           method: "DELETE",
         }

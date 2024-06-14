@@ -39,6 +39,7 @@ import MyHours from "../screens/directoryPages/myHours";
 import MyServices from "../screens/directoryPages/myServices";
 import MyClients from "../screens/directoryPages/myClients";
 import AddClientToEngagement from "../data/testAddClient";
+import ServicePage from "../screens/plusNavigatorButton/services/services";
 
 const RootStack = createStackNavigator();
 
@@ -141,12 +142,11 @@ const RootNavigator = () => {
         options={({ route, navigation }) => ({
           headerTitle: route.params.client.fullName,
           headerBackTitle: " ",
-          headerTitleAlign: 'left',
+          headerTitleAlign: "left",
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,
             left: -180,
-
           },
           headerTitleContainerStyle: { left: 0 },
           headerTintColor: "#094852",
@@ -567,6 +567,28 @@ const RootNavigator = () => {
         component={ClientInformation}
         options={({ route }) => ({
           headerTitle: "Add Client Information",
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerTransparent: true,
+        })}
+      />
+      <RootStack.Screen
+        name="Add a Service"
+        component={ServicePage}
+        options={({ route }) => ({
+          headerTitle: "Add a Service",
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

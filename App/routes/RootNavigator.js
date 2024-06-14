@@ -141,10 +141,12 @@ const RootNavigator = () => {
         options={({ route, navigation }) => ({
           headerTitle: route.params.client.fullName,
           headerBackTitle: " ",
+          headerTitleAlign: 'left',
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,
-            marginLeft: -160,
+            left: -180,
+
           },
           headerTitleContainerStyle: { left: 0 },
           headerTintColor: "#094852",

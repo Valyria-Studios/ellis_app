@@ -42,6 +42,7 @@ const globalstyles = StyleSheet.create({
 
   tagContainer: {
     flexDirection: "row",
+    flexWrap: 'wrap'
   },
 
   tagBackground: {

@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
   },
 
   requestedContainer: {
-    marginBottom: 0,
+    marginBottom: 10,
   },
 
   providerContainer: {

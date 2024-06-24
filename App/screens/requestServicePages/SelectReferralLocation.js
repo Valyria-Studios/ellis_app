@@ -1,3 +1,4 @@
+// Arrow-up-right logic
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -16,6 +17,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
   const { option, categoryName, client } = route.params;
   const [amenities, setAmenities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expandedCard, setExpandedCard] = useState(null);
 
   useEffect(() => {
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities")
@@ -67,7 +69,13 @@ const SelectReferralLocation = ({ route, navigation }) => {
           </Text>
         )}
         {amenities.map((amenity, index) => (
-          <TouchableOpacity key={index} activeOpacity={0.8}>
+          <TouchableOpacity
+            key={index}
+            activeOpacity={1}
+            onPress={() =>
+              setExpandedCard(expandedCard === index ? null : index)
+            }
+          >
             <Card>
               <View
                 style={{
@@ -78,7 +86,9 @@ const SelectReferralLocation = ({ route, navigation }) => {
               >
                 <Text style={styles.optionText}>{option}</Text>
                 <MaterialIcons
-                  name="keyboard-arrow-down"
+                  name={
+                    expandedCard === index ? "remove" : "keyboard-arrow-down"
+                  }
                   size={24}
                   color={"#094852"}
                 />
@@ -108,6 +118,25 @@ const SelectReferralLocation = ({ route, navigation }) => {
                   </Text>
                 </View>
               </View>
+              {expandedCard === index && (
+                <View style={{ marginVertical: 10 }}>
+                  <View style={styles.typeContainer}>
+                    <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: 'center', alignItems: 'center' }}>
+                      {amenity.type.map((type, typeIndex) => (
+                        <View key={typeIndex} style={styles.typeBox}>
+                          <Text style={styles.typeText}>{type}</Text>
+                        </View>
+                      ))}
+                    </View>
+                    <TouchableOpacity>
+                      <Feather name="arrow-up-right" size={26} color={"#094852"}/>
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.descriptionText}>
+                    {amenity.description}
+                  </Text>
+                </View>
+              )}
               <View
                 style={{
                   flexDirection: "row",
@@ -186,6 +215,34 @@ const styles = StyleSheet.create({
     color: "#094852",
     fontSize: 18,
     paddingLeft: 10,
+  },
+
+  descriptionText: {
+    fontFamily: "karla-regular",
+    fontSize: 16,
+  },
+
+  typeContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+
+  typeBox: {
+    borderWidth: 1,
+    borderColor: "#c9cbcd",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 5,
+    marginBottom: 5,
+    backgroundColor: "#ffffff",
+  },
+
+  typeText: {
+    color: "#114e57",
+    fontSize: 16,
+    fontFamily: "karla-regular",
   },
 
   enrollmentContainer: {

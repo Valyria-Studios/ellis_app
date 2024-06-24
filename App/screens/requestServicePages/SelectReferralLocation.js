@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   ScrollView,
+  Pressable,
 } from "react-native";
 import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
@@ -66,11 +67,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
           </Text>
         )}
         {amenities.map((amenity, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.8}
-            onPress={() => handleOptionSelect(amenity)}
-          >
+          <TouchableOpacity key={index} activeOpacity={0.8}>
             <Card>
               <View
                 style={{
@@ -140,15 +137,17 @@ const SelectReferralLocation = ({ route, navigation }) => {
                       : "Enrollment Available"}
                   </Text>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <MaterialIcons
-                    name="app-registration"
-                    size={16}
-                    color={"#094852"}
-                    style={{ paddingRight: 5 }}
-                  />
-                  <Text style={styles.referText}>Refer</Text>
-                </View>
+                <TouchableOpacity onPress={() => handleOptionSelect(amenity)}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <MaterialIcons
+                      name="app-registration"
+                      size={16}
+                      color={"#094852"}
+                      style={{ paddingRight: 5 }}
+                    />
+                    <Text style={styles.referText}>Refer</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             </Card>
           </TouchableOpacity>

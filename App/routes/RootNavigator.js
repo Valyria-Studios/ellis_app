@@ -40,6 +40,7 @@ import MyServices from "../screens/directoryPages/myServices";
 import MyClients from "../screens/directoryPages/myClients";
 import AddClientToEngagement from "../data/testAddClient";
 import ServicePage from "../screens/plusNavigatorButton/services/services";
+import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
 
 const RootStack = createStackNavigator();
 
@@ -589,6 +590,28 @@ const RootNavigator = () => {
         component={ServicePage}
         options={({ route }) => ({
           headerTitle: "Add a Service",
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerTransparent: true,
+        })}
+      />
+      <RootStack.Screen
+        name="Select a Meeting Time"
+        component={AppointmentScheduler}
+        options={({ route }) => ({
+          headerTitle: "Select meeting time",
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

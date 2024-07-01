@@ -493,7 +493,8 @@
       "age": "20",
       "demographics": {
         "gender": "male",
-        "primaryLanguage": "English"
+        "primaryLanguage": "English",
+        "race": "White"
       },
       "address": "here",
       "status": "Current",
@@ -569,6 +570,39 @@
           }
         ]
       },
+      "referrals": [
+        {
+          "clientId": "6",
+          "service": "fitness",
+          "dateStarted": "2:00pm, July 1st",
+          "status": "Pending"
+        },
+        {
+          "name": "bob",
+          "location": "haircuts"
+        },
+        {
+          "clientId": "1",
+          "dateStarted": "2024-07-01T16:22:10.123Z",
+          "option": "Emergency Food",
+          "referralType": "New",
+          "notes": ""
+        },
+        {
+          "clientId": "1",
+          "dateStarted": "2024-07-01T16:25:45.205Z",
+          "option": "Emergency Food",
+          "referralType": "New",
+          "notes": "Testing"
+        },
+        {
+          "clientId": "1",
+          "dateStarted": "2024-07-01T16:29:29.244Z",
+          "option": "Emergency Food",
+          "referralType": "New",
+          "notes": ""
+        }
+      ],
       "id": "1"
     },
     {

@@ -1,4 +1,5 @@
 // Logic for Houehold, Demographic, and Alternate Information Needed
+// Logic for STATUS in referral
 
 import React from "react";
 import {
@@ -31,6 +32,64 @@ const ConfirmReferral = ({ route, navigation }) => {
     certification,
     notes,
   } = route.params;
+
+  const handleConfirmReferral = async () => {
+    const dateStarted = new Date().toISOString();
+    const referralData = {
+      clientId: selectedClient.id,
+      dateStarted,
+      option,
+      amenity,
+      service,
+      referralType,
+      nameVerified,
+      addressVerified,
+      basicProfileInformation,
+      householdInformation,
+      demographicInformation,
+      alternateInformation,
+      communicationConsent,
+      certification,
+      notes,
+    };
+
+    try {
+      // Fetch the existing client data
+      const clientResponse = await fetch(
+        `http://localhost:3000/Clients/${selectedClient.id}`
+      );
+      const client = await clientResponse.json();
+
+      // Add the new referral to the referrals array
+      client.referrals.push(referralData);
+
+      // Update the client with the new referral
+      const response = await fetch(
+        `http://localhost:3000/Clients/${selectedClient.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(client),
+        }
+      );
+
+      if (response.ok) {
+        const responseData = await response.json();
+        navigation.navigate("Referral Sent", {
+          selectedClient: selectedClient,
+          dateStarted: dateStarted,
+          option: option,
+        });
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to submit referral:", errorData);
+      }
+    } catch (error) {
+      console.error("Error submitting referral:", error);
+    }
+  };
 
   return (
     <ScrollView style={globalstyles.container}>
@@ -74,7 +133,7 @@ const ConfirmReferral = ({ route, navigation }) => {
                 Location
               </Text>
               <Text style={globalstyles.detailsText}>
-                {selectedClient.location}
+                {selectedClient.address}
               </Text>
             </View>
             <View>
@@ -87,7 +146,7 @@ const ConfirmReferral = ({ route, navigation }) => {
                 Gender
               </Text>
               <Text style={globalstyles.detailsText}>
-                {selectedClient.gender}
+                {selectedClient.demographics.gender}
               </Text>
             </View>
           </View>
@@ -201,7 +260,7 @@ const ConfirmReferral = ({ route, navigation }) => {
                     { marginBottom: 0, marginHorizontal: 0 },
                   ]}
                 >
-                  {selectedClient.primaryLanguage}
+                  {selectedClient.demographics.primaryLanguage}
                 </Text>
               </View>
               <View>
@@ -420,7 +479,7 @@ const ConfirmReferral = ({ route, navigation }) => {
                 <Text
                   style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
                 >
-                  {selectedClient.primaryLanguage}
+                  {selectedClient.demographics.primaryLanguage}
                 </Text>
               </View>
             </View>
@@ -484,7 +543,7 @@ const ConfirmReferral = ({ route, navigation }) => {
                 <Text
                   style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
                 >
-                  {selectedClient.gender}
+                  {selectedClient.demographics.gender}
                 </Text>
               </View>
               <View>
@@ -518,12 +577,7 @@ const ConfirmReferral = ({ route, navigation }) => {
             },
           ]}
           activeOpacity={0.6}
-          onPress={() =>
-            navigation.navigate("Referral Sent", {
-              selectedClient: selectedClient,
-              option: option,
-            })
-          }
+          onPress={handleConfirmReferral}
         >
           <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
             Confirm Referral

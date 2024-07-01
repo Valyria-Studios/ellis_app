@@ -72,40 +72,10 @@ export default function Directory() {
     }
   }, [isFocused]);
 
-  const handlePress = (category) => {
-    setSelectedCategoryFilter((prevCategory) =>
-      prevCategory === category ? "All" : category
-    );
-  };
 
   const handleSearchChange = (text) => {
     setSearchInput(text);
   };
-
-  const handleSortPress = (criterion) => {
-    if (sortCriteria === criterion) {
-      // If the clicked sort criterion is the same as the current one,
-      // clear the sort criteria.
-      setSortCriteria(null);
-    } else {
-      // Set the new sort criteria.
-      setSortCriteria(criterion);
-    }
-    // No need to call applyFiltersAndSort here because useEffect will trigger it.
-  };
-
-  const categories = [
-    "All",
-    "Favorite",
-    "Community",
-    "Food",
-    "Shelter",
-    "Hygiene",
-    "Health",
-    "Work & Learn",
-    "Finance",
-    "Other",
-  ];
 
   return (
     <SafeAreaView style={globalstyles.container}>

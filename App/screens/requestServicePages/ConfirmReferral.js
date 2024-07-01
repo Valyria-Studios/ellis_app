@@ -56,7 +56,7 @@ const ConfirmReferral = ({ route, navigation }) => {
     try {
       // Fetch the existing client data
       const clientResponse = await fetch(
-        `http://localhost:3000/Clients/${selectedClient.id}`
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${selectedClient.id}`
       );
       const client = await clientResponse.json();
 
@@ -65,9 +65,9 @@ const ConfirmReferral = ({ route, navigation }) => {
 
       // Update the client with the new referral
       const response = await fetch(
-        `http://localhost:3000/Clients/${selectedClient.id}`,
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${selectedClient.id}`,
         {
-          method: "PUT",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },

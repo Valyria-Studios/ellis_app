@@ -5,8 +5,6 @@ import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
 import { createStackNavigator } from "@react-navigation/stack";
 import OnBoardingNavigator from "./routes/OnboardingNavigator";
-import RequestLegalAid from "./deprecated/RequestLegalAid";
-import LegalQuestions from "./deprecated/LegalQuestions";
 import SelectForms from "./screens/formPages/SelectForms";
 import LegalFormScreen from "./screens/formPages/LegalForm";
 import FoodFormScreen from "./screens/formPages/FoodForm";

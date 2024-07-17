@@ -111,10 +111,18 @@ const CreateNote = ({ route, navigation }) => {
     }
   }, [selectedClient, clients]);
 
+  useEffect(() => {
+    // If there's a client name passed, set it
+    if (route.params?.clientName) {
+      setSelectedClient(route.params.clientName);
+    } else {
+      setShowClientSearch(true);
+    }
+  }, [route.params?.clientName]);
+
   const handleSelectClient = (client) => {
     setSelectedClient(client.fullName);
-    setShowClientSearch(false);
-    setShowClients(false); // Hide the list
+    setShowClients(false); // Hide the list but keep the input visible
   };
 
   const handleSaveNote = async () => {

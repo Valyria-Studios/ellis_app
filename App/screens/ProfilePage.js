@@ -559,7 +559,7 @@ function ProfilePage({ route, navigation }) {
           {/* Note details */}
           <View style={{ marginBottom: 10 }}>
             <Text style={{ fontWeight: "bold" }}>{selectedNote.title}</Text>
-            <Text>{selectedNote.date}</Text>
+            <Text>{selectedNote.dateCreated}</Text>
             <Text>{selectedNote.content}</Text>
           </View>
         </View>
@@ -576,7 +576,7 @@ function ProfilePage({ route, navigation }) {
           >
             <View>
               <Text style={styles.noteTitle}>{note.title}</Text>
-              <Text style={styles.noteDate}>{note.date}</Text>
+              <Text style={styles.noteDate}>{note.dateCreated}</Text>
             </View>
             <MaterialIcons
               name="keyboard-arrow-right"

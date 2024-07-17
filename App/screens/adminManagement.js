@@ -77,7 +77,7 @@ const AdminManagementScreen = ({ route }) => {
     if (searchQuery.trim() !== "") {
       const lowercasedQuery = searchQuery.toLowerCase();
       const filtered = clientsExcludingCurrent.filter((client) =>
-        client.name.toLowerCase().includes(lowercasedQuery)
+        client.fullName.toLowerCase().includes(lowercasedQuery)
       );
       setFilteredClients(filtered);
     } else {
@@ -130,12 +130,12 @@ const AdminManagementScreen = ({ route }) => {
   };
   const handleAddToAdmins = async (newAdmin) => {
     // Prevent adding if the client is already an admin
-    if (currentClient.team.admins.includes(newAdmin.name)) {
-      alert(`${newAdmin.name} is already an admin.`);
+    if (currentClient.team.admins.includes(newAdmin.fullName)) {
+      alert(`${newAdmin.fullName} is already an admin.`);
       return;
     }
 
-    const updatedAdmins = [...currentClient.team.admins, newAdmin.name];
+    const updatedAdmins = [...currentClient.team.admins, newAdmin.fullName];
 
     try {
       const response = await fetch(
@@ -228,7 +228,7 @@ const AdminManagementScreen = ({ route }) => {
               style={styles.clientItem}
               onPress={() => handleAddToAdmins(item)}
             >
-              <Text style={styles.clientName}>{item.name}</Text>
+              <Text style={styles.clientName}>{item.fullName}</Text>
             </TouchableOpacity>
           )}
         />

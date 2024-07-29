@@ -41,6 +41,7 @@ import MyClients from "../screens/directoryPages/myClients";
 import AddClientToEngagement from "../data/testAddClient";
 import ServicePage from "../screens/plusNavigatorButton/services/services";
 import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
+import EntitiesScreen from "../screens/testingGeoApi";
 
 const RootStack = createStackNavigator();
 
@@ -612,6 +613,28 @@ const RootNavigator = () => {
         component={AppointmentScheduler}
         options={({ route }) => ({
           headerTitle: "Select meeting time",
+          headerBackTitle: " ",
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+            left: -190,
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerTransparent: true,
+        })}
+      />
+      <RootStack.Screen
+        name="Entities Screen"
+        component={EntitiesScreen}
+        options={({ route }) => ({
+          headerTitle: "Select Entity",
           headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",

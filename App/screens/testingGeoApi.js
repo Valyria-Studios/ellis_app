@@ -1,7 +1,12 @@
-// EntitiesScreen.js
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
-import { GET_ENTITIES_QUERY } from "../queries/getNonProfit";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+} from "react-native";
 
 const EntitiesScreen = () => {
   const [entities, setEntities] = useState([]);
@@ -9,15 +14,7 @@ const EntitiesScreen = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://geo-protocol.up.railway.app/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: GET_ENTITIES_QUERY,
-      }),
-    })
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
       .then((response) => {
         if (!response.ok) {
           throw new Error(
@@ -27,11 +24,7 @@ const EntitiesScreen = () => {
         return response.json();
       })
       .then((result) => {
-        if (result.errors) {
-          setError(result.errors[0]);
-        } else {
-          setEntities(result.data.geoEntities.nodes);
-        }
+        setEntities(result.slice(12,13)); // Assuming result is the array of entities
         setLoading(false);
       })
       .catch((error) => {
@@ -40,7 +33,7 @@ const EntitiesScreen = () => {
         setLoading(false);
       });
   }, []);
-  console.log(entities[0])
+
   if (loading) {
     return (
       <View style={styles.center}>
@@ -56,33 +49,35 @@ const EntitiesScreen = () => {
     );
   }
   return (
-    <FlatList
-      data={entities}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <View style={styles.item}>
-          <Text style={styles.title}>{item.name}</Text>
-          {item.triplesByEntityId.nodes.map((triple) => (
-            <View key={triple.id} style={styles.triple}>
-              <Text>
-                {triple.attribute.name}: {triple.stringValue}
-              </Text>
-              {triple.valueType === "image" && triple.stringValue && (
-                <Image
-                  source={{
-                    uri: triple.stringValue.replace(
-                      "ipfs://",
-                      "https://ipfs.io/ipfs/"
-                    ),
-                  }}
-                  style={styles.image}
-                />
-              )}
-            </View>
-          ))}
-        </View>
-      )}
-    />
+    <SafeAreaView style={{ marginTop: 100 }}>
+      <FlatList
+        data={entities}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            <Text style={styles.title}>{item.name}</Text>
+            {item.triplesByEntityId?.nodes?.map((triple) => (
+              <View key={triple.id} style={styles.triple}>
+                <Text>
+                  {triple.attribute.name}: {triple.stringValue}
+                </Text>
+                {triple.valueType === "image" && triple.stringValue && (
+                  <Image
+                    source={{
+                      uri: triple.stringValue.replace(
+                        "ipfs://",
+                        "https://ipfs.io/ipfs/"
+                      ),
+                    }}
+                    style={styles.image}
+                  />
+                )}
+              </View>
+            ))}
+          </View>
+        )}
+      />
+    </SafeAreaView>
   );
 };
 

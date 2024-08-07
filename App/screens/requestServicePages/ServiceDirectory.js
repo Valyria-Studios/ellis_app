@@ -201,6 +201,7 @@ const ServiceDirectory = ({ route, navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
+      <View style={{marginVertical: 20}}></View>
     </ScrollView>
   );
 };

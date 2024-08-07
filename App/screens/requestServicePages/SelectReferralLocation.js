@@ -1,4 +1,3 @@
-// Arrow-up-right logic
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -7,7 +6,6 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   ScrollView,
-  Pressable,
 } from "react-native";
 import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
@@ -15,40 +13,34 @@ import { MaterialIcons, Octicons, Feather } from "@expo/vector-icons";
 
 const SelectReferralLocation = ({ route, navigation }) => {
   const { option, categoryName, client } = route.params;
-  const [amenities, setAmenities] = useState([]);
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedCard, setExpandedCard] = useState(null);
 
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities")
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
       .then((response) => response.json())
       .then((data) => {
-        const filteredAmenities = data.filter((amenity) =>
-          amenity.type.includes(categoryName)
-        );
-        setAmenities(filteredAmenities);
+        setServices(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching amenities:", error);
+        console.error("Error fetching services:", error);
         setLoading(false);
       });
-  }, [categoryName]); // Dependency array to re-fetch if categoryName changes
+  }, []); // Dependency array to re-fetch if categoryName changes
 
-  const handleOptionSelect = (amenity) => {
-    // Check if a client is already selected
+  const handleOptionSelect = (service) => {
     if (client) {
-      // If a client is selected, navigate to a specific page, passing the selected client and amenity
       navigation.navigate("Enrollment Form", {
         selectedClient: client,
-        selectedAmenity: amenity,
+        selectedService: service,
         option: option,
       });
     } else {
-      // If no client is selected, follow the normal flow (e.g., show details or a confirmation step)
       navigation.navigate("Select Client With Location", {
         option,
-        selectedAmenity: amenity,
+        selectedService: service,
       });
     }
   };
@@ -56,7 +48,6 @@ const SelectReferralLocation = ({ route, navigation }) => {
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
-
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -68,7 +59,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
             Recommended services based on {client.fullName} profile:
           </Text>
         )}
-        {amenities.map((amenity, index) => (
+        {services.map((service, index) => (
           <TouchableOpacity
             key={index}
             activeOpacity={1}
@@ -94,7 +85,9 @@ const SelectReferralLocation = ({ route, navigation }) => {
                 />
               </View>
               <View>
-                <Text style={styles.title}>{amenity.location}</Text>
+                <Text style={styles.title}>
+                  {service.name || "Name not available"}
+                </Text>
                 <View
                   style={{
                     flexDirection: "row",
@@ -103,7 +96,10 @@ const SelectReferralLocation = ({ route, navigation }) => {
                   }}
                 >
                   <Octicons name="location" size={18} color={"#094852"} />
-                  <Text style={styles.amenityText}>{amenity.address}</Text>
+                  <Text style={styles.amenityText}>
+                    {service.attributes?.["Street address"] ||
+                      "Street address not available"}
+                  </Text>
                 </View>
                 <View
                   style={{
@@ -114,26 +110,41 @@ const SelectReferralLocation = ({ route, navigation }) => {
                 >
                   <Feather name="clock" size={16} color={"#094852"} />
                   <Text style={styles.amenityText}>
-                    {amenity.operationalHours}
+                    {service.attributes?.["Working hours"] ||
+                      "Operational hours not available"}
                   </Text>
                 </View>
               </View>
               {expandedCard === index && (
                 <View style={{ marginVertical: 10 }}>
                   <View style={styles.typeContainer}>
-                    <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: 'center', alignItems: 'center' }}>
-                      {amenity.type.map((type, typeIndex) => (
-                        <View key={typeIndex} style={styles.typeBox}>
-                          <Text style={styles.typeText}>{type}</Text>
-                        </View>
-                      ))}
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {(service.attributes?.Type || "Type not available")
+                        .split(",")
+                        .map((type, typeIndex) => (
+                          <View key={typeIndex} style={styles.typeBox}>
+                            <Text style={styles.typeText}>{type.trim()}</Text>
+                          </View>
+                        ))}
                     </View>
                     <TouchableOpacity>
-                      <Feather name="arrow-up-right" size={26} color={"#094852"}/>
+                      <Feather
+                        name="arrow-up-right"
+                        size={26}
+                        color={"#094852"}
+                      />
                     </TouchableOpacity>
                   </View>
                   <Text style={styles.descriptionText}>
-                    {amenity.description}
+                    {service.attributes?.Description ||
+                      "Description not available"}
                   </Text>
                 </View>
               )}
@@ -148,7 +159,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
                 <View
                   style={[
                     styles.enrollmentContainer,
-                    amenity.availability === "0"
+                    service.attributes?.Availability === "0"
                       ? styles.waitlistContainer
                       : styles.enrollmentContainer,
                   ]}
@@ -156,17 +167,17 @@ const SelectReferralLocation = ({ route, navigation }) => {
                   <Text
                     style={[
                       styles.cardAvailabilityText,
-                      amenity.availability === "0"
+                      service.attributes?.Availability === "0"
                         ? styles.waitlistText
                         : styles.enrollmentText,
                     ]}
                   >
-                    {amenity.availability === "0"
+                    {service.attributes?.Availability === "0"
                       ? "Waitlist"
                       : "Enrollment Available"}
                   </Text>
                 </View>
-                <TouchableOpacity onPress={() => handleOptionSelect(amenity)}>
+                <TouchableOpacity onPress={() => handleOptionSelect(service)}>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <MaterialIcons
                       name="app-registration"
@@ -195,7 +206,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     letterSpacing: -0.7,
   },
-
   optionText: {
     fontFamily: "gabarito-regular",
     fontSize: 12,
@@ -203,31 +213,26 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textTransform: "uppercase",
   },
-
   title: {
     fontFamily: "gabarito-semibold",
     fontSize: 24,
     color: "#094852",
   },
-
   amenityText: {
     fontFamily: "gabarito-regular",
     color: "#094852",
     fontSize: 18,
     paddingLeft: 10,
   },
-
   descriptionText: {
     fontFamily: "karla-regular",
     fontSize: 16,
   },
-
   typeContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 10,
   },
-
   typeBox: {
     borderWidth: 1,
     borderColor: "#c9cbcd",
@@ -238,13 +243,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: "#ffffff",
   },
-
   typeText: {
     color: "#114e57",
     fontSize: 16,
     fontFamily: "karla-regular",
   },
-
   enrollmentContainer: {
     backgroundColor: "#E7F2F3",
     borderWidth: 1,
@@ -252,7 +255,6 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 15,
   },
-
   waitlistContainer: {
     backgroundColor: "#FBEFDD",
     borderWidth: 1,
@@ -260,19 +262,16 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 15,
   },
-
   enrollmentText: {
     fontFamily: "karla-regular",
     fontSize: 14,
     color: "#094852",
   },
-
   waitlistText: {
     fontFamily: "karla-regular",
     fontSize: 14,
     color: "#533409",
   },
-
   referText: {
     fontFamily: "gabarito-regular",
     fontSize: 16,

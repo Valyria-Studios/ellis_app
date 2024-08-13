@@ -126,13 +126,19 @@ const SelectReferralLocation = ({ route, navigation }) => {
                         alignItems: "center",
                       }}
                     >
-                      {(service.attributes?.Type || "Type not available")
-                        .split(",")
-                        .map((type, typeIndex) => (
-                          <View key={typeIndex} style={styles.typeBox}>
-                            <Text style={styles.typeText}>{type.trim()}</Text>
+                      {Array.isArray(service.attributes?.Tags) ? (
+                        service.attributes.Tags.map((tag, tagIndex) => (
+                          <View key={tagIndex} style={styles.typeBox}>
+                            <Text style={styles.typeText}>{tag.trim()}</Text>
                           </View>
-                        ))}
+                        ))
+                      ) : (
+                        <View style={styles.typeBox}>
+                          <Text style={styles.typeText}>
+                            {service.attributes?.Tags || "Tags not available"}
+                          </Text>
+                        </View>
+                      )}
                     </View>
                     <TouchableOpacity>
                       <Feather
@@ -247,6 +253,7 @@ const styles = StyleSheet.create({
     color: "#114e57",
     fontSize: 16,
     fontFamily: "karla-regular",
+    textTransform: "capitalize"
   },
   enrollmentContainer: {
     backgroundColor: "#E7F2F3",

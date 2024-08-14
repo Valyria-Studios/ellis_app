@@ -41,6 +41,7 @@ import MyClients from "../screens/directoryPages/myClients";
 import AddClientToEngagement from "../data/testAddClient";
 import ServicePage from "../screens/plusNavigatorButton/services/services";
 import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
+import EntitiesScreen from "../screens/testingGeoApi";
 
 const RootStack = createStackNavigator();
 
@@ -629,7 +630,7 @@ const RootNavigator = () => {
           headerTransparent: true,
         })}
       />
-      {/* <RootStack.Screen
+      <RootStack.Screen
         name="Entities Screen"
         component={EntitiesScreen}
         options={({ route }) => ({
@@ -650,7 +651,7 @@ const RootNavigator = () => {
           },
           headerTransparent: true,
         })}
-      /> */}
+      />
     </RootStack.Navigator>
   );
 };

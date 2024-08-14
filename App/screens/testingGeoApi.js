@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  FlatList,
   StyleSheet,
-  Image,
   SafeAreaView,
+  SectionList,
 } from "react-native";
+import { fetchCommunityResourcesEntityIds } from "../data/serviceIdQueries/communityResources";
 
 const EntitiesScreen = () => {
   const [entities, setEntities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [communityResources, setCommunityResources] = useState(null); // State for GraphQL data
 
+  // First useEffect for the existing REST API call
   useEffect(() => {
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
       .then((response) => {
@@ -24,7 +26,7 @@ const EntitiesScreen = () => {
         return response.json();
       })
       .then((result) => {
-        setEntities(result.slice(12,13)); // Assuming result is the array of entities
+        setEntities(result); // Assuming result is the array of entities
         setLoading(false);
       })
       .catch((error) => {
@@ -33,6 +35,26 @@ const EntitiesScreen = () => {
         setLoading(false);
       });
   }, []);
+
+  // Second useEffect for the GraphQL query and comparison
+  useEffect(() => {
+    fetchCommunityResourcesEntityIds()
+      .then((communityResourceEntityIds) => {
+        const matchingEntities = entities.filter((entity) =>
+          communityResourceEntityIds.includes(entity.id)
+        );
+        setCommunityResources(matchingEntities)
+      })
+      .catch((error) => {
+        console.error("Error fetching entity IDs:", error);
+      });
+  }, [entities]); // Run this effect after `entities` are set
+
+  const sections = [
+    { title: "Community Resources", data: communityResources },
+    { title: "Food Assistance", data: [] },
+    { title: "NonProfits", data: entities },
+  ];
 
   if (loading) {
     return (
@@ -48,32 +70,19 @@ const EntitiesScreen = () => {
       </View>
     );
   }
+
   return (
     <SafeAreaView style={{ marginTop: 100 }}>
-      <FlatList
-        data={entities}
-        keyExtractor={(item) => item.id}
+      <SectionList
+        sections={sections}
+        stickySectionHeadersEnabled={true}
+        keyExtractor={(item, index) => item.id || index.toString()}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={styles.sectionHeader}>{title}</Text>
+        )}
         renderItem={({ item }) => (
           <View style={styles.item}>
             <Text style={styles.title}>{item.name}</Text>
-            {item.triplesByEntityId?.nodes?.map((triple) => (
-              <View key={triple.id} style={styles.triple}>
-                <Text>
-                  {triple.attribute.name}: {triple.stringValue}
-                </Text>
-                {triple.valueType === "image" && triple.stringValue && (
-                  <Image
-                    source={{
-                      uri: triple.stringValue.replace(
-                        "ipfs://",
-                        "https://ipfs.io/ipfs/"
-                      ),
-                    }}
-                    style={styles.image}
-                  />
-                )}
-              </View>
-            ))}
           </View>
         )}
       />
@@ -96,13 +105,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  triple: {
-    marginTop: 10,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    marginTop: 10,
+  sectionHeader: {
+    fontSize: 24,
+    fontWeight: "bold",
+    backgroundColor: "#f4f4f4",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
   },
 });
 

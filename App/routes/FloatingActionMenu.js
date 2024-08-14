@@ -24,7 +24,7 @@ export default FloatingActionMenu = (props) => {
   ];
 
   const featherMenuItems = [
-    { name: "Client", page: "Create New Client" },
+    { name: "Client", page: "Entities Screen" },
     { name: "Service", page: "Add a Service" },
     { name: "Note", page: "Create a Note" },
   ];

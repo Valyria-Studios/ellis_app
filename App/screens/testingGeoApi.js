@@ -7,12 +7,15 @@ import {
   SectionList,
 } from "react-native";
 import { fetchCommunityResourcesEntityIds } from "../data/serviceIdQueries/communityResources";
+import { fetchFoodAssistanceEntityIds } from "../data/serviceIdQueries/foodAssistance";
 
 const EntitiesScreen = () => {
   const [entities, setEntities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [communityResources, setCommunityResources] = useState(null); // State for GraphQL data
+  const [communityResources, setCommunityResources] = useState([]);
+  const [foodAssistance, setFoodAssistance] = useState([]);
+
 
   // First useEffect for the existing REST API call
   useEffect(() => {
@@ -36,23 +39,38 @@ const EntitiesScreen = () => {
       });
   }, []);
 
-  // Second useEffect for the GraphQL query and comparison
   useEffect(() => {
-    fetchCommunityResourcesEntityIds()
-      .then((communityResourceEntityIds) => {
-        const matchingEntities = entities.filter((entity) =>
+    const fetchData = async () => {
+      try {
+        // Fetch Community Resources
+        const communityResourceEntityIds =
+          await fetchCommunityResourcesEntityIds();
+        const matchingCommunityEntities = entities.filter((entity) =>
           communityResourceEntityIds.includes(entity.id)
         );
-        setCommunityResources(matchingEntities)
-      })
-      .catch((error) => {
+
+        // Fetch Food Assistance
+        const foodAssistanceEntityIds = await fetchFoodAssistanceEntityIds();
+        const matchingFoodEntities = entities.filter((entity) =>
+          foodAssistanceEntityIds.includes(entity.id)
+        );
+
+        // Update state
+        setCommunityResources(matchingCommunityEntities);
+        setFoodAssistance(matchingFoodEntities);
+      } catch (error) {
         console.error("Error fetching entity IDs:", error);
-      });
-  }, [entities]); // Run this effect after `entities` are set
+      }
+    };
+
+    if (entities.length > 0) {
+      fetchData();
+    }
+  }, [entities]);
 
   const sections = [
     { title: "Community Resources", data: communityResources },
-    { title: "Food Assistance", data: [] },
+    { title: "Food Assistance", data: foodAssistance },
     { title: "NonProfits", data: entities },
   ];
 

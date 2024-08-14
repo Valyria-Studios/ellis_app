@@ -1,4 +1,4 @@
-export const fetchCommunityResourcesEntityIds = async () => {
+export const fetchFoodAssistanceEntityIds = async () => {
   const query = `
       query {
         triples(
@@ -8,11 +8,12 @@ export const fetchCommunityResourcesEntityIds = async () => {
               {
                 valueId: {
                   in: [
-                    "aa4a50b7-9826-4097-9a57-38d84882ccc0"
-                    "24ee7604-e267-42d9-b5ff-483452c559b1"
-                    "3e21e53b-dbe4-4278-83f5-c824354ef8ee"
-                    "7fa21028-3aac-48f5-bec7-cbf7d6a925a8"
-                    "939aa5ac-7f5b-4658-88dc-cf9f475d5c43"
+                    "05ef5dc2-9689-4df5-adcc-b8275b1455ac",
+                    "0a216f80-73aa-458c-a30e-9ea70c9b561d",
+                    "8615a52b-6362-453c-a0bb-fb5866c8c9bb",
+                    "86d77487-5c56-4b46-b1ff-420089a889ee",
+                    "a5f90cc4-6921-41a6-befa-826276592fd8",
+                    "ddaf4099-a09e-45bb-8557-aa45270a8708"
                   ]
                 }
               }
@@ -22,11 +23,29 @@ export const fetchCommunityResourcesEntityIds = async () => {
           totalCount
           edges {
             node {
-              entityId
               entity {
                 name
               }
+              entityId
               attributeId
+              entityValue {
+                id
+                name
+              }
+            }
+          }
+        }
+        subservices: triples(
+          filter: {
+            and: [
+              { attributeId: { equalTo: "f2a6a7bb-a0e8-4119-9f57-ddf6bd4c8d27" } }
+              { entityId: { equalTo: "05ef5dc2-9689-4df5-adcc-b8275b1455ac" } }
+            ]
+          }
+        ) {
+          totalCount
+          edges {
+            node {
               entityValue {
                 id
                 name

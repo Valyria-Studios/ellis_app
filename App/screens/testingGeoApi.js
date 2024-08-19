@@ -6,30 +6,36 @@ import {
   SafeAreaView,
   SectionList,
 } from "react-native";
-import { fetchCommunityResourcesEntityIds } from "../data/serviceIdQueries/communityResources";
-import { fetchFoodAssistanceEntityIds } from "../data/serviceIdQueries/foodAssistance";
 
 const EntitiesScreen = () => {
   const [entities, setEntities] = useState([]);
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [communityResources, setCommunityResources] = useState([]);
-  const [foodAssistance, setFoodAssistance] = useState([]);
 
-
-  // First useEffect for the existing REST API call
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
+    // Fetch NonProfits data
+    const fetchNonProfits = fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
       .then((response) => {
         if (!response.ok) {
-          throw new Error(
-            `Network response was not ok: ${response.statusText}`
-          );
+          throw new Error(`Network response was not ok: ${response.statusText}`);
         }
         return response.json();
-      })
-      .then((result) => {
-        setEntities(result); // Assuming result is the array of entities
+      });
+
+    // Fetch Services data
+    const fetchServices = fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Services")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+      });
+
+    Promise.all([fetchNonProfits, fetchServices])
+      .then(([nonProfitsData, servicesData]) => {
+        setEntities(nonProfitsData);
+        setServices(servicesData);
         setLoading(false);
       })
       .catch((error) => {
@@ -39,40 +45,26 @@ const EntitiesScreen = () => {
       });
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch Community Resources
-        const communityResourceEntityIds =
-          await fetchCommunityResourcesEntityIds();
-        const matchingCommunityEntities = entities.filter((entity) =>
-          communityResourceEntityIds.includes(entity.id)
-        );
+  const compareServices = (providedServicesValueIds, service) => {
+    // Check if any of the providedServicesValueIds match the service id or any of its subservices
+    return (
+      providedServicesValueIds.includes(service.id) ||
+      providedServicesValueIds.some((serviceId) =>
+        service.Subservices.some((subservice) => subservice.valueId === serviceId)
+      )
+    );
+  };
 
-        // Fetch Food Assistance
-        const foodAssistanceEntityIds = await fetchFoodAssistanceEntityIds();
-        const matchingFoodEntities = entities.filter((entity) =>
-          foodAssistanceEntityIds.includes(entity.id)
-        );
+  const sections = services.map((service) => {
+    const matchingEntities = entities.filter((entity) =>
+      compareServices(entity.providedServicesValueIds, service)
+    );
 
-        // Update state
-        setCommunityResources(matchingCommunityEntities);
-        setFoodAssistance(matchingFoodEntities);
-      } catch (error) {
-        console.error("Error fetching entity IDs:", error);
-      }
+    return {
+      title: service.name,
+      data: matchingEntities,
     };
-
-    if (entities.length > 0) {
-      fetchData();
-    }
-  }, [entities]);
-
-  const sections = [
-    { title: "Community Resources", data: communityResources },
-    { title: "Food Assistance", data: foodAssistance },
-    { title: "NonProfits", data: entities },
-  ];
+  });
 
   if (loading) {
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import renderIcon from "../../shared/RenderIconFunction";
 import globalstyles from "../../shared/globalStyles";
@@ -6,6 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 const ServiceDetails = ({ route, navigation }) => {
   const { category, client } = route.params;
+  const [serviceIds, setServiceIds] = useState([])
 
   useEffect(() => {
     if (category.Subservices) {
@@ -14,6 +15,8 @@ const ServiceDetails = ({ route, navigation }) => {
       );
       const combinedIds = [category.id, ...valueIds]; // Include the main category id
       console.log("Combined valueIds including main category id:", combinedIds);
+      setServiceIds(combinedIds)
+      console.log(serviceIds)
     }
   }, [category]);
 
@@ -30,7 +33,7 @@ const ServiceDetails = ({ route, navigation }) => {
             option: category.name,
             categoryName: category.name,
             client,
-            providedServicesId: category.id, // Pass the main service ID
+            providedServicesId: serviceIds, // Pass the main service ID
           });
         }}
       >
@@ -62,7 +65,7 @@ const ServiceDetails = ({ route, navigation }) => {
                 option: subservice.name,
                 categoryName: category.name,
                 client,
-                providedServicesId: subservice.valueId,
+                providedServicesId: serviceIds,
               });
             }}
           >

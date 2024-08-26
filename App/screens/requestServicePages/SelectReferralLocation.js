@@ -12,23 +12,29 @@ import Card from "../../shared/Card";
 import { MaterialIcons, Octicons, Feather } from "@expo/vector-icons";
 
 const SelectReferralLocation = ({ route, navigation }) => {
-  const { option, categoryName, client } = route.params;
+  const { option, categoryName, client, providedServicesId } = route.params;
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedCard, setExpandedCard] = useState(null);
 
   useEffect(() => {
+    console.log(providedServicesId)
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
       .then((response) => response.json())
       .then((data) => {
-        setServices(data);
+        const filteredServices = data.filter((nonProfit) =>
+          nonProfit.providedServicesValueIds.some((valueId) =>
+            providedServicesId.includes(valueId)
+          )
+        );
+        setServices(filteredServices);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching services:", error);
         setLoading(false);
       });
-  }, []); // Dependency array to re-fetch if categoryName changes
+  }, [providedServicesId]);
 
   const handleOptionSelect = (service) => {
     if (client) {
@@ -253,7 +259,7 @@ const styles = StyleSheet.create({
     color: "#114e57",
     fontSize: 16,
     fontFamily: "karla-regular",
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   enrollmentContainer: {
     backgroundColor: "#E7F2F3",

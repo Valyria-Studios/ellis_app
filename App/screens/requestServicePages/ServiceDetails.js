@@ -14,9 +14,7 @@ const ServiceDetails = ({ route, navigation }) => {
         (subservice) => subservice.valueId
       );
       const combinedIds = [category.id, ...valueIds]; // Include the main category id
-      console.log("Combined valueIds including main category id:", combinedIds);
       setServiceIds(combinedIds)
-      console.log(serviceIds)
     }
   }, [category]);
 

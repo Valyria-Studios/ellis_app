@@ -18,7 +18,6 @@ const SelectReferralLocation = ({ route, navigation }) => {
   const [expandedCard, setExpandedCard] = useState(null);
 
   useEffect(() => {
-    console.log(providedServicesId)
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
       .then((response) => response.json())
       .then((data) => {

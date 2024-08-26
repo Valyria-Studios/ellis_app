@@ -13,17 +13,15 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 
-
-
 const ServiceDirectory = ({ route, navigation }) => {
   const client = route.params?.client;
   const [frequentServices, setFrequentServices] = useState([]);
   const [serviceCategories, setServiceCategories] = useState([]);
   const isFocused = useIsFocused();
-  
+
   const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
   const CACHE_KEY_SERVICES = "cache_services";
-  
+
   const fetchWithCache = async (cacheKey, url) => {
     try {
       const cachedItem = await AsyncStorage.getItem(cacheKey);
@@ -86,14 +84,16 @@ const ServiceDirectory = ({ route, navigation }) => {
           "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Services"
         );
 
-        // Transform services data to match the structure needed for serviceCategories
+        // Transform services data to match the required structure
         const transformedCategories = servicesData.map((service) => ({
+          id: service.id,
           name: service.name,
-          icon: service.icon || "briefcase", // Default icon, adjust as needed
-          library: service.library || "Feather", // Default icon library, adjust as needed
-          options: service.Subservices
-            ? service.Subservices.map((sub) => sub.name)
-            : [],
+          Subservices: service.Subservices.map((subservice) => ({
+            id: subservice.id,
+            name: subservice.name,
+            valueId: subservice.valueId,
+            spaceId: subservice.spaceId,
+          })),
         }));
 
         setServiceCategories(transformedCategories);

@@ -1,52 +1,86 @@
-// Need to replace AsyncStorage with cloud storage
 import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import renderIcon from "../../shared/RenderIconFunction";
 import globalstyles from "../../shared/globalStyles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const ServiceDetails = ({ route, navigation }) => {
   const { category, client } = route.params;
 
-  const updateUsageFrequency = async (optionName, categoryName, categoryIcon, catergoryLibrary) => {
-    const key = `${categoryName}:${optionName}:${categoryIcon}:${catergoryLibrary}`; // Create a unique key for each option within its category
-    console.log("key", key)
-    try {
-      const currentCount = await AsyncStorage.getItem(key);
-      const newCount = currentCount ? JSON.parse(currentCount) + 1 : 1;
-      await AsyncStorage.setItem(key, JSON.stringify(newCount));
-    } catch (error) {
-      console.error("Failed to update frequency count", error);
+  useEffect(() => {
+    if (category.Subservices) {
+      const valueIds = category.Subservices.map(
+        (subservice) => subservice.valueId
+      );
+      const combinedIds = [category.id, ...valueIds]; // Include the main category id
+      console.log("Combined valueIds including main category id:", combinedIds);
     }
-  };
+  }, [category]);
 
   return (
     <View
       style={[globalstyles.container, { paddingTop: 15, paddingHorizontal: 5 }]}
     >
-      {category.options &&
-        category.options.map((option, index) => (
+      {/* Option for the main service */}
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.container}
+        onPress={() => {
+          navigation.navigate("Referral Location", {
+            option: category.name,
+            categoryName: category.name,
+            client,
+            providedServicesId: category.id, // Pass the main service ID
+          });
+        }}
+      >
+        <View
+          style={[
+            globalstyles.optionsContainer,
+            { flexDirection: "row", justifyContent: "space-between" },
+          ]}
+        >
+          <View style={{ flexDirection: "row" }}>
+            {renderIcon(category.icon, category.library, styles.icon, 20)}
+            <Text style={globalstyles.optionsText}>{category.name}</Text>
+          </View>
+          <MaterialIcons
+            name="keyboard-arrow-right"
+            size={28}
+            style={{ color: "#094852" }}
+          />
+        </View>
+      </TouchableOpacity>
+      {category.Subservices &&
+        category.Subservices.map((subservice, index) => (
           <TouchableOpacity
             activeOpacity={0.8}
             key={index}
             style={styles.container}
             onPress={() => {
-              updateUsageFrequency(option, category.name, category.icon, category.library);
               navigation.navigate("Referral Location", {
-                option,
+                option: subservice.name,
                 categoryName: category.name,
                 client,
+                providedServicesId: subservice.valueId,
               });
             }}
           >
             <View
               style={[
                 globalstyles.optionsContainer,
-                { flexDirection: "row", justifyContent: "flex-start" },
+                { flexDirection: "row", justifyContent: "space-between" },
               ]}
             >
-              {renderIcon(category.icon, category.library, styles.icon, 20)}
-              <Text style={globalstyles.optionsText}>{option}</Text>
+              <View style={{ flexDirection: "row" }}>
+                {renderIcon(category.icon, category.library, styles.icon, 20)}
+                <Text style={globalstyles.optionsText}>{subservice.name}</Text>
+              </View>
+              <MaterialIcons
+                name="keyboard-arrow-right"
+                size={28}
+                style={{ color: "#094852" }}
+              />
             </View>
           </TouchableOpacity>
         ))}

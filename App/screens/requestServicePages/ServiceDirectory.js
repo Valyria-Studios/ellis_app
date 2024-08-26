@@ -1,6 +1,3 @@
-//Need all Options for Service Categories
-// Replace asyncStorage with cloud storage
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -16,10 +13,42 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 
+
+
 const ServiceDirectory = ({ route, navigation }) => {
   const client = route.params?.client;
   const [frequentServices, setFrequentServices] = useState([]);
+  const [serviceCategories, setServiceCategories] = useState([]);
   const isFocused = useIsFocused();
+  
+  const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
+  const CACHE_KEY_SERVICES = "cache_services";
+  
+  const fetchWithCache = async (cacheKey, url) => {
+    try {
+      const cachedItem = await AsyncStorage.getItem(cacheKey);
+      if (cachedItem) {
+        const { data, timestamp } = JSON.parse(cachedItem);
+        if (Date.now() - timestamp < CACHE_EXPIRATION) {
+          return data;
+        }
+      }
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      const data = await response.json();
+      await AsyncStorage.setItem(
+        cacheKey,
+        JSON.stringify({ data, timestamp: Date.now() })
+      );
+      return data;
+    } catch (error) {
+      console.error("Error fetching data with cache:", error);
+      throw error;
+    }
+  };
 
   const loadFrequentServices = async () => {
     try {
@@ -43,70 +72,38 @@ const ServiceDirectory = ({ route, navigation }) => {
     }
   };
 
-  // console.log("frequentServices", frequentServices)
-
   useEffect(() => {
     if (isFocused) {
       loadFrequentServices();
     }
   }, [isFocused]);
 
-  //Need all Options for Service Categories
-  const serviceCategories = [
-    {
-      name: "Food",
-      icon: "clinic-medical",
-      library: "FontAwesome5",
-      options: [
-        "Emergency Food",
-        "Food Benefits",
-        "Food Delivery",
-        "Food Pantry",
-        "Meals",
-      ],
-    },
-    {
-      name: "Health",
-      icon: "brain",
-      library: "FontAwesome5",
-      options: [
-        "Urgent Care",
-        "Mental Health Urgent Care",
-        "Mental Health Services",
-        "Women's Health",
-      ],
-    },
-    {
-      name: "Housing",
-      icon: "home",
-      library: "Ionicons",
-      options: ["Temporary Housing", "Permanent Supportive Housing"],
-    },
-    {
-      name: "Hygiene",
-      icon: "brain",
-      library: "FontAwesome5",
-      options: [],
-    },
-    {
-      name: "Learn",
-      icon: "briefcase",
-      library: "Feather",
-      options: [],
-    },
-    {
-      name: "Legal",
-      icon: "briefcase",
-      library: "Feather",
-      options: ["Civil Litigation", "Criminal Defense", "Eviction Prevention"],
-    },
-    {
-      name: "Money",
-      icon: "briefcase",
-      library: "Feather",
-      options: [],
-    },
-  ];
+  useEffect(() => {
+    const loadServiceCategories = async () => {
+      try {
+        const servicesData = await fetchWithCache(
+          CACHE_KEY_SERVICES,
+          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Services"
+        );
+
+        // Transform services data to match the structure needed for serviceCategories
+        const transformedCategories = servicesData.map((service) => ({
+          name: service.name,
+          icon: service.icon || "briefcase", // Default icon, adjust as needed
+          library: service.library || "Feather", // Default icon library, adjust as needed
+          options: service.Subservices
+            ? service.Subservices.map((sub) => sub.name)
+            : [],
+        }));
+
+        setServiceCategories(transformedCategories);
+      } catch (error) {
+        console.error("Failed to load service categories", error);
+      }
+    };
+
+    loadServiceCategories();
+  }, []);
 
   return (
     <ScrollView
@@ -125,8 +122,6 @@ const ServiceDirectory = ({ route, navigation }) => {
             <TextInput
               blurOnSubmit={true}
               style={[globalstyles.searchBar, { fontSize: 16 }]}
-              // value={''}
-              // onChangeText={''}
               placeholder="Search for service"
             />
           </View>
@@ -143,7 +138,7 @@ const ServiceDirectory = ({ route, navigation }) => {
                   navigation.navigate("Referral Location", {
                     option: item.option,
                     categoryName: item.categoryName,
-                    client: client, // Ensure you have the client data needed, if not, it may need to be handled appropriately
+                    client: client,
                   })
                 }
                 style={styles.frequentContainer}
@@ -201,7 +196,7 @@ const ServiceDirectory = ({ route, navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
-      <View style={{marginVertical: 20}}></View>
+      <View style={{ marginVertical: 20 }}></View>
     </ScrollView>
   );
 };
@@ -213,20 +208,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "#094851",
   },
-
   container: {
     borderWidth: 1,
     marginVertical: 5,
     borderRadius: 15,
     backgroundColor: "#fff",
-    borderColor: "#B5BABB"
+    borderColor: "#B5BABB",
   },
-
   icon: {
     color: "#094852",
     paddingLeft: 10,
   },
-
   frequentHeader: {
     fontFamily: "gabarito-regular",
     fontSize: 10,
@@ -235,11 +227,9 @@ const styles = StyleSheet.create({
     color: "#465355",
     textAlign: "left",
   },
-
   frequentIcon: {
     color: "#094852",
   },
-
   frequentContainer: {
     flexDirection: "column",
     flex: 1,
@@ -250,10 +240,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: 125,
     height: 175,
-    backgroundColor: '#FFFFFF',
-    borderColor: '#B5BABB',
+    backgroundColor: "#FFFFFF",
+    borderColor: "#B5BABB",
   },
-
   frequentOption: {
     color: "#171B1C",
     fontSize: 18,

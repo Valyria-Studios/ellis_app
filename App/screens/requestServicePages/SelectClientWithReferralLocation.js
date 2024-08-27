@@ -15,7 +15,7 @@ import imageMap from "../../shared/getProfileImage";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SelectClientWithLocation = ({ route, navigation }) => {
-  const { option, selectedAmenity } = route.params;
+  const { option, selectedService } = route.params;
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,7 +35,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
         }
         const data = await response.json();
         setClients(data);
-        setFilteredClients(data); // Initially, no filter is applied
+        setFilteredClients(data);
       } catch (error) {
         setError(error.message);
       }
@@ -46,7 +46,6 @@ const SelectClientWithLocation = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
-    // Filter clients based on the search query
     const filtered =
       searchQuery.trim() === ""
         ? []
@@ -58,14 +57,13 @@ const SelectClientWithLocation = ({ route, navigation }) => {
   }, [searchQuery, clients]);
 
   const handleSelectClient = (client) => {
-    setSelectedClient(client); // Save the selected client
-    setSearchQuery(""); // Optionally update the search query to show the selected client's name
-    // You might want to clear the searchQuery or keep it, depending on your UX design
+    setSelectedClient(client);
+    setSearchQuery("");
   };
 
   const clearSelection = () => {
     setSelectedClient(null);
-    setSearchQuery(""); // Keep or remove, depending on desired behavior post-clear
+    setSearchQuery("");
   };
 
   return (
@@ -83,7 +81,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
         <Card>
           <Text style={styles.optionText}>{option}</Text>
           <View>
-            <Text style={styles.title}>{selectedAmenity.location}</Text>
+            <Text style={styles.title}>{selectedService.name}</Text>
             <View
               style={{
                 flexDirection: "row",
@@ -92,7 +90,10 @@ const SelectClientWithLocation = ({ route, navigation }) => {
               }}
             >
               <Octicons name="location" size={18} color={"#094852"} />
-              <Text style={styles.amenityText}>{selectedAmenity.address}</Text>
+              <Text style={styles.amenityText}>
+                {selectedService.attributes?.["Street address"]?.trim() ||
+                  "Street address not available"}
+              </Text>
             </View>
             <View
               style={{
@@ -103,7 +104,8 @@ const SelectClientWithLocation = ({ route, navigation }) => {
             >
               <Feather name="clock" size={16} color={"#094852"} />
               <Text style={styles.amenityText}>
-                {selectedAmenity.operationalHours}
+                {selectedService.attributes?.["Working hours"] ||
+                  "Operational hours not available"}
               </Text>
             </View>
           </View>
@@ -135,7 +137,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
               }
               value={searchQuery}
               onChangeText={setSearchQuery}
-              editable={!selectedClient} // Consider making it not editable if a client is selected
+              editable={!selectedClient}
             />
 
             {selectedClient && (
@@ -312,14 +314,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
 
-  // Add to your StyleSheet to style the floating FlatList container
   floatingListContainer: {
     position: "absolute",
-    top: 260, // Adjust this value based on the search bar's height + marginTop
+    top: 260,
     left: 0,
     right: 0,
-    backgroundColor: "white", // or any color that matches your theme
-    zIndex: 1, // Ensure it overlays other content
+    backgroundColor: "white",
+    zIndex: 1,
     marginHorizontal: 10,
   },
 });

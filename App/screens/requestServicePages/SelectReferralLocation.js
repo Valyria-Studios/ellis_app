@@ -102,7 +102,8 @@ const SelectReferralLocation = ({ route, navigation }) => {
                 >
                   <Octicons name="location" size={18} color={"#094852"} />
                   <Text style={styles.amenityText}>
-                    {service.attributes?.["Street address"] ||
+                    {service.attributes?.["Address"]?.trim() ||
+                      service.attributes?.["Street address"]?.trim() ||
                       "Street address not available"}
                   </Text>
                 </View>
@@ -127,7 +128,8 @@ const SelectReferralLocation = ({ route, navigation }) => {
                       style={{
                         flexDirection: "row",
                         flexWrap: "wrap",
-                        justifyContent: "center",
+                        flex: 1,
+                        justifyContent: "flex-start",
                         alignItems: "center",
                       }}
                     >
@@ -154,8 +156,10 @@ const SelectReferralLocation = ({ route, navigation }) => {
                     </TouchableOpacity>
                   </View>
                   <Text style={styles.descriptionText}>
-                    {service.attributes?.Description ||
-                      "Description not available"}
+                    {Array.isArray(service.attributes?.Description) &&
+                    service.attributes?.Description.length === 0
+                      ? "Description not available"
+                      : service.attributes?.Description}
                   </Text>
                 </View>
               )}

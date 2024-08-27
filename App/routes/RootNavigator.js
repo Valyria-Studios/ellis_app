@@ -144,13 +144,12 @@ const RootNavigator = () => {
         options={({ route, navigation }) => ({
           headerTitle: route.params.client.fullName,
           headerBackTitle: " ",
-          headerTitleAlign: "left",
+          headerTitleAlign: "center",
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,
-            left: -180,
+            left: -80,
           },
-          headerTitleContainerStyle: { left: 0 },
           headerTintColor: "#094852",
           headerRight: () => (
             <Menu>

@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import globalstyles from "../../shared/globalStyles";
 import renderIcon from "../../shared/RenderIconFunction";
@@ -18,6 +19,7 @@ const ServiceDirectory = ({ route, navigation }) => {
   const [frequentServices, setFrequentServices] = useState([]);
   const [serviceCategories, setServiceCategories] = useState([]);
   const [nonProfits, setNonProfits] = useState([]); // Store NonProfits data
+  const [loading, setLoading] = useState(true); // Track loading state
   const isFocused = useIsFocused();
 
   const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
@@ -81,6 +83,7 @@ const ServiceDirectory = ({ route, navigation }) => {
   useEffect(() => {
     const loadServiceAndNonProfitsData = async () => {
       try {
+        setLoading(true);
         // Fetch services
         const servicesData = await fetchWithCache(
           CACHE_KEY_SERVICES,
@@ -109,6 +112,8 @@ const ServiceDirectory = ({ route, navigation }) => {
         setNonProfits(nonProfitsData); // Store NonProfits data
       } catch (error) {
         console.error("Failed to load service categories or NonProfits", error);
+      } finally {
+        setLoading(false); // End loading
       }
     };
 
@@ -130,6 +135,10 @@ const ServiceDirectory = ({ route, navigation }) => {
       filteredNonProfits, // Pass filtered NonProfits to the next page
     });
   };
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
   return (
     <ScrollView

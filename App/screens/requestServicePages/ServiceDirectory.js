@@ -17,10 +17,12 @@ const ServiceDirectory = ({ route, navigation }) => {
   const client = route.params?.client;
   const [frequentServices, setFrequentServices] = useState([]);
   const [serviceCategories, setServiceCategories] = useState([]);
+  const [nonProfits, setNonProfits] = useState([]); // Store NonProfits data
   const isFocused = useIsFocused();
 
   const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
   const CACHE_KEY_SERVICES = "cache_services";
+  const CACHE_KEY_NONPROFITS = "cache_nonprofits"; // Add cache key for NonProfits
 
   const fetchWithCache = async (cacheKey, url) => {
     try {
@@ -77,11 +79,18 @@ const ServiceDirectory = ({ route, navigation }) => {
   }, [isFocused]);
 
   useEffect(() => {
-    const loadServiceCategories = async () => {
+    const loadServiceAndNonProfitsData = async () => {
       try {
+        // Fetch services
         const servicesData = await fetchWithCache(
           CACHE_KEY_SERVICES,
           "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Services"
+        );
+
+        // Fetch NonProfits
+        const nonProfitsData = await fetchWithCache(
+          CACHE_KEY_NONPROFITS,
+          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits"
         );
 
         // Transform services data to match the required structure
@@ -97,13 +106,30 @@ const ServiceDirectory = ({ route, navigation }) => {
         }));
 
         setServiceCategories(transformedCategories);
+        setNonProfits(nonProfitsData); // Store NonProfits data
       } catch (error) {
-        console.error("Failed to load service categories", error);
+        console.error("Failed to load service categories or NonProfits", error);
       }
     };
 
-    loadServiceCategories();
+    loadServiceAndNonProfitsData();
   }, []);
+
+  const handleServicePress = (category) => {
+    const filteredNonProfits = nonProfits.filter((nonProfit) =>
+      nonProfit.providedServicesValueIds.some((valueId) =>
+        category.Subservices.some(
+          (subservice) => subservice.valueId === valueId
+        )
+      )
+    );
+
+    navigation.navigate("Service Details", {
+      category,
+      client,
+      filteredNonProfits, // Pass filtered NonProfits to the next page
+    });
+  };
 
   return (
     <ScrollView
@@ -171,9 +197,7 @@ const ServiceDirectory = ({ route, navigation }) => {
           <TouchableOpacity
             key={index}
             activeOpacity={0.7}
-            onPress={() =>
-              navigation.navigate("Service Details", { category, client })
-            }
+            onPress={() => handleServicePress(category)}
           >
             <View key={index} style={styles.container}>
               <View

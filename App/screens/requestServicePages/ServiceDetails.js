@@ -5,8 +5,8 @@ import globalstyles from "../../shared/globalStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const ServiceDetails = ({ route, navigation }) => {
-  const { category, client } = route.params;
-  const [serviceIds, setServiceIds] = useState([])
+  const { category, client, filteredNonProfits } = route.params;
+  const [serviceIds, setServiceIds] = useState([]);
 
   useEffect(() => {
     if (category.Subservices) {
@@ -14,9 +14,25 @@ const ServiceDetails = ({ route, navigation }) => {
         (subservice) => subservice.valueId
       );
       const combinedIds = [category.id, ...valueIds]; // Include the main category id
-      setServiceIds(combinedIds)
+      setServiceIds(combinedIds);
     }
   }, [category]);
+
+  const handleSubservicePress = (subservice) => {
+    // Filter NonProfits based on the selected subservice ID
+    const filteredBySubservice = filteredNonProfits.filter((nonProfit) =>
+      nonProfit.providedServicesValueIds.includes(subservice.valueId)
+    );
+
+    // Navigate to the Referral Location page with the filtered NonProfits
+    navigation.navigate("Referral Location", {
+      option: subservice.name,
+      categoryName: category.name,
+      client,
+      providedServicesId: subservice.valueId, // Pass the subservice ID
+      filteredNonProfits: filteredBySubservice, // Pass the filtered NonProfits
+    });
+  };
 
   return (
     <View
@@ -31,7 +47,8 @@ const ServiceDetails = ({ route, navigation }) => {
             option: category.name,
             categoryName: category.name,
             client,
-            providedServicesId: serviceIds, // Pass the main service ID
+            providedServicesId: category.id, // Pass the main service ID
+            filteredNonProfits, // Pass all filtered NonProfits
           });
         }}
       >
@@ -52,20 +69,14 @@ const ServiceDetails = ({ route, navigation }) => {
           />
         </View>
       </TouchableOpacity>
+
       {category.Subservices &&
         category.Subservices.map((subservice, index) => (
           <TouchableOpacity
             activeOpacity={0.8}
             key={index}
             style={styles.container}
-            onPress={() => {
-              navigation.navigate("Referral Location", {
-                option: subservice.name,
-                categoryName: category.name,
-                client,
-                providedServicesId: serviceIds,
-              });
-            }}
+            onPress={() => handleSubservicePress(subservice)}
           >
             <View
               style={[

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import renderIcon from "../../shared/RenderIconFunction";
 import globalstyles from "../../shared/globalStyles";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -17,14 +18,58 @@ const ServiceDetails = ({ route, navigation }) => {
       setServiceIds(combinedIds);
     }
   }, [category]);
+  
+  const incrementServiceFrequency = async (
+    categoryName,
+    optionName,
+    icon,
+    library
+  ) => {
+    try {
+      // Ensure all parts of the key are defined and default values are set if necessary
+      const safeCategoryName = categoryName || "Unknown Category";
+      const safeOptionName = optionName || "Unknown Option";
+      const safeIcon = icon || "default-icon";
+      const safeLibrary = library || "Ionicons";
+
+      const key = `${safeCategoryName}:${safeOptionName}:${safeIcon}:${safeLibrary}`;
+      const value = await AsyncStorage.getItem(key);
+      const count = value ? JSON.parse(value) + 1 : 1; // Increment count or initialize to 1
+      await AsyncStorage.setItem(key, JSON.stringify(count));
+    } catch (error) {
+      console.error("Error updating service frequency:", error);
+    }
+  };
+
+  const handleMainServicePress = () => {
+    incrementServiceFrequency(
+      category.name,
+      category.name,
+      category.icon,
+      category.library
+    );
+
+    navigation.navigate("Referral Location", {
+      option: category.name,
+      categoryName: category.name,
+      client,
+      providedServicesId: category.id, // Pass the main service ID
+      filteredNonProfits, // Pass all filtered NonProfits
+    });
+  };
 
   const handleSubservicePress = (subservice) => {
-    // Filter NonProfits based on the selected subservice ID
+    incrementServiceFrequency(
+      category.name,
+      subservice.name,
+      category.icon,
+      category.library
+    );
+
     const filteredBySubservice = filteredNonProfits.filter((nonProfit) =>
       nonProfit.providedServicesValueIds.includes(subservice.valueId)
     );
 
-    // Navigate to the Referral Location page with the filtered NonProfits
     navigation.navigate("Referral Location", {
       option: subservice.name,
       categoryName: category.name,
@@ -42,15 +87,7 @@ const ServiceDetails = ({ route, navigation }) => {
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.container}
-        onPress={() => {
-          navigation.navigate("Referral Location", {
-            option: category.name,
-            categoryName: category.name,
-            client,
-            providedServicesId: category.id, // Pass the main service ID
-            filteredNonProfits, // Pass all filtered NonProfits
-          });
-        }}
+        onPress={handleMainServicePress}
       >
         <View
           style={[

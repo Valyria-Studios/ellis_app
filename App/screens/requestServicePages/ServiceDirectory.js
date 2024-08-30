@@ -56,17 +56,34 @@ const ServiceDirectory = ({ route, navigation }) => {
     try {
       const keys = await AsyncStorage.getAllKeys();
       const stores = await AsyncStorage.multiGet(keys);
-      let freqs = stores.map(([key, value]) => {
-        const [categoryName, optionName, categoryIcon, catergoryLibrary] =
-          key.split(":");
-        return {
-          option: optionName,
-          categoryName: categoryName,
-          icon: categoryIcon,
-          catergoryLibrary: catergoryLibrary,
-          count: JSON.parse(value),
-        };
-      });
+
+      let freqs = stores
+        .map(([key, value]) => {
+          // Filter out cache keys and improperly formatted keys
+          if (key.startsWith("cache_")) return null;
+
+          const [categoryName, optionName, categoryIcon, categoryLibrary] =
+            key.split(":");
+
+          // Skip keys with missing or undefined values
+          if (
+            !categoryName ||
+            !optionName ||
+            categoryName === "undefined" ||
+            optionName === "undefined"
+          )
+            return null;
+
+          return {
+            option: optionName,
+            categoryName: categoryName,
+            icon: categoryIcon || "default-icon", // Provide a default icon if missing
+            categoryLibrary: categoryLibrary || "Ionicons", // Provide a default library if missing
+            count: JSON.parse(value),
+          };
+        })
+        .filter(Boolean); // Remove null values
+
       freqs.sort((a, b) => b.count - a.count);
       setFrequentServices(freqs.slice(0, 5));
     } catch (error) {

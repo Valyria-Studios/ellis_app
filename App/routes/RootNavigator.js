@@ -143,12 +143,12 @@ const RootNavigator = () => {
         component={ProfilePage}
         options={({ route, navigation }) => ({
           headerTitle: route.params.client.fullName,
-          headerBackTitle: " ",
+          headerBackTitleVisible: false,
           headerTitleAlign: "center",
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,
-            left: -80,
+            // left: -80,
           },
           headerTintColor: "#094852",
           headerRight: () => (

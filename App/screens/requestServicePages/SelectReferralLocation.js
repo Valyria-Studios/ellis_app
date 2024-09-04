@@ -192,7 +192,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
                       : "Enrollment Available"}
                   </Text>
                 </View>
-                <TouchableOpacity onPress={() => handleOptionSelect(service)}>
+                <TouchableOpacity style= {{ padding: 10}} onPress={() => handleOptionSelect(service)}>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <MaterialIcons
                       name="app-registration"

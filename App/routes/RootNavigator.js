@@ -42,6 +42,7 @@ import AddClientToEngagement from "../data/testAddClient";
 import ServicePage from "../screens/plusNavigatorButton/services/services";
 import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
 import EntitiesScreen from "../screens/testingGeoApi";
+import CustomBackButton from "../shared/CustomBackButton";
 
 const RootStack = createStackNavigator();
 
@@ -148,7 +149,7 @@ const RootNavigator = () => {
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,
-            // left: -80,
+            left: -80,
           },
           headerTintColor: "#094852",
           headerRight: () => (
@@ -199,14 +200,15 @@ const RootNavigator = () => {
             route.params && route.params.headerTitle
               ? route.params.headerTitle
               : "Service Directory",
-          headerTitleAlign: "left",
+          headerTitleAlign: "center",
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
+            left: -80,
           },
-          headerBackTitle: " ",
+          // headerBackTitleVisible: false,
+          headerLeft: () => <CustomBackButton color="#094852"/>,
           headerTintColor: "#094852",
           headerStyle: {
             backgroundColor: "#F3F8F9",

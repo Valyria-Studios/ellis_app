@@ -16,7 +16,6 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.mpatel31.App",
       "infoPlist": {
-        "UIViewControllerBasedStatusBarAppearance": false,
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
         }

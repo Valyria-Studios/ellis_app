@@ -7,7 +7,9 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from "react-native";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import globalstyles from "../../shared/globalStyles";
 import { TextInput } from "react-native-gesture-handler";
 import RNPickerSelect from "react-native-picker-select";
@@ -30,271 +32,278 @@ const EnrollmentForm = ({ route, navigation }) => {
   const [consent, setConsent] = useState();
 
   return (
-    <ScrollView
-      style={globalstyles.container}
-      showsVerticalScrollIndicator={false}
-    >
-      <View>
-        <View>
-          <Text style={styles.captionText}>
-            Leave the field below blank to leave the form for the organization
-            to fill out.
-          </Text>
-        </View>
-        <Text style={styles.header}>Referral Type</Text>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={referralType}
-            onValueChange={(value) => setReferralType(value)}
-            items={[
-              {
-                label: "Current Participant — Add Alternate",
-                value: "Add",
-              },
-              { label: "Current Participant — Update Info", value: "Update" },
-              {
-                label: "Current Participant — Transfer Location",
-                value: "Transfer",
-              },
-              // Add more options as needed
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "New Applicant", value: "New" }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-      </View>
-      <View>
-        <Text style={styles.header}>Required Verification</Text>
-        <Text style={styles.subheader}>Name verified by ID?</Text>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={nameVerified}
-            onValueChange={(value) => setNameVerified(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Select an option", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-        <Text style={styles.subheader}>Address verified by ID or mail?</Text>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={addressVerified}
-            onValueChange={(value) => setAddressVerified(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Select an option", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-      </View>
-      <View>
-        <Text style={styles.header}>Patron Profile</Text>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={basicProfileInformation}
-            onValueChange={(value) => setBasicProfileInformation(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Basic Profile Information", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={householdInformation}
-            onValueChange={(value) => setHouseholdInformation(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Household Information", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={demographicInformation}
-            onValueChange={(value) => setDemographicInformation(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Demographic Information", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={alternateInformation}
-            onValueChange={(value) => setAlternateInformation(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Alternate Information", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-      </View>
-      <View>
-        <Text style={styles.header}>Consent</Text>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={communicationConsent}
-            onValueChange={(value) => setCommunicationConsent(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Communication Consent", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-        <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            value={certification}
-            onValueChange={(value) => setCertification(value)}
-            items={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Certification", value: null }}
-            useNativeAndroidPickerStyle={false}
-            Icon={() => (
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="#094852"
-              />
-            )}
-          />
-        </View>
-      </View>
-      <View>
-        <Text style={styles.header}>Notes</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder={"Enter notes here"}
-          value={notes}
-          onChangeText={setNotes}
-          multiline={true}
-        />
-      </View>
-      <View
-        style={{
-          justifyContent: "center",
-        }}
+    <SafeAreaView style={[globalstyles.container, { backgroundColor: "#FFFFFF" }]}>
+    <KeyboardAwareScrollView
+        style={{ flex: 1 }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+        scrollEnabled={true}
+        keyboardShouldPersistTaps="handled" // Ensures taps work even when the keyboard is open
+        enableOnAndroid={true} // Enables behavior on Android
+        extraHeight={150} // Adjust this value for space between the input and keyboard
       >
-        <SafeAreaView>
-          <TouchableOpacity
-            style={[
-              globalstyles.buttonContainer,
-              {
-                backgroundColor: "#10798B",
-                borderColor: "#FFFFFF",
-                marginTop: 20,
-                marginBottom: 5,
-                margin: 0,
-              },
-            ]}
-            activeOpacity={0.6}
-            onPress={() =>
-              navigation.navigate("Confirm Referral", {
-                selectedClient: selectedClient,
-                option: option,
-                referralType: referralType,
-                nameVerified: nameVerified,
-                addressVerified: addressVerified,
-                basicProfileInformation: basicProfileInformation,
-                householdInformation: householdInformation,
-                demographicInformation: demographicInformation,
-                alternateInformation: alternateInformation,
-                communicationConsent: communicationConsent,
-                certification: certification,
-                notes: notes,
-              })
-            }
-          >
-            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
-              Create Referral
+        <View>
+          <View>
+            <Text style={styles.captionText}>
+              Leave the field below blank to leave the form for the organization
+              to fill out.
             </Text>
-          </TouchableOpacity>
-          <Text style={styles.skipText}>Skip</Text>
-        </SafeAreaView>
-      </View>
-    </ScrollView>
+          </View>
+          <Text style={styles.header}>Referral Type</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={referralType}
+              onValueChange={(value) => setReferralType(value)}
+              items={[
+                {
+                  label: "Current Participant — Add Alternate",
+                  value: "Add",
+                },
+                { label: "Current Participant — Update Info", value: "Update" },
+                {
+                  label: "Current Participant — Transfer Location",
+                  value: "Transfer",
+                },
+                // Add more options as needed
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "New Applicant", value: "New" }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+        </View>
+        <View>
+          <Text style={styles.header}>Required Verification</Text>
+          <Text style={styles.subheader}>Name verified by ID?</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={nameVerified}
+              onValueChange={(value) => setNameVerified(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Select an option", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+          <Text style={styles.subheader}>Address verified by ID or mail?</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={addressVerified}
+              onValueChange={(value) => setAddressVerified(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Select an option", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+        </View>
+        <View>
+          <Text style={styles.header}>Patron Profile</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={basicProfileInformation}
+              onValueChange={(value) => setBasicProfileInformation(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Basic Profile Information", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={householdInformation}
+              onValueChange={(value) => setHouseholdInformation(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Household Information", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={demographicInformation}
+              onValueChange={(value) => setDemographicInformation(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Demographic Information", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={alternateInformation}
+              onValueChange={(value) => setAlternateInformation(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Alternate Information", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+        </View>
+        <View>
+          <Text style={styles.header}>Consent</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={communicationConsent}
+              onValueChange={(value) => setCommunicationConsent(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Communication Consent", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={certification}
+              onValueChange={(value) => setCertification(value)}
+              items={[
+                { label: "Yes", value: "yes" },
+                { label: "No", value: "no" },
+              ]}
+              style={pickerSelectStyles}
+              placeholder={{ label: "Certification", value: null }}
+              useNativeAndroidPickerStyle={false}
+              Icon={() => (
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="#094852"
+                />
+              )}
+            />
+          </View>
+        </View>
+        <View>
+          <Text style={styles.header}>Notes</Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder={"Enter notes here"}
+            value={notes}
+            onChangeText={setNotes}
+            multiline={true}
+          />
+        </View>
+        <View
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <SafeAreaView>
+            <TouchableOpacity
+              style={[
+                globalstyles.buttonContainer,
+                {
+                  backgroundColor: "#10798B",
+                  borderColor: "#FFFFFF",
+                  marginTop: 20,
+                  marginBottom: 5,
+                  margin: 0,
+                },
+              ]}
+              activeOpacity={0.6}
+              onPress={() =>
+                navigation.navigate("Confirm Referral", {
+                  selectedClient: selectedClient,
+                  option: option,
+                  referralType: referralType,
+                  nameVerified: nameVerified,
+                  addressVerified: addressVerified,
+                  basicProfileInformation: basicProfileInformation,
+                  householdInformation: householdInformation,
+                  demographicInformation: demographicInformation,
+                  alternateInformation: alternateInformation,
+                  communicationConsent: communicationConsent,
+                  certification: certification,
+                  notes: notes,
+                })
+              }
+            >
+              <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+                Create Referral
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.skipText}>Skip</Text>
+          </SafeAreaView>
+        </View>
+    </KeyboardAwareScrollView>
+      </SafeAreaView>
   );
 };
 

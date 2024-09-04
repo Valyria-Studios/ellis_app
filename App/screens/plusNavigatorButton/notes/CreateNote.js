@@ -7,6 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../../shared/globalStyles";
@@ -165,69 +167,74 @@ const CreateNote = ({ route, navigation }) => {
     <SafeAreaView
       style={[
         globalstyles.container,
-        { backgroundColor: "#FFFFFF", paddingTop: -30 },
+        { backgroundColor: "#FFFFFF", paddingTop: -30, flex: 0 },
       ]}
     >
-      <View style={{ flex: 1 }}>
-        {showClientSearch && (
-          <View style={styles.textInputContainer}>
-            <EvilIcons
-              name="search"
-              size={24}
-              color="#828B89"
-              style={{ paddingLeft: 10 }}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={100} // Adjust offset if needed
+      >
+        <View style={{ flex: 1 }}>
+          {showClientSearch && (
+            <View style={styles.textInputContainer}>
+              <EvilIcons
+                name="search"
+                size={24}
+                color="#828B89"
+                style={{ paddingLeft: 10 }}
+              />
+              <TextInput
+                blurOnSubmit={true}
+                style={styles.textInput}
+                placeholder="Select Client"
+                value={selectedClient}
+                onChangeText={setSelectedClient}
+                onFocus={() => setShowClients(true)} // Show the list when input is focused
+              />
+            </View>
+          )}
+          {showClients && filteredClients.length > 0 && (
+            <FlatList
+              data={filteredClients}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => handleSelectClient(item)}
+                  style={styles.clientItem}
+                >
+                  <Text>{item.fullName}</Text>
+                </TouchableOpacity>
+              )}
+              style={[styles.clientList, { maxHeight: 200 }]}
             />
+          )}
+
+          <View style={styles.textInputContainer}>
             <TextInput
               blurOnSubmit={true}
               style={styles.textInput}
-              placeholder="Select Client"
-              value={selectedClient}
-              onChangeText={setSelectedClient}
-              onFocus={() => setShowClients(true)} // Show the list when input is focused
+              placeholder="Title"
+              value={title}
+              onChangeText={setTitle}
             />
           </View>
-        )}
-        {showClients && filteredClients.length > 0 && (
-          <FlatList
-            data={filteredClients}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => handleSelectClient(item)}
-                style={styles.clientItem}
-              >
-                <Text>{item.fullName}</Text>
-              </TouchableOpacity>
-            )}
-            style={[styles.clientList, { maxHeight: 200 }]}
-          />
-        )}
-
-        <View style={styles.textInputContainer}>
-          <TextInput
-            blurOnSubmit={true}
-            style={styles.textInput}
-            placeholder="Title"
-            value={title}
-            onChangeText={setTitle}
-          />
-        </View>
-        <View
-          style={[
-            styles.textInputContainer,
-            { flex: 0.8, alignItems: "flex-start" },
-          ]}
-        >
-          <TextInput
-            blurOnSubmit={true}
-            style={[styles.textInput, {}]}
-            multiline={true}
-            placeholder="Input Notes"
-            value={note}
-            onChangeText={setNote}
-          />
-        </View>
-        {/* <View style={styles.textInputContainer}>
+          <View
+            style={[
+              styles.textInputContainer,
+              { flex: 0.8, alignItems: "flex-start" },
+            ]}
+          >
+            <TextInput
+              blurOnSubmit={true}
+              style={[styles.textInput, {}]}
+              multiline={true}
+              placeholder="Input Notes"
+              value={note}
+              onChangeText={setNote}
+            />
+          </View>
+          {/* <View style={styles.textInputContainer}>
           <MaterialIcons
             name="label-outline"
             size={20}
@@ -272,34 +279,35 @@ const CreateNote = ({ route, navigation }) => {
             ))}
           </View>
         )} */}
-        <View style={styles.textInputContainer}>
-          <Ionicons
-            name="person-outline"
-            size={20}
-            color="#828B89"
-            style={{ paddingLeft: 10 }}
-          />
-          <TextInput
-            blurOnSubmit={true}
-            style={styles.textInput}
-            placeholder="Tag a Team Member"
-            value={teamMember}
-            onChangeText={setTeamMember}
-          />
+          <View style={styles.textInputContainer}>
+            <Ionicons
+              name="person-outline"
+              size={20}
+              color="#828B89"
+              style={{ paddingLeft: 10 }}
+            />
+            <TextInput
+              blurOnSubmit={true}
+              style={styles.textInput}
+              placeholder="Tag a Team Member"
+              value={teamMember}
+              onChangeText={setTeamMember}
+            />
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={handleSaveNote}
+              style={[
+                globalstyles.buttonContainer,
+                { backgroundColor: "#FFFFFF", borderRadius: 15 },
+              ]}
+              activeOpacity={0.6}
+            >
+              <Text style={[globalstyles.buttonText]}>Save Note</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View>
-          <TouchableOpacity
-            onPress={handleSaveNote}
-            style={[
-              globalstyles.buttonContainer,
-              { backgroundColor: "#FFFFFF", borderRadius: 15 },
-            ]}
-            activeOpacity={0.6}
-          >
-            <Text style={[globalstyles.buttonText]}>Save Note</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

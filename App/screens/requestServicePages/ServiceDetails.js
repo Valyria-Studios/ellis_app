@@ -23,7 +23,8 @@ const ServiceDetails = ({ route, navigation }) => {
     categoryName,
     optionName,
     icon,
-    library
+    library,
+    serviceId
   ) => {
     try {
       // Ensure all parts of the key are defined and default values are set if necessary
@@ -31,8 +32,10 @@ const ServiceDetails = ({ route, navigation }) => {
       const safeOptionName = optionName || "Unknown Option";
       const safeIcon = icon || "default-icon";
       const safeLibrary = library || "Ionicons";
+      const safeServiceId = serviceId || "unknown-id"; // Include serviceId in the key
 
-      const key = `${safeCategoryName}:${safeOptionName}:${safeIcon}:${safeLibrary}`;
+
+      const key = `${safeCategoryName}:${safeOptionName}:${safeIcon}:${safeLibrary}:${safeServiceId}`;
       const value = await AsyncStorage.getItem(key);
       const count = value ? JSON.parse(value) + 1 : 1; // Increment count or initialize to 1
       await AsyncStorage.setItem(key, JSON.stringify(count));
@@ -46,7 +49,8 @@ const ServiceDetails = ({ route, navigation }) => {
       category.name,
       category.name,
       category.icon,
-      category.library
+      category.library,
+      category.id // Pass the main service ID
     );
 
     navigation.navigate("Referral Location", {
@@ -63,7 +67,8 @@ const ServiceDetails = ({ route, navigation }) => {
       category.name,
       subservice.name,
       category.icon,
-      category.library
+      category.library,
+      subservice.valueId // Pass the subservice ID
     );
 
     const filteredBySubservice = filteredNonProfits.filter((nonProfit) =>

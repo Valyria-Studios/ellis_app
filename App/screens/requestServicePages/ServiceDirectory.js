@@ -62,8 +62,13 @@ const ServiceDirectory = ({ route, navigation }) => {
           // Filter out cache keys and improperly formatted keys
           if (key.startsWith("cache_")) return null;
 
-          const [categoryName, optionName, categoryIcon, categoryLibrary] =
-            key.split(":");
+          const [
+            categoryName,
+            optionName,
+            categoryIcon,
+            categoryLibrary,
+            serviceId,
+          ] = key.split(":"); // Add serviceId to the key parsing
 
           // Skip keys with missing or undefined values
           if (
@@ -80,6 +85,7 @@ const ServiceDirectory = ({ route, navigation }) => {
             icon: categoryIcon || "default-icon", // Provide a default icon if missing
             categoryLibrary: categoryLibrary || "Ionicons", // Provide a default library if missing
             count: JSON.parse(value),
+            serviceId: serviceId || null, // Include serviceId to differentiate main and sub-services
           };
         })
         .filter(Boolean); // Remove null values
@@ -191,6 +197,7 @@ const ServiceDirectory = ({ route, navigation }) => {
                     option: item.option,
                     categoryName: item.categoryName,
                     client: client,
+                    providedServicesId: item.serviceId, // Pass the stored serviceId for navigation
                   })
                 }
                 style={styles.frequentContainer}

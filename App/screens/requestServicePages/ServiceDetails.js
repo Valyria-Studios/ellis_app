@@ -18,7 +18,7 @@ const ServiceDetails = ({ route, navigation }) => {
       setServiceIds(combinedIds);
     }
   }, [category]);
-  
+
   const incrementServiceFrequency = async (
     categoryName,
     optionName,
@@ -34,7 +34,6 @@ const ServiceDetails = ({ route, navigation }) => {
       const safeLibrary = library || "Ionicons";
       const safeServiceId = serviceId || "unknown-id"; // Include serviceId in the key
 
-
       const key = `${safeCategoryName}:${safeOptionName}:${safeIcon}:${safeLibrary}:${safeServiceId}`;
       const value = await AsyncStorage.getItem(key);
       const count = value ? JSON.parse(value) + 1 : 1; // Increment count or initialize to 1
@@ -46,8 +45,8 @@ const ServiceDetails = ({ route, navigation }) => {
 
   const handleMainServicePress = () => {
     incrementServiceFrequency(
-      category.name,
-      category.name,
+      category.name, // Main category name
+      category.name, // Option name (same as the category name for the main service)
       category.icon,
       category.library,
       category.id // Pass the main service ID

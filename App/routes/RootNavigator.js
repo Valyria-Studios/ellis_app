@@ -54,21 +54,19 @@ const RootNavigator = () => {
         component={MainScreenContainer}
         options={{
           headerShown: false,
-          headerBackTitle: " ",
         }} // Hide header for the MainApp
       />
       <RootStack.Screen
         name="My Clients"
         component={MyClients}
         options={{
-          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
           headerStyle: {
             shadowColor: "transparent",
@@ -80,14 +78,13 @@ const RootNavigator = () => {
         name="My Services"
         component={MyServices}
         options={{
-          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
           headerStyle: {
             shadowColor: "transparent",
@@ -99,14 +96,13 @@ const RootNavigator = () => {
         name="My Hours"
         component={MyHours}
         options={{
-          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
           headerStyle: {
             shadowColor: "transparent",
@@ -119,7 +115,7 @@ const RootNavigator = () => {
         component={ChatPage}
         options={({ route }) => ({
           headerTitle: route.params.chatIdentifier || "Chat",
-          headerBackTitle: " ",
+
           headerTintColor: "black",
         })}
       />
@@ -128,7 +124,7 @@ const RootNavigator = () => {
         component={AmenityPage}
         options={{
           headerTitle: "",
-          headerBackTitle: " ",
+
           headerTitleStyle: {
             color: "#171b1c",
             fontSize: 28,
@@ -144,12 +140,11 @@ const RootNavigator = () => {
         component={ProfilePage}
         options={({ route, navigation }) => ({
           headerTitle: route.params.client.fullName,
-          headerBackTitleVisible: false,
-          headerTitleAlign: "center",
+          headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             color: "#171B1C",
             fontSize: 24,
-            left: -80,
           },
           headerTintColor: "#094852",
           headerRight: () => (
@@ -200,15 +195,13 @@ const RootNavigator = () => {
             route.params && route.params.headerTitle
               ? route.params.headerTitle
               : "Service Directory",
-          headerTitleAlign: "center",
+          headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -80,
           },
-          // headerBackTitleVisible: false,
-          headerLeft: () => <CustomBackButton color="#094852"/>,
           headerTintColor: "#094852",
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -239,14 +232,13 @@ const RootNavigator = () => {
         name="Profile Admin Settings"
         component={AdminManagementScreen}
         options={{
-          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -260,14 +252,14 @@ const RootNavigator = () => {
         component={ServiceDetails}
         options={({ route }) => ({
           headerTitle: route.params.category.name,
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -281,14 +273,14 @@ const RootNavigator = () => {
         component={SelectReferralLocation}
         options={({ route }) => ({
           headerTitle: route.params.option,
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -302,14 +294,14 @@ const RootNavigator = () => {
         component={SelectClientWithLocation}
         options={({ route }) => ({
           headerTitle: `${route.params.option} Referral`,
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -323,14 +315,14 @@ const RootNavigator = () => {
         component={EnrollmentForm}
         options={({ route }) => ({
           headerTitle: `${route.params.option} Enrollment Form`,
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -343,14 +335,13 @@ const RootNavigator = () => {
         name="Confirm Referral"
         component={ConfirmReferral}
         options={{
-          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -363,9 +354,9 @@ const RootNavigator = () => {
         name="Referral Sent"
         component={ReferralSent}
         options={({ navigation }) => ({
-          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
@@ -390,14 +381,13 @@ const RootNavigator = () => {
         name="Select Client"
         component={SelectClient}
         options={{
-          headerBackTitle: " ",
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#094852",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -411,14 +401,14 @@ const RootNavigator = () => {
         component={SelectReferralFor}
         options={{
           headerTitle: "Select Referral",
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#094852",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -432,14 +422,14 @@ const RootNavigator = () => {
         component={ReferToPerson}
         options={({ route }) => ({
           headerTitle: `Refer to ${route.params.teamMember}`,
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#094852",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -453,14 +443,14 @@ const RootNavigator = () => {
         component={ReferToService}
         options={({ route }) => ({
           headerTitle: `${route.params.service.name}`,
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -479,13 +469,13 @@ const RootNavigator = () => {
               ? route.params.headerTitle
               : "New Note",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerStyle: {
             backgroundColor: "#FFFFFF",
@@ -500,13 +490,13 @@ const RootNavigator = () => {
         options={({ route }) => ({
           headerTitle: `${route.params.note.title} Notes`,
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -180,
           },
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerStyle: {
             backgroundColor: "#FFFFFF",
@@ -548,14 +538,14 @@ const RootNavigator = () => {
         component={CreateClient}
         options={({ route }) => ({
           headerTitle: "Create New Client Profile",
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -570,14 +560,14 @@ const RootNavigator = () => {
         component={ClientInformation}
         options={({ route }) => ({
           headerTitle: "Add Client Information",
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -592,14 +582,14 @@ const RootNavigator = () => {
         component={ServicePage}
         options={({ route }) => ({
           headerTitle: "Add a Service",
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -614,14 +604,14 @@ const RootNavigator = () => {
         component={AppointmentScheduler}
         options={({ route }) => ({
           headerTitle: "Select meeting time",
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",
@@ -636,14 +626,14 @@ const RootNavigator = () => {
         component={EntitiesScreen}
         options={({ route }) => ({
           headerTitle: "Select Entity",
-          headerBackTitle: " ",
+
           headerTintColor: "#094852",
           headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
             color: "#171B1C",
-            left: -190,
           },
           headerStyle: {
             backgroundColor: "#F3F8F9",

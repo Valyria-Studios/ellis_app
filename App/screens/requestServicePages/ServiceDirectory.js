@@ -160,12 +160,24 @@ const ServiceDirectory = ({ route, navigation }) => {
   };
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return (
+      <View
+        style={[
+          globalstyles.container,
+          { justifyContent: "center", alignItems: "center" },
+        ]}
+      >
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
   }
 
   return (
     <ScrollView
-      style={[globalstyles.container, { paddingHorizontal: 5, marginHorizontal: 10 }]}
+      style={[
+        globalstyles.container,
+        { paddingHorizontal: 5, marginHorizontal: 10 },
+      ]}
       showsVerticalScrollIndicator={false}
     >
       <View>

@@ -51,8 +51,29 @@ const SelectReferralLocation = ({ route, navigation }) => {
   };
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return (
+      <View
+        style={[
+          globalstyles.container,
+          { justifyContent: "center", alignItems: "center" },
+        ]}
+      >
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
   }
+
+  // Add this block
+  if (services.length === 0) {
+    return (
+      <View style={[globalstyles.container, { paddingHorizontal: 5, alignItems: 'center', justifyContent: 'center' }]}>
+        <Text style={[styles.caption, {fontSize: 20}]}>
+          No Available Nonprofits for this service
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -192,7 +213,10 @@ const SelectReferralLocation = ({ route, navigation }) => {
                       : "Enrollment Available"}
                   </Text>
                 </View>
-                <TouchableOpacity style= {{ padding: 10 }} onPress={() => handleOptionSelect(service)}>
+                <TouchableOpacity
+                  style={{ padding: 10 }}
+                  onPress={() => handleOptionSelect(service)}
+                >
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <MaterialIcons
                       name="app-registration"

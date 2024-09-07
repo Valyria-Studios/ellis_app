@@ -165,7 +165,7 @@ const ServiceDirectory = ({ route, navigation }) => {
 
   return (
     <ScrollView
-      style={[globalstyles.container, { paddingHorizontal: 5 }]}
+      style={[globalstyles.container, { paddingHorizontal: 5, marginHorizontal: 10 }]}
       showsVerticalScrollIndicator={false}
     >
       <View>

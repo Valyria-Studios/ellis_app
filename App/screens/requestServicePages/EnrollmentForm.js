@@ -9,10 +9,10 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import Picker from "react-native-picker-select";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import globalstyles from "../../shared/globalStyles";
 import { TextInput } from "react-native-gesture-handler";
-import RNPickerSelect from "react-native-picker-select";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -32,8 +32,8 @@ const EnrollmentForm = ({ route, navigation }) => {
   const [consent, setConsent] = useState();
 
   return (
-    <SafeAreaView style={[globalstyles.container, { backgroundColor: "#FFFFFF" }]}>
-    <KeyboardAwareScrollView
+    <SafeAreaView style={[globalstyles.container]}>
+      <KeyboardAwareScrollView
         style={{ flex: 1 }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={{ flexGrow: 1 }}
@@ -51,7 +51,7 @@ const EnrollmentForm = ({ route, navigation }) => {
           </View>
           <Text style={styles.header}>Referral Type</Text>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={referralType}
               onValueChange={(value) => setReferralType(value)}
               items={[
@@ -83,7 +83,7 @@ const EnrollmentForm = ({ route, navigation }) => {
           <Text style={styles.header}>Required Verification</Text>
           <Text style={styles.subheader}>Name verified by ID?</Text>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={nameVerified}
               onValueChange={(value) => setNameVerified(value)}
               items={[
@@ -104,7 +104,7 @@ const EnrollmentForm = ({ route, navigation }) => {
           </View>
           <Text style={styles.subheader}>Address verified by ID or mail?</Text>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={addressVerified}
               onValueChange={(value) => setAddressVerified(value)}
               items={[
@@ -127,7 +127,7 @@ const EnrollmentForm = ({ route, navigation }) => {
         <View>
           <Text style={styles.header}>Patron Profile</Text>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={basicProfileInformation}
               onValueChange={(value) => setBasicProfileInformation(value)}
               items={[
@@ -147,7 +147,7 @@ const EnrollmentForm = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={householdInformation}
               onValueChange={(value) => setHouseholdInformation(value)}
               items={[
@@ -167,7 +167,7 @@ const EnrollmentForm = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={demographicInformation}
               onValueChange={(value) => setDemographicInformation(value)}
               items={[
@@ -187,7 +187,7 @@ const EnrollmentForm = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={alternateInformation}
               onValueChange={(value) => setAlternateInformation(value)}
               items={[
@@ -210,7 +210,7 @@ const EnrollmentForm = ({ route, navigation }) => {
         <View>
           <Text style={styles.header}>Consent</Text>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={communicationConsent}
               onValueChange={(value) => setCommunicationConsent(value)}
               items={[
@@ -230,7 +230,7 @@ const EnrollmentForm = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.pickerContainer}>
-            <RNPickerSelect
+            <Picker
               value={certification}
               onValueChange={(value) => setCertification(value)}
               items={[
@@ -302,8 +302,8 @@ const EnrollmentForm = ({ route, navigation }) => {
             <Text style={styles.skipText}>Skip</Text>
           </SafeAreaView>
         </View>
-    </KeyboardAwareScrollView>
-      </SafeAreaView>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

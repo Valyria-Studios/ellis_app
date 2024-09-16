@@ -1,5 +1,3 @@
-// TAGS ARE COMMENTED OUT
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -15,7 +13,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { format } from "date-fns";
 
 const NoteDetails = ({ route, navigation }) => {
-  const { note } = route.params;
+  // Destructure note and clientId from route params
+  const { note, clientId } = route.params;
   const [currentNote, setCurrentNote] = useState(note);
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(note.title);
@@ -27,16 +26,15 @@ const NoteDetails = ({ route, navigation }) => {
     const editDate = format(now, "p, PP"); // Formats the current date and time
     const updatedNote = {
       ...note,
-      title: editedTitle, // Update title
+      title: editedTitle,
       content: editedContent,
       teamMember: editedTeamMember,
       lastEdited: editDate,
-      // Additional fields can be updated here if needed
     };
 
     try {
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Notes/${note.id}`,
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientId}/notes/${note.id}`,
         {
           method: "PATCH",
           headers: {
@@ -83,18 +81,29 @@ const NoteDetails = ({ route, navigation }) => {
   };
 
   const deleteNote = async () => {
+    if (!clientId) {
+      // Use clientId directly from route params
+      console.error("Client ID is undefined. Cannot delete the note.");
+      return;
+    }
+
     try {
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Notes/${route.params.note.id}`,
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientId}/notes/${currentNote.id}`,
         {
           method: "DELETE",
         }
       );
+
       if (response.ok) {
         console.log("Note deleted successfully");
         navigation.goBack();
       } else {
-        throw new Error("Failed to delete the note");
+        const errorText = await response.text(); // Retrieve the error message from the response
+        console.error(`Failed to delete the note: ${errorText}`);
+        throw new Error(
+          `Failed to delete the note. Status: ${response.status}`
+        );
       }
     } catch (error) {
       console.error("Error deleting note:", error);
@@ -121,13 +130,6 @@ const NoteDetails = ({ route, navigation }) => {
             <Text style={styles.date}>{currentNote.lastEdited}</Text>
           </View>
         </View>
-        {/* <View style={{ flexDirection: "row" }}>
-        {note.topics.map((tags) => (
-          <View style={styles.tag}>
-            <Text style={styles.tagText}>{tags}</Text>
-          </View>
-        ))}
-      </View> */}
         {editMode && (
           <TextInput
             value={editedTitle}

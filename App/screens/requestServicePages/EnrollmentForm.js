@@ -55,16 +55,12 @@ const EnrollmentForm = ({ route, navigation }) => {
               value={referralType}
               onValueChange={(value) => setReferralType(value)}
               items={[
-                {
-                  label: "Current Participant — Add Alternate",
-                  value: "Add",
-                },
+                { label: "Current Participant — Add Alternate", value: "Add" },
                 { label: "Current Participant — Update Info", value: "Update" },
                 {
                   label: "Current Participant — Transfer Location",
                   value: "Transfer",
                 },
-                // Add more options as needed
               ]}
               style={pickerSelectStyles}
               placeholder={{ label: "New Applicant", value: "New" }}

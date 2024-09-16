@@ -92,11 +92,15 @@ function ProfilePage({ route, navigation }) {
   const filteredForms = forms.filter((form) => form.for === client.fullName);
 
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Notes")
+    if (!clientData.id) return; // Ensure client ID is present
+
+    fetch(
+      `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/notes`
+    )
       .then((response) => response.json())
-      .then((json) => setNotes(json))
-      .catch((error) => console.log("error fetching data:", error));
-  }, []);
+      .then((json) => setNotes(json)) // Fetch notes specifically for the client
+      .catch((error) => console.log("Error fetching client notes:", error));
+  }, [clientData.id]); // Fetch notes when clientData.id changes
 
   useFocusEffect(
     useCallback(() => {
@@ -586,7 +590,7 @@ function ProfilePage({ route, navigation }) {
           </TouchableOpacity>
         ))
       ) : (
-        <Text>Loading...</Text>
+        <Text>No notes available for this client.</Text>
       )}
     </View>
   );

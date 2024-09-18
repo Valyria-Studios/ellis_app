@@ -23,7 +23,8 @@
     },
     "android": {
       "package": "com.mpatel31.App", 
-      "versionCode": 3, 
+      "usesCleartextTraffic": true,
+      "versionCode": 4, 
       "permissions": [], 
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

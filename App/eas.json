@@ -17,15 +17,22 @@
       "channel": "ios-simulator"
     },
     "preview": {
+      "android": {
+        "buildType": "apk"
+      },
       "distribution": "internal",
       "channel": "preview"
     },
-    "beta": {
-      "distribution": "internal",
+    "preview2": {
       "android": {
-        "buildType": "app-bundle"
-      },
-      "channel": "beta"
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "preview4": {
+      "distribution": "internal"
     },
     "production": {
       "channel": "production"

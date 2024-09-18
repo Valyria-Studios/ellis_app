@@ -35,8 +35,11 @@ const ConfirmReferral = ({ route, navigation }) => {
 
   const handleConfirmReferral = async () => {
     const dateStarted = new Date().toISOString();
+    // Referral data with both clientId and referralSenderId
     const referralData = {
-      clientId: selectedClient.id,
+      clientId: selectedClient.id, // Client receiving the referral
+      referralSenderId:
+        selectedClient.referralSenderId || "1", // Sender of the referral
       dateStarted,
       option,
       amenity,
@@ -54,17 +57,23 @@ const ConfirmReferral = ({ route, navigation }) => {
     };
 
     try {
-      // Fetch the existing client data
+      // Fetch the client data for both the client and referral sender
       const clientResponse = await fetch(
         `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${selectedClient.id}`
       );
       const client = await clientResponse.json();
 
-      // Add the new referral to the referrals array
-      client.referrals.push(referralData);
+      const senderResponse = await fetch(
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referralData.referralSenderId}`
+      );
+      const sender = await senderResponse.json();
 
-      // Update the client with the new referral
-      const response = await fetch(
+      // Add the referral to both the client's and sender's activity logs
+      client.referrals.push(referralData);
+      sender.referrals.push(referralData);
+
+      // Update both the client and sender with the new referral in their activity logs
+      await fetch(
         `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${selectedClient.id}`,
         {
           method: "PATCH",
@@ -75,17 +84,23 @@ const ConfirmReferral = ({ route, navigation }) => {
         }
       );
 
-      if (response.ok) {
-        const responseData = await response.json();
-        navigation.navigate("Referral Sent", {
-          selectedClient: selectedClient,
-          dateStarted: dateStarted,
-          option: option,
-        });
-      } else {
-        const errorData = await response.json();
-        console.error("Failed to submit referral:", errorData);
-      }
+      await fetch(
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referralData.referralSenderId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sender),
+        }
+      );
+
+      // Navigate to the Referral Sent page or handle success
+      navigation.navigate("Referral Sent", {
+        selectedClient: selectedClient,
+        dateStarted: dateStarted,
+        option: option,
+      });
     } catch (error) {
       console.error("Error submitting referral:", error);
     }

@@ -110,9 +110,18 @@ function ProfilePage({ route, navigation }) {
       `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/referrals`
     )
       .then((response) => response.json())
-      .then((json) => setReferrals(json)) // Fetch referrals specifically for the client
+      .then((json) => {
+        // Ensure that referral data includes necessary fields
+        const processedReferrals = json.map((referral) => ({
+          ...referral,
+          referredBy: referral.referredBy || "Unknown",
+          organization: referral.organization || "Unknown",
+          dateStarted: new Date(referral.dateStarted).toLocaleString(), // Format date if necessary
+        }));
+        setReferrals(processedReferrals); // Store processed referrals in state
+      })
       .catch((error) => console.log("Error fetching client referrals:", error));
-  }, [clientData.id]); // Fetch referrals when clientData.id changes
+  }, [clientData.id]);
 
   useFocusEffect(
     useCallback(() => {
@@ -154,14 +163,16 @@ function ProfilePage({ route, navigation }) {
         referrals.map((referral, index) => (
           <Card key={index}>
             <View style={{ flex: 1, marginBottom: 5 }}>
-              <Text style={styles.tabHeader}>{referral.serviceType}</Text>
+              <Text style={styles.tabHeader}>{referral.option}</Text>
             </View>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <View style={{ justifyContent: "space-between" }}>
                 <View>
-                  <Text style={styles.time}>Referred on: {referral.date}</Text>
+                  <Text style={styles.time}>
+                    Referred on: {referral.dateStarted}
+                  </Text>
                 </View>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Text style={[styles.time, { color: "#465355" }]}>

@@ -22,6 +22,9 @@
       }
     },
     "android": {
+      "package": "com.mpatel31.App", 
+      "versionCode": 3, 
+      "permissions": [], 
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

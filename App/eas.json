@@ -1,7 +1,7 @@
 {
   "cli": {
     "version": ">= 9.0.7",
-    "appVersionSource": "local" 
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
@@ -19,6 +19,13 @@
     "preview": {
       "distribution": "internal",
       "channel": "preview"
+    },
+    "beta": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "channel": "beta"
     },
     "production": {
       "channel": "production"

@@ -80,6 +80,7 @@ function ProfilePage({ route, navigation }) {
   const [jobPlacementStatus, setJobPlacementStatus] = useState(null);
   const [clientData, setClientData] = useState(route.params.client);
   const [forms, setForms] = useState([]); // Placeholder for forms data state
+  const [referrals, setReferrals] = useState([]); // State to store referrals
 
   useEffect(() => {
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Forms")
@@ -101,6 +102,17 @@ function ProfilePage({ route, navigation }) {
       .then((json) => setNotes(json)) // Fetch notes specifically for the client
       .catch((error) => console.log("Error fetching client notes:", error));
   }, [clientData.id]); // Fetch notes when clientData.id changes
+
+  useEffect(() => {
+    if (!clientData.id) return; // Ensure client ID is present
+
+    fetch(
+      `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/referrals`
+    )
+      .then((response) => response.json())
+      .then((json) => setReferrals(json)) // Fetch referrals specifically for the client
+      .catch((error) => console.log("Error fetching client referrals:", error));
+  }, [clientData.id]); // Fetch referrals when clientData.id changes
 
   useFocusEffect(
     useCallback(() => {
@@ -128,29 +140,6 @@ function ProfilePage({ route, navigation }) {
     setSelectedNote(null);
   };
 
-  const activities = [
-    {
-      activity: "Legal Appointment",
-      providedBy: "Simon Baits",
-      company: "YWAM San Francisco",
-    },
-    {
-      activity: "Therapist Session",
-      providedBy: "Simon Baits",
-      company: "YWAM San Francisco",
-    },
-    {
-      activity: "Shower",
-      providedBy: "Simon Baits",
-      company: "YWAM San Francisco",
-    },
-    {
-      activity: "Haircut",
-      providedBy: "Simon Baits",
-      company: "YWAM San Francisco",
-    },
-  ];
-
   // Callback for when a checklist item is toggled
   const handleChecklistToggle = (isItemChecked) => {
     setCheckedItems((prevCount) =>
@@ -161,99 +150,49 @@ function ProfilePage({ route, navigation }) {
 
   const activityContent = (
     <View>
-      {activities.map((activity, index) => (
-        <Card key={index}>
-          <View style={{ flex: 1, marginBottom: 5 }}>
-            <Text style={styles.tabHeader}>{activity.activity}</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View
-              style={{
-                justifyContent: "space-between",
-              }}
-            >
-              <View>
-                <Text style={styles.time}>Today, 11:00 am</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginRight: 10,
-                  }}
-                >
-                  <AntDesign
-                    name="star"
-                    size={20}
-                    style={{ color: "#094852", paddingRight: 5 }}
-                  />
-                  <Text style={[styles.time, { color: "#465355" }]}>5</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <FontAwesome5
-                    name="history"
-                    size={20}
-                    style={{ color: "#094852", paddingRight: 5 }}
-                  />
-                  <Text style={[styles.time, { color: "#465355" }]}>25</Text>
-                </View>
-              </View>
+      {referrals.length > 0 ? (
+        referrals.map((referral, index) => (
+          <Card key={index}>
+            <View style={{ flex: 1, marginBottom: 5 }}>
+              <Text style={styles.tabHeader}>{referral.serviceType}</Text>
             </View>
-            <View>
-              <Text
-                style={[
-                  globalstyles.details,
-                  {
-                    margin: 0,
-                  },
-                ]}
-              >
-                Provided by
-              </Text>
-              <View style={[styles.peopleContainer, { marginVertical: 5 }]}>
-                <Ionicons
-                  name="person-circle-outline"
-                  size={24}
-                  style={{ marginRight: 5 }}
-                />
-                <Text
-                  style={[
-                    globalstyles.detailsText,
-                    {
-                      marginHorizontal: 0,
-                      marginBottom: 0,
-                      flexShrink: 1,
-                    },
-                  ]}
-                >
-                  {activity.providedBy}
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <View style={{ justifyContent: "space-between" }}>
+                <View>
+                  <Text style={styles.time}>Referred on: {referral.date}</Text>
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text style={[styles.time, { color: "#465355" }]}>
+                    Status: {referral.status}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <Text style={[globalstyles.details, { margin: 0 }]}>
+                  Referred by
+                </Text>
+                <View style={[styles.peopleContainer, { marginVertical: 5 }]}>
+                  <Ionicons
+                    name="person-circle-outline"
+                    size={24}
+                    style={{ marginRight: 5 }}
+                  />
+                  <Text style={[globalstyles.detailsText, { flexShrink: 1 }]}>
+                    {referral.referredBy}
+                  </Text>
+                </View>
+                <Text style={[styles.time, { color: "#465355" }]}>
+                  {referral.organization}
                 </Text>
               </View>
-              <Text style={[styles.time, { color: "#465355" }]}>
-                {activity.company}
-              </Text>
             </View>
-          </View>
-        </Card>
-      ))}
+          </Card>
+        ))
+      ) : (
+        <Text>No activities yet!</Text>
+      )}
     </View>
   );
 
@@ -590,7 +529,7 @@ function ProfilePage({ route, navigation }) {
           </TouchableOpacity>
         ))
       ) : (
-        <Text>No notes available for this client.</Text>
+        <Text>No notes available for this profile.</Text>
       )}
     </View>
   );

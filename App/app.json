@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.mpatel31.App",
-      "versionCode": 5,
+      "versionCode": 1,
       "permissions": ["INTERNET", "ACCESS_NETWORK_STATE", "ACCESS_WIFI_STATE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

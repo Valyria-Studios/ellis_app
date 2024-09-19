@@ -23,7 +23,6 @@
     },
     "android": {
       "package": "com.mpatel31.App",
-      "usesCleartextTraffic": true,
       "versionCode": 5,
       "permissions": ["INTERNET", "ACCESS_NETWORK_STATE", "ACCESS_WIFI_STATE"],
       "adaptiveIcon": {

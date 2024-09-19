@@ -22,10 +22,10 @@
       }
     },
     "android": {
-      "package": "com.mpatel31.App", 
+      "package": "com.mpatel31.App",
       "usesCleartextTraffic": true,
-      "versionCode": 4, 
-      "permissions": [], 
+      "versionCode": 4,
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE", "ACCESS_WIFI_STATE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

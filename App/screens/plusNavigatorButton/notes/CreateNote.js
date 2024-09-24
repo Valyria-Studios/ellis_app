@@ -141,14 +141,14 @@ const CreateNote = ({ route, navigation }) => {
       dateCreated: formattedDate,
       lastEdited: formattedDate,
     };
-  
+
     try {
       // Find selected client ID
       const client = clients.find(
         (client) => client.fullName === selectedClient
       );
       if (!client) return;
-  
+
       const response = await fetch(
         `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${client.id}/notes`,
         {
@@ -159,7 +159,7 @@ const CreateNote = ({ route, navigation }) => {
           body: JSON.stringify(newNote),
         }
       );
-  
+
       if (response.ok) {
         const responseJson = await response.json();
         console.log("Note added successfully:", responseJson);
@@ -167,6 +167,7 @@ const CreateNote = ({ route, navigation }) => {
         navigation.navigate("Note Details", {
           note: responseJson, // Pass the newly created note
           clientId: client.id, // Pass the selected client ID
+          fromProfile: route.params?.fromProfile || false, // Pass the fromProfile flag if it exists
         });
       } else {
         console.error("HTTP error: " + response.status + " during adding note");
@@ -175,7 +176,7 @@ const CreateNote = ({ route, navigation }) => {
       console.error("Error sending data to API", error);
     }
   };
-  
+
   return (
     <SafeAreaView
       style={[

@@ -490,6 +490,7 @@ function ProfilePage({ route, navigation }) {
             navigation.navigate("Create a Note", {
               headerTitle: `New Note for ${client.fullName}`,
               clientName: client.fullName,
+              fromProfile: true, // Add this flag
             })
           }
           style={[

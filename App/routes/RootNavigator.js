@@ -491,7 +491,15 @@ const RootNavigator = () => {
           headerTitleAlign: "left",
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() => navigation.popToTop()} // Navigates to the first screen in the stack
+              onPress={() => {
+                if (route.params.fromProfile) {
+                  // Navigate back to the profile page
+                  navigation.pop(2); // This takes you back to the Profile Page
+                } else {
+                  // Navigate to the start of the stack
+                  navigation.popToTop(); 
+                }
+              }}
               style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning
             >
               <Ionicons name="close" size={30} color="#094852" />

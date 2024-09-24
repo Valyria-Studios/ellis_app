@@ -82,64 +82,57 @@ function ProfilePage({ route, navigation }) {
   const [forms, setForms] = useState([]); // Placeholder for forms data state
   const [referrals, setReferrals] = useState([]); // State to store referrals
 
-  useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Forms")
-      .then((response) => response.json())
-      .then((json) => setForms(json))
-      .catch((error) => console.log("error fetching data:", error));
-  }, []);
-
-  // Filter forms for the current profile
-  const filteredForms = forms.filter((form) => form.for === client.fullName);
-
-  useEffect(() => {
-    if (!clientData.id) return; // Ensure client ID is present
-
-    fetch(
-      `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/notes`
-    )
-      .then((response) => response.json())
-      .then((json) => setNotes(json)) // Fetch notes specifically for the client
-      .catch((error) => console.log("Error fetching client notes:", error));
-  }, [clientData.id]); // Fetch notes when clientData.id changes
-
-  useEffect(() => {
-    if (!clientData.id) return; // Ensure client ID is present
-
-    fetch(
-      `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/referrals`
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        // Ensure that referral data includes necessary fields
-        const processedReferrals = json.map((referral) => ({
-          ...referral,
-          referredBy: referral.referredBy || "Unknown",
-          organization: referral.organization || "Unknown",
-          dateStarted: new Date(referral.dateStarted).toLocaleString(), // Format date if necessary
-        }));
-        setReferrals(processedReferrals); // Store processed referrals in state
-      })
-      .catch((error) => console.log("Error fetching client referrals:", error));
-  }, [clientData.id]);
-
   useFocusEffect(
     useCallback(() => {
-      const fetchUpdatedClientData = async () => {
+      const fetchClientData = async () => {
+        if (!clientData.id) return;
+
         try {
-          const response = await fetch(
+          // Fetch client notes
+          const notesResponse = await fetch(
+            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/notes`
+          );
+          const notesJson = await notesResponse.json();
+          setNotes(notesJson);
+
+          // Fetch client referrals
+          const referralsResponse = await fetch(
+            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/referrals`
+          );
+          const referralsJson = await referralsResponse.json();
+
+          const processedReferrals = referralsJson.map((referral) => ({
+            ...referral,
+            referredBy: referral.referredBy || "Unknown",
+            organization: referral.organization || "Unknown",
+            dateStarted: new Date(referral.dateStarted).toLocaleString(),
+          }));
+          setReferrals(processedReferrals);
+
+          // Fetch client data for updated information
+          const updatedClientDataResponse = await fetch(
             `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}`
           );
-          const updatedClientData = await response.json();
-          setClientData(updatedClientData); // Update your state with the latest data
+          const updatedClientData = await updatedClientDataResponse.json();
+          setClientData(updatedClientData);
+
+          // Fetch forms if needed
+          const formsResponse = await fetch(
+            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Forms`
+          );
+          const formsJson = await formsResponse.json();
+          setForms(formsJson);
         } catch (error) {
-          console.error("Error fetching updated client data:", error);
+          console.error("Error fetching data:", error);
         }
       };
 
-      fetchUpdatedClientData();
-    }, [])
+      fetchClientData();
+    }, [clientData.id])
   );
+
+  // Filter forms for the current profile
+  const filteredForms = forms.filter((form) => form.for === client.fullName);
 
   const onNotePress = (noteId) => {
     setSelectedNote(notes[noteId]);

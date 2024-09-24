@@ -356,7 +356,6 @@ const RootNavigator = () => {
         options={({ navigation }) => ({
           headerTintColor: "#094852",
           headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,
@@ -487,10 +486,17 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Note Details"
         component={NoteDetails}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           headerTitle: `${route.params.note.title} Notes`,
           headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.popToTop()} // Navigates to the first screen in the stack
+              style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning
+            >
+              <Ionicons name="close" size={30} color="#094852" />
+            </TouchableOpacity>
+          ),
           headerTitleStyle: {
             fontFamily: "gabarito-semibold",
             fontSize: 24,

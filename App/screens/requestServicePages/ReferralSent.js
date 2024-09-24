@@ -6,11 +6,18 @@ import imageMap from "../../shared/getProfileImage";
 import globalstyles from "../../shared/globalStyles";
 
 const ReferralSent = ({ route }) => {
-  const { selectedClient, options, reason, teamMember, dateStarted} = route.params;
-  console.log(dateStarted)
+  const {
+    selectedClient,
+    options,
+    reason,
+    teamMember,
+    dateStarted,
+    referralSender,
+  } = route.params;
+  console.log(dateStarted);
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
@@ -81,7 +88,7 @@ const ReferralSent = ({ route }) => {
                   { marginHorizontal: 0, marginBottom: 0 },
                 ]}
               >
-                Some Person
+                {referralSender}
               </Text>
             </View>
           </View>

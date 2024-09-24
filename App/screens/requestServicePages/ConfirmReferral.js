@@ -35,26 +35,6 @@ const ConfirmReferral = ({ route, navigation }) => {
 
   const handleConfirmReferral = async () => {
     const dateStarted = new Date().toISOString();
-    // Referral data with both clientId and referralSenderId
-    const referralData = {
-      clientId: selectedClient.id, // Client receiving the referral
-      referralSenderId:
-        selectedClient.referralSenderId || "1", // Sender of the referral
-      dateStarted,
-      option,
-      amenity,
-      service,
-      referralType,
-      nameVerified,
-      addressVerified,
-      basicProfileInformation,
-      householdInformation,
-      demographicInformation,
-      alternateInformation,
-      communicationConsent,
-      certification,
-      notes,
-    };
 
     try {
       // Fetch the client data for both the client and referral sender
@@ -64,9 +44,31 @@ const ConfirmReferral = ({ route, navigation }) => {
       const client = await clientResponse.json();
 
       const senderResponse = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referralData.referralSenderId}`
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${
+          selectedClient.referralSenderId || "1"
+        }`
       );
-      const sender = await senderResponse.json();
+      const sender = await senderResponse.json(); // Get the sender's full data
+
+      // Construct the referral data
+      const referralData = {
+        clientId: selectedClient.id,
+        referralSenderId: sender.id || "1", // Use the sender's ID
+        dateStarted,
+        option,
+        amenity,
+        service,
+        referralType,
+        nameVerified,
+        addressVerified,
+        basicProfileInformation,
+        householdInformation,
+        demographicInformation,
+        alternateInformation,
+        communicationConsent,
+        certification,
+        notes,
+      };
 
       // Add the referral to both the client's and sender's activity logs
       client.referrals.push(referralData);
@@ -85,7 +87,7 @@ const ConfirmReferral = ({ route, navigation }) => {
       );
 
       await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referralData.referralSenderId}`,
+        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${sender.id}`,
         {
           method: "PATCH",
           headers: {
@@ -98,6 +100,7 @@ const ConfirmReferral = ({ route, navigation }) => {
       // Navigate to the Referral Sent page or handle success
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,
+        referralSender: sender.fullName, // Pass the sender's name
         dateStarted: dateStarted,
         option: option,
       });

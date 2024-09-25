@@ -231,7 +231,12 @@ function ProfilePage({ route, navigation }) {
                 </View>
               </View>
               <View>
-                <Text style={[globalstyles.details, { margin: 0 }]}>
+                <Text
+                  style={[
+                    globalstyles.details,
+                    { margin: 0, textAlign: "right", marginBottom: 5 },
+                  ]}
+                >
                   Provided By
                 </Text>
                 <View style={styles.peopleContainer}>
@@ -246,7 +251,12 @@ function ProfilePage({ route, navigation }) {
                     {referral.referredBy}
                   </Text>
                 </View>
-                <Text style={[styles.time, { color: "#465355" }]}>
+                <Text
+                  style={[
+                    styles.time,
+                    { color: "#465355", textAlign: "right" },
+                  ]}
+                >
                   {referral.organization}
                 </Text>
               </View>
@@ -977,6 +987,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#E7F2F3",
     padding: 5,
+    marginBottom: 5,
   },
 
   referredByText: {

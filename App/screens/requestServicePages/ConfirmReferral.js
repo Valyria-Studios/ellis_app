@@ -18,6 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const ConfirmReferral = ({ route, navigation }) => {
   const {
     selectedClient,
+    selectedService,
     option,
     amenity,
     service,
@@ -32,6 +33,8 @@ const ConfirmReferral = ({ route, navigation }) => {
     certification,
     notes,
   } = route.params;
+
+console.log(selectedService.name)
 
   const handleConfirmReferral = async () => {
     const dateStarted = new Date().toISOString();
@@ -54,6 +57,7 @@ const ConfirmReferral = ({ route, navigation }) => {
       const referralData = {
         clientId: selectedClient.id,
         referralSenderId: sender.id || "1", // Use the sender's ID
+        organization: selectedService.name,
         dateStarted,
         option,
         amenity,

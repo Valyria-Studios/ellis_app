@@ -17,7 +17,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const EnrollmentForm = ({ route, navigation }) => {
-  const { selectedClient, option } = route.params;
+  const { selectedClient, option, selectedService } = route.params;
   const [referralType, setReferralType] = useState("New");
   const [nameVerified, setNameVerified] = useState();
   const [addressVerified, setAddressVerified] = useState();
@@ -278,6 +278,7 @@ const EnrollmentForm = ({ route, navigation }) => {
                 navigation.navigate("Confirm Referral", {
                   selectedClient: selectedClient,
                   option: option,
+                  selectedService: selectedService,
                   referralType: referralType,
                   nameVerified: nameVerified,
                   addressVerified: addressVerified,

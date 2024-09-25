@@ -205,6 +205,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
           onPress={() =>
             navigation.navigate("Enrollment Form", {
               selectedClient: selectedClient,
+              selectedService: selectedService,
               option,
             })
           }

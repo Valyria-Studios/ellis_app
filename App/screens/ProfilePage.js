@@ -34,6 +34,7 @@ import imageMap from "../shared/getProfileImage";
 import ProgressBar from "../shared/ProgressBar";
 import RNPickerSelect from "react-native-picker-select";
 import { useFocusEffect } from "@react-navigation/native";
+import { format, isToday, isYesterday } from "date-fns";
 import Card from "../shared/Card";
 
 if (
@@ -101,13 +102,49 @@ function ProfilePage({ route, navigation }) {
           );
           const referralsJson = await referralsResponse.json();
 
-          const processedReferrals = referralsJson.map((referral) => ({
-            ...referral,
-            referredBy: referral.referredBy || "Unknown",
-            organization: referral.organization || "Unknown",
-            dateStarted: new Date(referral.dateStarted).toLocaleString(),
-          }));
-          setReferrals(processedReferrals);
+          // Fetch the referredBy name for each referral if referralSenderId exists
+          const updatedReferrals = await Promise.all(
+            referralsJson.map(async (referral) => {
+              try {
+                // Check if referralSenderId exists
+                if (!referral.referralSenderId) {
+                  return {
+                    ...referral,
+                    referredBy: "Unknown",
+                    organization: referral.organization || "Unknown",
+                    dateStarted: referral.dateStarted || "Invalid Date",
+                  };
+                }
+
+                // Fetch the referral sender (referredBy) information based on referralSenderId
+                const senderResponse = await fetch(
+                  `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referral.referralSenderId}`
+                );
+                const senderJson = await senderResponse.json();
+
+                // Return the updated referral with the correct referredBy name
+                return {
+                  ...referral,
+                  referredBy: senderJson.fullName || "Unknown",
+                  organization: referral.organization || "Unknown",
+                  dateStarted: referral.dateStarted || "Invalid Date",
+                };
+              } catch (error) {
+                console.error(
+                  `Error fetching referredBy for referralSenderId ${referral.referralSenderId}:`,
+                  error
+                );
+                return {
+                  ...referral,
+                  referredBy: "Unknown",
+                  organization: referral.organization || "Unknown",
+                  dateStarted: referral.dateStarted || "Invalid Date",
+                };
+              }
+            })
+          );
+
+          setReferrals(updatedReferrals);
 
           // Fetch client data for updated information
           const updatedClientDataResponse = await fetch(
@@ -130,6 +167,26 @@ function ProfilePage({ route, navigation }) {
       fetchClientData();
     }, [clientData.id])
   );
+
+  const formatReferralDate = (dateString) => {
+    if (dateString === "Invalid Date") {
+      return "Date not available"; // Handle invalid dates
+    }
+
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+      return "Date not available"; // Handle invalid dates
+    }
+
+    if (isToday(date)) {
+      return `Today, ${format(date, "p")}`;
+    } else if (isYesterday(date)) {
+      return `Yesterday, ${format(date, "p")}`;
+    } else {
+      return `${format(date, "MMM d, p")}`;
+    }
+  };
 
   // Filter forms for the current profile
   const filteredForms = forms.filter((form) => form.for === client.fullName);
@@ -164,7 +221,7 @@ function ProfilePage({ route, navigation }) {
               <View style={{ justifyContent: "space-between" }}>
                 <View>
                   <Text style={styles.time}>
-                    Referred on: {referral.dateStarted}
+                    {formatReferralDate(referral.dateStarted)}
                   </Text>
                 </View>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -175,15 +232,17 @@ function ProfilePage({ route, navigation }) {
               </View>
               <View>
                 <Text style={[globalstyles.details, { margin: 0 }]}>
-                  Referred by
+                  Provided By
                 </Text>
-                <View style={[styles.peopleContainer, { marginVertical: 5 }]}>
+                <View style={styles.peopleContainer}>
                   <Ionicons
                     name="person-circle-outline"
                     size={24}
-                    style={{ marginRight: 5 }}
+                    style={styles.icon}
                   />
-                  <Text style={[globalstyles.detailsText, { flexShrink: 1 }]}>
+                  <Text
+                    style={[globalstyles.detailsText, styles.referredByText]}
+                  >
                     {referral.referredBy}
                   </Text>
                 </View>
@@ -918,6 +977,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#E7F2F3",
     padding: 5,
+  },
+
+  referredByText: {
+    flexShrink: 1,
+    flexWrap: "wrap", // This ensures the text wraps to the next line when it exceeds container width
+    marginBottom: 0,
   },
 
   time: {

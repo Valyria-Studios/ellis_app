@@ -86,12 +86,10 @@ const AdminManagementScreen = ({ route }) => {
     }
   }, [searchQuery, clients, currentClient.id]);
 
-  const handleMoveToMembers = async (adminName) => {
-    // Update the admins and members lists
+  const handleMoveToMembers = async (admin) => {
     const updatedAdmins = currentClient.team.admins.filter(
-      (admin) => admin !== adminName
+      (a) => a.id !== admin.id
     );
-    const updatedMembers = [...currentClient.team.members, adminName];
 
     try {
       const response = await fetch(
@@ -102,22 +100,20 @@ const AdminManagementScreen = ({ route }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            id: currentClient.id,
             ...currentClient,
             team: {
-              admins: updatedAdmins,
-              members: updatedMembers,
+              admins: updatedAdmins, // Only send admins, exclude members
             },
           }),
         }
       );
 
       if (response.ok) {
-        // Update local state
         const newClientData = {
           ...currentClient,
           team: {
-            admins: updatedAdmins,
-            members: updatedMembers,
+            admins: updatedAdmins, // Only update admins
           },
         };
         setCurrentClient(newClientData);
@@ -128,14 +124,16 @@ const AdminManagementScreen = ({ route }) => {
       console.error("Error updating team data:", error);
     }
   };
+
   const handleAddToAdmins = async (newAdmin) => {
-    // Prevent adding if the client is already an admin
-    if (currentClient.team.admins.includes(newAdmin.fullName)) {
+    const adminObject = { id: newAdmin.id, name: newAdmin.fullName };
+
+    if (currentClient.team.admins.some((admin) => admin.id === newAdmin.id)) {
       alert(`${newAdmin.fullName} is already an admin.`);
       return;
     }
 
-    const updatedAdmins = [...currentClient.team.admins, newAdmin.fullName];
+    const updatedAdmins = [...currentClient.team.admins, adminObject];
 
     try {
       const response = await fetch(
@@ -146,17 +144,16 @@ const AdminManagementScreen = ({ route }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            id: currentClient.id,
             ...currentClient,
             team: {
-              ...currentClient.team,
-              admins: updatedAdmins,
+              admins: updatedAdmins, // Only include admins
             },
           }),
         }
       );
 
       if (response.ok) {
-        // Update local state
         const newClientData = await response.json();
         setCurrentClient(newClientData);
       } else {
@@ -174,6 +171,7 @@ const AdminManagementScreen = ({ route }) => {
   if (error) {
     return <Text>Error: {error}</Text>;
   }
+
   return (
     <View style={globalstyles.container}>
       <View style={{ marginBottom: 10 }}>
@@ -188,7 +186,8 @@ const AdminManagementScreen = ({ route }) => {
                 backgroundColor: "#E7F2F3",
               }}
             >
-              <Text style={styles.adminText}>{admin}</Text>
+              {/* Fix: Render admin.name instead of the whole admin object */}
+              <Text style={styles.adminText}>{admin.name}</Text>
             </View>
             <View
               style={{

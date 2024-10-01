@@ -168,6 +168,12 @@ function ProfilePage({ route, navigation }) {
     }, [clientData.id])
   );
 
+  const getProfileImageForAdmin = (adminId) => {
+    // Assuming that the admin's image can be derived from their ID or mapped
+    const imageKey = `userImage${adminId}`; // Example: admin with id "2" corresponds to "userImage2"
+    return imageMap[imageKey] || imageMap["defaultImage"]; // Fallback to a default image if not found
+  };
+
   const formatReferralDate = (dateString) => {
     if (dateString === "Invalid Date") {
       return "Date not available"; // Handle invalid dates
@@ -352,7 +358,10 @@ function ProfilePage({ route, navigation }) {
         <View style={styles.teamContentContainer} key={index}>
           <View style={{ flexDirection: "row", padding: 10 }}>
             <View style={styles.profileImage}>
-              <Text>Pic</Text>
+              <Image
+                source={getProfileImageForAdmin(admin.id)} // Use the image derived from admin.id
+                style={{ width: 40, height: 40, borderRadius: 20 }} // Adjust styling as needed
+              />
             </View>
             <View
               style={{
@@ -362,7 +371,7 @@ function ProfilePage({ route, navigation }) {
               }}
             >
               <Text key={index} style={styles.teamMember}>
-                {admin}
+                {admin.name} {/* Display the admin's name */}
               </Text>
               <TouchableOpacity>
                 <Entypo

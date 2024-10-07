@@ -246,10 +246,9 @@ function ProfilePage({ route, navigation }) {
                   Provided By
                 </Text>
                 <View style={styles.peopleContainer}>
-                  <Ionicons
-                    name="person-circle-outline"
-                    size={24}
-                    style={styles.icon}
+                  <Image
+                    source={getProfileImageForAdmin(referral.referralSenderId)} // Use the image derived from admin.id
+                    style={{ width: 30, height: 30, borderRadius: 20 }} // Adjust styling as needed
                   />
                   <Text
                     style={[globalstyles.detailsText, styles.referredByText]}
@@ -996,6 +995,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#E7F2F3",
     padding: 5,
+    paddingLeft: 8,
     marginBottom: 5,
   },
 

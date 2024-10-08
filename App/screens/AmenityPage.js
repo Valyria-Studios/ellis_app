@@ -1,6 +1,6 @@
 // Logic for Similar Amenities needed
 
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   Text,
@@ -8,7 +8,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  TouchableWithoutFeedback,
+  ActivityIndicator,
   Linking,
 } from "react-native";
 import getAmenityImage from "../shared/getAmenityImage";
@@ -25,6 +25,7 @@ import SocialMediaLinks from "../shared/SocialMediaIcon";
 
 function AmenityPage({ route, navigation }) {
   const { amenity } = route.params;
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const openWebsite = () => {
     Linking.openURL(`${amenity?.attributes["Web URL"]}`).catch((err) =>
@@ -35,353 +36,173 @@ function AmenityPage({ route, navigation }) {
   const scrollViewRef = React.useRef();
 
   return (
-    <ImageBackground
-      source={{
-        uri: amenity?.attributes?.Cover.replace(
-          "ipfs://",
-          "https://ipfs.io/ipfs/"
-        ),
-      }}
-      style={styles.container}
-    >
-      <View style={styles.overlay} />
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        style={styles.scrollView}
+    <View style={styles.container}>
+      {/* ImageBackground */}
+      <ImageBackground
+        source={{
+          uri: amenity?.attributes?.Cover.replace(
+            "ipfs://",
+            "https://ipfs.io/ipfs/"
+          ),
+        }}
+        style={styles.container}
+        onLoad={() => setImageLoaded(true)}
       >
-        <View style={styles.centerCard}>
-          <View style={styles.mainText}>
-            <View style={styles.header}>
-              <Text style={styles.locationText}>
-                {amenity?.attributes?.["Name"]}
-              </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginBottom: 10,
-                }}
-              >
-                <Octicons
-                  name="location"
-                  size={20}
-                  style={{ marginRight: 10, color: "#094852" }}
-                />
-                <Text style={globalstyles.cardDetails}>
-                  {amenity?.attributes?.["Street address"]}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginBottom: 10,
-                }}
-              >
-                <MaterialIcons
-                  name="schedule"
-                  size={20}
-                  style={{ marginRight: 7, color: "#094852" }}
-                />
-                <Text style={globalstyles.cardDetails}>
-                  {amenity?.attributes?.["Phone number"]}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginBottom: 15,
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => {
-                    const address = encodeURIComponent(
-                      amenity?.attributes?.["Street address"]
-                    );
-                    const url = `https://www.google.com/maps/search/?api=1&query=${address}`;
+        {/* Overlay for dimming the background */}
+        <View style={styles.overlay} />
 
-                    Linking.openURL(url).catch((err) =>
-                      console.error("An error occurred", err)
-                    );
+        {/* Show ActivityIndicator only until the image is loaded */}
+        {!imageLoaded && (
+          <ActivityIndicator
+            size="large"
+            color="black"
+            style={styles.loadingIndicator}
+          />
+        )}
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}
+          style={styles.scrollView}
+        >
+          <View style={styles.centerCard}>
+            <View style={styles.mainText}>
+              <View style={styles.header}>
+                <Text style={styles.locationText}>
+                  {amenity?.attributes?.["Name"]}
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
                   }}
-                  style={[styles.buttonContainer, {marginRight: 10}]}
                 >
-                  <FontAwesome6
-                    name="arrows-split-up-and-left"
-                    size={18}
-                    color={"#094852"}
+                  <Octicons
+                    name="location"
+                    size={20}
+                    style={{ marginRight: 10, color: "#094852" }}
                   />
-                  <Text style={[styles.buttonText, { paddingLeft: 10 }]}>
-                    Get Directions
+                  <Text style={globalstyles.cardDetails}>
+                    {amenity?.attributes?.["Street address"]}
                   </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() =>
-                    Linking.openURL(
-                      `tel:${amenity?.attributes?.["Phone number"]}`
-                    )
-                  }
-                  style={styles.buttonContainer}
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
                 >
-                  <Feather name="phone" size={18} color={"#094852"} />
-                  <Text style={[styles.buttonText, { paddingLeft: 10 }]}>
-                    Call
+                  <MaterialIcons
+                    name="schedule"
+                    size={20}
+                    style={{ marginRight: 7, color: "#094852" }}
+                  />
+                  <Text style={globalstyles.cardDetails}>
+                    {amenity?.attributes?.["Phone number"]}
                   </Text>
-                </TouchableOpacity>
-              </View>
-              <View>
-                <TouchableOpacity onPress={openWebsite}>
-                  <Text
-                    style={{
-                      fontFamily: "karla-bold",
-                      fontSize: 16,
-                      color: "#10798B",
-                      textDecorationLine: "underline",
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginBottom: 15,
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => {
+                      const address = encodeURIComponent(
+                        amenity?.attributes?.["Street address"]
+                      );
+                      const url = `https://www.google.com/maps/search/?api=1&query=${address}`;
+
+                      Linking.openURL(url).catch((err) =>
+                        console.error("An error occurred", err)
+                      );
                     }}
+                    style={[styles.buttonContainer, { marginRight: 10 }]}
                   >
-                    Website
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={{ marginBottom: 30 }}>
-              <Text
-                style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
-              >
-                About the Organization
-              </Text>
-              <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
-                {amenity?.attributes?.Description?.length > 0
-                  ? amenity.attributes.Description
-                  : "No description available"}
-              </Text>
-            </View>
-
-            <View style={{ marginBottom: 15 }}>
-              {amenity?.attributes?.["Provided services"]?.map(
-                (service, index) => (
-                  <View key={index} style={styles.serviceCard}>
-                    <Text
-                      style={[
-                        globalstyles.details,
-                        { margin: 0, marginBottom: 5 },
-                      ]}
-                    >
-                      Service
+                    <FontAwesome6
+                      name="arrows-split-up-and-left"
+                      size={18}
+                      color={"#094852"}
+                    />
+                    <Text style={[styles.buttonText, { paddingLeft: 10 }]}>
+                      Get Directions
                     </Text>
-                    <Text style={styles.serviceCardHeader}>{service}</Text>
-                  </View>
-                )
-              )}
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() =>
+                      Linking.openURL(
+                        `tel:${amenity?.attributes?.["Phone number"]}`
+                      )
+                    }
+                    style={styles.buttonContainer}
+                  >
+                    <Feather name="phone" size={18} color={"#094852"} />
+                    <Text style={[styles.buttonText, { paddingLeft: 10 }]}>
+                      Call
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity onPress={openWebsite}>
+                    <Text
+                      style={{
+                        fontFamily: "karla-bold",
+                        fontSize: 16,
+                        color: "#10798B",
+                        textDecorationLine: "underline",
+                      }}
+                    >
+                      Website
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={{ marginBottom: 30 }}>
+                <Text
+                  style={[
+                    globalstyles.details,
+                    { margin: 0, marginBottom: 10 },
+                  ]}
+                >
+                  About the Organization
+                </Text>
+                <Text
+                  style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
+                >
+                  {amenity?.attributes?.Description?.length > 0
+                    ? amenity.attributes.Description
+                    : "No description available"}
+                </Text>
+              </View>
+
+              <View style={{ marginBottom: 15 }}>
+                {amenity?.attributes?.["Provided services"]?.map(
+                  (service, index) => (
+                    <View key={index} style={styles.serviceCard}>
+                      <Text
+                        style={[
+                          globalstyles.details,
+                          { margin: 0, marginBottom: 5 },
+                        ]}
+                      >
+                        Service
+                      </Text>
+                      <Text style={styles.serviceCardHeader}>{service}</Text>
+                    </View>
+                  )
+                )}
+              </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
-    </ImageBackground>
+        </ScrollView>
+      </ImageBackground>
+    </View>
   );
 }
-//   return (
-//     <ImageBackground
-//       source={getAmenityImage(amenity.location)}
-//       style={styles.container}
-//     >
-//       <View style={styles.overlay} />
-//       <ScrollView
-//         ref={scrollViewRef}
-//         contentContainerStyle={{ flexGrow: 1 }}
-//         style={styles.scrollView}
-//       >
-//         <View style={styles.centerCard}>
-//           <View style={styles.mainText}>
-//             <View style={styles.header}>
-//               <Text style={styles.locationText}>{amenity.location}</Text>
-//               <View
-//                 style={{
-//                   flexDirection: "row",
-//                   alignItems: "center",
-//                   marginBottom: 10,
-//                 }}
-//               >
-//                 <Octicons
-//                   name="location"
-//                   size={20}
-//                   style={{ marginRight: 10, color: "#094852" }}
-//                 />
-//                 <Text style={globalstyles.cardDetails}>{amenity.address}</Text>
-//               </View>
-//               <View
-//                 style={{
-//                   flexDirection: "row",
-//                   alignItems: "center",
-//                   marginBottom: 10,
-//                 }}
-//               >
-//                 <MaterialIcons
-//                   name="schedule"
-//                   size={20}
-//                   style={{ marginRight: 7, color: "#094852" }}
-//                 />
-//                 <Text style={globalstyles.cardDetails}>
-//                   {amenity.operationalHours}
-//                 </Text>
-//               </View>
-//               <View style={globalstyles.tagContainer}>
-//                 <TouchableOpacity activeOpacity={0.7}>
-//                   <View style={[styles.buttonContainer, { marginRight: 10 }]}>
-//                     <MaterialCommunityIcons
-//                       name="arrow-right-top-bold"
-//                       size={15}
-//                       color="#094852"
-//                       style={{ paddingRight: 5 }}
-//                     />
-//                     <Text style={styles.buttonText}>Get Directions</Text>
-//                   </View>
-//                 </TouchableOpacity>
-//                 <TouchableOpacity activeOpacity={0.7}>
-//                   <View style={styles.buttonContainer}>
-//                     <MaterialCommunityIcons
-//                       name="phone-outline"
-//                       size={15}
-//                       color="#094852"
-//                       style={{ paddingRight: 5 }}
-//                     />
-//                     <Text style={styles.buttonText}>Call</Text>
-//                   </View>
-//                 </TouchableOpacity>
-//               </View>
-//             </View>
-//             <View style={{ marginBottom: 30 }}>
-//               <Text
-//                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
-//               >
-//                 About the organization
-//               </Text>
-//               <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
-//                 {amenity.description}
-//               </Text>
-//               <TouchableOpacity
-//                 onPress={openWebsite}
-//                 style={{ alignSelf: "baseline" }}
-//               >
-//                 <Text style={styles.websiteText}>Website</Text>
-//               </TouchableOpacity>
-//               <SocialMediaLinks socialMedia={amenity.socialMedia} />
-//             </View>
-//             <View style={{ marginBottom: 15 }}>
-//               <Text
-//                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
-//               >
-//                 Language
-//               </Text>
-//               <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
-//                 {amenity.languages}
-//               </Text>
-//             </View>
-//             {amenity.services.map((service, index) => (
-//               <View key={index} style={styles.serviceCard}>
-//                 <Text
-//                   style={[
-//                     globalstyles.details,
-//                     { margin: 0, marginBottom: 10 },
-//                   ]}
-//                 >
-//                   {service.type}
-//                 </Text>
-//                 <Text style={styles.serviceCardHeader}>{service.name}</Text>
-//                 <View
-//                   style={{
-//                     flexDirection: "row",
-//                     alignItems: "center",
-//                     marginBottom: 10,
-//                   }}
-//                 >
-//                   <MaterialIcons
-//                     name="schedule"
-//                     size={20}
-//                     style={{ marginRight: 7, color: "#094852" }}
-//                   />
-//                   <Text style={globalstyles.cardDetails}>
-//                     {service.daysOpen}, {service.operationalHours}
-//                   </Text>
-//                 </View>
-//                 {service.availability > 0 ? (
-//                   service.availability <= 10 ? (
-//                     <View style={styles.serviceLowContainer}>
-//                       <Text
-//                         style={{
-//                           color: "#533409",
-//                           fontFamily: "karla-regular",
-//                           fontSize: 14,
-//                         }}
-//                       >
-//                         Low Availability
-//                       </Text>
-//                     </View>
-//                   ) : (
-//                     <View style={styles.serviceAvailabeContainer}>
-//                       <Text
-//                         style={{
-//                           color: "#094852",
-//                           fontFamily: "karla-regular",
-//                           fontSize: 14,
-//                         }}
-//                       >
-//                         Enrollment Available
-//                       </Text>
-//                     </View>
-//                   )
-//                 ) : (
-//                   <View style={styles.noServiceContainer}>
-//                     <Text
-//                       style={{
-//                         color: "#465355",
-//                         fontFamily: "karla-regular",
-//                         fontSize: 14,
-//                       }}
-//                     >
-//                       No Enrolloment Available
-//                     </Text>
-//                   </View>
-//                 )}
-//               </View>
-//             ))}
-//             <TouchableOpacity
-//               activeOpacity={1}
-//               onPress={() =>
-//                 scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })
-//               }
-//             >
-//               <Text style={styles.scrollToTopButton}>Back to top</Text>
-//             </TouchableOpacity>
-//           </View>
-//         </View>
-//       </ScrollView>
-//       <View style={styles.availabilityContainer}>
-//         <View style={styles.availabilityButtonContainer}>
-//           <TouchableOpacity activeOpacity={0.9}>
-//             <View style={styles.iconsContainer}>
-//               <MaterialCommunityIcons
-//                 name="message"
-//                 size={20}
-//                 style={styles.icon}
-//               />
-//             </View>
-//           </TouchableOpacity>
-//           <TouchableOpacity
-//             style={styles.referButton}
-//             activeOpacity={0.9}
-//             onPress={() => navigation.navigate("Select Client", { amenity })}
-//           >
-//             <MaterialIcons name="app-registration" size={18} color="#FFFFFF" />
-//             <Text style={styles.referButtonText}>Refer</Text>
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-//     </ImageBackground>
-//   );
-// }
 
 const styles = StyleSheet.create({
   container: {
@@ -391,6 +212,13 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
 
+  loadingIndicator: {
+    position: 'absolute',
+    top: "25%",
+    left: '45%',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(255,255,255, 0.4)",

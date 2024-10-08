@@ -85,16 +85,18 @@ function AmenityPage({ route, navigation }) {
                   {amenity?.attributes?.["Phone number"]}
                 </Text>
               </View>
-              <View style={globalstyles.tagContainer}>
-                <TouchableOpacity activeOpacity={0.7} onPress={openWebsite}>
-                  <View style={styles.buttonContainer}>
-                    <MaterialCommunityIcons
-                      name="web"
-                      size={15}
-                      color="#094852"
-                    />
-                    <Text style={styles.buttonText}>Website</Text>
-                  </View>
+              <View>
+                <TouchableOpacity onPress={openWebsite}>
+                  <Text
+                    style={{
+                      fontFamily: "karla-bold",
+                      fontSize: 16,
+                      color: "#10798B",
+                      textDecorationLine: "underline",
+                    }}
+                  >
+                    Website
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -106,19 +108,24 @@ function AmenityPage({ route, navigation }) {
                 About the Organization
               </Text>
               <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
-                {amenity?.attributes?.["Description"]}
+                {amenity?.attributes?.Description?.length > 0
+                  ? amenity.attributes.Description
+                  : "No description available"}
               </Text>
             </View>
 
             <View style={{ marginBottom: 15 }}>
-              <Text
-                style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
-              >
-                Services Provided
-              </Text>
               {amenity?.attributes?.["Provided services"]?.map(
                 (service, index) => (
                   <View key={index} style={styles.serviceCard}>
+                    <Text
+                      style={[
+                        globalstyles.details,
+                        { margin: 0, marginBottom: 5 },
+                      ]}
+                    >
+                      Service
+                    </Text>
                     <Text style={styles.serviceCardHeader}>{service}</Text>
                   </View>
                 )

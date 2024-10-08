@@ -66,8 +66,17 @@ const SelectReferralLocation = ({ route, navigation }) => {
   // Add this block
   if (services.length === 0) {
     return (
-      <View style={[globalstyles.container, { paddingHorizontal: 5, alignItems: 'center', justifyContent: 'center' }]}>
-        <Text style={[styles.caption, {fontSize: 20}]}>
+      <View
+        style={[
+          globalstyles.container,
+          {
+            paddingHorizontal: 5,
+            alignItems: "center",
+            justifyContent: "center",
+          },
+        ]}
+      >
+        <Text style={[styles.caption, { fontSize: 20 }]}>
           No Available Nonprofits for this service
         </Text>
       </View>
@@ -168,7 +177,13 @@ const SelectReferralLocation = ({ route, navigation }) => {
                         </View>
                       )}
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate("Amenity Page", {
+                          amenity: service,
+                        })
+                      }
+                    >
                       <Feather
                         name="arrow-up-right"
                         size={26}

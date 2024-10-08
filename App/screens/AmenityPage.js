@@ -25,7 +25,7 @@ function AmenityPage({ route, navigation }) {
   const { amenity } = route.params;
 
   const openWebsite = () => {
-    Linking.openURL(`${amenity.website}`).catch((err) =>
+    Linking.openURL(`${amenity?.attributes["Web URL"]}`).catch((err) =>
       console.error("An error occurred", err)
     );
   };
@@ -34,19 +34,25 @@ function AmenityPage({ route, navigation }) {
 
   return (
     <ImageBackground
-      source={getAmenityImage(amenity.location)}
+      source={{
+        uri: amenity?.attributes?.Cover.replace(
+          "ipfs://",
+          "https://ipfs.io/ipfs/"
+        ),
+      }}
       style={styles.container}
     >
       <View style={styles.overlay} />
       <ScrollView
-        ref={scrollViewRef}
         contentContainerStyle={{ flexGrow: 1 }}
         style={styles.scrollView}
       >
         <View style={styles.centerCard}>
           <View style={styles.mainText}>
             <View style={styles.header}>
-              <Text style={styles.locationText}>{amenity.location}</Text>
+              <Text style={styles.locationText}>
+                {amenity?.attributes?.["Name"]}
+              </Text>
               <View
                 style={{
                   flexDirection: "row",
@@ -59,7 +65,9 @@ function AmenityPage({ route, navigation }) {
                   size={20}
                   style={{ marginRight: 10, color: "#094852" }}
                 />
-                <Text style={globalstyles.cardDetails}>{amenity.address}</Text>
+                <Text style={globalstyles.cardDetails}>
+                  {amenity?.attributes?.["Street address"]}
+                </Text>
               </View>
               <View
                 style={{
@@ -74,164 +82,254 @@ function AmenityPage({ route, navigation }) {
                   style={{ marginRight: 7, color: "#094852" }}
                 />
                 <Text style={globalstyles.cardDetails}>
-                  {amenity.operationalHours}
+                  {amenity?.attributes?.["Phone number"]}
                 </Text>
               </View>
               <View style={globalstyles.tagContainer}>
-                <TouchableOpacity activeOpacity={0.7}>
-                  <View style={[styles.buttonContainer, { marginRight: 10 }]}>
-                    <MaterialCommunityIcons
-                      name="arrow-right-top-bold"
-                      size={15}
-                      color="#094852"
-                      style={{ paddingRight: 5 }}
-                    />
-                    <Text style={styles.buttonText}>Get Directions</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.7}>
+                <TouchableOpacity activeOpacity={0.7} onPress={openWebsite}>
                   <View style={styles.buttonContainer}>
                     <MaterialCommunityIcons
-                      name="phone-outline"
+                      name="web"
                       size={15}
                       color="#094852"
-                      style={{ paddingRight: 5 }}
                     />
-                    <Text style={styles.buttonText}>Call</Text>
+                    <Text style={styles.buttonText}>Website</Text>
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
+
             <View style={{ marginBottom: 30 }}>
               <Text
                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
               >
-                About the organization
+                About the Organization
               </Text>
               <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
-                {amenity.description}
+                {amenity?.attributes?.["Description"]}
               </Text>
-              <TouchableOpacity
-                onPress={openWebsite}
-                style={{ alignSelf: "baseline" }}
-              >
-                <Text style={styles.websiteText}>Website</Text>
-              </TouchableOpacity>
-              <SocialMediaLinks socialMedia={amenity.socialMedia} />
             </View>
+
             <View style={{ marginBottom: 15 }}>
               <Text
                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
               >
-                Language
+                Services Provided
               </Text>
-              <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
-                {amenity.languages}
-              </Text>
-            </View>
-            {amenity.services.map((service, index) => (
-              <View key={index} style={styles.serviceCard}>
-                <Text
-                  style={[
-                    globalstyles.details,
-                    { margin: 0, marginBottom: 10 },
-                  ]}
-                >
-                  {service.type}
-                </Text>
-                <Text style={styles.serviceCardHeader}>{service.name}</Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginBottom: 10,
-                  }}
-                >
-                  <MaterialIcons
-                    name="schedule"
-                    size={20}
-                    style={{ marginRight: 7, color: "#094852" }}
-                  />
-                  <Text style={globalstyles.cardDetails}>
-                    {service.daysOpen}, {service.operationalHours}
-                  </Text>
-                </View>
-                {service.availability > 0 ? (
-                  service.availability <= 10 ? (
-                    <View style={styles.serviceLowContainer}>
-                      <Text
-                        style={{
-                          color: "#533409",
-                          fontFamily: "karla-regular",
-                          fontSize: 14,
-                        }}
-                      >
-                        Low Availability
-                      </Text>
-                    </View>
-                  ) : (
-                    <View style={styles.serviceAvailabeContainer}>
-                      <Text
-                        style={{
-                          color: "#094852",
-                          fontFamily: "karla-regular",
-                          fontSize: 14,
-                        }}
-                      >
-                        Enrollment Available
-                      </Text>
-                    </View>
-                  )
-                ) : (
-                  <View style={styles.noServiceContainer}>
-                    <Text
-                      style={{
-                        color: "#465355",
-                        fontFamily: "karla-regular",
-                        fontSize: 14,
-                      }}
-                    >
-                      No Enrolloment Available
-                    </Text>
+              {amenity?.attributes?.["Provided services"]?.map(
+                (service, index) => (
+                  <View key={index} style={styles.serviceCard}>
+                    <Text style={styles.serviceCardHeader}>{service}</Text>
                   </View>
-                )}
-              </View>
-            ))}
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() =>
-                scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })
-              }
-            >
-              <Text style={styles.scrollToTopButton}>Back to top</Text>
-            </TouchableOpacity>
+                )
+              )}
+            </View>
           </View>
         </View>
       </ScrollView>
-      <View style={styles.availabilityContainer}>
-        <View style={styles.availabilityButtonContainer}>
-          <TouchableOpacity activeOpacity={0.9}>
-            <View style={styles.iconsContainer}>
-              <MaterialCommunityIcons
-                name="message"
-                size={20}
-                style={styles.icon}
-              />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.referButton}
-            activeOpacity={0.9}
-            onPress={() => navigation.navigate("Select Client", { amenity })}
-          >
-            <MaterialIcons name="app-registration" size={18} color="#FFFFFF" />
-            <Text style={styles.referButtonText}>Refer</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     </ImageBackground>
   );
 }
+//   return (
+//     <ImageBackground
+//       source={getAmenityImage(amenity.location)}
+//       style={styles.container}
+//     >
+//       <View style={styles.overlay} />
+//       <ScrollView
+//         ref={scrollViewRef}
+//         contentContainerStyle={{ flexGrow: 1 }}
+//         style={styles.scrollView}
+//       >
+//         <View style={styles.centerCard}>
+//           <View style={styles.mainText}>
+//             <View style={styles.header}>
+//               <Text style={styles.locationText}>{amenity.location}</Text>
+//               <View
+//                 style={{
+//                   flexDirection: "row",
+//                   alignItems: "center",
+//                   marginBottom: 10,
+//                 }}
+//               >
+//                 <Octicons
+//                   name="location"
+//                   size={20}
+//                   style={{ marginRight: 10, color: "#094852" }}
+//                 />
+//                 <Text style={globalstyles.cardDetails}>{amenity.address}</Text>
+//               </View>
+//               <View
+//                 style={{
+//                   flexDirection: "row",
+//                   alignItems: "center",
+//                   marginBottom: 10,
+//                 }}
+//               >
+//                 <MaterialIcons
+//                   name="schedule"
+//                   size={20}
+//                   style={{ marginRight: 7, color: "#094852" }}
+//                 />
+//                 <Text style={globalstyles.cardDetails}>
+//                   {amenity.operationalHours}
+//                 </Text>
+//               </View>
+//               <View style={globalstyles.tagContainer}>
+//                 <TouchableOpacity activeOpacity={0.7}>
+//                   <View style={[styles.buttonContainer, { marginRight: 10 }]}>
+//                     <MaterialCommunityIcons
+//                       name="arrow-right-top-bold"
+//                       size={15}
+//                       color="#094852"
+//                       style={{ paddingRight: 5 }}
+//                     />
+//                     <Text style={styles.buttonText}>Get Directions</Text>
+//                   </View>
+//                 </TouchableOpacity>
+//                 <TouchableOpacity activeOpacity={0.7}>
+//                   <View style={styles.buttonContainer}>
+//                     <MaterialCommunityIcons
+//                       name="phone-outline"
+//                       size={15}
+//                       color="#094852"
+//                       style={{ paddingRight: 5 }}
+//                     />
+//                     <Text style={styles.buttonText}>Call</Text>
+//                   </View>
+//                 </TouchableOpacity>
+//               </View>
+//             </View>
+//             <View style={{ marginBottom: 30 }}>
+//               <Text
+//                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
+//               >
+//                 About the organization
+//               </Text>
+//               <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
+//                 {amenity.description}
+//               </Text>
+//               <TouchableOpacity
+//                 onPress={openWebsite}
+//                 style={{ alignSelf: "baseline" }}
+//               >
+//                 <Text style={styles.websiteText}>Website</Text>
+//               </TouchableOpacity>
+//               <SocialMediaLinks socialMedia={amenity.socialMedia} />
+//             </View>
+//             <View style={{ marginBottom: 15 }}>
+//               <Text
+//                 style={[globalstyles.details, { margin: 0, marginBottom: 10 }]}
+//               >
+//                 Language
+//               </Text>
+//               <Text style={[globalstyles.detailsText, { marginHorizontal: 0 }]}>
+//                 {amenity.languages}
+//               </Text>
+//             </View>
+//             {amenity.services.map((service, index) => (
+//               <View key={index} style={styles.serviceCard}>
+//                 <Text
+//                   style={[
+//                     globalstyles.details,
+//                     { margin: 0, marginBottom: 10 },
+//                   ]}
+//                 >
+//                   {service.type}
+//                 </Text>
+//                 <Text style={styles.serviceCardHeader}>{service.name}</Text>
+//                 <View
+//                   style={{
+//                     flexDirection: "row",
+//                     alignItems: "center",
+//                     marginBottom: 10,
+//                   }}
+//                 >
+//                   <MaterialIcons
+//                     name="schedule"
+//                     size={20}
+//                     style={{ marginRight: 7, color: "#094852" }}
+//                   />
+//                   <Text style={globalstyles.cardDetails}>
+//                     {service.daysOpen}, {service.operationalHours}
+//                   </Text>
+//                 </View>
+//                 {service.availability > 0 ? (
+//                   service.availability <= 10 ? (
+//                     <View style={styles.serviceLowContainer}>
+//                       <Text
+//                         style={{
+//                           color: "#533409",
+//                           fontFamily: "karla-regular",
+//                           fontSize: 14,
+//                         }}
+//                       >
+//                         Low Availability
+//                       </Text>
+//                     </View>
+//                   ) : (
+//                     <View style={styles.serviceAvailabeContainer}>
+//                       <Text
+//                         style={{
+//                           color: "#094852",
+//                           fontFamily: "karla-regular",
+//                           fontSize: 14,
+//                         }}
+//                       >
+//                         Enrollment Available
+//                       </Text>
+//                     </View>
+//                   )
+//                 ) : (
+//                   <View style={styles.noServiceContainer}>
+//                     <Text
+//                       style={{
+//                         color: "#465355",
+//                         fontFamily: "karla-regular",
+//                         fontSize: 14,
+//                       }}
+//                     >
+//                       No Enrolloment Available
+//                     </Text>
+//                   </View>
+//                 )}
+//               </View>
+//             ))}
+//             <TouchableOpacity
+//               activeOpacity={1}
+//               onPress={() =>
+//                 scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })
+//               }
+//             >
+//               <Text style={styles.scrollToTopButton}>Back to top</Text>
+//             </TouchableOpacity>
+//           </View>
+//         </View>
+//       </ScrollView>
+//       <View style={styles.availabilityContainer}>
+//         <View style={styles.availabilityButtonContainer}>
+//           <TouchableOpacity activeOpacity={0.9}>
+//             <View style={styles.iconsContainer}>
+//               <MaterialCommunityIcons
+//                 name="message"
+//                 size={20}
+//                 style={styles.icon}
+//               />
+//             </View>
+//           </TouchableOpacity>
+//           <TouchableOpacity
+//             style={styles.referButton}
+//             activeOpacity={0.9}
+//             onPress={() => navigation.navigate("Select Client", { amenity })}
+//           >
+//             <MaterialIcons name="app-registration" size={18} color="#FFFFFF" />
+//             <Text style={styles.referButtonText}>Refer</Text>
+//           </TouchableOpacity>
+//         </View>
+//       </View>
+//     </ImageBackground>
+//   );
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -423,7 +521,6 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-regular",
     fontSize: 16,
     color: "#094852",
-    
   },
 });
 

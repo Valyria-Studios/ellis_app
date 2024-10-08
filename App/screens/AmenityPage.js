@@ -17,6 +17,8 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
   Ionicons,
+  Feather,
+  FontAwesome6,
 } from "@expo/vector-icons";
 import globalstyles from "../shared/globalStyles";
 import SocialMediaLinks from "../shared/SocialMediaIcon";
@@ -84,6 +86,49 @@ function AmenityPage({ route, navigation }) {
                 <Text style={globalstyles.cardDetails}>
                   {amenity?.attributes?.["Phone number"]}
                 </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginBottom: 15,
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    const address = encodeURIComponent(
+                      amenity?.attributes?.["Street address"]
+                    );
+                    const url = `https://www.google.com/maps/search/?api=1&query=${address}`;
+
+                    Linking.openURL(url).catch((err) =>
+                      console.error("An error occurred", err)
+                    );
+                  }}
+                  style={[styles.buttonContainer, {marginRight: 10}]}
+                >
+                  <FontAwesome6
+                    name="arrows-split-up-and-left"
+                    size={18}
+                    color={"#094852"}
+                  />
+                  <Text style={[styles.buttonText, { paddingLeft: 10 }]}>
+                    Get Directions
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(
+                      `tel:${amenity?.attributes?.["Phone number"]}`
+                    )
+                  }
+                  style={styles.buttonContainer}
+                >
+                  <Feather name="phone" size={18} color={"#094852"} />
+                  <Text style={[styles.buttonText, { paddingLeft: 10 }]}>
+                    Call
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View>
                 <TouchableOpacity onPress={openWebsite}>

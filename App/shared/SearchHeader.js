@@ -55,6 +55,12 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
     }
   };
 
+  const handleSearchPress = (organization) => {
+    setSearchInput("");
+    navigation.navigate("Amenity Page", { amenity: organization });
+  };
+  
+  
   const handlePress = (client) => {
     setSearchInput("");
     navigation.navigate("Profile Page", { client: clients[0] });
@@ -99,7 +105,7 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={() => handlePress(item)}
+                onPress={() => handleSearchPress(item)}
                 style={styles.organizationItem}
               >
                 <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -124,7 +124,7 @@ const RootNavigator = () => {
         component={AmenityPage}
         options={{
           headerTitle: "",
-
+          headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {
             color: "#171b1c",
             fontSize: 28,
@@ -497,7 +497,7 @@ const RootNavigator = () => {
                   navigation.pop(2); // This takes you back to the Profile Page
                 } else {
                   // Navigate to the start of the stack
-                  navigation.popToTop(); 
+                  navigation.popToTop();
                 }
               }}
               style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning

@@ -72,18 +72,19 @@ export default function Directory() {
     }
   }, [isFocused]);
 
-
   const handleSearchChange = (text) => {
     setSearchInput(text);
   };
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={{ zIndex: 10 }}>
         <SearchComponent
           searchInput={searchInput}
           setSearchInput={handleSearchChange}
         />
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <Text style={globalstyles.title}>Dashboard</Text>
         </View>

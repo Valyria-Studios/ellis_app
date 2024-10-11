@@ -56,11 +56,38 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
   };
 
   const handleSearchPress = (organization) => {
+    const dataToSend = {
+      search: searchInput,
+      Organization: organization.attributes?.Name || organization.name,
+      iterations: 1, // or set this dynamically if needed
+      id: organization.id, // Include the organization's id
+    };
+
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to send data");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Data sent successfully:", data);
+      })
+      .catch((error) => {
+        console.error("Error sending data to /Data endpoint:", error);
+      });
+
+    // Clear the search input and navigate to the AmenityPage
     setSearchInput("");
     navigation.navigate("Amenity Page", { amenity: organization });
   };
-  
-  
+
   const handlePress = (client) => {
     setSearchInput("");
     navigation.navigate("Profile Page", { client: clients[0] });

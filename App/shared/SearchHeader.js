@@ -55,6 +55,37 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
     }
   };
 
+  const handleSendSearch = () => {
+    const dataToSend = {
+      search: searchInput,
+      Organization: searchInput, // In case no organization is found, use search input as organization name
+      iterations: 1,
+      id: `${searchInput} Needs an id`,
+    };
+
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to send data");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Data sent successfully:", data);
+      })
+      .catch((error) => {
+        console.error("Error sending data to /Data endpoint:", error);
+      });
+
+    setSearchInput(""); // Clear the search input
+  };
+
   const handleSearchPress = (organization) => {
     const dataToSend = {
       search: searchInput,
@@ -155,7 +186,17 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
               </TouchableOpacity>
             )}
             ListEmptyComponent={
-              <Text style={globalstyles.noResults}>No organizations found</Text>
+              <View>
+                <Text style={globalstyles.noResults}>
+                  No organizations found
+                </Text>
+                {/* Button to allow sending the search string to the backend */}
+                <TouchableOpacity onPress={handleSendSearch}>
+                  <Text style={styles.sendSearchText}>
+                    Send "{searchInput}" to the backend
+                  </Text>
+                </TouchableOpacity>
+              </View>
             }
             contentContainerStyle={styles.listContainer}
           />
@@ -198,6 +239,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     paddingVertical: 5, // Adds some space around the list content
+  },
+  sendSearchText: {
+    marginTop: 10,
+    color: "#10798B",
+    fontSize: 16,
+    textAlign: "center",
   },
 });
 

@@ -187,13 +187,13 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
             )}
             ListEmptyComponent={
               <View>
-                <Text style={globalstyles.noResults}>
-                  No organizations found
+                <Text style={styles.noResults}>
+                  No organizations found. Please type the full name of the organization and press the button below.
                 </Text>
                 {/* Button to allow sending the search string to the backend */}
                 <TouchableOpacity onPress={handleSendSearch}>
                   <Text style={styles.sendSearchText}>
-                    Send "{searchInput}" to the backend
+                    Send "{searchInput}" to database for future addition to Ellis
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -242,10 +242,17 @@ const styles = StyleSheet.create({
   },
   sendSearchText: {
     marginTop: 10,
+    marginHorizontal: 15,
     color: "#10798B",
     fontSize: 16,
     textAlign: "center",
   },
+  noResults: {
+    fontSize: 16,
+    fontFamily: 'karla-regular',
+    padding: 10,
+    textAlign: 'center'
+  }
 });
 
 export default SearchComponent;

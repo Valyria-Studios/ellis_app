@@ -188,7 +188,7 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
             ListEmptyComponent={
               <View>
                 <Text style={styles.noResults}>
-                  No organizations found. Please type the full name of the organization and press the button below.
+                  No organizations found. Please type the full name of the organization then press the button below.
                 </Text>
                 {/* Button to allow sending the search string to the backend */}
                 <TouchableOpacity onPress={handleSendSearch}>

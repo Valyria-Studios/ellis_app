@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   StyleSheet,
+  Modal,
   TouchableOpacity,
 } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
@@ -18,6 +19,8 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
   const [organizations, setOrganizations] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
   const [filteredOrganizations, setFilteredOrganizations] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
@@ -55,10 +58,11 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
     }
   };
 
+  // Update handleSendSearch and handleSearchPress functions to show the message on success
   const handleSendSearch = () => {
     const dataToSend = {
       search: searchInput,
-      Organization: searchInput, // In case no organization is found, use search input as organization name
+      Organization: searchInput,
       iterations: 1,
       id: `${searchInput} Needs an id`,
     };
@@ -77,21 +81,22 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
         return response.json();
       })
       .then((data) => {
-        console.log("Data sent successfully:", data);
+        setSuccessMessage(`Data for "${searchInput}" sent successfully!`);
+        setModalVisible(true); // Show modal
       })
       .catch((error) => {
         console.error("Error sending data to /Data endpoint:", error);
       });
 
-    setSearchInput(""); // Clear the search input
+    setSearchInput("");
   };
 
   const handleSearchPress = (organization) => {
     const dataToSend = {
       search: searchInput,
       Organization: organization.attributes?.Name || organization.name,
-      iterations: 1, // or set this dynamically if needed
-      id: organization.id, // Include the organization's id
+      iterations: 1,
+      id: organization.id,
     };
 
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
@@ -108,13 +113,13 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
         return response.json();
       })
       .then((data) => {
-        console.log("Data sent successfully:", data);
+        setSuccessMessage(`Data for "${organization.name}" sent successfully!`);
+        setModalVisible(true); // Show modal
       })
       .catch((error) => {
         console.error("Error sending data to /Data endpoint:", error);
       });
 
-    // Clear the search input and navigate to the AmenityPage
     setSearchInput("");
     navigation.navigate("Amenity Page", { amenity: organization });
   };
@@ -188,12 +193,14 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
             ListEmptyComponent={
               <View>
                 <Text style={styles.noResults}>
-                  No organizations found. Please type the full name of the organization then press the button below.
+                  No organizations found. Please type the full name of the
+                  organization then press the button below.
                 </Text>
                 {/* Button to allow sending the search string to the backend */}
                 <TouchableOpacity onPress={handleSendSearch}>
                   <Text style={styles.sendSearchText}>
-                    Send "{searchInput}" to database for future addition to Ellis
+                    Send "{searchInput}" to database for future addition to
+                    Ellis
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -202,6 +209,24 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
           />
         </View>
       )}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)} // Handle modal close on back press
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>{successMessage}</Text>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setModalVisible(false)} // Close modal on button press
+            >
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -249,10 +274,36 @@ const styles = StyleSheet.create({
   },
   noResults: {
     fontSize: 16,
-    fontFamily: 'karla-regular',
+    fontFamily: "karla-regular",
     padding: 10,
-    textAlign: 'center'
-  }
+    textAlign: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Dim background
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  closeButton: {
+    backgroundColor: "#10798B",
+    padding: 10,
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: "white",
+    fontSize: 16,
+  },
 });
 
 export default SearchComponent;

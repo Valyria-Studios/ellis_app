@@ -18,7 +18,7 @@
     },
     "preview": {
       "android": {
-        "buildType": "aab"
+        "buildType": "app-bundle"
       },
       "distribution": "internal",
       "channel": "preview"

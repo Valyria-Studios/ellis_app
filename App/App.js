@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
-import RootNavigator from "./App/routes/RootNavigator";
+import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
 import { createStackNavigator } from "@react-navigation/stack";
-import OnBoardingNavigator from "./App/routes/OnboardingNavigator";
-import SelectForms from "./App/screens/formPages/SelectForms";
-import LegalFormScreen from "./App/screens/formPages/LegalForm";
-import FoodFormScreen from "./App/screens/formPages/FoodForm";
+import OnBoardingNavigator from "./routes/OnboardingNavigator";
+import SelectForms from "./screens/formPages/SelectForms";
+import LegalFormScreen from "./screens/formPages/LegalForm";
+import FoodFormScreen from "./screens/formPages/FoodForm";
 import { MenuProvider } from "react-native-popup-menu";
 
 

@@ -82,6 +82,7 @@ export default function Directory() {
         <SearchComponent
           searchInput={searchInput}
           setSearchInput={handleSearchChange}
+          showProfileImage={true}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

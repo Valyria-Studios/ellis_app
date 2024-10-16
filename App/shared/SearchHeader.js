@@ -12,8 +12,14 @@ import {
 import Icon from "@expo/vector-icons/Ionicons";
 import globalstyles from "../shared/globalStyles";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ActivityIndicator } from "react-native";
 
-const SearchComponent = ({ searchInput, setSearchInput }) => {
+const SearchComponent = ({
+  searchInput,
+  setSearchInput,
+  showProfileImage = true,
+}) => {
   const navigation = useNavigation();
   const [clients, setClients] = useState([]);
   const [organizations, setOrganizations] = useState([]);
@@ -21,6 +27,10 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
   const [filteredOrganizations, setFilteredOrganizations] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
+  const CACHE_KEY_NONPROFITS = "cache_nonprofits";
 
   useEffect(() => {
     fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
@@ -33,14 +43,50 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits")
-      .then((response) => response.json())
-      .then((data) => {
-        setOrganizations(data);
-        setFilteredOrganizations(data);
-      })
-      .catch((error) => console.error("Error fetching non-profits:", error));
+    const loadServiceAndNonProfitsData = async () => {
+      try {
+        setLoading(true);
+        const nonProfitsData = await fetchWithCache(
+          CACHE_KEY_NONPROFITS,
+          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits"
+        );
+        setOrganizations(nonProfitsData);
+        setFilteredOrganizations(nonProfitsData);
+      } catch (error) {
+        console.error("Failed to load NonProfits", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadServiceAndNonProfitsData();
   }, []);
+
+  const fetchWithCache = async (cacheKey, url) => {
+    try {
+      const cachedItem = await AsyncStorage.getItem(cacheKey);
+      if (cachedItem) {
+        const { data, timestamp } = JSON.parse(cachedItem);
+        if (Date.now() - timestamp < CACHE_EXPIRATION) {
+          return data;
+        }
+      }
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      const data = await response.json();
+      await AsyncStorage.setItem(
+        cacheKey,
+        JSON.stringify({ data, timestamp: Date.now() })
+      );
+      return data;
+    } catch (error) {
+      console.error("Error fetching data with cache:", error);
+      throw error;
+    }
+  };
 
   const handleSearch = (text) => {
     setSearchInput(text);
@@ -173,36 +219,42 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
 
   return (
     <View>
-      <View style={globalstyles.searchSection}>
-        <View style={globalstyles.searchContainer}>
-          <Icon
-            name="search-outline"
-            size={25}
-            color="#616a6c"
-            style={globalstyles.searchIcon}
-          />
-          <TextInput
-            blurOnSubmit={true}
-            style={globalstyles.searchBar}
-            value={searchInput}
-            onChangeText={handleSearch}
-            placeholder="Type in keyword"
-          />
-        </View>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => handlePress(filteredClients[0])}
-        >
-          <Image
-            source={require("../assets/images/userImage1.jpg")}
-            style={[
-              globalstyles.profileImage,
-              { marginLeft: 10, width: 45, height: 45 },
-            ]}
-          />
-        </TouchableOpacity>
-      </View>
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <View style={globalstyles.searchSection}>
+          <View style={globalstyles.searchContainer}>
+            <Icon
+              name="search-outline"
+              size={25}
+              color="#616a6c"
+              style={globalstyles.searchIcon}
+            />
+            <TextInput
+              blurOnSubmit={true}
+              style={globalstyles.searchBar}
+              value={searchInput}
+              onChangeText={handleSearch}
+              placeholder="Type in keyword"
+            />
+          </View>
 
+          {showProfileImage && (
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => handlePress(filteredClients[0])}
+            >
+              <Image
+                source={require("../assets/images/userImage1.jpg")}
+                style={[
+                  globalstyles.profileImage,
+                  { marginLeft: 10, width: 45, height: 45 },
+                ]}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
       {searchInput.trim() !== "" && (
         <View style={[styles.floatingListContainer, { maxHeight: 300 }]}>
           <FlatList

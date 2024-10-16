@@ -13,6 +13,7 @@ import renderIcon from "../../shared/RenderIconFunction";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
+import SearchComponent from "../../shared/SearchHeader";
 
 const ServiceDirectory = ({ route, navigation }) => {
   const client = route.params?.client;
@@ -21,6 +22,7 @@ const ServiceDirectory = ({ route, navigation }) => {
   const [nonProfits, setNonProfits] = useState([]); // Store NonProfits data
   const [loading, setLoading] = useState(true); // Track loading state
   const isFocused = useIsFocused();
+  const [searchInput, setSearchInput] = useState(""); // State for search input
 
   const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
   const CACHE_KEY_SERVICES = "cache_services";
@@ -173,100 +175,105 @@ const ServiceDirectory = ({ route, navigation }) => {
   }
 
   return (
-    <ScrollView
+    <View
       style={[
         globalstyles.container,
         { paddingHorizontal: 5, paddingLeft: 15 },
       ]}
-      showsVerticalScrollIndicator={false}
     >
-      <View>
-        <View style={[globalstyles.searchSection, { marginVertical: 15 }]}>
-          <View style={globalstyles.searchContainer}>
-            <Ionicons
-              name="search-outline"
-              size={20}
-              color="#616a6c"
-              style={globalstyles.searchIcon}
-            />
-            <TextInput
-              blurOnSubmit={true}
-              style={[globalstyles.searchBar, { fontSize: 16 }]}
-              placeholder="Search for service"
-            />
-          </View>
-        </View>
-        <View>
-          <Text style={[styles.subHeader, { marginTop: 0 }]}>
-            Recently Viewed
-          </Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {frequentServices.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() =>
-                  navigation.navigate("Referral Location", {
-                    option: item.option,
-                    categoryName: item.categoryName,
-                    client: client,
-                    providedServicesId: item.serviceId, // Pass the stored serviceId for navigation
-                  })
-                }
-                style={styles.frequentContainer}
-              >
-                <View>
-                  <Text style={styles.frequentHeader}>{item.categoryName}</Text>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginTop: 30,
-                  }}
-                >
-                  {renderIcon(
-                    item.icon,
-                    item.catergoryLibrary,
-                    styles.frequentIcon,
-                    26
-                  )}
-                  <Text style={styles.frequentOption}>{item.option}</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-        <Text style={styles.subHeader}>Services</Text>
-        {serviceCategories.map((category, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.7}
-            onPress={() => handleServicePress(category)}
-          >
-            <View key={index} style={styles.container}>
-              <View
-                style={[
-                  globalstyles.optionsContainer,
-                  { justifyContent: "space-between" },
-                ]}
-              >
-                <View style={{ flexDirection: "row" }}>
-                  {renderIcon(category.icon, category.library, styles.icon, 20)}
-                  <Text style={globalstyles.optionsText}>{category.name}</Text>
-                </View>
-                <MaterialIcons
-                  name="keyboard-arrow-right"
-                  size={28}
-                  style={{ color: "#094852" }}
-                />
-              </View>
-            </View>
-          </TouchableOpacity>
-        ))}
+      <View style={{ zIndex: 10 }}>
+        <SearchComponent
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          showProfileImage={false} // Hide the profile image here
+        />
       </View>
-      <View style={{ marginVertical: 20 }}></View>
-    </ScrollView>
+      <ScrollView style={{ zIndex: 0 }} showsVerticalScrollIndicator={false}>
+        <View>
+          <View>
+            <Text style={[styles.subHeader, { marginTop: 0 }]}>
+              Recently Viewed
+            </Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {frequentServices.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() =>
+                    navigation.navigate("Referral Location", {
+                      option: item.option,
+                      categoryName: item.categoryName,
+                      client: client,
+                      providedServicesId: item.serviceId, // Pass the stored serviceId for navigation
+                    })
+                  }
+                  style={styles.frequentContainer}
+                >
+                  <View>
+                    <Text style={styles.frequentHeader}>
+                      {item.categoryName}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginTop: 30,
+                    }}
+                  >
+                    {renderIcon(
+                      item.icon,
+                      item.catergoryLibrary,
+                      styles.frequentIcon,
+                      26
+                    )}
+                    <Text style={styles.frequentOption}>{item.option}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+          <Text style={styles.subHeader}>Services</Text>
+          {serviceCategories.map((category, index) => (
+            <TouchableOpacity
+              key={index}
+              activeOpacity={0.7}
+              onPress={() => handleServicePress(category)}
+            >
+              <View key={index} style={styles.container}>
+                <View
+                  style={[
+                    globalstyles.optionsContainer,
+                    { justifyContent: "space-between" },
+                  ]}
+                >
+                  <View style={{ flexDirection: "row" }}>
+                    {renderIcon(
+                      category.icon,
+                      category.library,
+                      styles.icon,
+                      20
+                    )}
+                    <Text style={globalstyles.optionsText}>
+                      {category.name}
+                    </Text>
+                  </View>
+                  <MaterialIcons
+                    name="keyboard-arrow-right"
+                    size={28}
+                    style={{ color: "#094852" }}
+                  />
+                </View>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={{ marginVertical: 20 }}></View>
+      </ScrollView>
+    </View>
   );
 };
 

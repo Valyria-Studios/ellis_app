@@ -204,7 +204,7 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
       </View>
 
       {searchInput.trim() !== "" && (
-        <View style={styles.floatingListContainer}>
+        <View style={[styles.floatingListContainer, { maxHeight: 300 }]}>
           <FlatList
             data={filteredOrganizations}
             keyExtractor={(item) => item.id.toString()}
@@ -278,8 +278,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
-    marginBottom: 5, // Adds space between each item
-    borderRadius: 8, // Optional: Makes each item look more like a card
+    marginBottom: 5,
+    borderRadius: 8,
   },
   organizationName: {
     fontSize: 16,
@@ -293,10 +293,10 @@ const styles = StyleSheet.create({
   },
   floatingListContainer: {
     position: "absolute",
-    top: 60, // Adjust this value to position the list below the search bar
+    top: 60,
     left: 0,
     right: 0,
-    zIndex: 10, // Make sure it appears above other elements
+    zIndex: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
     marginHorizontal: 10,
@@ -305,7 +305,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
-    paddingVertical: 5, // Adds some space around the list content
+    paddingVertical: 5,
+    maxHeight: 300, // Limit the height of the container
   },
   sendSearchText: {
     marginTop: 10,

@@ -45,13 +45,55 @@ const SearchComponent = ({ searchInput, setSearchInput }) => {
   const handleSearch = (text) => {
     setSearchInput(text);
     if (text.trim()) {
-      const filtered = organizations.filter(
-        (organization) =>
-          organization.name.toLowerCase().includes(text.toLowerCase()) ||
+      const filtered = organizations.filter((organization) => {
+        const nameMatch = organization.name
+          .toLowerCase()
+          .includes(text.toLowerCase());
+        const attributesNameMatch =
           organization.attributes?.Name?.toLowerCase().includes(
             text.toLowerCase()
-          )
-      );
+          );
+
+        // Handle Tags, Topics, and ProvidedServices which may be strings or arrays
+        const tagsMatch =
+          typeof organization.attributes?.Tags === "string"
+            ? organization.attributes.Tags.toLowerCase().includes(
+                text.toLowerCase()
+              )
+            : Array.isArray(organization.attributes?.Tags)
+            ? organization.attributes.Tags.some((tag) =>
+                tag.toLowerCase().includes(text.toLowerCase())
+              )
+            : false;
+
+        const topicsMatch =
+          typeof organization.attributes?.Topics === "string"
+            ? organization.attributes.Topics.toLowerCase().includes(
+                text.toLowerCase()
+              )
+            : Array.isArray(organization.attributes?.Topics)
+            ? organization.attributes.Topics.some((topic) =>
+                topic.toLowerCase().includes(text.toLowerCase())
+              )
+            : false;
+
+        const providedServicesMatch = Array.isArray(
+          organization.attributes?.ProvidedServices
+        )
+          ? organization.attributes.ProvidedServices.some((service) =>
+              service.toLowerCase().includes(text.toLowerCase())
+            )
+          : false;
+
+        // Return true if any of the conditions match
+        return (
+          nameMatch ||
+          attributesNameMatch ||
+          tagsMatch ||
+          topicsMatch ||
+          providedServicesMatch
+        );
+      });
       setFilteredOrganizations(filtered);
     } else {
       setFilteredOrganizations(organizations);

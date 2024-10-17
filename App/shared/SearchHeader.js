@@ -28,6 +28,7 @@ const SearchComponent = ({
   const [successMessage, setSuccessMessage] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [subservices, setSubservices] = useState([]);
 
   const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
   const CACHE_KEY_NONPROFITS = "cache_nonprofits";
@@ -60,6 +61,24 @@ const SearchComponent = ({
     };
 
     loadServiceAndNonProfitsData();
+
+    // Fetch services and extract subservices
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(
+          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Services"
+        );
+        const servicesData = await response.json();
+        const allSubservices = servicesData.flatMap(
+          (service) => service.Subservices
+        );
+        setSubservices(allSubservices);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+
+    fetchServices();
   }, []);
 
   const fetchWithCache = async (cacheKey, url) => {
@@ -100,7 +119,6 @@ const SearchComponent = ({
             text.toLowerCase()
           );
 
-        // Handle Tags, Topics, and ProvidedServices which may be strings or arrays
         const tagsMatch =
           typeof organization.attributes?.Tags === "string"
             ? organization.attributes.Tags.toLowerCase().includes(
@@ -124,14 +142,13 @@ const SearchComponent = ({
             : false;
 
         const providedServicesMatch = Array.isArray(
-          organization.attributes?.ProvidedServices
+          organization.attributes?.["Provided services"]
         )
-          ? organization.attributes.ProvidedServices.some((service) =>
+          ? organization.attributes["Provided services"].some((service) =>
               service.toLowerCase().includes(text.toLowerCase())
             )
           : false;
 
-        // Return true if any of the conditions match
         return (
           nameMatch ||
           attributesNameMatch ||
@@ -140,81 +157,22 @@ const SearchComponent = ({
           providedServicesMatch
         );
       });
-      setFilteredOrganizations(filtered);
+
+      const subservicesFiltered = subservices.filter((subservice) =>
+        subservice.name.toLowerCase().includes(text.toLowerCase())
+      );
+
+      setFilteredOrganizations([...filtered, ...subservicesFiltered]);
     } else {
       setFilteredOrganizations(organizations);
     }
   };
 
-  // Update handleSendSearch and handleSearchPress functions to show the message on success
-  const handleSendSearch = () => {
-    const dataToSend = {
-      search: searchInput,
-      Organization: searchInput,
-      iterations: 1,
-      id: `${searchInput} Needs an id`,
-    };
-
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to send data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSuccessMessage(`Data for "${searchInput}" sent successfully!`);
-        setModalVisible(true); // Show modal
-      })
-      .catch((error) => {
-        console.error("Error sending data to /Data endpoint:", error);
-      });
-
-    setSearchInput("");
-  };
-
-  const handleSearchPress = (organization) => {
-    const dataToSend = {
-      search: searchInput,
-      Organization: organization.attributes?.Name || organization.name,
-      iterations: 1,
-      id: organization.id,
-    };
-
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to send data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSuccessMessage(`Data for "${organization.name}" sent successfully!`);
-        setModalVisible(true); // Show modal
-      })
-      .catch((error) => {
-        console.error("Error sending data to /Data endpoint:", error);
-      });
-
-    setSearchInput("");
-    navigation.navigate("Amenity Page", { amenity: organization });
-  };
-
-  const handlePress = (client) => {
-    setSearchInput("");
-    navigation.navigate("Profile Page", { client: clients[0] });
+  const handleSubservicePress = (subservice) => {
+    navigation.navigate("Referral Location", {
+      option: subservice.name,
+      providedServicesId: subservice.valueId,
+    });
   };
 
   return (
@@ -262,43 +220,12 @@ const SearchComponent = ({
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={() => handleSearchPress(item)}
+                onPress={() => handleSubservicePress(item)}
                 style={styles.organizationItem}
               >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Image
-                    source={{
-                      uri: item?.attributes?.Avatar
-                        ? item.attributes.Avatar.replace(
-                            "ipfs://",
-                            "https://ipfs.io/ipfs/"
-                          )
-                        : "https://example.com/default-avatar.png", // Replace with your default image URL
-                    }}
-                    style={styles.organizationImage}
-                    defaultSource={require("../assets/images/location4.jpg")} // Add a default image for faster load times
-                  />
-                  <Text style={styles.organizationName}>
-                    {item.attributes?.Name || item.name}
-                  </Text>
-                </View>
+                <Text style={styles.organizationName}>{item.name}</Text>
               </TouchableOpacity>
             )}
-            ListEmptyComponent={
-              <View>
-                <Text style={styles.noResults}>
-                  No organizations found. Please type the full name of the
-                  organization then press the button below.
-                </Text>
-                {/* Button to allow sending the search string to the backend */}
-                <TouchableOpacity onPress={handleSendSearch}>
-                  <Text style={styles.sendSearchText}>
-                    Send "{searchInput}" to database for future addition to
-                    Ellis
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            }
             contentContainerStyle={styles.listContainer}
           />
         </View>
@@ -337,12 +264,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
   },
-  organizationImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    marginRight: 10,
-  },
   floatingListContainer: {
     position: "absolute",
     top: 60,
@@ -359,19 +280,6 @@ const styles = StyleSheet.create({
     elevation: 5,
     paddingVertical: 5,
     maxHeight: 300, // Limit the height of the container
-  },
-  sendSearchText: {
-    marginTop: 10,
-    marginHorizontal: 15,
-    color: "#10798B",
-    fontSize: 16,
-    textAlign: "center",
-  },
-  noResults: {
-    fontSize: 16,
-    fontFamily: "karla-regular",
-    padding: 10,
-    textAlign: "center",
   },
   modalContainer: {
     flex: 1,

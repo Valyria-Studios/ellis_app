@@ -8,12 +8,12 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 import globalstyles from "../shared/globalStyles";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ActivityIndicator } from "react-native";
 
 const SearchComponent = ({
   searchInput,
@@ -23,12 +23,12 @@ const SearchComponent = ({
   const navigation = useNavigation();
   const [clients, setClients] = useState([]);
   const [organizations, setOrganizations] = useState([]);
-  const [filteredClients, setFilteredClients] = useState([]);
   const [filteredOrganizations, setFilteredOrganizations] = useState([]);
+  const [subservices, setSubservices] = useState([]);
+  const [filteredSubservices, setFilteredSubservices] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [subservices, setSubservices] = useState([]);
 
   const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
   const CACHE_KEY_NONPROFITS = "cache_nonprofits";
@@ -38,7 +38,6 @@ const SearchComponent = ({
       .then((response) => response.json())
       .then((data) => {
         setClients(data);
-        setFilteredClients(data);
       })
       .catch((error) => console.error("Error fetching clients:", error));
   }, []);
@@ -110,7 +109,8 @@ const SearchComponent = ({
   const handleSearch = (text) => {
     setSearchInput(text);
     if (text.trim()) {
-      const filtered = organizations.filter((organization) => {
+      // Filter organizations
+      const filteredOrgs = organizations.filter((organization) => {
         const nameMatch = organization.name
           .toLowerCase()
           .includes(text.toLowerCase());
@@ -158,14 +158,82 @@ const SearchComponent = ({
         );
       });
 
-      const subservicesFiltered = subservices.filter((subservice) =>
+      // Filter subservices
+      const filteredSubs = subservices.filter((subservice) =>
         subservice.name.toLowerCase().includes(text.toLowerCase())
       );
 
-      setFilteredOrganizations([...filtered, ...subservicesFiltered]);
+      setFilteredOrganizations(filteredOrgs);
+      setFilteredSubservices(filteredSubs);
     } else {
       setFilteredOrganizations(organizations);
+      setFilteredSubservices([]);
     }
+  };
+
+  const handleSendSearch = () => {
+    const dataToSend = {
+      search: searchInput,
+      Organization: searchInput,
+      iterations: 1,
+      id: `${searchInput} Needs an id`,
+    };
+
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to send data");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSuccessMessage(`Data for "${searchInput}" sent successfully!`);
+        setModalVisible(true); // Show modal
+      })
+      .catch((error) => {
+        console.error("Error sending data to /Data endpoint:", error);
+      });
+
+    setSearchInput("");
+  };
+
+  const handleSearchPress = (organization) => {
+    const dataToSend = {
+      search: searchInput,
+      Organization: organization.attributes?.Name || organization.name,
+      iterations: 1,
+      id: organization.id,
+    };
+
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to send data");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSuccessMessage(`Data for "${organization.name}" sent successfully!`);
+        setModalVisible(true); // Show modal
+      })
+      .catch((error) => {
+        console.error("Error sending data to /Data endpoint:", error);
+      });
+
+    setSearchInput("");
+    navigation.navigate("Amenity Page", { amenity: organization });
   };
 
   const handleSubservicePress = (subservice) => {
@@ -173,6 +241,11 @@ const SearchComponent = ({
       option: subservice.name,
       providedServicesId: subservice.valueId,
     });
+  };
+
+  const handlePress = (client) => {
+    setSearchInput("");
+    navigation.navigate("Profile Page", { client: clients[0] });
   };
 
   return (
@@ -200,7 +273,7 @@ const SearchComponent = ({
           {showProfileImage && (
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => handlePress(filteredClients[0])}
+              onPress={() => handlePress(clients[0])}
             >
               <Image
                 source={require("../assets/images/userImage1.jpg")}
@@ -215,33 +288,54 @@ const SearchComponent = ({
       )}
       {searchInput.trim() !== "" && (
         <View style={[styles.floatingListContainer, { maxHeight: 300 }]}>
-          <FlatList
-            data={filteredOrganizations}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => handleSubservicePress(item)}
-                style={styles.organizationItem}
-              >
-                <Text style={styles.organizationName}>{item.name}</Text>
-              </TouchableOpacity>
-            )}
-            contentContainerStyle={styles.listContainer}
-          />
+          {filteredOrganizations.length > 0 && (
+            <>
+              <Text style={styles.header}>Organizations</Text>
+              <FlatList
+                data={filteredOrganizations}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => handleSearchPress(item)}
+                    style={styles.organizationItem}
+                  >
+                    <Text style={styles.organizationName}>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </>
+          )}
+          {filteredSubservices.length > 0 && (
+            <>
+              <Text style={styles.header}>Services</Text>
+              <FlatList
+                data={filteredSubservices}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => handleSubservicePress(item)}
+                    style={styles.organizationItem}
+                  >
+                    <Text style={styles.organizationName}>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </>
+          )}
         </View>
       )}
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Handle modal close on back press
+        onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>{successMessage}</Text>
             <TouchableOpacity
               style={styles.closeButton}
-              onPress={() => setModalVisible(false)} // Close modal on button press
+              onPress={() => setModalVisible(false)}
             >
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
@@ -253,6 +347,13 @@ const SearchComponent = ({
 };
 
 const styles = StyleSheet.create({
+  header: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginVertical: 5,
+    marginLeft: 10,
+    color: "#094852",
+  },
   organizationItem: {
     padding: 10,
     borderBottomWidth: 1,
@@ -279,13 +380,13 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     paddingVertical: 5,
-    maxHeight: 300, // Limit the height of the container
+    maxHeight: 300,
   },
   modalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Dim background
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
     backgroundColor: "white",

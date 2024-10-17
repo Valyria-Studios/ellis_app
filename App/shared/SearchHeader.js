@@ -237,6 +237,35 @@ const SearchComponent = ({
   };
 
   const handleSubservicePress = (subservice) => {
+    const dataToSend = {
+      search: searchInput,
+      Organization: subservice.name, // Using the name of the subservice
+      iterations: 1,
+      id: subservice.valueId, // Use the `valueId` as the unique identifier
+    };
+
+    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to send data");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSuccessMessage(`Data for "${subservice.name}" sent successfully!`);
+        setModalVisible(true); // Show modal on success
+      })
+      .catch((error) => {
+        console.error("Error sending data to /Data endpoint:", error);
+      });
+
+    setSearchInput("");
     navigation.navigate("Referral Location", {
       option: subservice.name,
       providedServicesId: subservice.valueId,

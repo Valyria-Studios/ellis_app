@@ -248,6 +248,13 @@ const SearchComponent = ({
     navigation.navigate("Profile Page", { client: clients[0] });
   };
 
+  const combinedResults = [
+    { type: "header", title: "Services" },
+    ...filteredSubservices.map((service) => ({ type: "service", ...service })),
+    { type: "header", title: "Organizations" },
+    ...filteredOrganizations.map((org) => ({ type: "organization", ...org })),
+  ];
+
   return (
     <View>
       {loading ? (
@@ -288,40 +295,35 @@ const SearchComponent = ({
       )}
       {searchInput.trim() !== "" && (
         <View style={[styles.floatingListContainer, { maxHeight: 300 }]}>
-          {filteredOrganizations.length > 0 && (
-            <>
-              <Text style={styles.header}>Organizations</Text>
-              <FlatList
-                data={filteredOrganizations}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => handleSearchPress(item)}
-                    style={styles.organizationItem}
-                  >
-                    <Text style={styles.organizationName}>{item.name}</Text>
-                  </TouchableOpacity>
-                )}
-              />
-            </>
-          )}
-          {filteredSubservices.length > 0 && (
-            <>
-              <Text style={styles.header}>Services</Text>
-              <FlatList
-                data={filteredSubservices}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
+          <FlatList
+            data={combinedResults}
+            keyExtractor={(item, index) =>
+              item.id?.toString() || index.toString()
+            }
+            renderItem={({ item }) => {
+              if (item.type === "header") {
+                return <Text style={styles.header}>{item.title}</Text>;
+              } else if (item.type === "service") {
+                return (
                   <TouchableOpacity
                     onPress={() => handleSubservicePress(item)}
                     style={styles.organizationItem}
                   >
                     <Text style={styles.organizationName}>{item.name}</Text>
                   </TouchableOpacity>
-                )}
-              />
-            </>
-          )}
+                );
+              } else if (item.type === "organization") {
+                return (
+                  <TouchableOpacity
+                    onPress={() => handleSearchPress(item)}
+                    style={styles.organizationItem}
+                  >
+                    <Text style={styles.organizationName}>{item.name}</Text>
+                  </TouchableOpacity>
+                );
+              }
+            }}
+          />
         </View>
       )}
       <Modal

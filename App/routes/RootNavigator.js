@@ -139,7 +139,7 @@ const RootNavigator = () => {
         name="Profile Page"
         component={ProfilePage}
         options={({ route, navigation }) => ({
-          headerTitle: route.params.client.fullName,
+          headerTitle: route.params?.client?.fullName || "Profile",
           headerTitleAlign: "left",
           headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleStyle: {

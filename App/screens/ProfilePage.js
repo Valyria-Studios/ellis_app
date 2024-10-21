@@ -168,7 +168,7 @@ function ProfilePage({ route, navigation }) {
     }, [clientData.id])
   );
 
-  const getProfileImageForAdmin = (adminId) => {
+  const getProfileImageFromId = (adminId) => {
     // Assuming that the admin's image can be derived from their ID or mapped
     const imageKey = `userImage${adminId}`; // Example: admin with id "2" corresponds to "userImage2"
     return imageMap[imageKey] || imageMap["defaultImage"]; // Fallback to a default image if not found
@@ -247,7 +247,7 @@ function ProfilePage({ route, navigation }) {
                 </Text>
                 <View style={styles.peopleContainer}>
                   <Image
-                    source={getProfileImageForAdmin(referral.referralSenderId)} // Use the image derived from admin.id
+                    source={getProfileImageFromId(referral.referralSenderId)} // Use the image derived from admin.id
                     style={{ width: 30, height: 30, borderRadius: 20 }} // Adjust styling as needed
                   />
                   <Text
@@ -358,7 +358,7 @@ function ProfilePage({ route, navigation }) {
           <View style={{ flexDirection: "row", padding: 10 }}>
             <View style={styles.profileImage}>
               <Image
-                source={getProfileImageForAdmin(admin.id)} // Use the image derived from admin.id
+                source={getProfileImageFromId(admin.id)} // Use the image derived from admin.id
                 style={{ width: 40, height: 40, borderRadius: 20 }} // Adjust styling as needed
               />
             </View>

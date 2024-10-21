@@ -21,6 +21,7 @@ import {
 } from "../../filtering/amenityFilter";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Octicons } from "@expo/vector-icons";
+import imageMap from "../../shared/getProfileImage";
 
 export default function Directory() {
   const navigation = useNavigation();
@@ -30,42 +31,54 @@ export default function Directory() {
   const [sortCriteria, setSortCriteria] = useState(null);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
   const [clientCount, setClientCount] = useState(0);
+  const [recentReferrals, setRecentReferrals] = useState([]);
   const isFocused = useIsFocused();
 
   const tabItems = ["Me", "Valyria Studios"];
 
-  useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Amenities")
-      .then((response) => response.json())
-      .then((data) => {
-        const result = applyFiltersAndSort(
-          data, // Use the fetched data here
-          searchInput,
-          selectedCategoryFilter,
-          sortCriteria,
-          applyCategoryFilter,
-          filterOpenNowAmenities,
-          getSortedAmenities
-        );
-        setFilteredAmenities(result); // Update the filtered amenities
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, [searchInput, selectedCategoryFilter, sortCriteria]);
+  const getProfileImageFromId = (adminId) => {
+    // Assuming that the admin's image can be derived from their ID or mapped
+    const imageKey = `userImage${adminId}`; // Example: admin with id "2" corresponds to "userImage2"
+    return imageMap[imageKey] || imageMap["defaultImage"]; // Fallback to a default image if not found
+  };
 
   useEffect(() => {
     if (isFocused) {
       fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
         .then((response) => response.json())
-        .then((data) => {
+        .then(async (data) => {
           if (data && data.length > 0) {
             const firstClient = data[0];
+
+            // Set client count based on engagements
             if (firstClient.engagements && firstClient.engagements.clients) {
               setClientCount(firstClient.engagements.clients.length);
             } else {
               setClientCount(0);
             }
-          } else {
-            setClientCount(0);
+
+            // Extract referrals
+            if (firstClient.referrals && firstClient.referrals.length > 0) {
+              const referrals = await Promise.all(
+                firstClient.referrals.map(async (referral) => {
+                  const clientResponse = await fetch(
+                    `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referral.clientId}`
+                  );
+                  const clientData = await clientResponse.json();
+                  return {
+                    ...referral,
+                    clientName: clientData.fullName,
+                    image: clientData.image,
+                    service: referral.option,
+                    time: referral.dateStarted,
+                    status: referral.referralType,
+                  };
+                })
+              );
+              setRecentReferrals(referrals);
+            } else {
+              setRecentReferrals([]);
+            }
           }
         })
         .catch((error) => console.error("Error fetching client data:", error));
@@ -293,81 +306,33 @@ export default function Directory() {
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={{ flexDirection: "row", paddingBottom: 50 }}>
-              <View style={styles.cards}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Image
-                    source={require("../../assets/images/userImage1.jpg")}
-                    style={styles.profileImage}
-                  />
-                  <Text style={styles.name}>Chris A.</Text>
-                </View>
-                <View style={styles.subContainer}>
-                  <Text style={[styles.cardSubText, { fontSize: 16 }]}>
-                    Shelter
-                  </Text>
-                  <View style={styles.subTextContainer}>
-                    <MaterialIcons
-                      name="access-time"
-                      size={12}
-                      style={styles.icon}
+              {recentReferrals.map((referral, index) => (
+                <View key={index} style={styles.cards}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Image
+                      source={getProfileImageFromId(referral.clientId)}
+                      style={styles.profileImage}
                     />
-                    <Text style={styles.cardSubText}>Today, 6pm</Text>
+                    <Text style={styles.name}>{referral.clientName}</Text>
                   </View>
-                  <View style={styles.status}>
-                    <Text style={styles.statusText}>Pending</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.cards}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Image
-                    source={require("../../assets/images/userImage2.jpg")}
-                    style={styles.profileImage}
-                  />
-                  <Text style={styles.name}>Rob B.</Text>
-                </View>
-                <View style={styles.subContainer}>
-                  <Text style={[styles.cardSubText, { fontSize: 16 }]}>
-                    Coding Class
-                  </Text>
-                  <View style={styles.subTextContainer}>
-                    <MaterialIcons
-                      name="access-time"
-                      size={12}
-                      style={styles.icon}
-                    />
-                    <Text style={styles.cardSubText}>Today, 12pm</Text>
-                  </View>
-                  <View style={styles.status}>
-                    <Text style={styles.statusText}>Pending</Text>
+                  <View style={styles.subContainer}>
+                    <Text style={[styles.cardSubText, { fontSize: 16 }]}>
+                      {referral.service}
+                    </Text>
+                    <View style={styles.subTextContainer}>
+                      <MaterialIcons
+                        name="access-time"
+                        size={12}
+                        style={styles.icon}
+                      />
+                      <Text style={styles.cardSubText}>{referral.time}</Text>
+                    </View>
+                    <View style={styles.status}>
+                      <Text style={styles.statusText}>{referral.status}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-              <View style={styles.cards}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Image
-                    source={require("../../assets/images/userImage3.jpg")}
-                    style={styles.profileImage}
-                  />
-                  <Text style={styles.name}>Julia C.</Text>
-                </View>
-                <View style={styles.subContainer}>
-                  <Text style={[styles.cardSubText, { fontSize: 16 }]}>
-                    Eviction Defense
-                  </Text>
-                  <View style={styles.subTextContainer}>
-                    <MaterialIcons
-                      name="access-time"
-                      size={12}
-                      style={styles.icon}
-                    />
-                    <Text style={styles.cardSubText}>Yesterday</Text>
-                  </View>
-                  <View style={styles.status}>
-                    <Text style={styles.statusText}>Complete</Text>
-                  </View>
-                </View>
-              </View>
+              ))}
             </View>
           </ScrollView>
         </View>

@@ -317,18 +317,24 @@ export default function Directory() {
             <View style={{ flexDirection: "row", paddingBottom: 50 }}>
               {recentReferrals.map((referral, index) => (
                 <View key={index} style={styles.cards}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Image
-                      source={getProfileImageFromId(referral.clientId)}
-                      style={styles.profileImage}
-                    />
-                    <Text style={styles.name}>{referral.clientName}</Text>
+                  <View style={styles.nameContainer}>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Image
+                        source={getProfileImageFromId(referral.clientId)}
+                        style={styles.profileImage}
+                      />
+                      <Text style={styles.name}>{referral.clientName}</Text>
+                    </View>
                   </View>
                   <View style={styles.subContainer}>
-                    <Text style={[styles.cardSubText, { fontSize: 16 }]}>
+                    <Text style={[styles.cardSubText, styles.serviceOption]}>
                       {referral.service}
                     </Text>
-                    <View style={styles.subTextContainer}>
+                    <View
+                      style={[styles.subTextContainer, styles.timeContainer]}
+                    >
                       <MaterialIcons
                         name="access-time"
                         size={12}
@@ -336,7 +342,7 @@ export default function Directory() {
                       />
                       <Text style={styles.cardSubText}>{referral.time}</Text>
                     </View>
-                    <View style={styles.status}>
+                    <View style={[styles.status, styles.statusContainer]}>
                       <Text style={styles.statusText}>{referral.status}</Text>
                     </View>
                   </View>
@@ -427,6 +433,10 @@ const styles = StyleSheet.create({
     color: "#465355",
   },
 
+  nameContainer: {
+    marginBottom: 50, // Add space below the name section
+  },
+
   activityText: {
     fontFamily: "gabarito-regular",
     fontSize: 18,
@@ -464,6 +474,18 @@ const styles = StyleSheet.create({
   subContainer: {
     flex: 0.6,
     justifyContent: "space-between",
+  },
+
+  serviceOption: {
+    marginBottom: 5, // Add space below the service option text
+  },
+
+  timeContainer: {
+    marginBottom: 5, // Add space below the time section
+  },
+
+  statusContainer: {
+    marginTop: 5, // Ensure the status section has some space above
   },
 
   profileImage: {

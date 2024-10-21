@@ -435,15 +435,13 @@ const styles = StyleSheet.create({
 
   subTextContainer: {
     flexDirection: "row",
-    alignContent: "center", // Align items vertically in the center
-    flexWrap: "nowrap", // Prevent items from wrapping to the next line
-    borderWidth: 1,
+    alignItems: "center", // Vertically center the items
+    flexWrap: "nowrap", // Prevent wrapping
   },
 
   icon: {
     color: "#094852",
-    alignContent: 'center',
-
+    marginRight: 5,
   },
 
   status: {

@@ -22,6 +22,7 @@ import {
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Octicons } from "@expo/vector-icons";
 import imageMap from "../../shared/getProfileImage";
+import { format, isToday, isYesterday } from "date-fns";
 
 export default function Directory() {
   const navigation = useNavigation();
@@ -40,6 +41,18 @@ export default function Directory() {
     // Assuming that the admin's image can be derived from their ID or mapped
     const imageKey = `userImage${adminId}`; // Example: admin with id "2" corresponds to "userImage2"
     return imageMap[imageKey] || imageMap["defaultImage"]; // Fallback to a default image if not found
+  };
+
+  const formatReferralDate = (dateString) => {
+    const date = new Date(dateString);
+
+    if (isToday(date)) {
+      return `Today, ${format(date, " h:mm a")}`;
+    } else if (isYesterday(date)) {
+      return `Yesterday, ${format(date, " h:mm a")}`;
+    } else {
+      return format(date, "MM/dd, h:mm a");
+    }
   };
 
   useEffect(() => {
@@ -65,12 +78,23 @@ export default function Directory() {
                     `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referral.clientId}`
                   );
                   const clientData = await clientResponse.json();
+
+                  // Construct name with first name and first initial of last name
+                  const clientName = `${
+                    clientData.firstName
+                  } ${clientData.lastName.charAt(0)}.`;
+
+                  // Format the referral date
+                  const formattedDate = formatReferralDate(
+                    referral.dateStarted
+                  );
+
                   return {
                     ...referral,
-                    clientName: clientData.fullName,
+                    clientName,
                     image: clientData.image,
                     service: referral.option,
-                    time: referral.dateStarted,
+                    time: formattedDate, // Use the formatted date
                     status: referral.referralType,
                   };
                 })
@@ -153,12 +177,7 @@ export default function Directory() {
                 navigation.navigate("My Clients");
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "baseline",
-                }}
-              >
+              <View style={styles.cardSpace}>
                 <Text style={styles.number}>{clientCount}</Text>
                 <Text style={styles.numberText}>clients</Text>
               </View>
@@ -170,12 +189,7 @@ export default function Directory() {
                 navigation.navigate("My Services");
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "baseline",
-                }}
-              >
+              <View style={styles.cardSpace}>
                 <Text style={styles.number}>3</Text>
                 <Text style={styles.numberText}>services</Text>
               </View>
@@ -187,12 +201,7 @@ export default function Directory() {
                 navigation.navigate("My Hours");
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "baseline",
-                }}
-              >
+              <View style={styles.cardSpace}>
                 <Text style={styles.number}>21</Text>
                 <Text style={styles.numberText}>hours</Text>
               </View>
@@ -385,13 +394,18 @@ const styles = StyleSheet.create({
 
   cards: {
     backgroundColor: "#ffffff",
-    width: 180,
     padding: 20,
-    flex: 1,
     margin: 2,
     borderRadius: 10,
-    justifyContent: "space-between",
-    height: 190,
+    justifyContent: "flex-start",
+    alignItems: "flex-start", // Ensure items align to the start for better wrapping
+  },
+
+  cardSpace: {
+    flexDirection: "row",
+    alignItems: "baseline",
+    paddingBottom: 70,
+    width: 90,
   },
 
   number: {
@@ -421,12 +435,15 @@ const styles = StyleSheet.create({
 
   subTextContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    alignContent: "center", // Align items vertically in the center
+    flexWrap: "nowrap", // Prevent items from wrapping to the next line
+    borderWidth: 1,
   },
 
   icon: {
     color: "#094852",
-    paddingRight: 5,
+    alignContent: 'center',
+
   },
 
   status: {

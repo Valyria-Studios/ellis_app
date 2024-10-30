@@ -324,35 +324,51 @@ const SearchComponent = ({
       )}
       {searchInput.trim() !== "" && (
         <View style={[styles.floatingListContainer, { maxHeight: 300 }]}>
-          <FlatList
-            data={combinedResults}
-            keyExtractor={(item, index) =>
-              item.id?.toString() || index.toString()
-            }
-            renderItem={({ item }) => {
-              if (item.type === "header") {
-                return <Text style={styles.header}>{item.title}</Text>;
-              } else if (item.type === "service") {
-                return (
-                  <TouchableOpacity
-                    onPress={() => handleSubservicePress(item)}
-                    style={styles.organizationItem}
-                  >
-                    <Text style={styles.organizationName}>{item.name}</Text>
-                  </TouchableOpacity>
-                );
-              } else if (item.type === "organization") {
-                return (
-                  <TouchableOpacity
-                    onPress={() => handleSearchPress(item)}
-                    style={styles.organizationItem}
-                  >
-                    <Text style={styles.organizationName}>{item.name}</Text>
-                  </TouchableOpacity>
-                );
+          {filteredSubservices.length === 0 &&
+          filteredOrganizations.length === 0 ? (
+            <View>
+              <Text style={styles.noResults}>
+                No services or organizations found. Type the full name and press
+                the button below to send a request.
+              </Text>
+              <TouchableOpacity onPress={handleSendSearch}>
+                <Text style={styles.sendSearchText}>
+                  Send "{searchInput}" to database for future addition
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <FlatList
+              data={combinedResults}
+              keyExtractor={(item, index) =>
+                item.id?.toString() || index.toString()
               }
-            }}
-          />
+              renderItem={({ item }) => {
+                if (item.type === "header") {
+                  return <Text style={styles.header}>{item.title}</Text>;
+                } else if (item.type === "service") {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => handleSubservicePress(item)}
+                      style={styles.organizationItem}
+                    >
+                      <Text style={styles.organizationName}>{item.name}</Text>
+                    </TouchableOpacity>
+                  );
+                } else if (item.type === "organization") {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => handleSearchPress(item)}
+                      style={styles.organizationItem}
+                    >
+                      <Text style={styles.organizationName}>{item.name}</Text>
+                    </TouchableOpacity>
+                  );
+                }
+              }}
+              contentContainerStyle={styles.listContainer}
+            />
+          )}
         </View>
       )}
       <Modal
@@ -438,6 +454,22 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: "white",
     fontSize: 16,
+  },
+  noResults: {
+    fontSize: 16,
+    padding: 10,
+    textAlign: "center",
+    color: "#555",
+  },
+  sendSearchText: {
+    marginTop: 10,
+    marginHorizontal: 15,
+    color: "#10798B",
+    fontSize: 16,
+    textAlign: "center",
+  },
+  listContainer: {
+    paddingBottom: 20,
   },
 });
 

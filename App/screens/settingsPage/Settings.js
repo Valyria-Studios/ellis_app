@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../shared/globalStyles";
@@ -8,6 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Settings() {
   const navigation = useNavigation();
+  const [searchInput, setSearchInput] = useState("");
+
   const pages = [
     {
       label: "Organization Profile",
@@ -34,7 +36,7 @@ export default function Settings() {
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <SearchComponent />
+      <SearchComponent searchInput={searchInput} showProfileImage={true} />
       <View style={{ marginVertical: 5 }}>
         <Text style={globalstyles.title}>Settings</Text>
       </View>

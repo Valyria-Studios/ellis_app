@@ -31,18 +31,24 @@ const Messages = () => {
     message.name.toLowerCase().includes(searchInput.toLowerCase())
   );
 
+  const handleSearchChange = (text) => {
+    setSearchInput(text);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <View style={{ zIndex: 10 }}>
         <SearchComponent
           searchInput={searchInput}
-          setSearchInput={setSearchInput}
+          setSearchInput={handleSearchChange}
         />
+      </View>
+      <View style={styles.header}>
         <Text style={globalstyles.title}>Messages</Text>
       </View>
       <View>
         <FlatList
-          data={filteredMessages}
+          data={messages}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
             <TouchableOpacity

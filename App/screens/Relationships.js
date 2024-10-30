@@ -29,60 +29,62 @@ const RelationshipPage = () => {
         setAllClients(data);
         setFilteredClients(data);
         let filtered = data;
-        if (searchInput) {
-          // If there's a search input, filter based on the search input and the status.
-          filtered = filtered.filter((client) =>
-            client.fullName.toLowerCase().includes(searchInput.toLowerCase())
-          );
-        }
-        if (filter && filter !== "all") {
-          filtered = filtered.filter(
-            (client) => client.status.toLowerCase() === filter.toLowerCase()
-          );
-        }
+      //   if (searchInput) {
+      //     // If there's a search input, filter based on the search input and the status.
+      //     filtered = filtered.filter((client) =>
+      //       client.fullName.toLowerCase().includes(searchInput.toLowerCase())
+      //     );
+      //   }
+      //   if (filter && filter !== "all") {
+      //     filtered = filtered.filter(
+      //       (client) => client.status.toLowerCase() === filter.toLowerCase()
+      //     );
+      //   }
 
-        setFilteredClients(filtered);
+      //   setFilteredClients(filtered);
       });
-  }, [filter, searchInput]);
+  },
+   [filter, searchInput]);
 
   const handleSearchChange = (text) => {
     setSearchInput(text);
 
-    let filtered;
+    // let filtered;
 
-    if (text) {
-      filtered = allClients.filter((client) =>
-        client.fullName.toLowerCase().includes(text.toLowerCase())
-      );
-    } else {
-      filtered = allClients;
-    }
+    // if (text) {
+    //   filtered = allClients.filter((client) =>
+    //     client.fullName.toLowerCase().includes(text.toLowerCase())
+    //   );
+    // } else {
+    //   filtered = allClients;
+    // }
 
-    // If search input is cleared, show all clients or consider the filter.
-    if (filter && filter !== "all") {
-      filtered = filtered.filter(
-        (client) => client.status.toLowerCase() === filter.toLowerCase()
-      );
-      setFilteredClients(filtered);
-    }
+    // // If search input is cleared, show all clients or consider the filter.
+    // if (filter && filter !== "all") {
+    //   filtered = filtered.filter(
+    //     (client) => client.status.toLowerCase() === filter.toLowerCase()
+    //   );
+    //   setFilteredClients(filtered);
+    // }
   };
 
-  const toggleFilter = (selectedFilter) => {
-    if (filter === selectedFilter) {
-      setFilter("all"); // Reset filter
-    } else {
-      setFilter(selectedFilter);
-    }
-  };
+  // const toggleFilter = (selectedFilter) => {
+  //   if (filter === selectedFilter) {
+  //     setFilter("all"); // Reset filter
+  //   } else {
+  //     setFilter(selectedFilter);
+  //   }
+  // };
 
   return (
     <SafeAreaView style={globalstyles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={{ zIndex: 10 }}>
         <SearchComponent
           searchInput={searchInput}
           setSearchInput={handleSearchChange}
         />
-
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Favorite People Section */}
         <View style={styles.relationshipsContainer}>
           <Text style={globalstyles.title}>Relationships</Text>

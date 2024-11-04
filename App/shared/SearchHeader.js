@@ -239,7 +239,7 @@ const SearchComponent = ({
   const handleSubservicePress = (subservice) => {
     const dataToSend = {
       search: searchInput,
-      Organization: subservice.name, // Using the name of the subservice
+      Subservice: subservice.name, // Using the name of the subservice
       iterations: 1,
       id: subservice.valueId, // Use the `valueId` as the unique identifier
     };

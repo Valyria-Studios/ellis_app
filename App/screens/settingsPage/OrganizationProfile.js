@@ -17,7 +17,7 @@ const OrgProfile = ({ navigation }) => {
   const [editableWebsite, setEditableWebsite] = useState("");
 
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Accounts")
+    fetch("https://ellis-test-data.com:8000/Accounts")
       .then((response) => response.json())
       .then((data) => {
         const firstAccount = data[0];
@@ -67,7 +67,7 @@ const OrgProfile = ({ navigation }) => {
       };
 
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Accounts/${account.id}`,
+        `https://ellis-test-data.com:8000/Accounts/${account.id}`,
         {
           method: "PUT", // or 'POST', depending on your API
           headers: {

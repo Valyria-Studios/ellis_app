@@ -57,7 +57,7 @@ export default function Directory() {
 
   useEffect(() => {
     if (isFocused) {
-      fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
+      fetch("https://ellis-test-data.com:8000/Clients")
         .then((response) => response.json())
         .then(async (data) => {
           if (data && data.length > 0) {
@@ -75,7 +75,7 @@ export default function Directory() {
               const referrals = await Promise.all(
                 firstClient.referrals.map(async (referral) => {
                   const clientResponse = await fetch(
-                    `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referral.clientId}`
+                    `https://ellis-test-data.com:8000/Clients/${referral.clientId}`
                   );
                   const clientData = await clientResponse.json();
 

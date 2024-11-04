@@ -34,7 +34,7 @@ const SearchComponent = ({
   const CACHE_KEY_NONPROFITS = "cache_nonprofits";
 
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
+    fetch("https://ellis-test-data.com:8000/Clients")
       .then((response) => response.json())
       .then((data) => {
         setClients(data);
@@ -48,7 +48,7 @@ const SearchComponent = ({
         setLoading(true);
         const nonProfitsData = await fetchWithCache(
           CACHE_KEY_NONPROFITS,
-          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits"
+          "https://ellis-test-data.com:8000/NonProfits"
         );
         setOrganizations(nonProfitsData);
         setFilteredOrganizations(nonProfitsData);
@@ -65,7 +65,7 @@ const SearchComponent = ({
     const fetchServices = async () => {
       try {
         const response = await fetch(
-          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Services"
+          "https://ellis-test-data.com:8000/Services"
         );
         const servicesData = await response.json();
         const allSubservices = servicesData.flatMap(
@@ -179,7 +179,7 @@ const SearchComponent = ({
       id: `${searchInput} Needs an id`,
     };
 
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+    fetch("https://ellis-test-data.com:8000/Data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -211,7 +211,7 @@ const SearchComponent = ({
       id: organization.id,
     };
 
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+    fetch("https://ellis-test-data.com:8000/Data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -244,7 +244,7 @@ const SearchComponent = ({
       id: subservice.valueId, // Use the `valueId` as the unique identifier
     };
 
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Data", {
+    fetch("https://ellis-test-data.com:8000/Data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -68,7 +68,7 @@ const Register = ({ navigation }) => {
 
     try {
       const response = await fetch(
-        "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Accounts",
+        "https://ellis-test-data.com:8000/Accounts",
         {
           method: "POST",
           headers: {

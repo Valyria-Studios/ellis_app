@@ -23,28 +23,27 @@ const RelationshipPage = () => {
   const [allClients, setAllClients] = useState([]);
 
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
+    fetch("https://ellis-test-data.com:8000/Clients")
       .then((response) => response.json())
       .then((data) => {
         setAllClients(data);
         setFilteredClients(data);
         let filtered = data;
-      //   if (searchInput) {
-      //     // If there's a search input, filter based on the search input and the status.
-      //     filtered = filtered.filter((client) =>
-      //       client.fullName.toLowerCase().includes(searchInput.toLowerCase())
-      //     );
-      //   }
-      //   if (filter && filter !== "all") {
-      //     filtered = filtered.filter(
-      //       (client) => client.status.toLowerCase() === filter.toLowerCase()
-      //     );
-      //   }
+        //   if (searchInput) {
+        //     // If there's a search input, filter based on the search input and the status.
+        //     filtered = filtered.filter((client) =>
+        //       client.fullName.toLowerCase().includes(searchInput.toLowerCase())
+        //     );
+        //   }
+        //   if (filter && filter !== "all") {
+        //     filtered = filtered.filter(
+        //       (client) => client.status.toLowerCase() === filter.toLowerCase()
+        //     );
+        //   }
 
-      //   setFilteredClients(filtered);
+        //   setFilteredClients(filtered);
       });
-  },
-   [filter, searchInput]);
+  }, [filter, searchInput]);
 
   const handleSearchChange = (text) => {
     setSearchInput(text);

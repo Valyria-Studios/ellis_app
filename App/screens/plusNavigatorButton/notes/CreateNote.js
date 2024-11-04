@@ -87,7 +87,7 @@ const CreateNote = ({ route, navigation }) => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients"
+          "https://ellis-test-data.com:8000/Clients"
         );
         if (!response.ok) {
           throw new Error("Something went wrong!");
@@ -150,7 +150,7 @@ const CreateNote = ({ route, navigation }) => {
       if (!client) return;
 
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${client.id}/notes`,
+        `https://ellis-test-data.com:8000/Clients/${client.id}/notes`,
         {
           method: "POST",
           headers: {

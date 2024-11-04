@@ -29,7 +29,7 @@ const ServiceHours = ({ route }) => {
   const postServiceData = async (allServiceDetails) => {
     try {
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Accounts/${userId}`,
+        `https://ellis-test-data.com:8000/Accounts/${userId}`,
         {
           method: "PATCH",
           headers: {

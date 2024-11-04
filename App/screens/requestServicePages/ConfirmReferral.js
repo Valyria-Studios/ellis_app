@@ -34,7 +34,7 @@ const ConfirmReferral = ({ route, navigation }) => {
     notes,
   } = route.params;
 
-console.log(selectedService.name)
+  console.log(selectedService.name);
 
   const handleConfirmReferral = async () => {
     const dateStarted = new Date().toISOString();
@@ -42,12 +42,12 @@ console.log(selectedService.name)
     try {
       // Fetch the client data for both the client and referral sender
       const clientResponse = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${selectedClient.id}`
+        `https://ellis-test-data.com:8000/Clients/${selectedClient.id}`
       );
       const client = await clientResponse.json();
 
       const senderResponse = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${
+        `https://ellis-test-data.com:8000/Clients/${
           selectedClient.referralSenderId || "1"
         }`
       );
@@ -80,7 +80,7 @@ console.log(selectedService.name)
 
       // Update both the client and sender with the new referral in their activity logs
       await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${selectedClient.id}`,
+        `https://ellis-test-data.com:8000/Clients/${selectedClient.id}`,
         {
           method: "PATCH",
           headers: {
@@ -90,16 +90,13 @@ console.log(selectedService.name)
         }
       );
 
-      await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${sender.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(sender),
-        }
-      );
+      await fetch(`https://ellis-test-data.com:8000/Clients/${sender.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sender),
+      });
 
       // Navigate to the Referral Sent page or handle success
       navigation.navigate("Referral Sent", {

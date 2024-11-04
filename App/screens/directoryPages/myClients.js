@@ -21,7 +21,7 @@ const MyClients = ({ navigation }) => {
   const [engagementClients, setEngagementClients] = useState([]);
 
   useEffect(() => {
-    fetch("http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients")
+    fetch("https://ellis-test-data.com:8000/Clients")
       .then((response) => response.json())
       .then((data) => {
         if (data && data.length > 0) {
@@ -51,9 +51,7 @@ const MyClients = ({ navigation }) => {
   const removeClient = async (engagementClientId) => {
     try {
       // Fetch all clients
-      const response = await fetch(
-        "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients"
-      );
+      const response = await fetch("https://ellis-test-data.com:8000/Clients");
       const clients = await response.json();
 
       // Find the client that contains the engagement to be deleted
@@ -81,7 +79,7 @@ const MyClients = ({ navigation }) => {
 
         // Send PUT request to update the specific client
         await fetch(
-          `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientToUpdate.id}`,
+          `https://ellis-test-data.com:8000/Clients/${clientToUpdate.id}`,
           {
             method: "PUT",
             headers: {

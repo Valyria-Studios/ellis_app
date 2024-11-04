@@ -112,13 +112,13 @@ const ServiceDirectory = ({ route, navigation }) => {
         // Fetch services
         const servicesData = await fetchWithCache(
           CACHE_KEY_SERVICES,
-          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Services"
+          "https://ellis-test-data.com:8000/Services"
         );
 
         // Fetch NonProfits
         const nonProfitsData = await fetchWithCache(
           CACHE_KEY_NONPROFITS,
-          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/NonProfits"
+          "https://ellis-test-data.com:8000/NonProfits"
         );
 
         // Transform services data to match the required structure

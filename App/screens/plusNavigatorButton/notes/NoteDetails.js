@@ -34,7 +34,7 @@ const NoteDetails = ({ route, navigation }) => {
 
     try {
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientId}/notes/${note.id}`,
+        `https://ellis-test-data.com:8000/Clients/${clientId}/notes/${note.id}`,
         {
           method: "PATCH",
           headers: {
@@ -89,7 +89,7 @@ const NoteDetails = ({ route, navigation }) => {
 
     try {
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientId}/notes/${currentNote.id}`,
+        `https://ellis-test-data.com:8000/Clients/${clientId}/notes/${currentNote.id}`,
         {
           method: "DELETE",
         }

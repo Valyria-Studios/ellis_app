@@ -91,14 +91,14 @@ function ProfilePage({ route, navigation }) {
         try {
           // Fetch client notes
           const notesResponse = await fetch(
-            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/notes`
+            `https://ellis-test-data.com:8000/Clients/${clientData.id}/notes`
           );
           const notesJson = await notesResponse.json();
           setNotes(notesJson);
 
           // Fetch client referrals
           const referralsResponse = await fetch(
-            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}/referrals`
+            `https://ellis-test-data.com:8000/Clients/${clientData.id}/referrals`
           );
           const referralsJson = await referralsResponse.json();
 
@@ -118,7 +118,7 @@ function ProfilePage({ route, navigation }) {
 
                 // Fetch the referral sender (referredBy) information based on referralSenderId
                 const senderResponse = await fetch(
-                  `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${referral.referralSenderId}`
+                  `https://ellis-test-data.com:8000/Clients/${referral.referralSenderId}`
                 );
                 const senderJson = await senderResponse.json();
 
@@ -148,14 +148,14 @@ function ProfilePage({ route, navigation }) {
 
           // Fetch client data for updated information
           const updatedClientDataResponse = await fetch(
-            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${clientData.id}`
+            `https://ellis-test-data.com:8000/Clients/${clientData.id}`
           );
           const updatedClientData = await updatedClientDataResponse.json();
           setClientData(updatedClientData);
 
           // Fetch forms if needed
           const formsResponse = await fetch(
-            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Forms`
+            `https://ellis-test-data.com:8000/Forms`
           );
           const formsJson = await formsResponse.json();
           setForms(formsJson);

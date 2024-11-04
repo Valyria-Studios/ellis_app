@@ -28,7 +28,7 @@ const AdminManagementScreen = ({ route }) => {
         setIsLoading(true);
         try {
           const response = await fetch(
-            `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${client.id}`
+            `https://ellis-test-data.com:8000/Clients/${client.id}`
           );
           if (!response.ok) {
             throw new Error("Something went wrong!");
@@ -50,7 +50,7 @@ const AdminManagementScreen = ({ route }) => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients"
+          "https://ellis-test-data.com:8000/Clients"
         );
         if (!response.ok) {
           throw new Error("Something went wrong!");
@@ -93,7 +93,7 @@ const AdminManagementScreen = ({ route }) => {
 
     try {
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${currentClient.id}`,
+        `https://ellis-test-data.com:8000/Clients/${currentClient.id}`,
         {
           method: "PATCH",
           headers: {
@@ -137,7 +137,7 @@ const AdminManagementScreen = ({ route }) => {
 
     try {
       const response = await fetch(
-        `http://ec2-54-227-106-154.compute-1.amazonaws.com:8000/Clients/${currentClient.id}`,
+        `https://ellis-test-data.com:8000/Clients/${currentClient.id}`,
         {
           method: "PATCH",
           headers: {

@@ -22,8 +22,8 @@ const SelectReferralLocation = ({ route, navigation }) => {
       .then((response) => response.json())
       .then((data) => {
         const filteredServices = data.filter((nonProfit) =>
-          nonProfit.providedServicesValueIds.some((valueId) =>
-            providedServicesId.includes(valueId)
+          nonProfit.providedServices.some((service) =>
+            providedServicesId.includes(service.id)
           )
         );
         setServices(filteredServices);

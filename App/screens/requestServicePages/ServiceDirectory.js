@@ -147,9 +147,9 @@ const ServiceDirectory = ({ route, navigation }) => {
 
   const handleServicePress = (category) => {
     const filteredNonProfits = nonProfits.filter((nonProfit) =>
-      nonProfit.providedServicesValueIds.some((valueId) =>
+      nonProfit.providedServiceswithId.some((service) =>
         category.Subservices.some(
-          (subservice) => subservice.valueId === valueId
+          (subservice) => subservice.valueId === service.id
         )
       )
     );

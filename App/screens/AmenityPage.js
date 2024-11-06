@@ -181,19 +181,39 @@ function AmenityPage({ route, navigation }) {
 
               <View style={{ marginBottom: 15 }}>
                 {amenity?.attributes?.["Provided services"]?.map(
-                  (service, index) => (
-                    <View key={index} style={styles.serviceCard}>
-                      <Text
-                        style={[
-                          globalstyles.details,
-                          { margin: 0, marginBottom: 5 },
-                        ]}
+                  (serviceName, index) => {
+                    // Find the matching service in providedServiceswithId by name
+                    const service = amenity.providedServiceswithId.find(
+                      (item) => item.name === serviceName
+                    );
+
+                    return (
+                      <TouchableOpacity
+                        key={index}
+                        style={styles.serviceCard}
+                        onPress={() => {
+                          navigation.push("Referral Location", {
+                            option: serviceName, // Display name from "Provided services"
+                            categoryName: amenity.attributes?.["Name"], // Name of the main category/amenity
+                            providedServicesId: service ? [service.id] : [], // Use the id if found, otherwise empty array
+                            client: route.params?.client || null, // Pass client data if applicable
+                          });
+                        }}
                       >
-                        Service
-                      </Text>
-                      <Text style={styles.serviceCardHeader}>{service}</Text>
-                    </View>
-                  )
+                        <Text
+                          style={[
+                            globalstyles.details,
+                            { margin: 0, marginBottom: 5 },
+                          ]}
+                        >
+                          Service
+                        </Text>
+                        <Text style={styles.serviceCardHeader}>
+                          {serviceName}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  }
                 )}
               </View>
             </View>
@@ -213,11 +233,11 @@ const styles = StyleSheet.create({
   },
 
   loadingIndicator: {
-    position: 'absolute',
+    position: "absolute",
     top: "25%",
-    left: '45%',
-    justifyContent: 'center',
-    alignContent: 'center',
+    left: "45%",
+    justifyContent: "center",
+    alignContent: "center",
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,

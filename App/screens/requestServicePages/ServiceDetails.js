@@ -70,8 +70,11 @@ const ServiceDetails = ({ route, navigation }) => {
       subservice.valueId // Pass the subservice ID
     );
 
+    // Update the filter to use providedServiceswithId
     const filteredBySubservice = filteredNonProfits.filter((nonProfit) =>
-      nonProfit.providedServicesValueIds.includes(subservice.valueId)
+      nonProfit.providedServiceswithId.some(
+        (service) => service.id === subservice.valueId
+      )
     );
 
     navigation.navigate("Referral Location", {

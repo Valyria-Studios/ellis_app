@@ -165,16 +165,16 @@ const SelectReferralLocation = ({ route, navigation }) => {
                     >
                       {Array.isArray(service.attributes?.Tags) ? (
                         service.attributes.Tags.map((tag, tagIndex) => (
-                          <View key={tagIndex} style={styles.typeBox}>
+                          <TouchableOpacity key={tagIndex} style={styles.typeBox}>
                             <Text style={styles.typeText}>{tag.trim()}</Text>
-                          </View>
+                          </TouchableOpacity>
                         ))
                       ) : (
-                        <View style={styles.typeBox}>
+                        <TouchableOpacity style={styles.typeBox}>
                           <Text style={styles.typeText}>
                             {service.attributes?.Tags || "Tags not available"}
                           </Text>
-                        </View>
+                        </TouchableOpacity>
                       )}
                     </View>
                     <TouchableOpacity

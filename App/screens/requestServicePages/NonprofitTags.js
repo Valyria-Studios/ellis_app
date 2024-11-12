@@ -11,8 +11,8 @@ import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
 import { MaterialIcons, Octicons, Feather } from "@expo/vector-icons";
 
-const SelectReferralLocation = ({ route, navigation }) => {
-  const { option, categoryName, client, providedServicesId } = route.params;
+const NonprofitsByTag = ({ route, navigation }) => {
+  const { selectedTag } = route.params;
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedCard, setExpandedCard] = useState(null);
@@ -22,9 +22,11 @@ const SelectReferralLocation = ({ route, navigation }) => {
       .then((response) => response.json())
       .then((data) => {
         const filteredServices = data.filter((nonProfit) =>
-          nonProfit.providedServiceswithId.some((service) =>
-            providedServicesId.includes(service.id)
-          )
+          Array.isArray(nonProfit.attributes?.Tags)
+            ? nonProfit.attributes.Tags.map((tag) => tag.trim()).includes(
+                selectedTag
+              )
+            : nonProfit.attributes?.Tags?.trim() === selectedTag
         );
         setServices(filteredServices);
         setLoading(false);
@@ -33,22 +35,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
         console.error("Error fetching services:", error);
         setLoading(false);
       });
-  }, [providedServicesId]);
-
-  const handleOptionSelect = (service) => {
-    if (client) {
-      navigation.navigate("Enrollment Form", {
-        selectedClient: client,
-        selectedService: service,
-        option: option,
-      });
-    } else {
-      navigation.navigate("Select Client With Location", {
-        option,
-        selectedService: service,
-      });
-    }
-  };
+  }, [selectedTag]);
 
   if (loading) {
     return (
@@ -63,7 +50,6 @@ const SelectReferralLocation = ({ route, navigation }) => {
     );
   }
 
-  // Add this block
   if (services.length === 0) {
     return (
       <View
@@ -77,7 +63,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
         ]}
       >
         <Text style={[styles.caption, { fontSize: 20 }]}>
-          No Available Nonprofits for this service
+          No Available Nonprofits for this tag
         </Text>
       </View>
     );
@@ -89,11 +75,6 @@ const SelectReferralLocation = ({ route, navigation }) => {
       style={[globalstyles.container, { paddingHorizontal: 5 }]}
     >
       <View>
-        {client && (
-          <Text style={styles.caption}>
-            Recommended services based on {client.fullName} profile:
-          </Text>
-        )}
         {services.map((service, index) => (
           <TouchableOpacity
             key={index}
@@ -110,7 +91,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
                   alignItems: "center",
                 }}
               >
-                <Text style={styles.optionText}>{option}</Text>
+                <Text style={styles.optionText}>{selectedTag}</Text>
                 <MaterialIcons
                   name={
                     expandedCard === index ? "remove" : "keyboard-arrow-down"
@@ -132,8 +113,7 @@ const SelectReferralLocation = ({ route, navigation }) => {
                 >
                   <Octicons name="location" size={18} color={"#094852"} />
                   <Text style={styles.amenityText}>
-                    {service.attributes?.["Address"]?.trim() ||
-                      service.attributes?.["Street address"]?.trim() ||
+                    {service.attributes?.["Street address"]?.trim() ||
                       "Street address not available"}
                   </Text>
                 </View>
@@ -168,45 +148,18 @@ const SelectReferralLocation = ({ route, navigation }) => {
                           <TouchableOpacity
                             key={tagIndex}
                             style={styles.typeBox}
-                            onPress={() => {
-                              navigation.navigate("Nonprofit Tags", {
-                                selectedTag: tag.trim(),
-                              });
-                            }}
                           >
                             <Text style={styles.typeText}>{tag.trim()}</Text>
                           </TouchableOpacity>
                         ))
                       ) : (
-                        <TouchableOpacity
-                          style={styles.typeBox}
-                          onPress={() => {
-                            if (service.attributes?.Tags) {
-                              navigation.navigate("Nonprofit Tags", {
-                                selectedTag: service.attributes.Tags.trim(),
-                              });
-                            }
-                          }}
-                        >
+                        <TouchableOpacity style={styles.typeBox}>
                           <Text style={styles.typeText}>
                             {service.attributes?.Tags || "Tags not available"}
                           </Text>
                         </TouchableOpacity>
                       )}
                     </View>
-                    <TouchableOpacity
-                      onPress={() =>
-                        navigation.navigate("Amenity Page", {
-                          amenity: service,
-                        })
-                      }
-                    >
-                      <Feather
-                        name="arrow-up-right"
-                        size={26}
-                        color={"#094852"}
-                      />
-                    </TouchableOpacity>
                   </View>
                   <Text style={styles.descriptionText}>
                     {Array.isArray(service.attributes?.Description) &&
@@ -247,7 +200,11 @@ const SelectReferralLocation = ({ route, navigation }) => {
                 </View>
                 <TouchableOpacity
                   style={{ padding: 10 }}
-                  onPress={() => handleOptionSelect(service)}
+                  onPress={() =>
+                    navigation.navigate("Nonprofit Details", {
+                      nonprofit: service,
+                    })
+                  }
                 >
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <MaterialIcons
@@ -352,4 +309,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectReferralLocation;
+export default NonprofitsByTag;

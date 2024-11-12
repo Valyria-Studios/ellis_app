@@ -43,6 +43,7 @@ import ServicePage from "../screens/plusNavigatorButton/services/services";
 import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
 import EntitiesScreen from "../screens/testingGeoApi";
 import CustomBackButton from "../shared/CustomBackButton";
+import NonprofitsByTag from "../screens/requestServicePages/NonprofitTags";
 
 const RootStack = createStackNavigator();
 
@@ -273,7 +274,26 @@ const RootNavigator = () => {
         component={SelectReferralLocation}
         options={({ route }) => ({
           headerTitle: route.params.option,
-
+          headerTintColor: "#094852",
+          headerTitleAlign: "left",
+          headerLeft: () => <CustomBackButton color="#094852" />,
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        })}
+      />
+      <RootStack.Screen
+        name="Nonprofit Tags"
+        component={NonprofitsByTag}
+        options={({ route }) => ({
+          headerTitle: route.params.selectedTag,
           headerTintColor: "#094852",
           headerTitleAlign: "left",
           headerLeft: () => <CustomBackButton color="#094852" />,

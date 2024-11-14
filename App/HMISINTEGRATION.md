@@ -29,9 +29,9 @@ It's pretty much a way for the U.S. Department of Housing and Urban Development 
 
 There are two terms that are using in data structures, **projects** and **programs**. There is a difference between the two and should be referred to them as what they are.
 
-A **project** is referred to a specific service that an organization provides.
+1. A **project** is referred to a specific service that an organization provides.
 
-A **program** is the federal funding source the organization works with.
+1. A **program** is the federal funding source the organization works with.
 
 > Project and Program are terms used to mean different things across the federal agencies. In
 > this document, and for the purposes of data collection in HMIS, a program refers to the federal
@@ -39,6 +39,8 @@ A **program** is the federal funding source the organization works with.
 > distinct unit of an organization as set up in the HMIS (e.g., Rapid Re-Housing).
 
 Data is set up in an HMIS throught projects. Each project contains different data structures and compenents. The data differs for many reasons, federal program relations, privacy reason, and/or if an organization wants to add additional data components.
+
+3. An additional a term I use is **organization** which refers to any of the institutions that are working with the Ellis App.
 
 ---
 

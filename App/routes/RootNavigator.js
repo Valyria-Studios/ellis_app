@@ -44,6 +44,7 @@ import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
 import EntitiesScreen from "../screens/testingGeoApi";
 import CustomBackButton from "../shared/CustomBackButton";
 import NonprofitsByTag from "../screens/referralFlowPages/NonprofitTags";
+import RecentReferrals from "../screens/directoryPages/recentReferral";
 
 const RootStack = createStackNavigator();
 
@@ -371,6 +372,31 @@ const RootNavigator = () => {
         }}
       />
       <RootStack.Screen
+        name="Recent Referral"
+        component={RecentReferrals}
+        options={({ route }) => {
+          const { clientName } = route.params || {};
+          return {
+            headerTitle: clientName
+              ? `${clientName}'s Referral`
+              : "Recent Referrals",
+            headerTintColor: "#094852",
+            headerTitleAlign: "left",
+            headerLeft: () => <CustomBackButton color="#094852" />,
+            headerTitleStyle: {
+              fontFamily: "gabarito-semibold",
+              fontSize: 24,
+              color: "#171B1C",
+            },
+            headerStyle: {
+              backgroundColor: "#F3F8F9",
+              shadowColor: "transparent",
+              elevation: 0,
+            },
+          };
+        }}
+      />
+      <RootStack.Screen
         name="Referral Sent"
         component={ReferralSent}
         options={({ navigation }) => ({
@@ -660,7 +686,6 @@ const RootNavigator = () => {
         component={EntitiesScreen}
         options={({ route }) => ({
           headerTitle: "Select Entity",
-
           headerTintColor: "#094852",
           headerTitleAlign: "left",
           headerLeft: () => <CustomBackButton color="#094852" />,

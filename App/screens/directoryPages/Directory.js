@@ -316,7 +316,17 @@ export default function Directory() {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={{ flexDirection: "row", paddingBottom: 50 }}>
               {recentReferrals.map((referral, index) => (
-                <View key={index} style={styles.cards}>
+                <TouchableOpacity
+                  key={index}
+                  style={styles.cards}
+                  onPress={() =>
+                    navigation.navigate("Recent Referral", {
+                      clientId: referral.clientId,
+                      referral,
+                      clientName: referral.clientName, // Pass the clientName parameter
+                    })
+                  }
+                >
                   <View style={styles.nameContainer}>
                     <View
                       style={{ flexDirection: "row", alignItems: "center" }}
@@ -346,7 +356,7 @@ export default function Directory() {
                       <Text style={styles.statusText}>{referral.status}</Text>
                     </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           </ScrollView>

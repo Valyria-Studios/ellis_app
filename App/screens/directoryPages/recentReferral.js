@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import globalstyles from "../../shared/globalStyles";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { format } from "date-fns";
 
 const RecentReferrals = ({ route }) => {
   const { clientId, referral } = route.params;
@@ -17,27 +17,29 @@ const RecentReferrals = ({ route }) => {
       .catch((error) => console.error("Error fetching client data:", error));
   }, [clientId]);
 
+  // Format dateStarted
+  const formattedDate = referral.dateStarted
+    ? format(new Date(referral.dateStarted), "MMMM dd, yyyy")
+    : "";
+
   return (
-      <View style={globalstyles.container}>
-        {clientData ? (
-          <View style={styles.contentContainer}>
-            <Text style={styles.infoText}>Client ID: {clientData.id}</Text>
-            <Text style={styles.infoText}>
-              Organization: {referral.organization}
-            </Text>
-            <Text style={styles.infoText}>
-              Date Started: {referral.dateStarted}
-            </Text>
-            <Text style={styles.infoText}>Option: {referral.option}</Text>
-            <Text style={styles.infoText}>
-              Referral Type: {referral.referralType}
-            </Text>
-            <Text style={styles.infoText}>Notes: {referral.notes}</Text>
-          </View>
-        ) : (
-          <Text>Loading...</Text>
-        )}
-      </View>
+    <View style={globalstyles.container}>
+      {clientData ? (
+        <View style={styles.contentContainer}>
+          <Text style={styles.infoText}>
+            Referral Type: {referral.referralType}
+          </Text>
+          <Text style={styles.infoText}>
+            Organization: {referral.organization}
+          </Text>
+          <Text style={styles.infoText}>Service: {referral.option}</Text>
+          <Text style={styles.infoText}>Date Started: {formattedDate}</Text>
+          <Text style={styles.infoText}>Notes: {referral.notes}</Text>
+        </View>
+      ) : (
+        <Text>Loading...</Text>
+      )}
+    </View>
   );
 };
 

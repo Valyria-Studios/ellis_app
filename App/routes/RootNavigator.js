@@ -4,7 +4,7 @@ import AppNavigator from "./AppNavigator"; // Import your BottomTabNavigator
 import ChatPage from "../screens/ChatPage";
 import AmenityPage from "../screens/AmenityPage";
 import ProfilePage from "../screens/ProfilePage";
-import ServiceDirectory from "../screens/requestServicePages/ServiceDirectory";
+import ServiceDirectory from "../screens/referralFlowPages/ServiceDirectory";
 import OrgProfile from "../screens/settingsPage/OrganizationProfile";
 import AccountPage from "../screens/settingsPage/AccountPage";
 import NotificationsPage from "../screens/settingsPage/NotificationsPage";
@@ -14,22 +14,22 @@ import LegalFormScreen from "../screens/formPages/LegalForm";
 import AdminManagementScreen from "../screens/adminManagement";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, StyleSheet } from "react-native";
-import ServiceDetails from "../screens/requestServicePages/ServiceDetails";
-import SelectReferralLocation from "../screens/requestServicePages/SelectReferralLocation";
-import SelectClientWithLocation from "../screens/requestServicePages/SelectClientWithReferralLocation";
-import EnrollmentForm from "../screens/requestServicePages/EnrollmentForm";
-import ConfirmReferral from "../screens/requestServicePages/ConfirmReferral";
-import ReferralSent from "../screens/requestServicePages/ReferralSent";
+import ServiceDetails from "../screens/referralFlowPages/ServiceDetails";
+import SelectReferralLocation from "../screens/referralFlowPages/SelectReferralLocation";
+import SelectClientWithLocation from "../screens/referralFlowPages/SelectClientWithReferralLocation";
+import EnrollmentForm from "../screens/referralFlowPages/EnrollmentForm";
+import ConfirmReferral from "../screens/referralFlowPages/ConfirmReferral";
+import ReferralSent from "../screens/referralFlowPages/ReferralSent";
 import {
   Menu,
   MenuOptions,
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
-import SelectClient from "../screens/requestServicePages/SelectClient";
-import SelectReferralFor from "../screens/requestServicePages/SelectReferralFor";
-import ReferToPerson from "../screens/requestServicePages/ReferToPerson";
-import ReferToService from "../screens/requestServicePages/ReferToService";
+import SelectClient from "../screens/referralFlowPages/SelectClient";
+import SelectReferralFor from "../screens/referralFlowPages/SelectReferralFor";
+import ReferToPerson from "../screens/referralFlowPages/ReferToPerson";
+import ReferToService from "../screens/referralFlowPages/ReferToService";
 import MainScreenContainer from "./MainScreenContainer";
 import CreateNote from "../screens/plusNavigatorButton/notes/CreateNote";
 import CreateClient from "../screens/plusNavigatorButton/client/CreateClient";
@@ -43,7 +43,7 @@ import ServicePage from "../screens/plusNavigatorButton/services/services";
 import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
 import EntitiesScreen from "../screens/testingGeoApi";
 import CustomBackButton from "../shared/CustomBackButton";
-import NonprofitsByTag from "../screens/requestServicePages/NonprofitTags";
+import NonprofitsByTag from "../screens/referralFlowPages/NonprofitTags";
 
 const RootStack = createStackNavigator();
 

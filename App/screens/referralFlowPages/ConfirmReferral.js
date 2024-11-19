@@ -46,35 +46,7 @@ const ConfirmReferral = ({ route, navigation }) => {
       );
       const client = await clientResponse.json();
 
-      const senderResponse = await fetch(
-        `https://ellis-test-data.com:8000/Clients/${
-          selectedClient.referralSenderId || "1"
-        }`
-      );
-      const sender = await senderResponse.json(); // Get the sender's full data
-
-      // Construct the referral data
-      const referralData = {
-        clientId: selectedClient.id,
-        referralSenderId: sender.id || "1",
-        organization: selectedService.name,
-        dateStarted,
-        option,
-        amenity,
-        service,
-        referralType,
-        nameVerified,
-        addressVerified,
-        basicProfileInformation,
-        householdInformation,
-        demographicInformation,
-        alternateInformation,
-        communicationConsent,
-        certification,
-        notes,
-      };
-
-      // Construct the UDE project data for the backend
+      // Construct the UDE project data for the backend with only relevant HMIS fields
       const projectData = {
         id: `project-${selectedClient.id}-${Date.now()}`, // Unique project ID
         name: `Referral Project for ${client.fullName}`,
@@ -83,34 +55,27 @@ const ConfirmReferral = ({ route, navigation }) => {
         clients: [
           {
             clientID: client.id,
+            projectEntryDate: dateStarted, // Date when the project starts
             personalInformation: {
               firstName: client.firstName,
               middleName: client.middleName,
               lastName: client.lastName,
-              fullName: client.fullName,
               dob: client.dob,
-              dobDataQuality: 1, // Placeholder; use appropriate value
+              dobDataQuality: 1, // Use appropriate value for data quality
               gender: client.demographics.gender,
-              race: client.demographics.race,
-              ethnicity: client.demographics.primaryLanguage,
+              race: Array.isArray(client.demographics.race)
+                ? client.demographics.race
+                : [client.demographics.race],
+              ethnicity: client.demographics.primaryLanguage, // Placeholder for ethnicity if applicable
+              veteranStatus: client.vetStatus.toLowerCase() === "yes", // Convert to boolean
             },
-            projectEntryDate: dateStarted,
-            phoneNumber: client.phoneNumber,
-            email: client.email,
-            age: client.age,
-            vetStatus: client.vetStatus,
-            address: client.address,
-            status: client.status,
-            services: client.services,
-            providers: client.providers,
-            image: client.image,
-            team: client.team,
-            notes: client.notes,
-            engagements: client.engagements,
-            referrals: client.referrals,
+            // Include only fields required for HMIS, such as relationship to head of household or housing details if applicable
           },
         ],
       };
+
+      // Log project data for debugging
+      console.log("Project Data:", JSON.stringify(projectData, null, 2));
 
       // Send the UDE data to the "Project" endpoint
       const projectResponse = await fetch(
@@ -134,33 +99,9 @@ const ConfirmReferral = ({ route, navigation }) => {
         );
       }
 
-      // Update both the client and sender with the new referral in their activity logs
-      client.referrals.push(referralData);
-      sender.referrals.push(referralData);
-
-      await fetch(
-        `https://ellis-test-data.com:8000/Clients/${selectedClient.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(client),
-        }
-      );
-
-      await fetch(`https://ellis-test-data.com:8000/Clients/${sender.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(sender),
-      });
-
       // Navigate to the Referral Sent page or handle success
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,
-        referralSender: sender.fullName,
         dateStarted: dateStarted,
         option: option,
       });

@@ -56,7 +56,7 @@ const ConfirmReferral = ({ route, navigation }) => {
       // Construct the referral data
       const referralData = {
         clientId: selectedClient.id,
-        referralSenderId: sender.id || "1", // Use the sender's ID
+        referralSenderId: sender.id || "1",
         organization: selectedService.name,
         dateStarted,
         option,
@@ -74,11 +74,70 @@ const ConfirmReferral = ({ route, navigation }) => {
         notes,
       };
 
-      // Add the referral to both the client's and sender's activity logs
+      // Construct the UDE project data for the backend
+      const projectData = {
+        id: `project-${selectedClient.id}-${Date.now()}`, // Unique project ID
+        name: `Referral Project for ${client.fullName}`,
+        description: `Referral project initiated for client ${client.fullName}`,
+        startDate: dateStarted,
+        clients: [
+          {
+            clientID: client.id,
+            personalInformation: {
+              firstName: client.firstName,
+              middleName: client.middleName,
+              lastName: client.lastName,
+              fullName: client.fullName,
+              dob: client.dob,
+              dobDataQuality: 1, // Placeholder; use appropriate value
+              gender: client.demographics.gender,
+              race: client.demographics.race,
+              ethnicity: client.demographics.primaryLanguage,
+            },
+            projectEntryDate: dateStarted,
+            phoneNumber: client.phoneNumber,
+            email: client.email,
+            age: client.age,
+            vetStatus: client.vetStatus,
+            address: client.address,
+            status: client.status,
+            services: client.services,
+            providers: client.providers,
+            image: client.image,
+            team: client.team,
+            notes: client.notes,
+            engagements: client.engagements,
+            referrals: client.referrals,
+          },
+        ],
+      };
+
+      // Send the UDE data to the "Project" endpoint
+      const projectResponse = await fetch(
+        `https://ellis-test-data.com:8000/Projects`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(projectData),
+        }
+      );
+
+      if (!projectResponse.ok) {
+        const errorText = await projectResponse.text(); // Log response text for detailed error message
+        console.error(
+          `Failed to submit project data: ${projectResponse.status} - ${errorText}`
+        );
+        throw new Error(
+          `Failed to submit project data: ${projectResponse.status} - ${errorText}`
+        );
+      }
+
+      // Update both the client and sender with the new referral in their activity logs
       client.referrals.push(referralData);
       sender.referrals.push(referralData);
 
-      // Update both the client and sender with the new referral in their activity logs
       await fetch(
         `https://ellis-test-data.com:8000/Clients/${selectedClient.id}`,
         {
@@ -101,12 +160,12 @@ const ConfirmReferral = ({ route, navigation }) => {
       // Navigate to the Referral Sent page or handle success
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,
-        referralSender: sender.fullName, // Pass the sender's name
+        referralSender: sender.fullName,
         dateStarted: dateStarted,
         option: option,
       });
     } catch (error) {
-      console.error("Error submitting referral:", error);
+      console.error("Error submitting referral or project data:", error);
     }
   };
 

@@ -239,7 +239,7 @@ const ConfirmReferral = ({ route, navigation }) => {
                     { marginBottom: 0, marginHorizontal: 0 },
                   ]}
                 >
-                  {selectedClient.birthday}
+                  {selectedClient.dob}
                 </Text>
               </View>
               <View>
@@ -483,7 +483,7 @@ const ConfirmReferral = ({ route, navigation }) => {
                 <Text
                   style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
                 >
-                  {selectedClient.birthday}
+                  {selectedClient.dob}
                 </Text>
               </View>
               <View>

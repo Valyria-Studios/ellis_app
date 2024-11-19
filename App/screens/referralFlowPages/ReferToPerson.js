@@ -145,7 +145,7 @@ const ReferToPerson = ({ route, navigation }) => {
                     { marginBottom: 0, marginHorizontal: 0 },
                   ]}
                 >
-                  {selectedClient.birthday}
+                  {selectedClient.dob}
                 </Text>
               </View>
               <View>

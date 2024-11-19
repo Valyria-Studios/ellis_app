@@ -26,7 +26,7 @@ const CreateClient = ({ navigation }) => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [dob, setDob] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
@@ -59,7 +59,7 @@ const CreateClient = ({ navigation }) => {
       middleName: middleName || "",
       lastName: lastName || "",
       fullName: `${firstName} ${middleName} ${lastName}`.trim(),
-      birthday: birthday || "",
+      dob: dob || "",
       phoneNumber: phoneNumber || "",
       email: email || "",
       age: age || "",
@@ -189,8 +189,8 @@ const CreateClient = ({ navigation }) => {
                 <TextInput
                   style={[styles.textInput, { flex: 1, marginRight: 5 }]}
                   placeholder="Date of Birth (optional)"
-                  value={birthday}
-                  onChangeText={setBirthday}
+                  value={dob}
+                  onChangeText={setDob}
                 />
                 <TextInput
                   style={[styles.textInput, { flex: 1, marginLeft: 5 }]}

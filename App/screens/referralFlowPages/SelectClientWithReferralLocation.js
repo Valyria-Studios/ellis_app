@@ -189,6 +189,7 @@ const SelectClientWithLocation = ({ route, navigation }) => {
         <TouchableOpacity
           style={[globalstyles.buttonContainer, { borderRadius: 10 }]}
           activeOpacity={0.6}
+          onPress={() => navigation.navigate("Create New Client")}
         >
           <View>
             <Text style={globalstyles.buttonText}>Create new client</Text>

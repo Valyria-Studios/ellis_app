@@ -13,6 +13,7 @@ const ReferralSent = ({ route }) => {
     teamMember,
     dateStarted,
     referralSender,
+    referralSenderImage,
   } = route.params;
   console.log(dateStarted);
 
@@ -70,7 +71,7 @@ const ReferralSent = ({ route }) => {
             </Text>
             <View style={styles.peopleContainer}>
               <Image
-                source={imageMap[selectedClient.image]}
+                source={imageMap[referralSenderImage]}
                 style={[
                   globalstyles.profileImage,
                   {

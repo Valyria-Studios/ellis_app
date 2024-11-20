@@ -183,6 +183,7 @@ const ConfirmReferral = ({ route, navigation }) => {
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,
         referralSender: sender.fullName,
+        referralSenderImage: sender.image,
         dateStarted: dateStarted,
         option: option,
       });

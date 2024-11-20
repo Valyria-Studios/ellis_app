@@ -46,6 +46,34 @@ const ConfirmReferral = ({ route, navigation }) => {
       );
       const client = await clientResponse.json();
 
+      const senderResponse = await fetch(
+        `https://ellis-test-data.com:8000/Clients/${
+          selectedClient.referralSenderId || "1"
+        }`
+      );
+      const sender = await senderResponse.json(); // Get the sender's full data
+
+      // Construct the referral data
+      const referralData = {
+        clientId: selectedClient.id,
+        referralSenderId: sender.id || "1",
+        organization: selectedService.name,
+        dateStarted,
+        option,
+        amenity,
+        service,
+        referralType,
+        nameVerified,
+        addressVerified,
+        basicProfileInformation,
+        householdInformation,
+        demographicInformation,
+        alternateInformation,
+        communicationConsent,
+        certification,
+        notes,
+      };
+
       // Construct the HMIS project data
       const projectData = {
         id: `project-${selectedClient.id}-${Date.now()}`, // Unique project ID
@@ -128,9 +156,33 @@ const ConfirmReferral = ({ route, navigation }) => {
         );
       }
 
+      // Update both the client and sender with the new referral in their activity logs
+      client.referrals.push(referralData);
+      sender.referrals.push(referralData);
+
+      await fetch(
+        `https://ellis-test-data.com:8000/Clients/${selectedClient.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(client),
+        }
+      );
+
+      await fetch(`https://ellis-test-data.com:8000/Clients/${sender.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sender),
+      });
+
       // Navigate to the Referral Sent page or handle success
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,
+        referralSender: sender.fullName,
         dateStarted: dateStarted,
         option: option,
       });

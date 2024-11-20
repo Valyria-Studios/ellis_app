@@ -61,6 +61,7 @@ const ConfirmReferral = ({ route, navigation }) => {
               middleName: client.middleName,
               lastName: client.lastName,
               dob: client.dob,
+              ssn: client.ssn,
               dobDataQuality: 1, // Use appropriate value for data quality
               gender: client.demographics.gender,
               race: Array.isArray(client.demographics.race)

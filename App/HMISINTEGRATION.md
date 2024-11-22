@@ -88,6 +88,13 @@ That is all dependent on which Federal Programs that specific organization is wo
 
 ---
 
+### How do you know what data goes within a project?
+
+The Data Dictonary breaks down all the fields and data elements within a project. This lists all the elements that could exist in any HMIS project.
+
+To know which data elements align with what projects and programs look for the "*Element Type*" and the "*Funder: Program-Component*" of that element. This will show which elements are needed for which programs and project types.
+___
+
 ## Project Setup
 
 > One of the most critical steps in accurate data collection and reporting is ensuring that a project
@@ -137,6 +144,6 @@ These are the data elements that are **required** in all projects:
 
 ### How do we store data in a project?
 
-It should be a json file that has all the data arrayed into key-value pairs. An example of data being sent to the HUD would help understanding how exactly we should structure it.
+It should be a json file that has all the data arrayed into key-value pairs. An example of data being sent to the HUD would help with understanding how exactly we should structure it.
 
 ### What should the data that is being sent to the HUD look like?

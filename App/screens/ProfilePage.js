@@ -216,58 +216,64 @@ function ProfilePage({ route, navigation }) {
   const activityContent = (
     <View>
       {referrals.length > 0 ? (
-        referrals.map((referral, index) => (
-          <Card key={index}>
-            <View style={{ flex: 1, marginBottom: 5 }}>
-              <Text style={styles.tabHeader}>{referral.option}</Text>
-            </View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <View style={{ justifyContent: "space-between" }}>
+        // Sort referrals by dateStarted in descending order
+        referrals
+          .sort((a, b) => new Date(b.dateStarted) - new Date(a.dateStarted))
+          .map((referral, index) => (
+            <Card key={index}>
+              <View style={{ flex: 1, marginBottom: 5 }}>
+                <Text style={styles.tabHeader}>{referral.option}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <View style={{ justifyContent: "space-between" }}>
+                  <View>
+                    <Text style={styles.time}>
+                      {formatReferralDate(referral.dateStarted)}
+                    </Text>
+                  </View>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={[styles.time, { color: "#465355" }]}>
+                      Status: {referral.status}
+                    </Text>
+                  </View>
+                </View>
                 <View>
-                  <Text style={styles.time}>
-                    {formatReferralDate(referral.dateStarted)}
-                  </Text>
-                </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text style={[styles.time, { color: "#465355" }]}>
-                    Status: {referral.status}
-                  </Text>
-                </View>
-              </View>
-              <View>
-                <Text
-                  style={[
-                    globalstyles.details,
-                    { margin: 0, textAlign: "right", marginBottom: 5 },
-                  ]}
-                >
-                  Provided By
-                </Text>
-                <View style={styles.peopleContainer}>
-                  <Image
-                    source={getProfileImageFromId(referral.referralSenderId)} // Use the image derived from admin.id
-                    style={{ width: 30, height: 30, borderRadius: 20 }} // Adjust styling as needed
-                  />
                   <Text
-                    style={[globalstyles.detailsText, styles.referredByText]}
+                    style={[
+                      globalstyles.details,
+                      { margin: 0, textAlign: "right", marginBottom: 5 },
+                    ]}
                   >
-                    {referral.referredBy}
+                    Provided By
+                  </Text>
+                  <View style={styles.peopleContainer}>
+                    <Image
+                      source={getProfileImageFromId(referral.referralSenderId)}
+                      style={{ width: 30, height: 30, borderRadius: 20 }}
+                    />
+                    <Text
+                      style={[globalstyles.detailsText, styles.referredByText]}
+                    >
+                      {referral.referredBy}
+                    </Text>
+                  </View>
+                  <Text
+                    style={[
+                      styles.time,
+                      { color: "#465355", textAlign: "right" },
+                    ]}
+                  >
+                    {referral.organization}
                   </Text>
                 </View>
-                <Text
-                  style={[
-                    styles.time,
-                    { color: "#465355", textAlign: "right" },
-                  ]}
-                >
-                  {referral.organization}
-                </Text>
               </View>
-            </View>
-          </Card>
-        ))
+            </Card>
+          ))
       ) : (
         <Text>No activities yet!</Text>
       )}

@@ -413,8 +413,10 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 2,
     borderRadius: 10,
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "flex-start", // Ensure items align to the start for better wrapping
+    minHeight: 200, // Set a minimum height for taller cards
+    width: 150, // Adjust width as needed
   },
 
   cardSpace: {
@@ -449,8 +451,10 @@ const styles = StyleSheet.create({
 
   activityText: {
     fontFamily: "gabarito-regular",
+    flexWrap: 'wrap',
     fontSize: 18,
     color: "#094852",
+    marginBottom: 10,
   },
 
   subTextContainer: {

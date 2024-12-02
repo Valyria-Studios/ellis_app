@@ -75,16 +75,16 @@ Certain pieces of data must be **removed** from an HMIS, but that information mu
 
 That is all dependent on which Federal Programs that specific organization is working with. Here is a list of different Federal Programs and the data needed for that program:
 
->| Manual Name               | Federal partner                                                                                                                                                                                                                                      | Program (s)                                                                                                         |
->| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
->| CoC Program HMIS Manual   | U.S. Department of Housing and Urban Development - Office of Special Needs Assistance Programs [CoC Program Information](https://www.hudexchange.info/programs/coc/ "CoC Program Information")                                                       | All Continuum of Care (CoC) Program component projects.                                                             |
->| YHDP HMIS Manual          | U.S. Department of Housing and Urban Development - Office of Special Needs Assistance Programs [YHDP Information](https://www.hudexchange.info/programs/yhdp/ "YHDP Information")                                                                    | All Youth Homelessness Demonstration Program (YHDP) projects                                                        |
->| ESG Program HMIS Manual   | U.S. Department of Housing andUrban Development - Office of Special Needs Assistance Programs [ESG Program Information](https://www.hudexchange.info/programs/esg/ "ESG Program Information")                                                        | All Emergency Solutions Grant (ESG) Program component projects.                                                     |
->| HOPWA Program HMIS Manual | U.S. Department of Housing and Urban Development - Office of HIV/AIDS Housing [HOPWA Program Information](https://www.hudexchange.info/hopwa/ "HOPWA Program Information")                                                                           | All Housing Opportunities for Persons with AIDS (HOPWA) program component projects.                                 |
->| PATH Program HMIS Manual  | U.S. Department of Health and Human Services - Substance Abuse and Mental Health Services Administration [PATH Program Information](http://www.samhsa.gov/homelessness-programs-resources/grant-programs-services/path "PATH Program Information")   | All Projects for Assistance in Transition from Homelessness (PATH) component projects.                              |
->| RHY Program HMIS Manual   | U.S. Department of Health and Human Services - Administration for Children and Families - Family and Youth Services Bureau [RHY Program Information](http://www.acf.hhs.gov/programs/fysb/programs/runaway-homeless-youth "RHY Program Information") | All Runaway and Homeless Youth program component projects.                                                          |
->| VA Program HMIS Manual    | Department of Veterans Affairs [VA Program information](http://www.va.gov/homeless/ "VA Program Information")                                                                                                                                        | Supportive Services for Veteran Families (SSVF), Grant-Per-Diem (GPD), and Healthcare for Homeless Veterans (HCHV). |
->| VASH Program HMIS Manual  | U.S. Department of Housing and Urban Development - VASH and Department of Veterans Affairs [VASH Program](https://www.hudexchange.info/programs/hud-vash/ "VASH Program Information")                                                                | Veterans Affairs Supportive Housing (VASH) program.                                                                 |
+> | Manual Name               | Federal partner                                                                                                                                                                                                                                      | Program (s)                                                                                                         |
+> | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+> | CoC Program HMIS Manual   | U.S. Department of Housing and Urban Development - Office of Special Needs Assistance Programs [CoC Program Information](https://www.hudexchange.info/programs/coc/ "CoC Program Information")                                                       | All Continuum of Care (CoC) Program component projects.                                                             |
+> | YHDP HMIS Manual          | U.S. Department of Housing and Urban Development - Office of Special Needs Assistance Programs [YHDP Information](https://www.hudexchange.info/programs/yhdp/ "YHDP Information")                                                                    | All Youth Homelessness Demonstration Program (YHDP) projects                                                        |
+> | ESG Program HMIS Manual   | U.S. Department of Housing andUrban Development - Office of Special Needs Assistance Programs [ESG Program Information](https://www.hudexchange.info/programs/esg/ "ESG Program Information")                                                        | All Emergency Solutions Grant (ESG) Program component projects.                                                     |
+> | HOPWA Program HMIS Manual | U.S. Department of Housing and Urban Development - Office of HIV/AIDS Housing [HOPWA Program Information](https://www.hudexchange.info/hopwa/ "HOPWA Program Information")                                                                           | All Housing Opportunities for Persons with AIDS (HOPWA) program component projects.                                 |
+> | PATH Program HMIS Manual  | U.S. Department of Health and Human Services - Substance Abuse and Mental Health Services Administration [PATH Program Information](http://www.samhsa.gov/homelessness-programs-resources/grant-programs-services/path "PATH Program Information")   | All Projects for Assistance in Transition from Homelessness (PATH) component projects.                              |
+> | RHY Program HMIS Manual   | U.S. Department of Health and Human Services - Administration for Children and Families - Family and Youth Services Bureau [RHY Program Information](http://www.acf.hhs.gov/programs/fysb/programs/runaway-homeless-youth "RHY Program Information") | All Runaway and Homeless Youth program component projects.                                                          |
+> | VA Program HMIS Manual    | Department of Veterans Affairs [VA Program information](http://www.va.gov/homeless/ "VA Program Information")                                                                                                                                        | Supportive Services for Veteran Families (SSVF), Grant-Per-Diem (GPD), and Healthcare for Homeless Veterans (HCHV). |
+> | VASH Program HMIS Manual  | U.S. Department of Housing and Urban Development - VASH and Department of Veterans Affairs [VASH Program](https://www.hudexchange.info/programs/hud-vash/ "VASH Program Information")                                                                | Veterans Affairs Supportive Housing (VASH) program.                                                                 |
 
 ---
 
@@ -92,8 +92,9 @@ That is all dependent on which Federal Programs that specific organization is wo
 
 The Data Dictonary breaks down all the fields and data elements within a project. This lists all the elements that could exist in any HMIS project.
 
-To know which data elements align with what projects and programs look for the "*Element Type*" and the "*Funder: Program-Component*" of that element. This will show which elements are needed for which programs and project types.
-___
+To know which data elements align with what projects and programs look for the "_Element Type_" and the "_Funder: Program-Component_" of that element. This will show which elements are needed for which programs and project types.
+
+---
 
 ## Project Setup
 
@@ -137,13 +138,49 @@ These are the data elements that are **required** in all projects:
 > | 3.02 Social Security Number                                                                    | 3.10 Project Start Date                                                                                                   |
 > | 3.03 Date of Birth                                                                             | 3.11 Project Exit Date                                                                                                    |
 > | 3.04 Race and Ethnicity                                                                        | 3.12 Destination                                                                                                          |
->| 3.06 Gender                                                                                    | 3.15 Relationship to Head of Household                                                                                    |
+> | 3.06 Gender                                                                                    | 3.15 Relationship to Head of Household                                                                                    |
 > | 3.07 Veteran Status                                                                            | 3.16 Enrollment CoC                                                                                                       |
->|                                                                                                | 3.917 Prior Living Situation                                                                                              |
+> |                                                                                                | 3.917 Prior Living Situation                                                                                              |
 > |                                                                                                | 3.20 Housing Move-In Date                                                                                                 |
+
+### Breakdown of Elements
+
+Each element has multiple field values affiliated with them. These fields are required for data collection. Below is a breakdown of the "Name" UDE to serve as an example (created without a reference and using my own understanding of the structure) of an element with multiple fields within it:
+
+> ```
+> "name": {
+>   "firstName": "Tim",
+>   "middleName": "James",
+>   "lastName": "Langston",
+>   "suffix": "",
+>   "nameDataQuality": 1
+> }
+> ```
+
+The _nameDataQuality_ field has a value of **1** because the data dictonary has keys that represent the string value of the object. The different key-value pairs for that field are here:
+
+> | Key | Value                                       |
+> | --- | ------------------------------------------- |
+> | 1   | Full name reported                          |
+> | 2   | Partial, street name, or code name reported |
+> | 8   | Client doesn’t know                         |
+> | 9   | Client prefers not to answer                |
+> | 99  | Data not collected                          |
+
+This is just an example of one element (**Name**) and a field (**nameDataQuality**) within it. All element are broken down into fields, some with user input values and others with HUD related key-value pairs. The data dictionary also states all of the project types and programs that specifc element is required/used in.
+
+---
 
 ### How do we store data in a project?
 
 It should be a json file that has all the data arrayed into key-value pairs. An example of data being sent to the HUD would help with understanding how exactly we should structure it.
 
 ### What should the data that is being sent to the HUD look like?
+
+### How do we send data to the HUD?
+
+###
+
+```
+
+```

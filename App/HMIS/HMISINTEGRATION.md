@@ -212,6 +212,8 @@ The _nameDataQuality_ field has a value of **1** because the data dictonary has 
 
 This is just an example of one element (**Name**) and a field (**nameDataQuality**) within it. All element are broken down into fields, some with user input values and others with HUD related key-value pairs. The data dictionary also states all of the project types and programs that specifc element is required/used in.
 
+An example template made from the information I know is the other file in this folder called _HMISTemplate.json_. This takes what is shown in the [Data Dictionary](https://files.hudexchange.info/resources/documents/HMIS-Data-Dictionary-2024.pdf "2024 Data Dictionary") and displays them as a json file. That file is only a template for PDDEs and UDEs, nothing program related is within that file.
+
 ---
 
 ### How do we store data in a project?

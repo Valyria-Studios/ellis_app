@@ -128,9 +128,52 @@ There is a [Project Setup Tool](https://www.hudexchange.info/programs/hmis/hmis-
 
 ---
 
-### Universal Data Elements
+### Project Descriptor Data Elements (PDDEs)
 
-These are the data elements that are **required** in all projects:
+> Project descriptor data elements are intended to identify the organization, specific
+> project, and project details to which an individual client record is associated in an HMIS.
+
+These are the **required** elements that are need in all projects relating to organizations, programs and the specific project:
+
+1. Organization Information
+
+   - To uniquely identify organizations operating one or more projects that enter data into HMIS
+
+2. Project Information
+
+   - To uniquely identify each project entering data into HMIS
+
+3. Continuum of Care Information
+
+   - To associate each project entering data into HMIS, as well as any residential continuum projects
+     not participating in HMIS, with one or more Continuum of Care (CoC) for reporting and data
+     exchange purposes.
+
+4. Funding Sources
+
+   - To identify funding sources for each project entering data into HMIS
+
+5. Bed and Unit Inventory Information
+
+   - To record bed and unit inventory information for each residential project entering data into
+     HMIS
+
+6. HMIS Participation Status
+
+   - To identify the HMIS or comparable database participation status of all Continuum projects
+
+7. Coordinated Entry Participation Status
+
+   - The Coordinated Entry Participation Status is designed to identify a project’s type of
+     engagement in the local Coordinated Entry System (CES). This element captures information
+     about whether a project is an access point for the CES and if the project accepts referrals from
+     the CES.
+
+---
+
+### Universal Data Elements (UDEs)
+
+These are the data elements, for clients, that are **required** in all projects:
 
 > | <div align="center"> Universal Identifier Elements (One and Only One per Client Record) </div> | <div align="center"> Universal Project Stay Elements (One or More Value(s) Per Client, One Value Per Project Stay) </div> |
 > | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |

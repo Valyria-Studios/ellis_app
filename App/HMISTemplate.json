@@ -1,0 +1,641 @@
+{
+  "Project": {
+    "PDDEs": {
+      "Organization Information": {
+        "Organization ID": "[auto generate]",
+        "Organization Name": "",
+        "Victim Service Provider": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes"
+          }
+        },
+        "Project Information": {
+          "Project ID": "[auto generate]",
+          "Project Name": "",
+          "Operating Start Date": "",
+          "Operating End Date": "",
+          "Continuum Project": {
+            "Responses": {
+              "0": "No",
+              "1": "Yes"
+            }
+          },
+          "Project Type": {
+            "Responses": {
+              "0": "Emergency Shelter – Entry Exit",
+              "1": "Emergency Shelter – Night-by-Night",
+              "2": "Transitional Housing",
+              "3": "PH – Permanent Supportive Housing (disability required for entry)",
+              "4": "Street Outreach",
+              "5": "RETIRED",
+              "6": "Services Only",
+              "7": "Other",
+              "8": "Safe Haven",
+              "9": "PH – Housing Only",
+              "10": "PH – Housing with Services(no disability required for entry)",
+              "11": "Day Shelter",
+              "12": "Homelessness Prevention",
+              "13": "PH – Rapid Re-Housing",
+              "14": "Coordinated Entry Dependent B – Dependent to"
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent A",
+                "Description": "Dependent to Field 6 & Response 13",
+                "Condition": "If PH – Rapid Re-Housing",
+                "Responses": {
+                  "1": "RRH: Services Only",
+                  "2": "RRH: Housing with or without services"
+                }
+              },
+              {
+                "Name": "Dependent B",
+                "Description": "Dependent to Field 6 & Response 6 or Dependent A = 1",
+                "Condition": "If Services Only for 'Project Type' or RRH: Services Only subtype",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              },
+              {
+                "Name": "Dependent C",
+                "Description": "Dependent to Dependent B & Response 1",
+                "Condition": "If Yes for 'Affiliated with a residential project'",
+                "Responses": "Project ID(s) of residential project(s) affiliated with SSO or RRH: Services Only project"
+              },
+              {
+                "Name": "Dependent D",
+                "Description": "Dependent to Field 6 responses 0, 1, 2, 3, 8, 9, 10, 13",
+                "Condition": "If 13, Dependent A = 2",
+                "Responses": {
+                  "1": "Site-based – single site",
+                  "2": "Site-based – clustered/multiple sites",
+                  "3": "Tenant-based – scattered site"
+                }
+              }
+            ]
+          },
+          "Target Population": {
+            "Responses": {
+              "1": "DV: Survivors of Domestic Violence",
+              "3": "HIV: Persons with HIV/AIDS",
+              "4": "NA: Not applicable"
+            }
+          },
+          "HOPWA-funded Medically Assisted Living Facility": {
+            "Responses": {
+              "0": "No",
+              "1": "Yes",
+              "2": "NA – non-HOPWA Funded Project"
+            }
+          }
+        },
+        "Continuum of Care Information": {
+          "Continuum Code": "[HUD-assigned CoC codes for the project location (text – 6 characters)]",
+          "Geocode": "(6 digits)",
+          "Project street address 1": "",
+          "Project street address 2": "",
+          "Project city": "",
+          "Project state": "",
+          "Project ZIP code": "",
+          "Geography Type": {
+            "Responses": {
+              "1": "Urban",
+              "2": "Suburban",
+              "3": "Rural"
+            }
+          }
+        },
+        "Funding Sources": {
+          "Federal Partner Program and Components": {
+            "Responses": {
+              "1": "HUD: CoC – Homelessness Prevention (High Performing Comm. Only)",
+              "2": "HUD: CoC – Permanent Supportive Housing",
+              "3": "HUD: CoC – Rapid Re-Housing",
+              "4": "HUD: CoC – Supportive Services Only",
+              "5": "HUD: CoC – Transitional Housing",
+              "6": "HUD: CoC – Safe Haven",
+              "7": "HUD: CoC – Single Room Occupancy (SRO)",
+              "43": "HUD: CoC – Youth Homeless Demonstration Program (YHDP)",
+              "44": "HUD: CoC – Joint Component TH/RRH",
+              "8": "HUD: ESG – Emergency Shelter (operating and/or essential services)",
+              "9": "HUD: ESG – Homelessness Prevention",
+              "10": "HUD: ESG – Rapid Re-Housing",
+              "11": "HUD: ESG – Street Outreach",
+              "47": "HUD: ESG-CV",
+              "53": "HUD: ESG-RUSH",
+              "54": "HUD: Unsheltered Special NOFO",
+              "55": "HUD: Rural Special NOFO",
+              "35": "HUD: Pay for Success",
+              "13": "HUD: HOPWA – Hotel/Motel Vouchers",
+              "14": "HUD: HOPWA – Housing Information",
+              "15": "HUD: HOPWA – Permanent Housing (facility based or TBRA)",
+              "16": "HUD: HOPWA – Permanent Housing Placement",
+              "17": "HUD: HOPWA – Short-Term Rent, Mortgage, Utility assistance",
+              "18": "HUD: HOPWA – Short-Term Supportive Facility",
+              "19": "HUD: HOPWA – Transitional Housing (facility based or TBRA)",
+              "48": "HUD: HOPWA-CV",
+              "36": "HUD: Public and Indian Housing (PIH) Programs",
+              "20": "HUD: HUD/VASH",
+              "52": "HUD: PIH (Emergency Housing Voucher)",
+              "50": "HUD: HOME",
+              "51": "HUD: HOME (ARP)",
+              "21": "HHS: PATH – Street Outreach & Supportive Services Only",
+              "22": "HHS: RHY – Basic Center Program (prevention and shelter)",
+              "23": "HHS: RHY – Maternity Group Home for Pregnant and Parenting Youth",
+              "24": "HHS: RHY – Transitional Living Program",
+              "25": "HHS: RHY – Street Outreach Project",
+              "26": "HHS: RHY – Demonstration Project",
+              "27": "VA: CRS Contract Residential Services",
+              "37": "VA: Grant Per Diem – Bridge Housing",
+              "38": "VA: Grant Per Diem – Low Demand",
+              "39": "VA: Grant Per Diem – Hospital to Housing",
+              "40": "VA: Grant Per Diem – Clinical Treatment",
+              "41": "VA: Grant Per Diem – Service Intensive Transitional Housing",
+              "42": "VA: Grant Per Diem – Transition in Place",
+              "45": "VA: Grant Per Diem – Case Management/Housing Retention",
+              "30": "VA: Community Contract Safe Haven Program",
+              "33": "VA: Supportive Services for Veteran Families",
+              "34": "N/A",
+              "46": "Local or Other Funding Source (Please Specify)"
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent A",
+                "Description": "Dependent to Field 1 Response 46",
+                "Condition": "If other, specify",
+                "Response": ""
+              }
+            ],
+            "Grant Identifier": "",
+            "Grant Start Date": "[date field]",
+            "Grant End Date": "[date field]"
+          },
+          "Bed and Unit Inventory Information": {
+            "Inventory start date": "[date field]",
+            "Inventory end date": "[date field]",
+            "Continuum Code": "",
+            "Household type": {
+              "Responses": {
+                "1": "Households without children",
+                "3": "Households with at least one adult and one child",
+                "4": "Households with only children"
+              }
+            },
+            "Bed Type": {
+              "Condition": "[If 2.02 Project Type = ‘Emergency Shelter – Entry Exit’ or ‘Emergency Shelter – Night-by-Night’]",
+              "Responses": {
+                "1": "Facility-based beds",
+                "2": "Voucher beds",
+                "3": "Other beds"
+              }
+            },
+            "Availability": {
+              "Condition": "[If 2.02 Project Type = ‘Emergency Shelter – Entry Exit’ or ‘Emergency Shelter – Night-by-Night’]",
+              "Responses": {
+                "1": "Year-round",
+                "2": "Seasonal",
+                "3": "Overflow"
+              }
+            },
+            "Beds dedicated to chronically homeless veterans": "[integer]",
+            "Beds dedicated to youth-veterans": "[integer]",
+            "Beds dedicated to any other veteran": "[integer]",
+            "Beds dedicated to chronically homeless youth": "[integer]",
+            "Beds dedicated to any other youth": "[integer]",
+            "Beds dedicated to any other CH": "[integer]",
+            "Non-dedicated beds": "[integer]",
+            "Total bed inventory": "[integer]",
+            "Total unit inventory": "[integer]"
+          },
+          "HMIS Participation Status": {
+            "HMIS Participation Status": {
+              "Responses": {
+                "0": "Not Participating",
+                "1": "HMIS Participating",
+                "2": "Comparable Database Participating"
+              }
+            },
+            "Participation Status Start Date": "[date field]",
+            "Participation Status End Date": "[date field]"
+          },
+          "Coordinated Entry Participation Status": {
+            "Project is a Coordinated Entry Access Point": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent A",
+                "Description": "Dependent to Field 1 Response 1",
+                "Provided by CE Project": {
+                  "Responses": {
+                    "1": "Homelessness Prevention Assessment, Screening, and/or Referral",
+                    "2": "Shelter Assessment, Screening, and/or Referral",
+                    "3": "Housing Assessment, Screening, and/or Referral",
+                    "4": "Direct Services (search and/or placement support)"
+                  }
+                }
+              }
+            ],
+            "Project Receives CE Referrals": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            },
+            "CE Participation Status Start Date": "[date field]",
+            "CE Participation Status End Date": "[date field]"
+          }
+        },
+        "UDEs": {
+          "Name": {
+            "First": "",
+            "Middle": "",
+            "Last": "",
+            "Suffix": "",
+            "Name Data Quality": {
+              "Responses": {
+                "1": "Full name reported",
+                "2": "Partial, street name, or code name reported",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          "Social Security Number": {
+            "Social Security Number": "",
+            "SSN Data Quality": {
+              "Responses": {
+                "1": "Full SSN reported",
+                "2": "Approximate or partial SSN reported",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          "Date of Birth": {
+            "Date of Birth": "",
+            "DOB Data Quality": {
+              "Responses": {
+                "1": "Full DOB reported",
+                "2": "Approximate or partial DOB reported",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          "Race and Ethnicity": {
+            "Race and Ethnicity": {
+              "Responses": {
+                "1": "American Indian, Alaska Native, or Indigenous",
+                "2": "Asian or Asian American",
+                "3": "Black, African American, or African",
+                "6": "Hispanic/Latina/e/o",
+                "7": "Middle Eastern or North African",
+                "4": "Native Hawaiian or Pacific Islander",
+                "5": "White",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Additional Race and Ethnicity Detail": ""
+          },
+          "Gender": {
+            "Gender": {
+              "Responses": {
+                "0": "Woman (Girl, if child)",
+                "1": "Man (Boy, if child)",
+                "2": "Culturally Specific Identity (e.g., Two-Spirit)",
+                "5": "Transgender",
+                "4": "Non-Binary",
+                "6": "Questioning",
+                "3": "Different Identity",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent A",
+                "Description": "Dependent to Field 1 Response 3",
+                "Condition": "If Different Identity",
+                "Response": ""
+              }
+            ]
+          },
+          "Veteran Status": {
+            "Veteran Status": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          "Disabling Condition": {
+            "Disabling Condition": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          "Project Start Date": "[date field]",
+          "Project End Date": "[date field]",
+          "Destination": {
+            "Responses": {
+              "116": "Place not meant for habitation (e.g., a vehicle, an abandoned building, bus/train/subway station/airport or anywhere outside)",
+              "101": "Emergency shelter, including hotel or motel paid for with emergency shelter voucher, Host Home shelter",
+              "118": "Safe Haven",
+              "215": "Foster care home or foster care group home",
+              "206": "Hospital or other residential non-psychiatric medical facility",
+              "207": "Jail, prison, or juvenile detention facility",
+              "225": "Long-term care facility or nursing home",
+              "204": "Psychiatric hospital or other psychiatric facility",
+              "205": "Substance abuse treatment facility or detox center",
+              "302": "Transitional housing for homeless persons (including homeless youth)",
+              "329": "Residential project or halfway house with no homeless criteria",
+              "314": "Hotel or motel paid for without emergency shelter voucher",
+              "332": "Host Home (non-crisis)",
+              "312": "Staying or living with family, temporary tenure (e.g., room, apartment, or house)",
+              "313": "Staying orliving with friends,temporary tenure (e.g.,room, apartment, or house)",
+              "327": "Moved from one HOPWA funded project to HOPWA TH",
+              "422": "Staying or living with family, permanent tenure",
+              "423": "Staying or living with friends, permanent tenure",
+              "426": "Moved from one HOPWA funded project to HOPWA PH",
+              "410": "Rental by client, no ongoing housing subsidy",
+              "435": "Rental by client, with ongoing housing subsidy",
+              "421": "Owned by client, with ongoing housing subsidy",
+              "411": "Owned by client, no ongoing housing subsidy",
+              "30": "No exit interview completed",
+              "17": "Other",
+              "24": "Deceased",
+              "8": "Client doesn’t know",
+              "9": "Client prefers not to answer",
+              "99": "Data not collected"
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent A",
+                "Description": "Dependent to Field 1 Response 435",
+                "Rental Subsidy Type": {
+                  "Responses": {
+                    "428": "GPD TIP housing subsidy",
+                    "419": "VASH housing subsidy",
+                    "431": "RRH or equivalent subsidy",
+                    "433": "HCV voucher (tenant or project based) (not dedicated)",
+                    "434": "Public housing unit",
+                    "420": "Rental by client, with other ongoing housing subsidy",
+                    "436": "Housing Stability Voucher",
+                    "437": "Family Unification Program Voucher (FUP)",
+                    "438": "Foster Youth to Independence Initiative (FYI)",
+                    "439": "Permanent Supportive Housing",
+                    "440": "Other permanent housing dedicated for formerly homeless persons"
+                  }
+                }
+              },
+              {
+                "Name": "Dependent B",
+                "Description": "Dependent to Field 1 & Response 17",
+                "Condition": "If Other for 'Type of Residence'",
+                "Response": "Specify Where "
+              }
+            ]
+          },
+          "Relationship to Head of Household": {
+            "Relationship to Head of Household": {
+              "Responses": {
+                "1": "Self (Head of Household)",
+                "2": "Head of Household’s child",
+                "3": "Head of Household’s spouse or partner",
+                "4": "Head of Household’s other relation member (other relation to Head of Household)",
+                "5": "Other: non-relation member"
+              }
+            }
+          },
+          "Enrollment CoC": {
+            "Response": "HUD assigned CoC code for the client’s location at project start"
+          },
+          "Prior Living Situation (3.917A)": {
+            "Type of Residence": {
+              "Responses": {
+                "116": "Place not meant for habitation (e.g., a vehicle, an abandoned building, bus/train/subway station/airport or anywhere outside)",
+                "101": "Emergency shelter, including hotel or motel paid for with emergency shelter voucher, Host Home shelter",
+                "118": "Safe Haven",
+                "215": "Foster care home or foster care group home",
+                "206": "Hospital or other residential non-psychiatric medical facility",
+                "207": "Jail, prison, or juvenile detention facility",
+                "225": "Long-term care facility or nursing home",
+                "204": "Psychiatric hospital or other psychiatric facility",
+                "205": "Substance abuse treatment facility or detox center",
+                "302": "Transitional housing for homeless persons (including homeless youth)",
+                "329": "Residential project or halfway house with no homeless criteria",
+                "314": "Hotel or motel paid for without emergency shelter voucher",
+                "332": "Host Home (non-crisis)",
+                "336": "Staying or living in a friend’s room, apartment, or house",
+                "335": "Staying or living in a family member’s room, apartment, or house",
+                "410": "Rental by client, no ongoing housing subsidy",
+                "435": "Rental by client, with ongoing housing subsidy",
+                "421": "Owned by client, with ongoing housing subsidy",
+                "411": "Owned by client, no ongoing housing subsidy",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent A",
+                "Description": "Dependent to Field 1 Response 435",
+                "Rental Subsidy Type": {
+                  "Responses": {
+                    "428": "GPD TIP housing subsidy",
+                    "419": "VASH housing subsidy",
+                    "431": "RRH or equivalent subsidy",
+                    "433": "HCV voucher (tenant or project based) (not dedicated)",
+                    "434": "Public housing unit",
+                    "420": "Rental by client, with other ongoing housing subsidy",
+                    "436": "Housing Stability Voucher",
+                    "437": "Family Unification Program Voucher (FUP)",
+                    "438": "Foster Youth to Independence Initiative (FYI)",
+                    "439": "Permanent Supportive Housing",
+                    "440": "Other permanent housing dedicated for formerly homeless persons"
+                  }
+                }
+              }
+            ],
+            "Length of stay in prior living situation": {
+              "Responses": {
+                "10": "One night or less",
+                "11": "Two to six nights",
+                "2": "One week or more, but less than one month",
+                "3": "One month or more, but less than 90 days",
+                "4": "90 days or more, but less than one year",
+                "5": "One year or longer",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Approximate date this episode of homelessness started": "[date field]",
+            "Number of times the client has been on the streets, in ES, or SH in the past three years including today": {
+              "Responses": {
+                "1": "One Time",
+                "2": "Two times",
+                "3": "Three times",
+                "4": "Four or more times",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Total number of months homeless on the street, in ES, or SH in the past three years": {
+              "Responses": {
+                "101": "One month (this time is the first month)",
+                "102-112": "[integers 2-12]",
+                "113": "More than 12 months",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          "Prior Living Situation (3.917B)": {
+            "Type of Residence": {
+              "Responses": {
+                "116": "Place not meant for habitation (e.g., a vehicle, an abandoned building, bus/train/subway station/airport or anywhere outside)",
+                "101": "Emergency shelter, including hotel or motel paid for with emergency shelter voucher, Host Home shelter",
+                "118": "Safe Haven",
+                "215": "Foster care home or foster care group home",
+                "206": "Hospital or other residential non-psychiatric medical facility",
+                "207": "Jail, prison, or juvenile detention facility",
+                "225": "Long-term care facility or nursing home",
+                "204": "Psychiatric hospital or other psychiatric facility",
+                "205": "Substance abuse treatment facility or detox center",
+                "302": "Transitional housing for homeless persons (including homeless youth)",
+                "329": "Residential project or halfway house with no homeless criteria",
+                "314": "Hotel or motel paid for without emergency shelter voucher",
+                "332": "Host Home (non-crisis)",
+                "336": "Staying or living in a friend’s room, apartment, or house",
+                "335": "Staying or living in a family member’s room, apartment, or house",
+                "410": "Rental by client, no ongoing housing subsidy",
+                "435": "Rental by client, with ongoing housing subsidy",
+                "421": "Owned by client, with ongoing housing subsidy",
+                "411": "Owned by client, no ongoing housing subsidy",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Dependency Logic": "If response to Field 1: 'Type of Residence' is a Homeless Situation (values 100-199), display Fields 3, 4, and 5",
+            "Dependents": [
+              {
+                "Name": "Dependent A",
+                "Description": "Dependent to Field 1 Response 435",
+                "Rental Subsidy Type": {
+                  "Responses": {
+                    "428": "GPD TIP housing subsidy",
+                    "419": "VASH housing subsidy",
+                    "431": "RRH or equivalent subsidy",
+                    "433": "HCV voucher (tenant or project based) (not dedicated)",
+                    "434": "Public housing unit",
+                    "420": "Rental by client, with other ongoing housing subsidy",
+                    "436": "Housing Stability Voucher",
+                    "437": "Family Unification Program Voucher (FUP)",
+                    "438": "Foster Youth to Independence Initiative (FYI)",
+                    "439": "Permanent Supportive Housing",
+                    "440": "Other permanent housing dedicated for formerly homeless persons"
+                  }
+                }
+              }
+            ],
+            "Length of stay in the prior living situation": {
+              "Responses": {
+                "10": "One night or less",
+                "11": "Two to six nights",
+                "2": "One week or more, but less than one month",
+                "3": "One month or more, but less than 90 days",
+                "4": "90 days or more, but less than one year",
+                "5": "One year or longer",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Dependencies for Institutional Situations": {
+              "Field 2A": {
+                "Question": "Did you stay less than 90 days?",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependency Logic": "If No – no other response options required; If Yes – use Field #2 response options 10, 11, 2, 3 and go to Field 2C"
+              }
+            },
+            "Dependencies for Temporary, Permanent, and Other Situations": {
+              "Field 2B": {
+                "Question": "Did you stay less than 7 nights?",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependency Logic": "If No – no other response options required; If Yes – use Field #2 response options 10, 11, and go to Field 2C"
+              }
+            },
+            "Dependency for Yes to 2A or 2B": {
+              "Field 2C": {
+                "Question": "On the night before did you stay on the streets, ES, or SH?",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependency Logic": "If No – no other response options required; If Yes – go to Field 3, followed by Field 4, and then Field 5"
+              }
+            },
+            "Elements for Chronic Homelessness": {
+              "Approximate date this episode of homelessness started": "[date field]",
+              "Regardless of where they stayed last night, number of times the client has been on the streets, in ES, or SH in the past three years including today": {
+                "Responses": {
+                  "1": "One Time",
+                  "2": "Two times",
+                  "3": "Three times",
+                  "4": "Four or more times",
+                  "8": "Client doesn’t know",
+                  "9": "Client prefers not to answer",
+                  "99": "Data not collected"
+                }
+              },
+              "Total number of months homeless on the street, in ES, or SH in the past three years": {
+                "Responses": {
+                  "101": "One month (this time is the first month)",
+                  "102-112": "[integers 2-12]",
+                  "113": "More than 12 months",
+                  "8": "Client doesn’t know",
+                  "9": "Client prefers not to answer",
+                  "99": "Data not collected"
+                }
+              }
+            }
+          },
+          "Housing Move-In Date": {
+            "Response": "Housing Move-in Date ([date field])"
+          }
+        }
+      }
+    }
+  }
+}

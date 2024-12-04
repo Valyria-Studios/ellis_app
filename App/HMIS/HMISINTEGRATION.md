@@ -11,7 +11,7 @@ The information in this file is being derived from the HMIS documentation provid
 - If there are data structure related question refer to this document:
   - [FY 2024 HMIS Data Dictionary – Version 1.6](https://files.hudexchange.info/resources/documents/HMIS-Data-Dictionary-2024.pdf "2024 Data Dictionary")
 - Bitfocus has an HMIS built and is used by some of the current NonProfits in the SF area. They have a page that shows what a form looks like for specific projects and programs they may be associated with. This could help visualize what data we need to collect:
-   - [2024 HMIS Sample Forms](https://help.bitfocus.com/2024-hmis-sample-forms, "Bitfocus 2024 HMIS Sample Forms")
+  - [2024 HMIS Sample Forms](https://help.bitfocus.com/2024-hmis-sample-forms, "Bitfocus 2024 HMIS Sample Forms")
 
 ## HMIS Data Standards
 
@@ -187,6 +187,10 @@ These are the data elements, for clients, that are **required** in all projects:
 > | 3.07 Veteran Status                                                                            | 3.16 Enrollment CoC                                                                                                       |
 > |                                                                                                | 3.917 Prior Living Situation                                                                                              |
 > |                                                                                                | 3.20 Housing Move-In Date                                                                                                 |
+
+- Data elements 3.01 through 3.07 are required to have one response per client, regardless of how many project enrollments that client has in the system. The remaining UDEs are to be collected at least once per project enrollment. The timing of when the data are to be collected and about whom is noted in each data element.
+
+---
 
 ### Breakdown of Elements
 

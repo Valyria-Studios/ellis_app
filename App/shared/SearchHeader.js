@@ -26,7 +26,6 @@ const SearchComponent = ({
   const [filteredOrganizations, setFilteredOrganizations] = useState([]);
   const [subservices, setSubservices] = useState([]);
   const [filteredSubservices, setFilteredSubservices] = useState([]);
-  const [successMessage, setSuccessMessage] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -192,10 +191,6 @@ const SearchComponent = ({
         }
         return response.json();
       })
-      .then((data) => {
-        setSuccessMessage(`Data for "${searchInput}" sent successfully!`);
-        setModalVisible(true); // Show modal
-      })
       .catch((error) => {
         console.error("Error sending data to /Data endpoint:", error);
       });
@@ -224,10 +219,6 @@ const SearchComponent = ({
         }
         return response.json();
       })
-      .then((data) => {
-        setSuccessMessage(`Data for "${organization.name}" sent successfully!`);
-        setModalVisible(true); // Show modal
-      })
       .catch((error) => {
         console.error("Error sending data to /Data endpoint:", error);
       });
@@ -239,9 +230,9 @@ const SearchComponent = ({
   const handleSubservicePress = (subservice) => {
     const dataToSend = {
       search: searchInput,
-      Subservice: subservice.name, // Using the name of the subservice
+      Subservice: subservice.name,
       iterations: 1,
-      id: subservice.valueId, // Use the `valueId` as the unique identifier
+      id: subservice.valueId,
     };
 
     fetch("https://ellis-test-data.com:8000/Data", {
@@ -256,10 +247,6 @@ const SearchComponent = ({
           throw new Error("Failed to send data");
         }
         return response.json();
-      })
-      .then((data) => {
-        setSuccessMessage(`Data for "${subservice.name}" sent successfully!`);
-        setModalVisible(true); // Show modal on success
       })
       .catch((error) => {
         console.error("Error sending data to /Data endpoint:", error);
@@ -371,24 +358,6 @@ const SearchComponent = ({
           )}
         </View>
       )}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>{successMessage}</Text>
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 };

@@ -168,6 +168,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    minWidth: 20, // Set a minimum width to prevent shrinking
+    flexShrink: 0, // Prevent shrinking
   },
 
   selectedMenuItem: {
@@ -193,6 +195,7 @@ const styles = StyleSheet.create({
 
   icon: {
     color: "#094852",
+    flexShrink: 0, // Prevent shrinking
   },
 
   buttonContainer: {

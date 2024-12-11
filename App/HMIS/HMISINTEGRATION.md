@@ -12,6 +12,8 @@ The information in this file is being derived from the HMIS documentation provid
   - [FY 2024 HMIS Data Dictionary – Version 1.6](https://files.hudexchange.info/resources/documents/HMIS-Data-Dictionary-2024.pdf "2024 Data Dictionary")
 - Bitfocus has an HMIS built and is used by some of the current NonProfits in the SF area. They have a page that shows what a form looks like for specific projects and programs they may be associated with. This could help visualize what data we need to collect:
   - [2024 HMIS Sample Forms](https://help.bitfocus.com/2024-hmis-sample-forms, "Bitfocus 2024 HMIS Sample Forms")
+- If there are questions that relate to Comma Separated Value (CSV) documentation or specifications refer to this document:
+  - [HMIS CSV Specifications](https://files.hudexchange.info/resources/documents/HMIS-CSV-Format-Specifications-2024.pdf "HMIS CSV Specifications")
 
 ## HMIS Data Standards
 
@@ -230,8 +232,17 @@ It should be a json file that has all the data arrayed into key-value pairs. An 
 
 ### How do we send data to the HUD?
 
-###
+---
 
-```
+## HMIS CSV Documentation
 
-```
+This is how the final file should look when it comes to sending the report to the hUD. Each of the values are specified in their structure using the [HMIS CSV Specifications](https://files.hudexchange.info/resources/documents/HMIS-CSV-Format-Specifications-2024.pdf "HMIS CSV Specifications") document. 
+
+The breakdown of each element and how they should look in the final CSV document, is shown there.
+
+### What is entailed in a CSV?
+
+### CSV Document breakdown
+
+### How do you send the document to HUD/other programs?
+

@@ -1,0 +1,1004 @@
+{
+  "Common Program Specific": {
+    "Income_and_Sources": {
+      "Information_Date": "[date field]",
+      "Income_from_Any_Source": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Income Sources",
+            "Description": "If yes for 'Income from any source', indicate all sources and amounts that apply",
+            "Sources": {
+              "Earned_Income": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent A",
+                    "Description": "Dependent to Earned Income & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Unemployment_Insurance": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent B",
+                    "Description": "Dependent to Unemployment Insurance & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Supplemental_Security_Income": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent C",
+                    "Description": "Dependent to SSI & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Social_Security_Disability_Insurance": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent D",
+                    "Description": "Dependent to SSDI & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "VA_Service_Connected_Disability": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent E",
+                    "Description": "Dependent to VA Service-Connected & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "VA_Non_Service_Connected_Disability": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent F",
+                    "Description": "Dependent to VA Non-Service-Connected & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Private_Disability_Insurance": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent G",
+                    "Description": "Dependent to Private Disability & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Workers_Compensation": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent H",
+                    "Description": "Dependent to Worker's Compensation & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "TANF": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent I",
+                    "Description": "Dependent to TANF & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "General_Assistance": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent J",
+                    "Description": "Dependent to GA & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Retirement_Income_Social_Security": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent K",
+                    "Description": "Dependent to Social Security Retirement & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Pension_Former_Job": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent L",
+                    "Description": "Dependent to Pension & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Child_Support": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent M",
+                    "Description": "Dependent to Child Support & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Alimony": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent N",
+                    "Description": "Dependent to Alimony & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  }
+                ]
+              },
+              "Other_Source": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent O",
+                    "Description": "Dependent to Other Source & Response 1",
+                    "Monthly_Amount": "[currency/decimal]"
+                  },
+                  {
+                    "Name": "Dependent P",
+                    "Description": "Dependent to Other Source & Response 1",
+                    "Specify_Source": "[text field]"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Total_Monthly_Income": "[currency/decimal]"
+    },
+    "Non_Cash_Benefits": {
+      "Information_Date": "[date field]",
+      "Benefits_from_Any_Source": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Benefit Sources",
+            "Description": "If yes for 'Non-cash benefits from any source', indicate all sources that apply",
+            "Sources": {
+              "SNAP": {
+                "Description": "Supplemental Nutrition Assistance Program (Previously known as Food Stamps)",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              },
+              "WIC": {
+                "Description": "Special Supplemental Nutrition Program for Women, Infants, and Children",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              },
+              "TANF_Child_Care": {
+                "Description": "TANF Child Care services",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              },
+              "TANF_Transportation": {
+                "Description": "TANF transportation services",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              },
+              "Other_TANF_Services": {
+                "Description": "Other TANF-funded services",
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              },
+              "Other_Source": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Dependent A",
+                    "Description": "Dependent to Other Source & Response 1",
+                    "Specify_Source": "[text field]"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "Health_Insurance": {
+      "Information_Date": "[date field]",
+      "Covered_by_Health_Insurance": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Insurance Sources",
+            "Description": "If yes for 'Covered by Health Insurance', indicate all sources that apply",
+            "Sources": {
+              "Medicaid": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "Medicare": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "State_Childrens_Health_Insurance": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "VA_Health_Administration": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "Employer_Provided": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "COBRA": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "Private_Pay": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "State_Health_Insurance_Adults": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "Indian_Health_Services": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              },
+              "Other": {
+                "Responses": {
+                  "0": "No",
+                  "1": "Yes"
+                },
+                "Dependents": [
+                  {
+                    "Name": "Source Specification",
+                    "Description": "If Yes for Other, specify source",
+                    "Specify_Source": "[text field]"
+                  },
+                  {
+                    "Name": "HOPWA Dependent",
+                    "Description": "HOPWA FIELD ONLY - If No, Reason",
+                    "Condition": "Response 0 and HOPWA program",
+                    "Responses": {
+                      "1": "Applied; decision pending",
+                      "2": "Applied; client not eligible",
+                      "3": "Client did not apply",
+                      "4": "Insurance type N/A for this client",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "Physical_Disability": {
+      "Information_Date": "[date field]",
+      "Has_Physical_Disability": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "If Yes for Physical Disability",
+            "Condition": "Response 1",
+            "Long_Term_Impact": {
+              "Description": "Expected to be of long-continued and indefinite duration and substantially impairs ability to live independently",
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "Developmental_Disability": {
+      "Information_Date": "[date field]",
+      "Has_Developmental_Disability": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    },
+    "Chronic_Health_Condition": {
+      "Information_Date": "[date field]",
+      "Has_Chronic_Health_Condition": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "If Yes for Chronic Health Condition",
+            "Condition": "Response 1",
+            "Long_Term_Impact": {
+              "Description": "Expected to be of long-continued and indefinite duration and substantially impairs ability to live independently",
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "HIV_AIDS": {
+      "Information_Date": "[date field]",
+      "Has_HIV_AIDS": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    },
+    "Mental_Health_Disorder": {
+      "Information_Date": "[date field]",
+      "Has_Mental_Health_Disorder": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "If Yes for Mental Health Disorder",
+            "Condition": "Response 1",
+            "Long_Term_Impact": {
+              "Description": "Expected to be of long-continued and indefinite duration and substantially impairs ability to live independently",
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "Substance_Use_Disorder": {
+      "Information_Date": "[date field]",
+      "Has_Substance_Use_Disorder": {
+        "Responses": {
+          "0": "No",
+          "1": "Alcohol use disorder",
+          "2": "Drug use disorder",
+          "3": "Both alcohol and drug use disorders",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "If Alcohol use disorder, Drug use disorder, or Both alcohol and drug use disorders",
+            "Condition": "Responses 1, 2, or 3",
+            "Long_Term_Impact": {
+              "Description": "Expected to be of long-continued and indefinite duration and substantially impairs ability to live independently",
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "Domestic_Violence": {
+      "Information_Date": "[date field]",
+      "Survivor_of_Domestic_Violence": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn't know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "If Yes for Survivor of Domestic Violence",
+            "Condition": "Response 1",
+            "When_Experience_Occurred": {
+              "Description": "When experience occurred",
+              "Responses": {
+                "1": "Within the past three months",
+                "2": "Three to six months ago (excluding six months exactly)",
+                "3": "Six months to one year ago (excluding one year exactly)",
+                "4": "One year ago, or more",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "If Yes for Survivor of Domestic Violence",
+            "Condition": "Response 1",
+            "Currently_Fleeing": {
+              "Description": "Are you currently fleeing?",
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "Current_Living_Situation": {
+      "Information_Date": "[date field]",
+      "Living_Situation": {
+        "Description": "Current Living Situation [See Appendix A – Living Situation Information]",
+        "Responses": {
+          "116": "Place not meant for habitation (e.g., a vehicle, an abandoned building, bus/train/subway station/airport or anywhere outside)",
+          "101": "Emergency shelter, including hotel or motel paid for with emergency shelter voucher, Host Home shelter",
+          "118": "Safe Haven",
+          "215": "Foster care home or foster care group home",
+          "206": "Hospital or other residential non-psychiatric medical facility",
+          "207": "Jail, prison, or juvenile detention facility",
+          "225": "Long-term care facility or nursing home",
+          "204": "Psychiatric hospital or other psychiatric facility",
+          "205": "Substance abuse treatment facility or detox center",
+          "302": "Transitional housing for homeless persons (including homeless youth)",
+          "329": "Residential project or halfway house with no homeless criteria",
+          "314": "Hotel or motel paid for without emergency shelter voucher",
+          "332": "Host Home (non-crisis)",
+          "336": "Staying or living in a friend’s room, apartment, or house",
+          "335": "Staying or living in a family member’s room, apartment, or house",
+          "410": "Rental by client, no ongoing housing subsidy",
+          "435": "Rental by client, with ongoing housing subsidy",
+          "421": "Owned by client, with ongoing housing subsidy",
+          "411": "Owned by client, no ongoing housing subsidy",
+          "17": "Other",
+          "37": "Worker unable to determine",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Response 435",
+            "Condition": "Response 435",
+            "Rental Subsidy Type": {
+              "Responses": {
+                "428": "GPD TIP housing subsidy",
+                "419": "VASH housing subsidy",
+                "431": "RRH or equivalent subsidy",
+                "433": "HCV voucher (tenant or project based) (not dedicated)",
+                "434": "Public housing unit",
+                "420": "Rental by client, with other ongoing housing subsidy",
+                "436": "Housing Stability Voucher",
+                "437": "Family Unification Program Voucher (FUP)",
+                "438": "Foster Youth to Independence Initiative (FYI)",
+                "439": "Permanent Supportive Housing",
+                "440": "Other permanent housing dedicated for formerly homeless persons"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to all non-homeless situation responses (17, 37, and 200-499)",
+            "Condition": "Responses 17, 37, or 200-499",
+            "Will_Leave_Within_14_Days": {
+              "Description": "Is client going to have to leave their current living situation within 14 days?",
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn't know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              },
+              "Dependents": [
+                {
+                  "Name": "Dependent C",
+                  "Description": "If Yes to leaving within 14 days",
+                  "Condition": "Response 1",
+                  "Subsequent_Residence_Identified": {
+                    "Description": "Has a subsequent residence been identified?",
+                    "Responses": {
+                      "0": "No",
+                      "1": "Yes",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                },
+                {
+                  "Name": "Dependent D",
+                  "Description": "If Yes to leaving within 14 days",
+                  "Condition": "Response 1",
+                  "Has_Resources_Or_Support": {
+                    "Description": "Does individual or family have resources or support networks to obtain other permanent housing?",
+                    "Responses": {
+                      "0": "No",
+                      "1": "Yes",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                },
+                {
+                  "Name": "Dependent E",
+                  "Description": "If Yes to leaving within 14 days",
+                  "Condition": "Response 1",
+                  "Had_Previous_Lease": {
+                    "Description": "Has the client had a lease or ownership interest in a permanent housing unit in the last 60 days?",
+                    "Responses": {
+                      "0": "No",
+                      "1": "Yes",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                },
+                {
+                  "Name": "Dependent F",
+                  "Description": "If Yes to leaving within 14 days",
+                  "Condition": "Response 1",
+                  "Multiple_Moves": {
+                    "Description": "Has the client moved 2 or more times in the last 60 days?",
+                    "Responses": {
+                      "0": "No",
+                      "1": "Yes",
+                      "8": "Client doesn't know",
+                      "9": "Client prefers not to answer",
+                      "99": "Data not collected"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "Living_Situation_Verified_By": {
+        "Description": "Coordinated Entry Projects ONLY: Living situation verified by",
+        "Response": "[list of Continuum projects]"
+      },
+      "Location_Details": "[text box]"
+    },
+    "Date_of_Engagement": {
+      "Date_of_Engagement": "[date field]"
+    },
+    "Bed_Night_Date": {
+      "Bed_Night_Date": "[date field]"
+    },
+    "Coordinated_Entry_Assessment": {
+      "Assessment_Date": "[date field]",
+      "Assessment_Location": {
+        "Response": "[drop down]"
+      },
+      "Assessment_Type": {
+        "Responses": {
+          "1": "Phone",
+          "2": "Virtual",
+          "3": "In person"
+        }
+      },
+      "Assessment_Level": {
+        "Responses": {
+          "1": "Crisis Needs Assessment",
+          "2": "Housing Needs Assessment"
+        }
+      },
+      "Assessment_Questions": {
+        "Description": "Local determination - as defined by the community",
+        "Questions": {
+          "Description": "1...n Questions",
+          "Values": "[array of locally defined questions]",
+          "Dependents": [
+            {
+              "Name": "Dependent A",
+              "Description": "Assessment answers - Local determination",
+              "Answers": "[array of answers corresponding to questions]"
+            }
+          ]
+        }
+      },
+      "Assessment_Result_Type": {
+        "Description": "Local determination - as defined by the community",
+        "Result_Types": {
+          "Description": "1...n Result Type",
+          "Values": "[array of locally defined result types]",
+          "Dependents": [
+            {
+              "Name": "Dependent B",
+              "Description": "Assessment Result",
+              "Results": "[array of results corresponding to result types]"
+            }
+          ]
+        }
+      },
+      "Prioritization_Status": {
+        "Responses": {
+          "1": "Placed on prioritization list",
+          "2": "Not placed on prioritization list"
+        }
+      }
+    },
+    "Coordinated_Entry_Event": {
+      "Event_Date": "[date field]",
+      "Event": {
+        "Access_Events": {
+          "Responses": {
+            "1": "Referral to Prevention Assistance project",
+            "2": "Problem Solving/Diversion/Rapid Resolution intervention or service",
+            "3": "Referral to scheduled Coordinated Entry Crisis Needs Assessment",
+            "4": "Referral to scheduled Coordinated Entry Housing Needs Assessment"
+          }
+        },
+        "Referral_Events": {
+          "Responses": {
+            "5": "Referral to post-placement/follow-up case management",
+            "6": "Referral to Street Outreach project or services",
+            "7": "Referral to Housing Navigation project or services",
+            "8": "Referral to Non-continuum services: Ineligible for continuum services",
+            "9": "Referral to Non-continuum services: No availability in continuum services",
+            "10": "Referral to Emergency Shelter bed opening",
+            "11": "Referral to Transitional Housing bed/unit opening",
+            "12": "Referral to Joint TH-RRH project/unit/resource opening",
+            "13": "Referral to RRH project resource opening",
+            "14": "Referral to PSH project resource opening",
+            "15": "Referral to Other PH project/unit/resource opening",
+            "16": "Referral to emergency assistance/flex fund/furniture assistance",
+            "18": "Referral to a Housing Stability Voucher"
+          }
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "If Problem Solving/Diversion/Rapid Resolution intervention",
+            "Condition": "Response 2",
+            "Client_Safely_Housed": {
+              "Description": "Client housed/re-housed in a safe alternative",
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "If Referral to post-placement/follow-up case management",
+            "Condition": "Response 5",
+            "Enrolled_in_Aftercare": {
+              "Description": "Enrolled in Aftercare project",
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependent C",
+            "Description": "If Housing Referral",
+            "Condition": "Responses 10-15",
+            "Housing_Location": {
+              "Description": "Location of Crisis Housing or Permanent Housing Referral",
+              "Response": "[Project name and/or Project ID]"
+            }
+          },
+          {
+            "Name": "Dependent D",
+            "Description": "If Housing or Voucher Referral",
+            "Condition": "Responses 10-15 or 18",
+            "Referral_Result": {
+              "Responses": {
+                "1": "Successful referral: client accepted",
+                "2": "Unsuccessful referral: client rejected",
+                "3": "Unsuccessful referral: provider rejected"
+              }
+            }
+          },
+          {
+            "Name": "Dependent E",
+            "Description": "If Referral Result provided",
+            "Condition": "Dependent to Dependent D",
+            "Result_Date": "[date field]"
+          }
+        ]
+      }
+    }
+  }
+}

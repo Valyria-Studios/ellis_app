@@ -97,6 +97,29 @@ const ConfirmReferral = ({ route, navigation }) => {
         body: JSON.stringify(sender),
       });
 
+      // Construct the NonProfit referral data
+      const nonprofitReferralData = {
+        id: selectedService.id, // Assuming selectedService.id is the NonProfit ID
+        referral: {
+          clientId: selectedClient.id,
+          referralSenderId: sender.id || "1",
+          organization: selectedService.name,
+          dateStarted,
+          option,
+          referralType,
+          notes,
+        },
+      };
+
+      // Send the referral to NonProfits-Referrals endpoint
+      await fetch(`https://ellis-test-data.com:8000/NonProfits-Referrals`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nonprofitReferralData),
+      });
+
       // Navigate to the Referral Sent page or handle success
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,

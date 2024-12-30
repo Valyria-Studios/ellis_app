@@ -79,23 +79,26 @@ const ConfirmReferral = ({ route, navigation }) => {
       sender.referrals.push(referralData);
 
       await fetch(
-        `https://ellis-test-data.com:8000/Clients/${selectedClient.id}`,
+        `https://ellis-test-data.com:8000/Clients/${selectedClient.id}/referrals`,
         {
-          method: "PATCH",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(client),
+          body: JSON.stringify(referralData),
         }
       );
 
-      await fetch(`https://ellis-test-data.com:8000/Clients/${sender.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(sender),
-      });
+      await fetch(
+        `https://ellis-test-data.com:8000/Clients/${sender.id}/referrals`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(referralData),
+        }
+      );
 
       // Construct the NonProfit referral data
       const nonprofitReferralData = {

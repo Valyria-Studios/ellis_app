@@ -1,0 +1,234 @@
+{
+  "Services Provided – HOPWA": {
+    "Fields": {
+      "Date of Service": {
+        "Response": "[date field]"
+      },
+      "Type of Service": {
+        "Responses": {
+          "1": "Adult day care and personal assistance",
+          "2": "Case management",
+          "3": "Child care",
+          "4": "Criminal justice/legal services",
+          "5": "Education",
+          "6": "Employment and training services",
+          "7": "Food/meals/nutritional services",
+          "8": "Health/medical care",
+          "9": "Life skills training",
+          "10": "Mental health care/counseling",
+          "11": "Outreach and/or engagement",
+          "12": "Substance use services/treatment",
+          "13": "Transportation",
+          "14": "Other HOPWA funded service"
+        }
+      }
+    }
+  },
+  "Financial Assistance – HOPWA": {
+    "Fields": {
+      "Date of Financial Assistance": {
+        "Response": "[date field]"
+      },
+      "Financial Assistance Type": {
+        "Responses": {
+          "1": "Rental assistance [collect for PHP and STRMU and PH-TBRA]",
+          "2": "Security deposits [collect for PHP]",
+          "3": "Utility deposits [collect for PHP]",
+          "4": "Utility payments [collect for PHP and STRMU]",
+          "7": "Mortgage assistance [collect for STRMU]"
+        }
+      },
+      "Financial Assistance Amount": {
+        "Response": "[currency/decimal]"
+      }
+    }
+  },
+  "Medical Assistance": {
+    "Fields": {
+      "Information Date": {
+        "Response": "[date field]"
+      },
+      "Receiving AIDS Drug Assistance Program (ADAP)": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 2 & Response 0",
+            "Condition": "If No for 'Receiving AIDS Drug Assistance Program (ADAP)'",
+            "Reason": {
+              "Responses": {
+                "1": "Applied; decision pending",
+                "2": "Applied; client not eligible",
+                "3": "Client did not apply",
+                "4": "Insurance type N/A for this client",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      },
+      "Receiving Ryan White-funded Medical or Dental Assistance": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent C",
+            "Description": "Dependent to Field 4 & Response 0",
+            "Condition": "If No for 'Receiving Ryan White-funded Medical or Dental Assistance'",
+            "Reason": {
+              "Responses": {
+                "1": "Applied; decision pending",
+                "2": "Applied; client not eligible",
+                "3": "Client did not apply",
+                "4": "Insurance type N/A for this client",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "T-Cell (CD4) and Viral Load": {
+    "Fields": {
+      "Information Date": {
+        "Response": "[date field]"
+      },
+      "T-Cell (CD4) Count Available": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 & Response 1",
+            "Condition": "If a yes to 'T-Cell (CD4) Count Available'",
+            "T-Cell Count": "[integer between 0 – 1500]"
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 2 & Response 1",
+            "Condition": "If a number is entered in the T-Cell (CD4) count",
+            "How was the information obtained": {
+              "Responses": {
+                "1": "Medical Report",
+                "2": "Client report",
+                "3": "Other"
+              }
+            }
+          }
+        ]
+      },
+      "Viral Load Information Available": {
+        "Responses": {
+          "0": "Not Available",
+          "1": "Available",
+          "2": "Undetectable",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent C",
+            "Description": "Dependent to Field 3 & Response 1",
+            "Condition": "If 'Viral Load Information Available'",
+            "Count": "[integer between 0 – 999999]"
+          },
+          {
+            "Name": "Dependent D",
+            "Description": "Dependent to Field 3 & Response 1",
+            "Condition": "If a number is entered in the Viral Load count",
+            "How was the information obtained": {
+              "Responses": {
+                "1": "Medical Report",
+                "2": "Client report",
+                "3": "Other"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Housing Assessment at Exit": {
+    "Fields": {
+      "Housing Assessment at Exit": {
+        "Responses": {
+          "1": "Able to maintain the housing they had at project entry",
+          "2": "Moved to new housing unit",
+          "3": "Moved in with family/friends on a temporary basis",
+          "4": "Moved in with family/friends on a permanent basis",
+          "5": "Moved to a transitional or temporary housing facility or program",
+          "6": "Client became homeless – moving to a shelter or place unfit for human habitation",
+          "7": "Jail/prison",
+          "10": "Deceased",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 & Response 1",
+            "Condition": "If Able to maintain the housing they had at project entry for 'Housing Assessment at Exit'",
+            "Subsidy information": {
+              "Responses": {
+                "1": "Without a subsidy",
+                "2": "With the subsidy they had at project entry",
+                "3": "With an on-going subsidy acquired since project entry",
+                "4": "Only with financial assistance other than a subsidy"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 1 & Response 2",
+            "Condition": "If Moved to new housing unit for 'Housing Assessment at Exit'",
+            "Subsidy information": {
+              "Responses": {
+                "1": "With on-going subsidy",
+                "2": "Without an on-going subsidy"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Prescribed Anti-Retroviral": {
+    "Fields": {
+      "Information Date": {
+        "Response": "[date field]"
+      },
+      "Has the participant been prescribed anti-retroviral drugs?": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  }
+}

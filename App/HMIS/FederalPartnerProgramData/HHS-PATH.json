@@ -1,0 +1,102 @@
+{
+  "Services Provided – PATH Funded": {
+    "Fields": {
+      "Date of Service": {
+        "Response": "[date field]"
+      },
+      "Type of PATH FUNDED Service Provided": {
+        "Responses": {
+          "1": "Re-engagement",
+          "2": "Screening",
+          "14": "Clinical assessment",
+          "3": "Habilitation/rehabilitation",
+          "4": "Community Mental Health",
+          "5": "Substance use treatment",
+          "6": "Case management",
+          "7": "Residential supportive services",
+          "8": "Housing minor renovation",
+          "9": "Housing moving assistance",
+          "10": "Housing eligibility determination",
+          "11": "Security deposits",
+          "12": "One-time rent for eviction prevention"
+        }
+      }
+    }
+  },
+  "Referrals Provided PATH": {
+    "Fields": {
+      "Date of Referral": {
+        "Response": "[date field]"
+      },
+      "Type of Referral": {
+        "Responses": {
+          "1": "Community Mental Health",
+          "2": "Substance Use Treatment",
+          "3": "Primary Health/ Dental Care",
+          "4": "Job Training",
+          "5": "Educational Services",
+          "6": "Housing Services",
+          "11": "Temporary Housing",
+          "7": "Permanent Housing",
+          "8": "Income Assistance",
+          "9": "Employment Assistance",
+          "10": "Medical Insurance"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 & Responses 1-10",
+            "Condition": "If any 'Type of Referral' made",
+            "Select Outcome for each": {
+              "Responses": {
+                "1": "Attained",
+                "2": "Not attained",
+                "3": "Unknown"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "PATH Status": {
+    "Fields": {
+      "Date of Status Determination": {
+        "Response": "[date field]"
+      },
+      "Client Became Enrolled in PATH": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 & Response 0",
+            "Condition": "If No for 'Client Became Enrolled in PATH'",
+            "Reason not enrolled": {
+              "Responses": {
+                "1": "Client was found ineligible for PATH",
+                "2": "Client was not enrolled for other reason(s)",
+                "3": "Unable to locate client"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Connection with SOAR": {
+    "Fields": {
+      "Connection with SOAR": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  }
+}

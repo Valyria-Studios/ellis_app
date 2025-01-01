@@ -1,0 +1,499 @@
+{
+  "Veterans Information": {
+    "Fields": {
+      "Year Entered Military Service": {
+        "Response": "[year]"
+      },
+      "Year Separated from Military Service": {
+        "Response": "[year]"
+      },
+      "Theatre of Operations": {
+        "World War II": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        },
+        "Korean War": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        },
+        "Vietnam War": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        },
+        "Persian Gulf War (Operation Desert Storm)": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        },
+        "Afghanistan (Operation Enduring Freedom)": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        },
+        "Iraq (Operation Iraqi Freedom)": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        },
+        "Iraq (Operation New Dawn)": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        },
+        "Other Peace-keeping Operations or Military Interventions": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes",
+            "8": "Client doesn’t know",
+            "9": "Client prefers not to answer",
+            "99": "Data not collected"
+          }
+        }
+      },
+      "Branch of the Military": {
+        "Responses": {
+          "1": "Army",
+          "2": "Air Force",
+          "3": "Navy",
+          "4": "Marines",
+          "6": "Coast Guard",
+          "7": "Space Force",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      },
+      "Discharge Status": {
+        "Responses": {
+          "1": "Honorable",
+          "2": "General under honorable conditions",
+          "6": "Under other than honorable conditions (OTH)",
+          "4": "Bad conduct",
+          "5": "Dishonorable",
+          "7": "Uncharacterized",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  },
+  "Services Provided – SSVF": {
+    "Fields": {
+      "Date of Service": {
+        "Response": "[date field]"
+      },
+      "Type of Service": {
+        "Responses": {
+          "1": "Outreach services",
+          "2": "Case management services",
+          "3": "Assistance obtaining VA benefits",
+          "4": "Assistance obtaining/coordinating other public benefits",
+          "5": "Direct provision of other public benefits",
+          "6": "Other (non-TFA) supportive service approved by VA",
+          "7": "Shallow Subsidy",
+          "8": "Returning Home",
+          "9": "Rapid Resolution"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 Response 3",
+            "Condition": "If 'Assistance obtaining VA benefits'",
+            "Responses": {
+              "1": "VA vocational and rehabilitation counseling",
+              "2": "Employment and training services",
+              "3": "Educational assistance",
+              "4": "Health care services"
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 2 Response 4",
+            "Condition": "If 'Assistance obtaining/coordinating other public benefits'",
+            "Responses": {
+              "1": "Health care services",
+              "2": "Daily living services",
+              "3": "Personal financial planning services",
+              "4": "Transportation services",
+              "5": "Income support services",
+              "6": "Fiduciary and representative payee services",
+              "7": "Legal services – child support",
+              "8": "Legal services – eviction prevention",
+              "9": "Legal services – outstanding fines and penalties",
+              "10": "Legalservices – restore/acquire driver’s license",
+              "11": "Legalservices – other",
+              "12": "Child care",
+              "13": "Housing counseling"
+            }
+          },
+          {
+            "Name": "Dependent C",
+            "Description": "Dependent to Field 2 Response 5",
+            "Condition": "If 'Direct provision of other public benefits'",
+            "Responses": {
+              "1": "Personal financial planning services",
+              "2": "Transportation services",
+              "3": "Income support services",
+              "4": "Fiduciary and representative payee services",
+              "5": "Legal services – child support",
+              "6": "Legal services – eviction prevention",
+              "7": "Legal services – outstanding fines and penalties",
+              "8": "Legalservices – restore/acquire driver’s license",
+              "9": "Legalservices – other",
+              "10": "Child care",
+              "11": "Housing counseling"
+            }
+          },
+          {
+            "Name": "Dependent D",
+            "Description": "Dependent to Field 2 Response 6",
+            "Condition": "If 'Other (Non-TFA) Supportive Service approved by VA'",
+            "Response": "[text box] Specify"
+          }
+        ]
+      }
+    }
+  },
+  "Financial Assistance – SSVF": {
+    "Fields": {
+      "Start Date of Financial Assistance": {
+        "Response": "[date field]"
+      },
+      "Financial Assistance Amount": {
+        "Response": "[currency/decimal]"
+      },
+      "Financial Assistance Type": {
+        "Responses": {
+          "1": "Rental assistance",
+          "4": "Utility fee payment assistance",
+          "2": "Security deposit",
+          "3": "Utility deposit",
+          "5": "Moving costs",
+          "8": "Transportation services: tokens/vouchers",
+          "9": "Transportation services: vehicle repair/maintenance",
+          "10": "Child care",
+          "12": "General housing stability assistance",
+          "14": "Emergency housing assistance",
+          "15": "Shallow subsidy financial assistance",
+          "16": "Food assistance",
+          "17": "Landlord incentive",
+          "18": "Tenant incentive"
+        }
+      },
+      "End Date of Financial Assistance": {
+        "Response": "[date field]"
+      }
+    }
+  },
+  "Percent of AMI (SSVF Eligibility)": {
+    "Fields": {
+      "Household Income as a Percentage of AMI": {
+        "Responses": {
+          "1": "30% or less",
+          "2": "31% to 50%",
+          "3": "51% to 80%",
+          "4": "81% or greater"
+        }
+      }
+    }
+  },
+  "VAMC Station Number": {
+    "Fields": {
+      "VAMC Station Number": {
+        "Response": "[drop down list of all VAMC Station codes and names]"
+      }
+    }
+  },
+  "HP Targeting Criteria": {
+    "Fields": {
+      "Is Homelessness Prevention targeting screener required?": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependency A",
+            "Description": "dependent to Field 1 Response 1",
+            "Housing loss expected within": {
+              "Responses": {
+                "0": "1-6 days",
+                "1": "7-13 days",
+                "2": "14-21 days",
+                "3": "More than 21 days"
+              }
+            }
+          },
+          {
+            "Name": "Dependency B",
+            "Description": "dependent to Field 1 Response 1",
+            "Current household income": {
+              "Responses": {
+                "0": "$0 (i.e., not employed, not receiving cash benefits, no other current income)",
+                "1": "1-14% of Area Median Income (AMI) for household size",
+                "2": "15-30% of AMI for household size",
+                "3": "More than 30% of AMI for household size"
+              }
+            }
+          },
+          {
+            "Name": "Dependency C",
+            "Description": "dependent to Field 1 Response 1",
+            "Past experience of Homelessness (street/shelter/transitional housing) (any adult)": {
+              "Responses": {
+                "0": "Most recent episode occurred within the last year",
+                "1": "Most recent episode occurred more than one year ago",
+                "2": "None"
+              }
+            }
+          },
+          {
+            "Name": "Dependency D",
+            "Description": "dependent to Field 1 Response 1",
+            "Head of Household is not a current leaseholder/renter of unit": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency E",
+            "Description": "dependent to Field 1 Response 1",
+            "Head of Household has never been a leaseholder/renter of unit": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency F",
+            "Description": "dependent to Field 1 Response 1",
+            "Currently at risk of losing a tenant-based housing subsidy or housing in a subsidized building or unit (household)": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency G",
+            "Description": "dependent to Field 1 Response 1",
+            "Rental Evictions within the past 7 years (any adult)": {
+              "Responses": {
+                "0": "No prior rental evictions",
+                "1": "1 prior rental eviction",
+                "2": "2 or more prior rental evictions"
+              }
+            }
+          },
+          {
+            "Name": "Dependency H",
+            "Description": "dependent to Field 1 Response 1",
+            "Criminal record for arson, drug dealing or manufacture, or felony offense against persons or property (any adult)": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency I",
+            "Description": "dependent to Field 1 Response 1",
+            "Incarcerated as adult (any adult in household)": {
+              "Responses": {
+                "0": "Not incarcerated",
+                "1": "Incarcerated once",
+                "2": "Incarcerated two or more times"
+              }
+            }
+          },
+          {
+            "Name": "Dependency J",
+            "Description": "dependent to Field 1 Response 1",
+            "Discharged from jail or prison within last six months after incarceration of 90 days or more (adults)": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency K",
+            "Description": "dependent to Field 1 Response 1",
+            "Registered sex offender (any household members)": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency L",
+            "Description": "dependent to Field 1 Response 1",
+            "Head of Household with disabling condition (physical health, mental health, substance use) that directly affects ability to secure/maintain housing": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency M",
+            "Description": "dependent to Field 1 Response 1",
+            "Currently pregnant (any household member)": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency N",
+            "Description": "dependent to Field 1 Response 1",
+            "Single parent/guardian household with minor child(ren)": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency O",
+            "Description": "dependent to Field 1 Response 1",
+            "Household includes one or more young children (age six or under), or a child who requires significant care": {
+              "Responses": {
+                "0": "No",
+                "1": "Youngest child is under 1 year old",
+                "2": "Youngest child is 1 to 6 years old and/or one or more children (any age) require significant care."
+              }
+            }
+          },
+          {
+            "Name": "Dependency P",
+            "Description": "dependent to Field 1 Response 1",
+            "Household size of 5 or more requiring at least 3 bedrooms (due to age/gender mix)": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency Q",
+            "Description": "dependent to Field 1 Response 1",
+            "Household includes one or more members of an overrepresented population in the homelessness system when compared to the general population.": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes"
+              }
+            }
+          },
+          {
+            "Name": "Dependency R",
+            "Description": "dependent to Field 1 Response 1",
+            "HP applicant total points": "[integer]"
+          },
+          {
+            "Name": "Dependency S",
+            "Description": "dependent to Field 1 Response 1",
+            "Grantee targeting threshold score": "[integer]"
+          }
+        ]
+      }
+    }
+  },
+  "HUD-VASH Voucher Tracking": {
+    "Fields": {
+      "Information date": {
+        "Response": "[date field]"
+      },
+      "Voucher change": {
+        "Responses": {
+          "1": "Referral package forwarded to PHA",
+          "2": "Voucher denied by PHA",
+          "3": "Voucher issued by PHA",
+          "4": "Voucher revoked or expired",
+          "5": "Voucher in use – veteran moved into housing",
+          "6": "Voucher was ported locally",
+          "7": "Voucher was administratively absorbed by new PHA",
+          "8": "Voucher was converted to Housing Choice Voucher",
+          "9": "Veteran exited – voucher was returned",
+          "10": "Veteran exited – family maintained the voucher",
+          "11": "Veteran exited – prior to ever receiving a voucher",
+          "12": "Other"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 & Response 12",
+            "Condition": "If Other",
+            "Response": "[text box] Specify"
+          }
+        ]
+      }
+    }
+  },
+  "HUD-VASH Exit Information": {
+    "Fields": {
+      "Case Management Exit Reason": {
+        "Responses": {
+          "1": "Accomplished goals and/or obtained services and no longer needs CM",
+          "2": "Transferred to another HUD-VASH program site",
+          "3": "Found/chose other housing",
+          "4": "Did not comply with HUD-VASH CM",
+          "5": "Eviction and/or other housing related issues",
+          "6": "Unhappy with HUD-VASH housing",
+          "7": "No longer financially eligible for HUD-VASH voucher",
+          "8": "No longer interested in participating in this program",
+          "9": "Veteran cannot be located",
+          "10": "Veteran too ill to participate at this time",
+          "11": "Veteran is incarcerated",
+          "12": "Veteran is deceased",
+          "13": "Other"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 1 & Response 13",
+            "Condition": "If Other",
+            "Response": "[text box] Specify"
+          }
+        ]
+      }
+    }
+  }
+}

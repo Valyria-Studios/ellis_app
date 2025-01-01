@@ -1,0 +1,113 @@
+{
+  "Element Name": "Moving On Assistance Provided",
+  "Fields": {
+    "Date of Moving On Assistance": {
+      "Response": "[date field]"
+    },
+    "Moving On Assistance": {
+      "Responses": {
+        "1": "Subsidized housing application assistance",
+        "2": "Financial assistance for Moving On (e.g., security deposit, moving expenses)",
+        "3": "Non-financial assistance for Moving On (e.g., housing navigation, transition support)",
+        "4": "Housing referral/placement",
+        "5": "Other (please specify)"
+      },
+      "Dependents": [
+        {
+          "Name": "Dependent A",
+          "Description": "Dependent to Field 2 Response 5",
+          "Condition": "Other (please specify)",
+          "Response": "[text]"
+        }
+      ]
+    }
+  },
+  "Youth Education Status": {
+    "Fields": {
+      "Information Date": {
+        "Response": "(date information was collected) ([date field])"
+      },
+      "Current school enrollment and attendance": {
+        "Responses": {
+          "0": "Not currently enrolled in any school or educational course",
+          "1": "Currently enrolled but NOT attending regularly (when school or the course is in session)",
+          "2": "Currently enrolled and attending regularly (when school or the course is in session)",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 Response 0",
+            "Most Recent Educational Status": {
+              "Responses": {
+                "0": "K12: Graduated from high school",
+                "1": "K12: Obtained GED",
+                "2": "K12: Dropped out",
+                "3": "K12: Suspended",
+                "4": "K12: Expelled",
+                "5": "Higher education: Pursuing a credential but not currently attending",
+                "6": "Higher education: Dropped out",
+                "7": "Higher education: Obtained a credential/degree",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 2 Response 1 OR Response 2",
+            "Current Educational Status": {
+              "Responses": {
+                "0": "Pursuing a high school diploma or GED",
+                "1": "Pursuing Associate’s Degree",
+                "2": "Pursuing Bachelor’s Degree",
+                "3": "Pursuing Graduate Degree",
+                "4": "Pursuing other post-secondary credential",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Translation Assistance Needed": {
+    "Fields": {
+      "Translation Assistance Needed": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 Response 1",
+            "Preferred Language": {
+              "Responses": {
+                "100-426": "Languages selected by the HMIS Lead",
+                "21": "Different Preferred Language",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Dependent A response 21",
+            "Condition": "If Different Preferred Language",
+            "Response": "[text]"
+          }
+        ]
+      }
+    }
+  }
+}

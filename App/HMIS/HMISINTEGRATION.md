@@ -222,6 +222,8 @@ This is just an example of one element (**Name**) and a field (**nameDataQuality
 
 An example template made from the information I know is the other file in this folder called _HMISTemplate.json_. This takes what is shown in the [Data Dictionary](https://files.hudexchange.info/resources/documents/HMIS-Data-Dictionary-2024.pdf "2024 Data Dictionary") and displays them as a json file. That file is only a template for PDDEs and UDEs, nothing program related is within that file.
 
+Program related templates are within the *Federal Partner Program Data* and *Program Specific Data* folders. Each of those folders contain templates that breakdown the data elements that relate to programs. These files contain only the **required** data elements for those programs. There are additional elements that are needed for programs, such as the common program elements and the referral information.
+
 ---
 
 ### How do we store data in a project?
@@ -236,7 +238,7 @@ It should be a json file that has all the data arrayed into key-value pairs. An 
 
 ## HMIS CSV Documentation
 
-This is how the final file should look when it comes to sending the report to the hUD. Each of the values are specified in their structure using the [HMIS CSV Specifications](https://files.hudexchange.info/resources/documents/HMIS-CSV-Format-Specifications-2024.pdf "HMIS CSV Specifications") document.
+This is how the final file should look when it comes to sending the report to the HUD. Each of the values are specified in their structure using the [HMIS CSV Specifications](https://files.hudexchange.info/resources/documents/HMIS-CSV-Format-Specifications-2024.pdf "HMIS CSV Specifications") document.
 
 The breakdown of each element and how they should look in the final CSV document, is shown there.
 

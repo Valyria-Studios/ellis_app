@@ -1,0 +1,652 @@
+{
+  "Referral Source": {
+    "Fields": {
+      "Referral Source": {
+        "Responses": {
+          "1": "Self-Referral",
+          "2": "Individual: Parent/Guardian/Relative/Friend/Foster Parent/Other Individual",
+          "7": "Outreach Project",
+          "11": "Temporary Shelter",
+          "18": "Residential Project",
+          "28": "Hotline",
+          "30": "Child Welfare/CPS",
+          "34": "Juvenile Justice",
+          "35": "Law Enforcement/ Police",
+          "37": "Mental Hospital",
+          "38": "School",
+          "39": "Other Organization",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 & Response 7",
+            "Condition": "If Outreach Project: FYSB for 'Referral Source' is selected",
+            "Number of times approached by outreach prior to entering the project": "[Box for integer response]"
+          }
+        ]
+      }
+    }
+  },
+  "RHY – BCP Status": {
+    "Fields": {
+      "Date of Status Determination": {
+        "Response": "[date field]"
+      },
+      "Youth Eligible for RHY Services": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 & Response 0",
+            "Condition": "If No for 'Youth Eligible for RHY Services'",
+            "Reason why services are not funded by BCP grant": {
+              "Responses": {
+                "1": "Out of age range",
+                "2": "Ward of the State – Immediate Reunification",
+                "3": "Ward of the Criminal Justice System – Immediate Reunification",
+                "4": "Other"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 2 & Response 1",
+            "Condition": "If Yes for 'Youth Eligible for RHY Services'",
+            "Runaway youth": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Sexual Orientation": {
+    "Fields": {
+      "Sexual Orientation": {
+        "Responses": {
+          "1": "Heterosexual",
+          "2": "Gay",
+          "3": "Lesbian",
+          "4": "Bisexual",
+          "5": "Questioning/Unsure",
+          "6": "Other",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Response 6",
+            "Condition": "If other, please describe",
+            "Response": "[text]"
+          }
+        ]
+      }
+    }
+  },
+  "Last Grade Completed": {
+    "Fields": {
+      "Last Grade Completed": {
+        "Responses": {
+          "1": "Less than Grade 5",
+          "2": "Grades 5-6",
+          "3": "Grades 7-8",
+          "4": "Grades 9-11",
+          "5": "Grade 12/High school diploma",
+          "6": "School program does not have grade levels",
+          "7": "GED",
+          "10": "Some college",
+          "11": "Associate’s degree",
+          "12": "Bachelor’s degree",
+          "13": "Graduate degree",
+          "14": "Vocational certification",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  },
+  "School Status": {
+    "Fields": {
+      "School Status": {
+        "Responses": {
+          "1": "Attending school regularly",
+          "2": "Attending school irregularly",
+          "3": "Graduated from high school",
+          "4": "Obtained GED",
+          "5": "Dropped out",
+          "6": "Suspended",
+          "7": "Expelled",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  },
+  "Employment Status": {
+    "Fields": {
+      "Information Date": {
+        "Response": "[date field]"
+      },
+      "Employed": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 & Response 1",
+            "Condition": "If Yes for 'Employed'",
+            "Type of Employment": {
+              "Responses": {
+                "1": "Full-time",
+                "2": "Part-time",
+                "3": "Seasonal/ sporadic (including day labor)"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 2 & Response 0",
+            "Condition": "If No for 'Employed'",
+            "Why Not Employed": {
+              "Responses": {
+                "1": "Looking for work",
+                "2": "Unable to work",
+                "3": "Not looking for work"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "General Health Status": {
+    "Fields": {
+      "General Health Status": {
+        "Responses": {
+          "1": "Excellent",
+          "2": "Very good",
+          "3": "Good",
+          "4": "Fair",
+          "5": "Poor",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  },
+  "Dental Health Status": {
+    "Fields": {
+      "Dental Health Status": {
+        "Responses": {
+          "1": "Excellent",
+          "2": "Very good",
+          "3": "Good",
+          "4": "Fair",
+          "5": "Poor",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  },
+  "Mental Health Status": {
+    "Fields": {
+      "Mental Health Status": {
+        "Responses": {
+          "1": "Excellent",
+          "2": "Very good",
+          "3": "Good",
+          "4": "Fair",
+          "5": "Poor",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      }
+    }
+  },
+  "Pregnancy Status": {
+    "Fields": {
+      "Pregnancy Status": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2 & Response 1",
+            "Condition": "If Yes for 'Pregnancy Status'",
+            "Due Date": "[date field]"
+          }
+        ]
+      }
+    }
+  },
+  "Formerly a Ward of Child Welfare/Foster Care Agency": {
+    "Fields": {
+      "Formerly a Ward of Child Welfare or Foster Care Agency": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 & Response 1",
+            "Condition": "If Yes for 'Formerly a Ward of Child Welfare or Foster Care Agency'",
+            "Number of Years": {
+              "Responses": {
+                "1": "Less than one year",
+                "2": "1 to 2 years",
+                "3": "3 to 5 or more years"
+              }
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent B",
+                "Description": "Dependent to Dependent A & Response 1",
+                "Condition": "If Less than one year for 'Number of Years'",
+                "Number of Months": "[integers 1-11]"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "Formerly a Ward of Juvenile Justice System": {
+    "Fields": {
+      "Formerly a Ward of Juvenile Justice System": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 & Response 1",
+            "Condition": "If Yes for 'Formerly a Ward of Juvenile Justice System'",
+            "Number of Years": {
+              "Responses": {
+                "1": "Less than one year",
+                "2": "1 to 2 years",
+                "3": "3 to 5 or more years"
+              }
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent B",
+                "Description": "Dependent to Dependent A & Response 1",
+                "Condition": "If Less than one year for 'Number of Years'",
+                "Number of Months": "[integers 1-11]"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "Family Critical Issues": {
+    "Fields": {
+      "Unemployment – Family member": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        }
+      },
+      "Mental Health Disorder – Family member": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        }
+      },
+      "Physical Disability – Family member": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        }
+      },
+      "Alcohol or Substance Use Disorder – Family member": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        }
+      },
+      "Insufficient Income to support youth – Family member": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        }
+      },
+      "Incarcerated Parent of Youth": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        }
+      }
+    }
+  },
+  "RHY Service Connections BCP-P BCP-ES TLP&MGH SOP DEMO": {
+    "Fields": {
+      "Date of Service": {
+        "Response": "[date field]"
+      },
+      "Type of RHY Service": {
+        "Responses": {
+          "2": "Community service/service learning (CSL)",
+          "7": "Criminal justice /legal services",
+          "5": "Education",
+          "6": "Employment and/or training services",
+          "14": "Health/medical care",
+          "26": "Home-based Services",
+          "8": "Life skills training",
+          "10": "Parenting education for youth with children",
+          "27": "Post-natal newborn care (wellness exams; immunizations)",
+          "12": "Post-natal care for client (person who gave birth)",
+          "13": "Pre-natal care",
+          "28": "STD Testing",
+          "29": "Street-based Services",
+          "17": "Substance use disorder treatment",
+          "18": "Substance Use disorder Ed/Prevention Services"
+        }
+      }
+    }
+  },
+  "Commercial Sexual Exploitation/Sex Trafficking": {
+    "Fields": {
+      "Ever received anything in exchange for sex (e.g., money, food, drugs, shelter)": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 & Response 1",
+            "Condition": "If Yes for 'Ever received anything in exchange for sex'",
+            "In the last three months": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          {
+            "Name": "Dependent B",
+            "Description": "Dependent to Field 1 & Response 1",
+            "Condition": "If Yes for 'Ever received anything in exchange for sex'",
+            "How many times": {
+              "Responses": {
+                "1": "1-3",
+                "2": "4-7",
+                "3": "8-11",
+                "4": "12 or more",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            }
+          },
+          {
+            "Name": "Dependent C",
+            "Description": "Dependent to Field 1 & Response 1",
+            "Condition": "If Yes for 'Ever received anything in exchange for sex'",
+            "Ever made/persuaded/forced to have sex in exchange for something": {
+              "Responses": {
+                "0": "No",
+                "1": "Yes",
+                "8": "Client doesn’t know",
+                "9": "Client prefers not to answer",
+                "99": "Data not collected"
+              }
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent D",
+                "Description": "Dependent to Dependent C & Response 1",
+                "Condition": "If Yes for 'Ever made/persuaded/forced to have sex in exchange for something?'",
+                "In the last three months?": {
+                  "Responses": {
+                    "0": "No",
+                    "1": "Yes",
+                    "8": "Client doesn’t know",
+                    "9": "Client prefers not to answer",
+                    "99": "Data not collected"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "Labor Exploitation/Trafficking": {
+    "Fields": {
+      "Ever afraid to quit/leave work due to threats of violence to yourself, family, or friends": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      },
+      "Ever promised work where work or payment was different than you expected": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      },
+      "Dependents": [
+        {
+          "Name": "Dependent A",
+          "Description": "Dependent to Field 1 & 2 Response 1",
+          "Condition": "If Yes for either 'Workplace violence threats' OR 'Workplace promise difference'",
+          "Felt forced, coerced, pressured, or tricked into continuing the job": {
+            "Responses": {
+              "0": "No",
+              "1": "Yes",
+              "8": "Client doesn’t know",
+              "9": "Client prefers not to answer",
+              "99": "Data not collected"
+            }
+          }
+        },
+        {
+          "Name": "Dependent B",
+          "Description": "Dependent to Field 1 & 2 Response 1",
+          "Condition": "If Yes for either 'Workplace violence threats' OR 'Workplace promise actual difference'",
+          "In the last 3 months": {
+            "Responses": {
+              "0": "No",
+              "1": "Yes",
+              "8": "Client doesn’t know",
+              "9": "Client prefers not to answer",
+              "99": "Data not collected"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "Project Completion Status": {
+    "Fields": {
+      "Project Completion Status": {
+        "Responses": {
+          "1": "Completed project",
+          "2": "Client voluntarily left early",
+          "3": "Client was expelled or otherwise involuntarily discharged from project"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 & Response 3",
+            "Condition": "If Client was expelled or otherwise involuntarily discharged from project for 'Project Completion Status'",
+            "Select the major reason": {
+              "Responses": {
+                "1": "Criminal activity/destruction of property/violence",
+                "2": "Non-compliance with project rules",
+                "3": "Non-payment of rent/occupancy charge",
+                "4": "Reached maximum time allowed by project",
+                "5": "Project terminated",
+                "6": "Unknown/disappeared"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Counseling": {
+    "Fields": {
+      "Client received counseling": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 1 & Response 1",
+            "Condition": "If Yes",
+            "Identify the type(s) of counseling received": {
+              "Responses": {
+                "1": "Individual",
+                "2": "Family",
+                "3": "Group – including peer counseling"
+              }
+            },
+            "Dependents": [
+              {
+                "Name": "Dependent B",
+                "Description": "Dependent to Field 1 & Response 1",
+                "Condition": "If yes",
+                "Identify the number of sessions received by exit": "[integers 1-48+]"
+              }
+            ]
+          }
+        ],
+        "Total number of sessions planned in client’s treatment or service plan": "[integers 1-48+]",
+        "A plan is in place to start or continue counseling after exit": {
+          "Responses": {
+            "0": "No",
+            "1": "Yes"
+          }
+        }
+      }
+    }
+  },
+  "Safe and Appropriate Exit": {
+    "Fields": {
+      "Exit destination safe – as determined by the client": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "8": "Client doesn’t know",
+          "9": "Client prefers not to answer",
+          "99": "Data not collected"
+        }
+      },
+      "Exit destination safe – as determined by the project/caseworker": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "2": "Worker does not know"
+        }
+      },
+      "Client has permanent positive adult connections outside of project": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "2": "Worker does not know"
+        }
+      },
+      "Client has permanent positive peer connections outside of project": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "2": "Worker does not know"
+        }
+      },
+      "Client has permanent positive community connections outside of project": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "2": "Worker does not know"
+        }
+      }
+    }
+  },
+  "Aftercare Plans": {
+    "Fields": {
+      "Information Date": {
+        "Response": "[date field]"
+      },
+      "Aftercare was provided": {
+        "Responses": {
+          "0": "No",
+          "1": "Yes",
+          "9": "Client prefers not to answer"
+        },
+        "Dependents": [
+          {
+            "Name": "Dependent A",
+            "Description": "Dependent to Field 2",
+            "Condition": "If yes",
+            "Identify the primary way it was provided": {
+              "Responses": {
+                "1": "Via email/social media",
+                "2": "Via telephone",
+                "3": "In person: one-on-one",
+                "4": "In person: group"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

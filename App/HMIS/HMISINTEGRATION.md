@@ -100,6 +100,41 @@ To know which data elements align with what projects and programs look for the "
 
 ---
 
+### What additional fields are needed for projects that don’t exist within a referral in the Ellis App?
+
+The Ellis app creates referrals for Nonprofits that has a set of data, like user data and information about that specific referrals. Projects contain data as stated below, some of these data points are not contained in a referral from the Ellis App. Below are the data points that are needed for a project, that we do not have within a referral process or the client data.
+
+The user data structure can be changed to include these missing fields: 
+ 
+>1. Suffix
+>2. Name Data Quality
+>3. SSN Data Quality
+>4. DOB Data Quality
+>5. Veteran Status
+>6. Disability Condition
+
+The organization data structure are missing these elements: 
+
+>1. Victim Service Provider
+>2. Continuum of Care Information
+>3. Funding Sources
+>4. Bed and Unit Inventory Information
+>5. HMIS Participation Status
+>6. Coordinated Entry Participation Status
+
+
+These data elements and which fields they contain can be found in the *PDDEandUDETemplate* within this folder.
+
+---
+### How will we get additional elements?
+
+There are elements that are needed in a project, depending on the programs an organization is a part of. Due to this, the universal elements that can exist via the user and organization data structure, we need to still retrieve the elements needed for those projects. 
+
+How are we going to retrieve these data elements? I assume we create a new page on the Ellis App for this.
+
+---
+### What values can be stored within the client object?
+
 ## Project Setup
 
 > One of the most critical steps in accurate data collection and reporting is ensuring that a project

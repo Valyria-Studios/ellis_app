@@ -171,85 +171,85 @@
             "Grant Identifier": "",
             "Grant Start Date": "[date field]",
             "Grant End Date": "[date field]"
+          }
+        },
+        "Bed and Unit Inventory Information": {
+          "Inventory start date": "[date field]",
+          "Inventory end date": "[date field]",
+          "Continuum Code": "",
+          "Household type": {
+            "Responses": {
+              "1": "Households without children",
+              "3": "Households with at least one adult and one child",
+              "4": "Households with only children"
+            }
           },
-          "Bed and Unit Inventory Information": {
-            "Inventory start date": "[date field]",
-            "Inventory end date": "[date field]",
-            "Continuum Code": "",
-            "Household type": {
-              "Responses": {
-                "1": "Households without children",
-                "3": "Households with at least one adult and one child",
-                "4": "Households with only children"
-              }
-            },
-            "Bed Type": {
-              "Condition": "[If 2.02 Project Type = ‘Emergency Shelter – Entry Exit’ or ‘Emergency Shelter – Night-by-Night’]",
-              "Responses": {
-                "1": "Facility-based beds",
-                "2": "Voucher beds",
-                "3": "Other beds"
-              }
-            },
-            "Availability": {
-              "Condition": "[If 2.02 Project Type = ‘Emergency Shelter – Entry Exit’ or ‘Emergency Shelter – Night-by-Night’]",
-              "Responses": {
-                "1": "Year-round",
-                "2": "Seasonal",
-                "3": "Overflow"
-              }
-            },
-            "Beds dedicated to chronically homeless veterans": "[integer]",
-            "Beds dedicated to youth-veterans": "[integer]",
-            "Beds dedicated to any other veteran": "[integer]",
-            "Beds dedicated to chronically homeless youth": "[integer]",
-            "Beds dedicated to any other youth": "[integer]",
-            "Beds dedicated to any other CH": "[integer]",
-            "Non-dedicated beds": "[integer]",
-            "Total bed inventory": "[integer]",
-            "Total unit inventory": "[integer]"
+          "Bed Type": {
+            "Condition": "[If 2.02 Project Type = ‘Emergency Shelter – Entry Exit’ or ‘Emergency Shelter – Night-by-Night’]",
+            "Responses": {
+              "1": "Facility-based beds",
+              "2": "Voucher beds",
+              "3": "Other beds"
+            }
           },
+          "Availability": {
+            "Condition": "[If 2.02 Project Type = ‘Emergency Shelter – Entry Exit’ or ‘Emergency Shelter – Night-by-Night’]",
+            "Responses": {
+              "1": "Year-round",
+              "2": "Seasonal",
+              "3": "Overflow"
+            }
+          },
+          "Beds dedicated to chronically homeless veterans": "[integer]",
+          "Beds dedicated to youth-veterans": "[integer]",
+          "Beds dedicated to any other veteran": "[integer]",
+          "Beds dedicated to chronically homeless youth": "[integer]",
+          "Beds dedicated to any other youth": "[integer]",
+          "Beds dedicated to any other CH": "[integer]",
+          "Non-dedicated beds": "[integer]",
+          "Total bed inventory": "[integer]",
+          "Total unit inventory": "[integer]"
+        },
+        "HMIS Participation Status": {
           "HMIS Participation Status": {
-            "HMIS Participation Status": {
-              "Responses": {
-                "0": "Not Participating",
-                "1": "HMIS Participating",
-                "2": "Comparable Database Participating"
-              }
-            },
-            "Participation Status Start Date": "[date field]",
-            "Participation Status End Date": "[date field]"
+            "Responses": {
+              "0": "Not Participating",
+              "1": "HMIS Participating",
+              "2": "Comparable Database Participating"
+            }
           },
-          "Coordinated Entry Participation Status": {
-            "Project is a Coordinated Entry Access Point": {
-              "Responses": {
-                "0": "No",
-                "1": "Yes"
-              }
-            },
-            "Dependents": [
-              {
-                "Name": "Dependent A",
-                "Description": "Dependent to Field 1 Response 1",
-                "Provided by CE Project": {
-                  "Responses": {
-                    "1": "Homelessness Prevention Assessment, Screening, and/or Referral",
-                    "2": "Shelter Assessment, Screening, and/or Referral",
-                    "3": "Housing Assessment, Screening, and/or Referral",
-                    "4": "Direct Services (search and/or placement support)"
-                  }
+          "Participation Status Start Date": "[date field]",
+          "Participation Status End Date": "[date field]"
+        },
+        "Coordinated Entry Participation Status": {
+          "Project is a Coordinated Entry Access Point": {
+            "Responses": {
+              "0": "No",
+              "1": "Yes"
+            }
+          },
+          "Dependents": [
+            {
+              "Name": "Dependent A",
+              "Description": "Dependent to Field 1 Response 1",
+              "Provided by CE Project": {
+                "Responses": {
+                  "1": "Homelessness Prevention Assessment, Screening, and/or Referral",
+                  "2": "Shelter Assessment, Screening, and/or Referral",
+                  "3": "Housing Assessment, Screening, and/or Referral",
+                  "4": "Direct Services (search and/or placement support)"
                 }
               }
-            ],
-            "Project Receives CE Referrals": {
-              "Responses": {
-                "0": "No",
-                "1": "Yes"
-              }
-            },
-            "CE Participation Status Start Date": "[date field]",
-            "CE Participation Status End Date": "[date field]"
-          }
+            }
+          ],
+          "Project Receives CE Referrals": {
+            "Responses": {
+              "0": "No",
+              "1": "Yes"
+            }
+          },
+          "CE Participation Status Start Date": "[date field]",
+          "CE Participation Status End Date": "[date field]"
         },
         "UDEs": {
           "Name": {

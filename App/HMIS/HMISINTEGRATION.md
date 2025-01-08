@@ -104,35 +104,36 @@ To know which data elements align with what projects and programs look for the "
 
 The Ellis app creates referrals for Nonprofits that has a set of data, like user data and information about that specific referrals. Projects contain data as stated below, some of these data points are not contained in a referral from the Ellis App. Below are the data points that are needed for a project, that we do not have within a referral process or the client data.
 
-The user data structure can be changed to include these missing fields: 
- 
->1. Suffix
->2. Name Data Quality
->3. SSN Data Quality
->4. DOB Data Quality
->5. Veteran Status
->6. Disability Condition
+The user data structure can be changed to include these missing fields:
 
-The organization data structure are missing these elements: 
+> 1.  Suffix
+> 2.  Name Data Quality
+> 3.  SSN Data Quality
+> 4.  DOB Data Quality
+> 5.  Veteran Status
+> 6.  Disability Condition
 
->1. Victim Service Provider
->2. Continuum of Care Information
->3. Funding Sources
->4. Bed and Unit Inventory Information
->5. HMIS Participation Status
->6. Coordinated Entry Participation Status
+The organization data structure are missing these elements:
 
+> 1.  Victim Service Provider
+> 2.  Continuum of Care Information
+> 3.  Funding Sources
+> 4.  Bed and Unit Inventory Information
+> 5.  HMIS Participation Status
+> 6.  Coordinated Entry Participation Status
 
-These data elements and which fields they contain can be found in the *PDDEandUDETemplate* within this folder.
+These data elements and which fields they contain can be found in the _PDDEandUDETemplate_ within this folder.
 
 ---
+
 ### How will we get additional elements?
 
-There are elements that are needed in a project, depending on the programs an organization is a part of. Due to this, the universal elements that can exist via the user and organization data structure, we need to still retrieve the elements needed for those projects. 
+There are elements that are needed in a project, depending on the programs an organization is a part of. Due to this, the universal elements that can exist via the user and organization data structure, we need to still retrieve the elements needed for those projects.
 
 How are we going to retrieve these data elements? I assume we create a new page on the Ellis App for this.
 
 ---
+
 ### What values can be stored within the client object?
 
 ## Project Setup
@@ -257,7 +258,7 @@ This is just an example of one element (**Name**) and a field (**nameDataQuality
 
 An example template made from the information I know is the other file in this folder called _HMISTemplate.json_. This takes what is shown in the [Data Dictionary](https://files.hudexchange.info/resources/documents/HMIS-Data-Dictionary-2024.pdf "2024 Data Dictionary") and displays them as a json file. That file is only a template for PDDEs and UDEs, nothing program related is within that file.
 
-Program related templates are within the *Federal Partner Program Data* and *Program Specific Data* folders. Each of those folders contain templates that breakdown the data elements that relate to programs. These files contain only the **required** data elements for those programs. There are additional elements that are needed for programs, such as the common program elements and the referral information.
+Program related templates are within the _Federal Partner Program Data_ and _Program Specific Data_ folders. Each of those folders contain templates that breakdown the data elements that relate to programs. These files contain only the **required** data elements for those programs. There are additional elements that are needed for programs, such as the common program elements and the referral information.
 
 ---
 
@@ -304,8 +305,16 @@ This file is a technical file, to help have a common format and help simplify th
 Data elements that are in the [HMIS Data Dictionary](https://files.hudexchange.info/resources/documents/HMIS-Data-Dictionary-2024.pdf "2024 Data Dictionary").
 
 > This document defines CSV files and fields required for data exchange of all data elements defined
-> in theHMIS Data Dictionary, basic rules and assumptions for HMIS export and import processes,
+> in the HMIS Data Dictionary, basic rules and assumptions for HMIS export and import processes,
 > and general descriptions of terms used.
+
+### What types of files are in the HMIS CSV Specificaiton?
+
+These are the different file groups that exist as a CSV:
+
+> Files are grouped into the following sections based on the type of data they contain: Export,
+> Project Descriptor, Client, and Enrollment. A complete list of each data element and the name of
+> the CSV file in which it appears is included in Appendix A.
 
 ### CSV Document breakdown
 
@@ -396,5 +405,26 @@ Shows a chart of all the data elements/fields and the file they are associated w
 | W5 | Housing Assessment at Exit | Exit.csv |
 | W6 | Prescribed Anti-Retroviral | Disabilities.csv |
 
+## File Definitions
+
+### Column Breakdown
+
+Here are column descriptors that are in CSV files:
+
+| Column    | Descriptor                                                                                                                                                                                                                                                                                                                                                       |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **DE#**   | This is the data standards identification of fields; it includes the data element number and field identifier (numbers for primary fields and letters for dependent fields) as listed the HMIS Data Dictionary.                                                                                                                                                  |
+| **Name**  | This lists the CSV field name for each field defined. Many fields may be shortened, for example Date of birth to DOB.                                                                                                                                                                                                                                            |
+| **Type**  | The data type for the field. The types included are defined in the Data Types section.                                                                                                                                                                                                                                                                           |
+| **List**  | Fields that have response categories defined in the HMIS Data Dictionary or in this document will have a list number in this column. (Appendix B)                                                                                                                                                                                                                |
+| **Null**  | Fields that may be null are identified with a Y (for Yes). Any field not specifically permitted to be null should have an exported value of the appropriate data type; for non-nullable fields with response categories defined in the HMIS Data Dictionary, 99 (Data not collected) should be exported for blank fields/missing data unless otherwise specified |
+| **Notes** | Includes definitions, specific validation requirements, and other relevant information. Regular expressions are included for some fields as a supplement to descriptions of validation requirements; they are included as a convenience only and there is no requirement to use them.                                                                            |
+
+#### Repeated Data:
+
+- Data that are repeated in multiple files only have a **DE#** identified in the file where they
+  originate. For example, 5.08 Personal ID serves as a unique identifier (primary key) in
+  Client.csv and its **DE#** is listed there. The same identifier is used to associate data in other
+  CSV files with a client (foreign key), but the **DE#** is not listed when it appears in other files.
 
 ### How do you send the document to HUD/other programs?

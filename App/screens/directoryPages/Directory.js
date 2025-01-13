@@ -12,13 +12,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchComponent from "../../shared/SearchHeader";
-import { getSortedAmenities } from "../../filtering/sortByFiltering";
 import globalstyles from "../../shared/globalStyles";
-import { filterOpenNowAmenities } from "../../filtering/openNowFilter";
-import {
-  applyFiltersAndSort,
-  applyCategoryFilter,
-} from "../../filtering/amenityFilter";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Octicons } from "@expo/vector-icons";
 import imageMap from "../../shared/getProfileImage";
@@ -451,7 +445,7 @@ const styles = StyleSheet.create({
 
   activityText: {
     fontFamily: "gabarito-regular",
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
     fontSize: 18,
     color: "#094852",
     marginBottom: 10,

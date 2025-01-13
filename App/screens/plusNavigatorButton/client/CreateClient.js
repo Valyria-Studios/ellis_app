@@ -7,15 +7,12 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import RNPickerSelect from "react-native-picker-select";
 import globalstyles from "../../../shared/globalStyles";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView } from "react-native-gesture-handler";
 
 const CreateClient = ({ navigation }) => {
   const [selectedAmenity, setSelectedAmenity] = useState(null);

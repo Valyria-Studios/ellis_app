@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
@@ -84,8 +83,8 @@ const ServiceDirectory = ({ route, navigation }) => {
           return {
             option: optionName,
             categoryName: categoryName,
-            icon: categoryIcon || "default-icon", // Provide a default icon if missing
-            categoryLibrary: categoryLibrary || "Ionicons", // Provide a default library if missing
+            icon: categoryIcon || "star", // Provide a default icon if missing
+            categoryLibrary: categoryLibrary || Ionicons, // Provide a default library if missing
             count: JSON.parse(value),
             serviceId: serviceId || null, // Include serviceId to differentiate main and sub-services
           };

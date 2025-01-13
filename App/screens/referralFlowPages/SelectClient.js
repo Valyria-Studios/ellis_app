@@ -8,9 +8,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import Card from "../../shared/Card";
 import globalstyles from "../../shared/globalStyles";
-import { Feather, Octicons, Ionicons } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import imageMap from "../../shared/getProfileImage";
 import { SafeAreaView } from "react-native-safe-area-context";
 

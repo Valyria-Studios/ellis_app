@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { fetchChats } from "../api/Chats";
-import SearchComponent from "../shared/SearchHeader";
-import globalstyles from "../shared/globalStyles";
+import { fetchChats } from "../../api/Chats";
+import SearchComponent from "../../shared/SearchHeader";
+import globalstyles from "../../shared/globalStyles";
 
 const Messages = () => {
   const navigation = useNavigation();

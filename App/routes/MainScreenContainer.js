@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import FloatingActionMenu from "./FloatingActionMenu";
-import Messages from "../screens/Messages";
+import Messages from "../screens/messagesPages/Messages";
 import Settings from "../screens/settingsPage/Settings";
-import RelationshipPage from "../screens/Relationships";
+import RelationshipPage from "../screens/relationshipsPages/Relationships";
 import Directory from "../screens/directoryPages/Directory";
-
 
 const MainScreenContainer = () => {
   const [currentScreen, setCurrentScreen] = useState("Directory");

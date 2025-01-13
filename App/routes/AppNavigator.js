@@ -1,12 +1,10 @@
 import React, { lazy } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import Messages from "../screens/Messages";
+import Messages from "../screens/messagesPages/Messages";
 import Settings from "../screens/settingsPage/Settings";
-import RelationshipPage from "../screens/Relationships";
+import RelationshipPage from "../screens/relationshipsPages/Relationships";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Directory from "../screens/directoryPages/Directory";
-import ChatPage from "../screens/ChatPage";
 
 const Tab = createBottomTabNavigator();
 

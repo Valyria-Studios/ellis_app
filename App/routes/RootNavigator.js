@@ -1,9 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import AppNavigator from "./AppNavigator"; // Import your BottomTabNavigator
-import ChatPage from "../screens/ChatPage";
-import AmenityPage from "../screens/AmenityPage";
-import ProfilePage from "../screens/ProfilePage";
+import ChatPage from "../screens/chatPages/ChatPage";
+import AmenityPage from "../screens/amenityPages/AmenityPage";
+import ProfilePage from "../screens/profilePages/ProfilePage";
 import ServiceDirectory from "../screens/referralFlowPages/ServiceDirectory";
 import OrgProfile from "../screens/settingsPage/OrganizationProfile";
 import AccountPage from "../screens/settingsPage/AccountPage";
@@ -38,7 +37,6 @@ import NoteDetails from "../screens/plusNavigatorButton/notes/NoteDetails";
 import MyHours from "../screens/directoryPages/myHours";
 import MyServices from "../screens/directoryPages/myServices";
 import MyClients from "../screens/directoryPages/myClients";
-import AddClientToEngagement from "../data/testAddClient";
 import ServicePage from "../screens/plusNavigatorButton/services/services";
 import AppointmentScheduler from "../screens/coachReferPages/selectMeetingTime";
 import EntitiesScreen from "../screens/testingGeoApi";

@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Onboarding from "../screens/onboarding/Onboarding";
-import Login from "../screens/LoginPage";
+import Login from "../screens/onboarding/LoginPage";
 import Register from "../screens/onboarding/RegisterPage";
 import CreateOrganization from "../screens/onboarding/CreateOrganization";
 import ServiceHours from "../screens/onboarding/addServiceHours";

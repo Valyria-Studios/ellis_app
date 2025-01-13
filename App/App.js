@@ -3,15 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
-import { createStackNavigator } from "@react-navigation/stack";
-import OnBoardingNavigator from "./routes/OnboardingNavigator";
-import SelectForms from "./screens/formPages/SelectForms";
-import LegalFormScreen from "./screens/formPages/LegalForm";
-import FoodFormScreen from "./screens/formPages/FoodForm";
 import { MenuProvider } from "react-native-popup-menu";
-
-
-const Stack = createStackNavigator();
 
 const getFonts = () =>
   Font.loadAsync({
@@ -68,81 +60,3 @@ export default function App() {
     return null;
   }
 }
-// return <Test />;
-
-// return (
-//   <NavigationContainer>
-//     {onboardingComplete ? (
-//       <RootNavigator />
-//     ) : (
-//       <OnBoardingNavigator
-//         onCompleteOnboarding={handleCompleteOnboarding}
-//       />
-//     )}
-//   </NavigationContainer>
-// );
-
-// return (
-//   <NavigationContainer>
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="Select Forms"
-//         component={SelectForms}
-//         options={{
-//           headerShown: false,
-//         }}
-//       />
-//       <Stack.Screen
-//         name="Legal Form"
-//         component={LegalFormScreen}
-//         options={{
-//           headerShown: false,
-//         }}
-//       />
-//       <Stack.Screen
-//         name="Food Form"
-//         component={FoodFormScreen}
-//         options={{ headerShown: false }}
-//       />
-//     </Stack.Navigator>
-//   </NavigationContainer>
-// );
-
-// return (
-//   <NavigationContainer>
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="Create New Client Profile"
-//         component={CreateUser}
-//         options={{
-//           headerTitleAlign: "left",
-//           headerTitleStyle: {
-//             fontSize: 24,
-//             fontFamily: "gabarito-bold",
-//             color: "#171B1C",
-//           },
-//           headerStyle: {
-//             backgroundColor: "#F3F8F9",
-//             shadowOpacity: 0,
-//           },
-//         }}
-//       />
-//       <Stack.Screen
-//         name="Profile Admin Settings"
-//         component={AdminPage}
-//         options={{
-//           headerTitleAlign: "left",
-//           headerTitleStyle: {
-//             fontSize: 24,
-//             fontFamily: "gabarito-bold",
-//             color: "#171B1C",
-//           },
-//           headerStyle: {
-//             backgroundColor: "#F3F8F9",
-//             shadowOpacity: 0,
-//           }
-//         }}
-//       />
-//     </Stack.Navigator>
-//   </NavigationContainer>
-// );

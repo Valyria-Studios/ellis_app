@@ -8,11 +8,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import SearchComponent from "../shared/SearchHeader";
-import Card from "../shared/Card";
-import globalstyles from "../shared/globalStyles";
-import imageMap from "../shared/getProfileImage";
-import ProgressBar from "../shared/ProgressBar";
+import SearchComponent from "../../shared/SearchHeader";
+import Card from "../../shared/Card";
+import globalstyles from "../../shared/globalStyles";
+import imageMap from "../../shared/getProfileImage";
+import ProgressBar from "../../shared/ProgressBar";
 import { useNavigation } from "@react-navigation/native";
 
 const RelationshipPage = () => {
@@ -92,11 +92,11 @@ const RelationshipPage = () => {
           <Text style={styles.headerText}>Favorites</Text>
           <ScrollView horizontal={true}>
             <Image
-              source={require("../assets/images/userImage1.jpg")}
+              source={require("../../assets/images/userImage1.jpg")}
               style={styles.favoriteIcons}
             />
             <Image
-              source={require("../assets/images/userImage2.jpg")}
+              source={require("../../assets/images/userImage2.jpg")}
               style={styles.favoriteIcons}
             />
             {/* ... add more profiles as needed */}

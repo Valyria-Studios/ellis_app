@@ -11,17 +11,13 @@ import {
   ActivityIndicator,
   Linking,
 } from "react-native";
-import getAmenityImage from "../shared/getAmenityImage";
 import {
   Octicons,
-  MaterialCommunityIcons,
   MaterialIcons,
-  Ionicons,
   Feather,
   FontAwesome6,
 } from "@expo/vector-icons";
-import globalstyles from "../shared/globalStyles";
-import SocialMediaLinks from "../shared/SocialMediaIcon";
+import globalstyles from "../../shared/globalStyles";
 
 function AmenityPage({ route, navigation }) {
   const { amenity } = route.params;

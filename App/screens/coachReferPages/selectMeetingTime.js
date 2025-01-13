@@ -1,7 +1,7 @@
 // LOGIC FOR AVAILABLE TIMES AND DATES
 
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
 import globalstyles from "../../shared/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";

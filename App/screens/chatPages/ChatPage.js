@@ -7,7 +7,7 @@ import {
   TextInput,
   Button,
 } from "react-native";
-import mockFetchMessages from "../api/ChatMessages";
+import mockFetchMessages from "../../api/ChatMessages";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ChatPage({ route }) {

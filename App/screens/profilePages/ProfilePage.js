@@ -7,9 +7,8 @@
 // RENDER STATUS LOGIC
 // SHOW STATUS OF REQUESTS UNDER TITLE OF OPTION
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import {
-  ImageBackground,
   Text,
   View,
   StyleSheet,
@@ -19,23 +18,15 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { Dropdown } from "../shared/Dropdown";
-import ChecklistItem from "../shared/CheckBox";
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  Entypo,
-  Ionicons,
-  AntDesign,
-  FontAwesome5,
-} from "@expo/vector-icons";
-import globalstyles from "../shared/globalStyles";
-import imageMap from "../shared/getProfileImage";
-import ProgressBar from "../shared/ProgressBar";
+import { Dropdown } from "../../shared/Dropdown";
+import { MaterialIcons, Entypo, Ionicons } from "@expo/vector-icons";
+import globalstyles from "../../shared/globalStyles";
+import imageMap from "../../shared/getProfileImage";
+import ProgressBar from "../../shared/ProgressBar";
 import RNPickerSelect from "react-native-picker-select";
 import { useFocusEffect } from "@react-navigation/native";
 import { format, isToday, isYesterday } from "date-fns";
-import Card from "../shared/Card";
+import Card from "../../shared/Card";
 
 if (
   Platform.OS === "android" &&

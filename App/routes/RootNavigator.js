@@ -9,7 +9,6 @@ import AccountPage from "../screens/settingsPage/AccountPage";
 import NotificationsPage from "../screens/settingsPage/NotificationsPage";
 import HelpPage from "../screens/settingsPage/HelpPage";
 import LogOutPage from "../screens/settingsPage/LogOutPage";
-import LegalFormScreen from "../screens/formPages/LegalForm";
 import AdminManagementScreen from "../screens/adminManagement";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, StyleSheet } from "react-native";
@@ -122,19 +121,51 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Amenity Page"
         component={AmenityPage}
-        options={{
+        options={({ navigation, route }) => ({
           headerTitle: "",
+          headerRight: () => (
+            <Menu>
+              <MenuTrigger>
+                <Ionicons
+                  name="ellipsis-vertical"
+                  size={24}
+                  style={{ paddingRight: 10, color: "#094852" }}
+                />
+              </MenuTrigger>
+              <MenuOptions
+                optionsContainerStyle={{
+                  marginTop: 30,
+                  width: 150,
+                  padding: 5,
+                }}
+              >
+                <MenuOption
+                  onSelect={() =>
+                    navigation.setParams({
+                      isEditMode: !(route.params?.isEditMode || false),
+                    })
+                  }
+                  text={route.params?.isEditMode ? "Save" : "Edit"}
+                />
+              </MenuOptions>
+            </Menu>
+          ),
           headerLeft: () => <CustomBackButton color="#094852" />,
+          headerTitleAlign: "left",
           headerTitleStyle: {
-            color: "#171b1c",
-            fontSize: 28,
-            marginLeft: -160,
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#094852",
           },
-          headerTitleContainerStyle: { left: 0 },
-          headerTintColor: "#094852",
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
           headerTransparent: true,
-        }}
+        })}
       />
+
       <RootStack.Screen
         name="Profile Page"
         component={ProfilePage}
@@ -223,30 +254,6 @@ const RootNavigator = () => {
       />
       <RootStack.Screen name="Help" component={HelpPage} options={{}} />
       <RootStack.Screen name="LogOut" component={LogOutPage} options={{}} />
-      <RootStack.Screen
-        name="Legal Aid"
-        component={LegalFormScreen}
-        options={{}}
-      />
-      <RootStack.Screen
-        name="Profile Admin Settings"
-        component={AdminManagementScreen}
-        options={{
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
       <RootStack.Screen
         name="Service Details"
         component={ServiceDetails}

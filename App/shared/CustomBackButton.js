@@ -8,7 +8,7 @@ const CustomBackButton = ({ color = '#094852' }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginHorizontal: 10 }}>
+    <TouchableOpacity onPress={() => navigation.goBack()} style={{ paddingHorizontal: 10}}>
       <FontAwesome6 name="chevron-left" size={24} color={color} />
     </TouchableOpacity>
   );

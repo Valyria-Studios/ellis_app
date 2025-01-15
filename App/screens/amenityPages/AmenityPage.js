@@ -1,6 +1,6 @@
 // Logic for Similar Amenities needed
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   Text,
@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Linking,
+  TextInput,
 } from "react-native";
 import {
   Octicons,
@@ -22,11 +23,37 @@ import globalstyles from "../../shared/globalStyles";
 function AmenityPage({ route, navigation }) {
   const { amenity } = route.params;
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(
+    route.params?.isEditMode || false
+  );
+  const [editedData, setEditedData] = useState({
+    name: amenity?.attributes?.["Name"] || "",
+    address: amenity?.attributes?.["Street address"] || "",
+    phone: amenity?.attributes?.["Phone number"] || "",
+    description:
+      Array.isArray(amenity?.attributes?.Description) &&
+      amenity?.attributes?.Description.length > 0
+        ? amenity.attributes.Description.join(" ") // Combine array elements into a single string, if applicable
+        : "No description available",
+  });
+
+  useEffect(() => {
+    // Update state if the route's edit mode changes
+    if (route.params?.isEditMode !== undefined) {
+      setIsEditMode(route.params.isEditMode);
+    }
+  }, [route.params?.isEditMode]);
 
   const openWebsite = () => {
     Linking.openURL(`${amenity?.attributes["Web URL"]}`).catch((err) =>
       console.error("An error occurred", err)
     );
+  };
+
+  const handleSave = () => {
+    console.log("Saving data:", editedData);
+    // Logic to save data to the backend or state management
+    navigation.setParams({ isEditMode: false });
   };
 
   const scrollViewRef = React.useRef();
@@ -63,9 +90,17 @@ function AmenityPage({ route, navigation }) {
           <View style={styles.centerCard}>
             <View style={styles.mainText}>
               <View style={styles.header}>
-                <Text style={styles.locationText}>
-                  {amenity?.attributes?.["Name"]}
-                </Text>
+                {isEditMode ? (
+                  <TextInput
+                    style={[globalstyles.cardDetails, styles.editInput]}
+                    value={editedData.name}
+                    onChangeText={(text) =>
+                      setEditedData((prev) => ({ ...prev, name: text }))
+                    }
+                  />
+                ) : (
+                  <Text style={styles.locationText}>{editedData.name}</Text>
+                )}
                 <View
                   style={{
                     flexDirection: "row",
@@ -78,9 +113,19 @@ function AmenityPage({ route, navigation }) {
                     size={20}
                     style={{ marginRight: 10, color: "#094852" }}
                   />
-                  <Text style={globalstyles.cardDetails}>
-                    {amenity?.attributes?.["Street address"]}
-                  </Text>
+                  {isEditMode ? (
+                    <TextInput
+                      style={[globalstyles.cardDetails, styles.editInput]}
+                      value={editedData.address}
+                      onChangeText={(text) =>
+                        setEditedData((prev) => ({ ...prev, address: text }))
+                      }
+                    />
+                  ) : (
+                    <Text style={globalstyles.cardDetails}>
+                      {editedData.address}
+                    </Text>
+                  )}
                 </View>
                 <View
                   style={{
@@ -94,9 +139,19 @@ function AmenityPage({ route, navigation }) {
                     size={20}
                     style={{ marginRight: 7, color: "#094852" }}
                   />
-                  <Text style={globalstyles.cardDetails}>
-                    {amenity?.attributes?.["Phone number"]}
-                  </Text>
+                  {isEditMode ? (
+                    <TextInput
+                      style={[globalstyles.cardDetails, styles.editInput]}
+                      value={editedData.phone}
+                      onChangeText={(text) =>
+                        setEditedData((prev) => ({ ...prev, phone: text }))
+                      }
+                    />
+                  ) : (
+                    <Text style={globalstyles.cardDetails}>
+                      {editedData.phone}
+                    </Text>
+                  )}
                 </View>
                 <View
                   style={{
@@ -166,13 +221,22 @@ function AmenityPage({ route, navigation }) {
                 >
                   About the Organization
                 </Text>
-                <Text
-                  style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
-                >
-                  {amenity?.attributes?.Description?.length > 0
-                    ? amenity.attributes.Description
-                    : "No description available"}
-                </Text>
+                {isEditMode ? (
+                  <TextInput
+                    style={[globalstyles.cardDetails, styles.editInput]}
+                    value={editedData.description}
+                    onChangeText={(text) =>
+                      setEditedData((prev) => ({ ...prev, description: text }))
+                    }
+                    multiline
+                  />
+                ) : (
+                  <Text
+                    style={[globalstyles.detailsText, { marginHorizontal: 0 }]}
+                  >
+                    {editedData.description || "No description available"}
+                  </Text>
+                )}
               </View>
 
               <View style={{ marginBottom: 15 }}>
@@ -417,6 +481,17 @@ const styles = StyleSheet.create({
     fontFamily: "gabarito-regular",
     fontSize: 16,
     color: "#094852",
+  },
+
+  editInput: {
+    borderWidth: 1, // Add a visible border
+    borderColor: "#10798B", // Use a distinct color for edit mode
+    backgroundColor: "#F3F8F9", // Light background color for differentiation
+    borderRadius: 5, // Rounded corners for aesthetics
+    padding: 8, // Inner padding for better readability
+    fontSize: 16, // Match the font size with the original text
+    color: "#094852", // Ensure the text color is clear
+    fontFamily: "karla-regular", // Use the same font for consistency
   },
 });
 

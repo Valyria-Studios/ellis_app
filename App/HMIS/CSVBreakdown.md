@@ -4,6 +4,8 @@ This is how the final file should look when it comes to sending the report to th
 
 The breakdown of each element and how they should look in the final CSV document, is shown there.
 
+---
+
 ### What is the CSV used for?
 
 > There are several purposes for which HMIS data might be exported from one system and

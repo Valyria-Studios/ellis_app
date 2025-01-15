@@ -266,6 +266,183 @@ Program related templates are within the _Federal Partner Program Data_ and _Pro
 
 It should be a json file that has all the data arrayed into key-value pairs. An example of data being sent to the HUD would help with understanding how exactly we should structure it.
 
+---
+
+### At what point are elements collected?
+
+For each project there are elements that are collected at certain intervals, either at the beginning or the end of a project. Here is the list of elements and when they are collected for a project:
+
+#### <u>PDDEs:</u>
+
+- All Organizational elements are collected at _"Initial HMIS project setup, reviewed/updated no less than annually."_
+  - Except for **Bed and Unit Inventory Information** and **HMIS Participation Status** these two elements should be collected at _"Initial HMIS project setup reviewed at least annually and updated as needed to reflect changes."_
+
+#### <u>UDEs:</u>
+
+- Elements that should be collected at _Record Creation_:
+
+  - 3.01 Name
+  - 3.02 SSN
+  - 3.03 DOB
+  - 3.04 Race and Ethnicity
+  - 3.06 Gender
+  - 3.07 Veteran Status
+
+- Elements that should be collected at _Project Start_:
+
+  - 3.08 Disabling Condition (Edit as necessary to reflect new information)
+  - 3.10 Project Start Date
+  - 3.15 Relationship to Head of Household
+  - 3.16 Enrollement CoC
+  - 3.917 Prior Living Situation (3.917A and 3.917B)
+
+- Elements that should be collected at _Project Exit_:
+
+  - 3.11 Project Exit Date
+  - 3.12 Destination
+
+- Elements that should be collected at _Occurrence Point_:
+  - 3.20 Housing Move-In Date
+    - At move-in – must be entered if/when a household moves into
+      any type of permanent housing, regardless of funding source or whether the
+      project is providing the rental assistance to differentiate between clients who are housed and those who are experiencing homelessness at different points during
+      their enrollment.
+
+#### <u>Common Program Specific Elements:</u>
+
+- Elements that should be collected at _Project Start, Update, Annual Assessment, and Project Exit_:
+
+  - 4.02 Income and Sources
+  - 4.03 Non-Cash Benefits
+  - 4.04 Health Insurance
+
+- Elements that should be collected at _Project Start, Update, and Project Exit_:
+
+  - 4.05 Physical Disability
+  - 4.06 Developmental Disability
+  - 4.07 Chronic Health Condition
+  - 4.08 HIV/AIDS
+  - 4.09 Mental Health Disorder
+  - 4.10 Substance Use Disorder
+
+- Elements that should be collected at _Project Start and Update_:
+
+  - 4.11 Domestic Violence
+
+- Elements that should be collected at _Occurrence Point_:
+
+  - 4.12 Current Living Situation (At the Time of Contact)
+  - 4.13 Date of Engagement (At the Point of Engagement)
+  - 4.14 Bed-Night Date (As Provided)
+
+- Elements that should be collected at _At occurence_:
+  - 4.19 Coordinated Entry Assessment
+  - 4.20 Coordinated Entry Event
+
+#### <u>HUD-CoC Only Required Elements:</u>
+
+- Elements that should be collected at _Occurrence Point_:
+
+  - C2 Moving On Assistance Provided (as provided)
+
+- Elements that should be collected at _Project Start and Project Exit_:
+
+  - C3 Youth Education Status
+
+- Elements that should be collected at _Project Start_:
+  - C4 Translation Assistance Needed
+
+#### <u>HUD-HOPWA Required Elements:</u>
+
+- Elements that should be collected at _Occurrence Point_:
+
+  - W1 Services Provided - HOPWA (As Provided)
+  - W2 Financial Assistance – HOPWA (As Provided)
+
+- Elements that should be collected at _Project Start, Update, and Project Exit_:
+
+  - W3 Medical Assistance
+  - W6 Prescribed Anti-Retroviral
+
+- Elements that should be collected at _Project Start, Update, Annual Assessment, and Project Exit_:
+
+  - W4 T-Cell (CD4) and Viral Load
+
+- Elements that should be collected at _Project Exit_:
+  - W5 Housing Assessment at Exit
+
+#### <u>HHS-PATH Required Elements:</u>
+
+- Elements that should be collected at _Occurrence Point_:
+
+  - P1 Services Provided – PATH Funded (As Provided)
+  - P2 Referrals Provided – PATH (As Provided)
+  - P3 PATH Status (At Determination; collect once, at or before exit, when the
+    status is determined)
+
+- Elements that should be collected at _Project Start, Update, Annual Assessment, and Project Exit_:
+  - P4 Connection with SOAR
+
+#### <u>HHS-RHY Required Elements:</u>
+
+- Elements that should be collected at _Project Start_:
+
+  - R1 Referral Source
+  - R2 RHY – BCP Status
+  - R3 Sexual Orientation
+  - R11 Formerly a Ward of Child Welfare/Foster Care Agency
+  - R12 Formerly a Ward of Juvenile Justice System
+  - R13 Family Critical Issues
+
+- Elements that should be collected at _Project Start and Project Exit_:
+
+  - R4 Last Grade Completed
+  - R5 School Status
+  - R6 Employment Status
+  - R7 General Health Status
+  - R8 Dental Health Status
+  - R9 Mental Health Status
+
+- Elements that should be collected at _Project Start and Update_:
+
+  - R10 Pregnancy Status
+
+- Elements that should be collected at _Occurrence Point_:
+
+  - R14 RHY Service Connections (At First Service)
+
+- Elements that should be collected at _Project Exit_:
+
+  - R15 Commercial Sexual Exploitation/Sex Trafficking
+  - R16 Labor Exploitation/Trafficking
+  - R17 Project Completion Status
+  - R18 Counseling
+  - R19 Safe and Appropriate Exit
+
+- Elements that should be collected at _Post Exit_:
+  - R20 Aftercare Plans
+
+#### <u>VA Required Elements:</u>
+
+- Elements that should be collected at _Record Creation_:
+
+  - V1 Veteran’sInformation
+
+- Elements that should be collected at _Occurrence Point_:
+
+  - V2 Services Provided – SSVF (As Provided)
+  - V3 Financial Assistance – SSVF (As Provided)
+  - V8 HUD-VASH Voucher Tracking (As Provided)
+
+- Elements that should be collected at _Project Start_:
+
+  - V4 Percent of AMI (SSVF Eligibility)
+  - V6 VAMC Station Number
+  - V7 HP Targeting Criteria
+
+- Elements that should be collected at _Project Exit_:
+  - V9 HUD-VASH Exit Information
+
 ### What should the data that is being sent to the HUD look like?
 
 ### How do we send data to the HUD?

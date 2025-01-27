@@ -74,7 +74,19 @@ const ConfirmReferral = ({ route, navigation }) => {
         notes,
       };
 
-      // Update both the client and sender with the new referral in their activity logs
+      // Send referral data to the NonProfits-Referrals endpoint
+      await fetch(`https://ellis-test-data.com:8000/NonProfits-Referrals`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: selectedService.id,
+          referral: referralData,
+        }),
+      });
+
+      // Update backend referral logs for both client and sender
       client.referrals.push(referralData);
       sender.referrals.push(referralData);
 
@@ -100,30 +112,23 @@ const ConfirmReferral = ({ route, navigation }) => {
         }
       );
 
-      // Construct the NonProfit referral data
-      const nonprofitReferralData = {
-        id: selectedService.id, // Assuming selectedService.id is the NonProfit ID
-        referral: {
-          clientId: selectedClient.id,
-          referralSenderId: sender.id || "1",
-          organization: selectedService.name,
-          dateStarted,
-          option,
-          referralType,
-          notes,
-        },
+      // **Send to the /Data endpoint like in the Search Header**
+      const dataToSend = {
+        search: "Used Referral Flow",
+        Organization: selectedService.name,
+        iterations: 1,
+        id: `${selectedService.id}`,
       };
 
-      // Send the referral to NonProfits-Referrals endpoint
-      await fetch(`https://ellis-test-data.com:8000/NonProfits-Referrals`, {
+      await fetch("https://ellis-test-data.com:8000/Data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(nonprofitReferralData),
+        body: JSON.stringify(dataToSend),
       });
 
-      // Navigate to the Referral Sent page or handle success
+      // Navigate to the Referral Sent page
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,
         referralSender: sender.fullName,
@@ -132,7 +137,7 @@ const ConfirmReferral = ({ route, navigation }) => {
         option: option,
       });
     } catch (error) {
-      console.error("Error submitting referral or project data:", error);
+      console.error("Error submitting referral or sending data:", error);
     }
   };
 

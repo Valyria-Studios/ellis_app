@@ -50,11 +50,24 @@ const RootNavigator = () => {
     <RootStack.Navigator>
       <RootStack.Screen
         name="MainScreen"
-        component={MainScreenContainer}
+        component={ServiceDirectory}
         options={{
-          headerShown: false,
-        }} // Hide header for the MainApp
+          headerTitle: "Service Directory",
+          headerTitleAlign: "left",
+          headerTintColor: "#094852",
+          headerTitleStyle: {
+            fontFamily: "gabarito-semibold",
+            fontSize: 24,
+            color: "#171B1C",
+          },
+          headerStyle: {
+            backgroundColor: "#F3F8F9",
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+        }}
       />
+
       <RootStack.Screen
         name="My Clients"
         component={MyClients}

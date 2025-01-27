@@ -22,6 +22,9 @@
       },
       "distribution": "internal",
       "channel": "preview"
+    },
+    "production": {
+      "channel": "production"
     }
   },
   "submit": {

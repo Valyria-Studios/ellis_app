@@ -10,10 +10,8 @@ The information in this file is being derived from the HMIS documentation provid
   - [FY 2024 HMIS Data Standards Manual](https://files.hudexchange.info/resources/documents/HMIS-Data-Standards-Manual-2024.pdf "2024 Data Standards Manual")
 - If there are data structure related question refer to this document:
   - [FY 2024 HMIS Data Dictionary – Version 1.6](https://files.hudexchange.info/resources/documents/HMIS-Data-Dictionary-2024.pdf "2024 Data Dictionary")
-- Bitfocus has an HMIS built and is used by some of the current NonProfits in the SF area. They have a page that shows what a form looks like for specific projects and programs they may be associated with. This could help visualize what data we need to collect:
-  - [2024 HMIS Sample Forms](https://help.bitfocus.com/2024-hmis-sample-forms, "Bitfocus 2024 HMIS Sample Forms")
-- If there are questions that relate to Comma Separated Value (CSV) documentation or specifications refer to this document:
-  - [HMIS CSV Specifications](https://files.hudexchange.info/resources/documents/HMIS-CSV-Format-Specifications-2024.pdf "HMIS CSV Specifications")
+- Bitfocus has an HMIS built and is used by some of the current Nonprofits in the SF area. They have a page that shows what a form looks like for specific projects and programs they may be associated with. This could help visualize what data we need to collect:
+  - [2024 HMIS Sample Forms](https://help.bitfocus.com/2024-hmis-sample-forms "Bitfocus 2024 HMIS Sample Forms")
 
 ## HMIS Data Standards
 
@@ -155,16 +153,23 @@ There is a [Project Setup Tool](https://www.hudexchange.info/programs/hmis/hmis-
 3. Emergency Shelter – Entry Exit
 4. Emergency Shelter – Night-by-Night
 5. Homelessness Prevention
-6. Other
+6. Other \*
 7. PH – Housing Only
-8. PH – Housing with Services (no disability required for entry)
+8. PH – Housing with Services (no disability required for entry) \*
 9. PH – Permanent Supportive Housing (disability required for entry)
 10. PH – Rapid Re-Housing
-11. RETIRED
+11. RETIRED \*
 12. Safe Haven
 13. Services Only
 14. Street Outreach
 15. Transitional Housing
+
+- Permanent Supportive Housing
+- Determination based on funding opportunity
+- Emergency Shelter Entry Exit
+- Emergency Shelter Night-by-night
+
+Based off the [Project Setup Tool](https://www.hudexchange.info/programs/hmis/hmis-project-set-up-tool/ "HMIS Project Setup Tool") the values that have " \* " are not in the project types after selecting a program. The list of 4 are additional project types that are mentioned within the setup tool, but are not mentioned within any of the HMIS documentation.
 
 ---
 

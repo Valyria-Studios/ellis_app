@@ -108,18 +108,19 @@ const ServiceDirectory = ({ route, navigation }) => {
     const loadServiceAndNonProfitsData = async () => {
       try {
         setLoading(true);
+    
         // Fetch services
         const servicesData = await fetchWithCache(
           CACHE_KEY_SERVICES,
           "https://ellis-test-data.com:8000/Services"
         );
-
+    
         // Fetch NonProfits
         const nonProfitsData = await fetchWithCache(
           CACHE_KEY_NONPROFITS,
           "https://ellis-test-data.com:8000/NonProfits"
         );
-
+    
         // Transform services data to match the required structure
         const transformedCategories = servicesData.map((service) => ({
           id: service.id,
@@ -131,8 +132,20 @@ const ServiceDirectory = ({ route, navigation }) => {
             spaceId: subservice.spaceId,
           })),
         }));
-
-        setServiceCategories(transformedCategories);
+    
+        // Filter categories based on available nonprofits
+        const filteredCategories = transformedCategories.filter((category) => {
+          const hasNonProfits = category.Subservices.some((subservice) =>
+            nonProfitsData.some((nonProfit) =>
+              nonProfit.providedServiceswithId.some(
+                (service) => service.id === subservice.valueId
+              )
+            )
+          );
+          return hasNonProfits; // Only include categories with associated nonprofits
+        });
+    
+        setServiceCategories(filteredCategories);
         setNonProfits(nonProfitsData); // Store NonProfits data
       } catch (error) {
         console.error("Failed to load service categories or NonProfits", error);
@@ -140,6 +153,7 @@ const ServiceDirectory = ({ route, navigation }) => {
         setLoading(false); // End loading
       }
     };
+    
 
     loadServiceAndNonProfitsData();
   }, []);

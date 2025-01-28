@@ -136,33 +136,6 @@ const RootNavigator = () => {
         component={AmenityPage}
         options={({ navigation, route }) => ({
           headerTitle: "",
-          headerRight: () => (
-            <Menu>
-              <MenuTrigger>
-                <Ionicons
-                  name="ellipsis-vertical"
-                  size={24}
-                  style={{ paddingRight: 10, color: "#094852" }}
-                />
-              </MenuTrigger>
-              <MenuOptions
-                optionsContainerStyle={{
-                  marginTop: 30,
-                  width: 150,
-                  padding: 5,
-                }}
-              >
-                <MenuOption
-                  onSelect={() =>
-                    navigation.setParams({
-                      isEditMode: !(route.params?.isEditMode || false),
-                    })
-                  }
-                  text={route.params?.isEditMode ? "Save" : "Edit"}
-                />
-              </MenuOptions>
-            </Menu>
-          ),
           headerLeft: () => <CustomBackButton color="#094852" />,
           headerTitleAlign: "left",
           headerTitleStyle: {

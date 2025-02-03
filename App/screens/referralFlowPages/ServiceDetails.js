@@ -115,7 +115,13 @@ const ServiceDetails = ({ route, navigation }) => {
       </TouchableOpacity>
 
       {category.Subservices &&
-        category.Subservices.map((subservice, index) => (
+        category.Subservices.filter((subservice) =>
+          filteredNonProfits.some((nonProfit) =>
+            nonProfit.providedServiceswithId.some(
+              (service) => service.id === subservice.valueId
+            )
+          )
+        ).map((subservice, index) => (
           <TouchableOpacity
             activeOpacity={0.8}
             key={index}

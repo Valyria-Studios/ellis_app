@@ -108,19 +108,19 @@ const ServiceDirectory = ({ route, navigation }) => {
     const loadServiceAndNonProfitsData = async () => {
       try {
         setLoading(true);
-    
+
         // Fetch services
         const servicesData = await fetchWithCache(
           CACHE_KEY_SERVICES,
           "https://ellis-test-data.com:8000/Services"
         );
-    
+
         // Fetch NonProfits
         const nonProfitsData = await fetchWithCache(
           CACHE_KEY_NONPROFITS,
           "https://ellis-test-data.com:8000/NonProfits"
         );
-    
+
         // Transform services data to match the required structure
         const transformedCategories = servicesData.map((service) => ({
           id: service.id,
@@ -132,7 +132,7 @@ const ServiceDirectory = ({ route, navigation }) => {
             spaceId: subservice.spaceId,
           })),
         }));
-    
+
         // Filter categories based on available nonprofits
         const filteredCategories = transformedCategories.filter((category) => {
           const hasNonProfits = category.Subservices.some((subservice) =>
@@ -144,7 +144,7 @@ const ServiceDirectory = ({ route, navigation }) => {
           );
           return hasNonProfits; // Only include categories with associated nonprofits
         });
-    
+
         setServiceCategories(filteredCategories);
         setNonProfits(nonProfitsData); // Store NonProfits data
       } catch (error) {
@@ -153,7 +153,6 @@ const ServiceDirectory = ({ route, navigation }) => {
         setLoading(false); // End loading
       }
     };
-    
 
     loadServiceAndNonProfitsData();
   }, []);
@@ -243,7 +242,14 @@ const ServiceDirectory = ({ route, navigation }) => {
                       styles.frequentIcon,
                       26
                     )}
-                    <Text style={styles.frequentOption}>{item.option}</Text>
+                    <Text
+                      style={styles.frequentOption}
+                      adjustsFontSizeToFit
+                      minimumFontScale={0.75}
+                      numberOfLines={2}
+                    >
+                      {item.option}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               ))}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BlurView } from "expo-blur";
 import {
   View,
   Text,
@@ -6,7 +7,10 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
+
 import globalstyles from "../../shared/globalStyles";
 import renderIcon from "../../shared/RenderIconFunction";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -26,6 +30,11 @@ const ServiceDirectory = ({ route, navigation }) => {
   const CACHE_EXPIRATION = 1000 * 60 * 60; // 1 hour
   const CACHE_KEY_SERVICES = "cache_services";
   const CACHE_KEY_NONPROFITS = "cache_nonprofits"; // Add cache key for NonProfits
+
+  const handlePressOutside = () => {
+    Keyboard.dismiss();
+    setSearchInput(""); // Clears search input and hides search results
+  };
 
   const fetchWithCache = async (cacheKey, url) => {
     try {
@@ -193,6 +202,13 @@ const ServiceDirectory = ({ route, navigation }) => {
         { paddingHorizontal: 5, paddingLeft: 15 },
       ]}
     >
+      {searchInput.trim() !== "" && (
+        <TouchableWithoutFeedback onPress={handlePressOutside}>
+          <View style={styles.overlayContainer}>
+            <BlurView intensity={20} tint="light" style={styles.overlay} />
+          </View>
+        </TouchableWithoutFeedback>
+      )}
       <View style={{ zIndex: 10 }}>
         <SearchComponent
           searchInput={searchInput}
@@ -297,6 +313,14 @@ const ServiceDirectory = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  overlayContainer: {
+    ...StyleSheet.absoluteFillObject, // Covers the entire screen
+    zIndex: 10, // Ensures it's above other elements
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject, // Makes the overlay fill the screen
+    backgroundColor: "rgba(0, 0, 0, 0.2)", // Semi-transparent background
+  },
   subHeader: {
     fontSize: 24,
     fontFamily: "gabarito-bold",

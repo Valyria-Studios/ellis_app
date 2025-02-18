@@ -6,7 +6,6 @@ import {
   Text,
   Image,
   StyleSheet,
-  Modal,
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
@@ -285,7 +284,6 @@ const SearchComponent = ({
               style={globalstyles.searchIcon}
             />
             <TextInput
-              blurOnSubmit={true}
               style={globalstyles.searchBar}
               value={searchInput}
               onChangeText={handleSearch}

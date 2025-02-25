@@ -59,4 +59,43 @@ app.post("/update-sheet", async (req, res) => {
   }
 });
 
+app.post("/add-event", async (req, res) => {
+  try {
+    const { values } = req.body; // Expecting ["New Event", "3/5", 20]
+    const client = await auth.getClient();
+
+    await sheets.spreadsheets.values.append({
+      auth: client,
+      spreadsheetId: SPREADSHEET_ID,
+      range: "Sheet1!A:C", // Append to the end of columns A to C
+      valueInputOption: "USER_ENTERED",
+      resource: { values: [values] },
+    });
+
+    res.json({ message: "✅ Event added successfully" });
+  } catch (error) {
+    console.error("❌ Error adding event:", error);
+    res.status(500).send(error.message);
+  }
+});
+
+app.post("/delete-event", async (req, res) => {
+  try {
+    const { row } = req.body; // Expecting { row: 3 } to delete row 3
+    const client = await auth.getClient();
+
+    // Clear the row (does not shift others up)
+    await sheets.spreadsheets.values.clear({
+      auth: client,
+      spreadsheetId: SPREADSHEET_ID,
+      range: `Sheet1!A${row}:C${row}`,
+    });
+
+    res.json({ message: "✅ Event deleted successfully" });
+  } catch (error) {
+    console.error("❌ Error deleting event:", error);
+    res.status(500).send(error.message);
+  }
+});
+
 app.listen(3000, () => console.log("Server running on port 3000"));

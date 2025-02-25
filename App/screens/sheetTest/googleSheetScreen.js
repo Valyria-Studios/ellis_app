@@ -11,13 +11,13 @@ import {
 import axios from "axios";
 
 const API_URL = "http://localhost:3000/sheets";
-const UPDATE_API_URL = "http://localhost:3000/update-sheet";
+const ADD_EVENT_URL = "http://localhost:3000/add-event";
+const DELETE_EVENT_URL = "http://localhost:3000/delete-event";
 
 const GoogleSheetScreen = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editingRow, setEditingRow] = useState(null);
-  const [editedValues, setEditedValues] = useState(["", "", ""]);
+  const [newEvent, setNewEvent] = useState(["", "", ""]); // [Event, Date, Availability]
 
   useEffect(() => {
     fetchData();
@@ -33,23 +33,27 @@ const GoogleSheetScreen = () => {
     setLoading(false);
   };
 
-  const handleEdit = (index) => {
-    setEditingRow(index);
-    setEditedValues(data[index]);
+  const addEvent = async () => {
+    if (!newEvent[0] || !newEvent[1] || !newEvent[2]) {
+      alert("Please fill all fields!");
+      return;
+    }
+
+    try {
+      await axios.post(ADD_EVENT_URL, { values: newEvent });
+      fetchData();
+      setNewEvent(["", "", ""]);
+    } catch (error) {
+      console.error("Error adding event:", error);
+    }
   };
 
-  const handleSave = async (index) => {
+  const deleteEvent = async (index) => {
     try {
-      await axios.post(UPDATE_API_URL, {
-        row: index + 2, // Adjust row number (1-based index)
-        values: editedValues,
-      });
-
-      // Refresh data after update
+      await axios.post(DELETE_EVENT_URL, { row: index + 2 }); // Adjust row number
       fetchData();
-      setEditingRow(null);
     } catch (error) {
-      console.error("Error updating Google Sheet:", error);
+      console.error("Error deleting event:", error);
     }
   };
 
@@ -57,45 +61,40 @@ const GoogleSheetScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* Add Event Input */}
+      <View style={styles.addContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Event Name"
+          value={newEvent[0]}
+          onChangeText={(text) => setNewEvent([text, newEvent[1], newEvent[2]])}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Date (e.g. 3/5)"
+          value={newEvent[1]}
+          onChangeText={(text) => setNewEvent([newEvent[0], text, newEvent[2]])}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Availability"
+          keyboardType="numeric"
+          value={newEvent[2]}
+          onChangeText={(text) => setNewEvent([newEvent[0], newEvent[1], text])}
+        />
+        <Button title="Add Event" onPress={addEvent} />
+      </View>
+
+      {/* List of Events */}
       <FlatList
         data={data}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View style={styles.row}>
-            {editingRow === index ? (
-              <>
-                <TextInput
-                  style={styles.input}
-                  value={editedValues[0]}
-                  onChangeText={(text) =>
-                    setEditedValues([text, editedValues[1], editedValues[2]])
-                  }
-                />
-                <TextInput
-                  style={styles.input}
-                  value={editedValues[1]}
-                  onChangeText={(text) =>
-                    setEditedValues([editedValues[0], text, editedValues[2]])
-                  }
-                />
-                <TextInput
-                  style={styles.input}
-                  value={editedValues[2]}
-                  keyboardType="numeric"
-                  onChangeText={(text) =>
-                    setEditedValues([editedValues[0], editedValues[1], text])
-                  }
-                />
-                <Button title="Save" onPress={() => handleSave(index)} />
-              </>
-            ) : (
-              <>
-                <Text style={styles.text}>{item[0]}</Text>
-                <Text style={styles.text}>{item[1]}</Text>
-                <Text style={styles.text}>{item[2]}</Text>
-                <Button title="Edit" onPress={() => handleEdit(index)} />
-              </>
-            )}
+            <Text style={styles.text}>{item[0]}</Text>
+            <Text style={styles.text}>{item[1]}</Text>
+            <Text style={styles.text}>{item[2]}</Text>
+            <Button title="❌" onPress={() => deleteEvent(index)} />
           </View>
         )}
       />
@@ -108,6 +107,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: "#fff",
+  },
+  addContainer: {
+    flex: 1,
+    padding: 10,
+    borderBottomWidth: 1,
+    marginBottom: 10,
   },
   row: {
     flexDirection: "row",
@@ -124,6 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     marginHorizontal: 5,
+    marginBottom: 5,
   },
 });
 

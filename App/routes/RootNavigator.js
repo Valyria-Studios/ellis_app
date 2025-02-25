@@ -42,6 +42,7 @@ import EntitiesScreen from "../screens/testingGeoApi";
 import CustomBackButton from "../shared/CustomBackButton";
 import NonprofitsByTag from "../screens/referralFlowPages/NonprofitTags";
 import RecentReferrals from "../screens/directoryPages/recentReferral";
+import GoogleSheetScreen from "../screens/sheetTest/googleSheetScreen";
 
 const RootStack = createStackNavigator();
 
@@ -50,7 +51,7 @@ const RootNavigator = () => {
     <RootStack.Navigator>
       <RootStack.Screen
         name="MainScreen"
-        component={ServiceDirectory}
+        component={GoogleSheetScreen}
         options={{
           headerTitle: "Service Directory",
           headerTitleAlign: "left",

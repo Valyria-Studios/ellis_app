@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: google-sheets-backend
+    rootDir: App/screens/sheetTest
+    runtime: node
+    buildCommand: "npm install"
+    startCommand: "node googleSheet.js"
+    envVars:
+      - key: NODE_ENV
+        value: production

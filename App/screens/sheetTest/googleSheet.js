@@ -3,7 +3,7 @@ import { google } from "googleapis";
 import cors from "cors";
 import bodyParser from "body-parser";
 import path from "path";
-import { fileURLToPath } from "url"; // Required for __dirname in ESM
+import { fileURLToPath } from "url";
 
 // Fix __dirname for ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -13,12 +13,16 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const sheets = google.sheets("v4");
+const credentials = JSON.parse(
+  Buffer.from(process.env.GOOGLE_CREDENTIALS, "base64").toString("utf-8")
+);
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, "test-for-writing-to-sheet-dc20eeb8c2e8.json"), // Corrected path handling
+  credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
+const sheets = google.sheets({ version: "v4", auth });
 const SPREADSHEET_ID = "1funwdM7sR_KtBZF6ApRnpxPD77asoWMGEfQWJsNSX6Q";
 
 // **Fetch Data from Google Sheets**
@@ -28,7 +32,7 @@ app.get("/sheets", async (req, res) => {
     const response = await sheets.spreadsheets.values.get({
       auth: client,
       spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A1:C10", // Adjust range as needed
+      range: "Sheet1!A1:C10",
     });
 
     res.json(response.data.values);
@@ -41,13 +45,13 @@ app.get("/sheets", async (req, res) => {
 // **Update Google Sheets Data**
 app.post("/update-sheet", async (req, res) => {
   try {
-    const { row, values } = req.body; // Expecting { row: 2, values: ["Updated Event", "3/5", 20] }
+    const { row, values } = req.body;
     const client = await auth.getClient();
 
-    sheets.spreadsheets.values.update({
+    await sheets.spreadsheets.values.update({
       auth: client,
       spreadsheetId: SPREADSHEET_ID,
-      range: `Sheet1!A${row}:C${row}`, // Update specific row
+      range: `Sheet1!A${row}:C${row}`,
       valueInputOption: "USER_ENTERED",
       resource: { values: [values] },
     });
@@ -59,15 +63,16 @@ app.post("/update-sheet", async (req, res) => {
   }
 });
 
+// **Add a New Event**
 app.post("/add-event", async (req, res) => {
   try {
-    const { values } = req.body; // Expecting ["New Event", "3/5", 20]
+    const { values } = req.body;
     const client = await auth.getClient();
 
     await sheets.spreadsheets.values.append({
       auth: client,
       spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A:C", // Append to the end of columns A to C
+      range: "Sheet1!A:C",
       valueInputOption: "USER_ENTERED",
       resource: { values: [values] },
     });
@@ -79,12 +84,12 @@ app.post("/add-event", async (req, res) => {
   }
 });
 
+// **Delete an Event**
 app.post("/delete-event", async (req, res) => {
   try {
-    const { row } = req.body; // Expecting { row: 3 } to delete row 3
+    const { row } = req.body;
     const client = await auth.getClient();
 
-    // Clear the row (does not shift others up)
     await sheets.spreadsheets.values.clear({
       auth: client,
       spreadsheetId: SPREADSHEET_ID,
@@ -98,4 +103,6 @@ app.post("/delete-event", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// **Start Server**
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

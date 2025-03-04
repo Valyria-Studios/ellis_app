@@ -51,7 +51,7 @@ const RootNavigator = () => {
     <RootStack.Navigator>
       <RootStack.Screen
         name="MainScreen"
-        component={GoogleSheetScreen}
+        component={ServiceDirectory}
         options={{
           headerTitle: "Service Directory",
           headerTitleAlign: "left",

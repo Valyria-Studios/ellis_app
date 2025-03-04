@@ -209,8 +209,8 @@ const SearchComponent = ({
         // Step 3: If no record exists, insert a new one
         const newEntry = {
           search: searchTerm,
-          Organization: null,
-          Subservice: null,
+          Organization: searchInput,
+          Subservice: searchInput,
           iterations: 1,
           id: searchId,
           time: [newTimestamp],

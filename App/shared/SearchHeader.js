@@ -13,7 +13,7 @@ import Icon from "@expo/vector-icons/Ionicons";
 import globalstyles from "../shared/globalStyles";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import supabase from "../api/supabaseClient";
+import { dataSupabase } from "../api/supabaseClient";
 
 const SearchComponent = ({
   searchInput,
@@ -179,7 +179,7 @@ const SearchComponent = ({
 
     try {
       // Step 1: Check if the record already exists
-      const { data: existingRecords, error: fetchError } = await supabase
+      const { data: existingRecords, error: fetchError } = await dataSupabase
         .from("search_data")
         .select("id, iterations, time")
         .eq("search", searchTerm)
@@ -195,7 +195,7 @@ const SearchComponent = ({
         const updatedIterations = existingRecords.iterations + 1;
         const updatedTime = [...existingRecords.time, newTimestamp];
 
-        const { error: updateError } = await supabase
+        const { error: updateError } = await dataSupabase
           .from("search_data")
           .update({ iterations: updatedIterations, time: updatedTime })
           .eq("id", existingRecords.id);
@@ -216,7 +216,7 @@ const SearchComponent = ({
           time: [newTimestamp],
         };
 
-        const { error: insertError } = await supabase
+        const { error: insertError } = await dataSupabase
           .from("search_data")
           .insert([newEntry]);
 
@@ -241,7 +241,7 @@ const SearchComponent = ({
 
     try {
       // Step 1: Check if the record already exists
-      const { data: existingRecords, error: fetchError } = await supabase
+      const { data: existingRecords, error: fetchError } = await dataSupabase
         .from("search_data")
         .select("id, iterations, time")
         .eq("id", orgId)
@@ -261,7 +261,7 @@ const SearchComponent = ({
         const updatedIterations = existingRecords.iterations + 1;
         const updatedTime = [...existingRecords.time, newTimestamp]; // Append new timestamp
 
-        const { error: updateError } = await supabase
+        const { error: updateError } = await dataSupabase
           .from("search_data")
           .update({ iterations: updatedIterations, time: updatedTime })
           .eq("id", orgId);
@@ -285,7 +285,7 @@ const SearchComponent = ({
           time: [newTimestamp], // Start with one timestamp
         };
 
-        const { error: insertError } = await supabase
+        const { error: insertError } = await dataSupabase
           .from("search_data")
           .insert([newEntry]);
 
@@ -313,7 +313,7 @@ const SearchComponent = ({
     const newTimestamp = new Date().toISOString();
 
     try {
-      const { data: existingRecords, error: fetchError } = await supabase
+      const { data: existingRecords, error: fetchError } = await dataSupabase
         .from("search_data")
         .select("id, iterations, time")
         .eq("id", subserviceId)
@@ -328,7 +328,7 @@ const SearchComponent = ({
         const updatedIterations = existingRecords.iterations + 1;
         const updatedTime = [...existingRecords.time, newTimestamp];
 
-        const { error: updateError } = await supabase
+        const { error: updateError } = await dataSupabase
           .from("search_data")
           .update({ iterations: updatedIterations, time: updatedTime })
           .eq("id", subserviceId);
@@ -348,7 +348,7 @@ const SearchComponent = ({
           time: [newTimestamp],
         };
 
-        const { error: insertError } = await supabase
+        const { error: insertError } = await dataSupabase
           .from("search_data")
           .insert([newEntry]);
 

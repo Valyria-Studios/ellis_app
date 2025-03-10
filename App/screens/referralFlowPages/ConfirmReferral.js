@@ -14,7 +14,7 @@ import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
 import imageMap from "../../shared/getProfileImage";
 import { SafeAreaView } from "react-native-safe-area-context";
-import supabase from "../../api/supabaseClient";
+import { dataSupabase } from "../../api/supabaseClient";
 
 const ConfirmReferral = ({ route, navigation }) => {
   const {
@@ -110,7 +110,7 @@ const ConfirmReferral = ({ route, navigation }) => {
       );
 
       // ✅ Fetch existing record from Supabase before upsert
-      const { data: existingEntry, error: fetchError } = await supabase
+      const { data: existingEntry, error: fetchError } = await dataSupabase
         .from("search_data")
         .select("iterations, time")
         .eq("id", selectedService.id)
@@ -130,7 +130,7 @@ const ConfirmReferral = ({ route, navigation }) => {
         ? [...existingEntry.time, dateStarted]
         : [dateStarted];
 
-      const { data, error } = await supabase.from("search_data").upsert(
+      const { data, error } = await dataSupabase.from("search_data").upsert(
         [
           {
             search: "Used Referral Flow",

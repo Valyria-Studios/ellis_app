@@ -14,10 +14,8 @@ import { authSupabase } from "../../api/supabaseClient"; // Import Supabase clie
 const Register = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [agreedError, setAgreedError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -53,13 +51,6 @@ const Register = ({ navigation }) => {
       setEmailError("");
     }
 
-    if (!password) {
-      setPasswordError("Password is required");
-      valid = false;
-    } else {
-      setPasswordError("");
-    }
-
     if (!agreed) {
       setAgreedError("Must accept Terms of Use");
       valid = false;
@@ -73,9 +64,8 @@ const Register = ({ navigation }) => {
     }
 
     try {
-      const { data, error } = await authSupabase.auth.signUp({
+      const { data, error } = await authSupabase.auth.signInWithOtp({
         email,
-        password,
         options: {
           emailRedirectTo: "https://ellis-onboarding-auth-handler.vercel.app/auth-handler",
         },
@@ -124,16 +114,6 @@ const Register = ({ navigation }) => {
           onChangeText={setEmail}
         />
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-        <TextInput
-          placeholder="Password"
-          style={globalstyles.textInput}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={true}
-        />
-        {passwordError ? (
-          <Text style={styles.errorText}>{passwordError}</Text>
-        ) : null}
       </View>
       <View style={styles.agreeContainer}>
         <TouchableOpacity
@@ -148,10 +128,10 @@ const Register = ({ navigation }) => {
       {agreedError ? <Text style={styles.errorText}>{agreedError}</Text> : null}
       <View>
         <TouchableOpacity
-          // disabled={!agreed || !name || !email || !password}
+          // disabled={!agreed || !name || !email}
           style={[
             globalstyles.buttonContainer,
-            !agreed || !name || !email || !password
+            !agreed || !name || !email
               ? styles.disabledButton
               : { backgroundColor: "#10798B" },
             { marginVertical: 10 },

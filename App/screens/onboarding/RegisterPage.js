@@ -20,6 +20,8 @@ const Register = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const [agreed, setAgreed] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [waitingForOtp, setWaitingForOtp] = useState(false);
 
   const toggleAgree = () => {
     setAgreed(!agreed);
@@ -30,6 +32,7 @@ const Register = ({ navigation }) => {
     return emailRegex.test(email);
   };
 
+  // Function to handle registration
   const handleSubmit = async () => {
     setLoading(true);
 
@@ -64,12 +67,8 @@ const Register = ({ navigation }) => {
     }
 
     try {
-      const { data, error } = await authSupabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: "https://ellis-onboarding-auth-handler.vercel.app/auth-handler",
-        },
-      });
+      // Send OTP instead of magic link
+      const { error } = await authSupabase.auth.signInWithOtp({ email });
 
       if (error) {
         Alert.alert("Signup Error", error.message);
@@ -77,16 +76,34 @@ const Register = ({ navigation }) => {
         return;
       }
 
-      Alert.alert(
-        "Check Your Email",
-        "A confirmation link has been sent to your email. Please verify your account before continuing."
-      );
-
+      Alert.alert("Check Your Email", "Enter the OTP code sent to your email.");
+      setWaitingForOtp(true);
       setLoading(false);
     } catch (error) {
       console.error("Unexpected error:", error);
       Alert.alert("Error", "Something went wrong. Please try again.");
       setLoading(false);
+    }
+  };
+
+  // Function to verify OTP
+  const handleVerifyOtp = async () => {
+    try {
+      const { data, error } = await authSupabase.auth.verifyOtp({
+        email,
+        token: otp,
+        type: "email",
+      });
+
+      if (error) {
+        Alert.alert("Verification Error", error.message);
+        return;
+      } else {
+        console.log("User Data After Login:", data);
+      }
+    } catch (error) {
+      console.error("OTP Verification Error:", error);
+      Alert.alert("Error", "Something went wrong. Please try again.");
     }
   };
 
@@ -127,23 +144,41 @@ const Register = ({ navigation }) => {
       </View>
       {agreedError ? <Text style={styles.errorText}>{agreedError}</Text> : null}
       <View>
-        <TouchableOpacity
-          // disabled={!agreed || !name || !email}
-          style={[
-            globalstyles.buttonContainer,
-            !agreed || !name || !email
-              ? styles.disabledButton
-              : { backgroundColor: "#10798B" },
-            { marginVertical: 10 },
-          ]}
-          activeOpacity={0.6}
-          onPress={handleSubmit}
-          disabled={loading}
-        >
-          <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
-            {loading ? "Signing up..." : "Sign Up"}
-          </Text>
-        </TouchableOpacity>
+        {waitingForOtp ? (
+          <>
+            <TextInput
+              placeholder="Enter OTP"
+              style={globalstyles.textInput}
+              value={otp}
+              onChangeText={setOtp}
+              keyboardType="number-pad"
+            />
+            <TouchableOpacity
+              style={globalstyles.buttonContainer}
+              onPress={handleVerifyOtp}
+              activeOpacity={0.6}
+            >
+              <Text style={globalstyles.buttonText}>Verify OTP</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity
+            style={[
+              globalstyles.buttonContainer,
+              !agreed || !name || !email
+                ? styles.disabledButton
+                : { backgroundColor: "#10798B" },
+              { marginVertical: 10 },
+            ]}
+            activeOpacity={0.6}
+            onPress={handleSubmit}
+            disabled={loading}
+          >
+            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+              {loading ? "Signing up..." : "Sign Up"}
+            </Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={globalstyles.buttonContainer}
           activeOpacity={0.6}

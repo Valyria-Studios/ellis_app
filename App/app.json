@@ -2,7 +2,7 @@
   "expo": {
     "name": "Ellis",
     "slug": "ellis-app",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "orientation": "portrait",
     "icon": "./assets/ellis-test-icon.png",
     "userInterfaceStyle": "light",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.mpatel31.App",
@@ -23,12 +21,8 @@
     },
     "android": {
       "package": "com.mpatel31.App",
-      "versionCode": 9,
-      "permissions": [
-        "INTERNET",
-        "ACCESS_NETWORK_STATE",
-        "ACCESS_WIFI_STATE"
-      ],
+      "versionCode": 10,
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE", "ACCESS_WIFI_STATE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/ellis-test-icon.png",
         "backgroundColor": "#ffffff"
@@ -49,8 +43,6 @@
     "updates": {
       "url": "https://u.expo.dev/2d4a8ef2-a0bb-4fe0-bfe2-894723f3cbfc"
     },
-    "plugins": [
-      "expo-font"
-    ]
+    "plugins": ["expo-font"]
   }
 }

@@ -5,20 +5,23 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalstyles from "../../shared/globalStyles";
+import { authSupabase } from "../../api/supabaseClient"; // Import Supabase client
 
 const Register = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [agreedError, setAgreedError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [agreed, setAgreed] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [waitingForOtp, setWaitingForOtp] = useState(false);
 
   const toggleAgree = () => {
     setAgreed(!agreed);
@@ -29,8 +32,9 @@ const Register = ({ navigation }) => {
     return emailRegex.test(email);
   };
 
+  // Function to handle registration
   const handleSubmit = async () => {
-    const formData = { name, email, password, agreed };
+    setLoading(true);
 
     let valid = true;
     if (!name) {
@@ -44,17 +48,10 @@ const Register = ({ navigation }) => {
       setEmailError("Email is required");
       valid = false;
     } else if (!isValidEmail(email)) {
-      setEmailError("Please enter a vaild email address");
+      setEmailError("Please enter a valid email address");
       valid = false;
     } else {
       setEmailError("");
-    }
-
-    if (!password) {
-      setPasswordError("Password is required");
-      valid = false;
-    } else {
-      setPasswordError("");
     }
 
     if (!agreed) {
@@ -64,28 +61,49 @@ const Register = ({ navigation }) => {
       setAgreedError("");
     }
 
-    if (!valid) return;
+    if (!valid) {
+      setLoading(false);
+      return;
+    }
 
     try {
-      const response = await fetch(
-        "https://ellis-test-data.com:8000/Accounts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      if (response.ok) {
-        const responseJson = await response.json();
-        const userId = responseJson.id;
-        navigation.navigate("CreateOrganization", { userId: userId });
+      // Send OTP instead of magic link
+      const { error } = await authSupabase.auth.signInWithOtp({ email });
+
+      if (error) {
+        Alert.alert("Signup Error", error.message);
+        setLoading(false);
+        return;
+      }
+
+      Alert.alert("Check Your Email", "Enter the OTP code sent to your email.");
+      setWaitingForOtp(true);
+      setLoading(false);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      Alert.alert("Error", "Something went wrong. Please try again.");
+      setLoading(false);
+    }
+  };
+
+  // Function to verify OTP
+  const handleVerifyOtp = async () => {
+    try {
+      const { data, error } = await authSupabase.auth.verifyOtp({
+        email,
+        token: otp,
+        type: "email",
+      });
+
+      if (error) {
+        Alert.alert("Verification Error", error.message);
+        return;
       } else {
-        console.error("HTTP error: " + response.status);
+        console.log("User Data After Login:", data);
       }
     } catch (error) {
-      console.error("Error sending data to API", error);
+      console.error("OTP Verification Error:", error);
+      Alert.alert("Error", "Something went wrong. Please try again.");
     }
   };
 
@@ -113,16 +131,6 @@ const Register = ({ navigation }) => {
           onChangeText={setEmail}
         />
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-        <TextInput
-          placeholder="Password"
-          style={globalstyles.textInput}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={true}
-        />
-        {passwordError ? (
-          <Text style={styles.errorText}>{passwordError}</Text>
-        ) : null}
       </View>
       <View style={styles.agreeContainer}>
         <TouchableOpacity
@@ -136,22 +144,41 @@ const Register = ({ navigation }) => {
       </View>
       {agreedError ? <Text style={styles.errorText}>{agreedError}</Text> : null}
       <View>
-        <TouchableOpacity
-          // disabled={!agreed || !name || !email || !password}
-          style={[
-            globalstyles.buttonContainer,
-            !agreed || !name || !email || !password
-              ? styles.disabledButton
-              : { backgroundColor: "#10798B" },
-            { marginVertical: 10 },
-          ]}
-          activeOpacity={0.6}
-          onPress={handleSubmit}
-        >
-          <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
-            Sign Up
-          </Text>
-        </TouchableOpacity>
+        {waitingForOtp ? (
+          <>
+            <TextInput
+              placeholder="Enter OTP"
+              style={globalstyles.textInput}
+              value={otp}
+              onChangeText={setOtp}
+              keyboardType="number-pad"
+            />
+            <TouchableOpacity
+              style={globalstyles.buttonContainer}
+              onPress={handleVerifyOtp}
+              activeOpacity={0.6}
+            >
+              <Text style={globalstyles.buttonText}>Verify OTP</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity
+            style={[
+              globalstyles.buttonContainer,
+              !agreed || !name || !email
+                ? styles.disabledButton
+                : { backgroundColor: "#10798B" },
+              { marginVertical: 10 },
+            ]}
+            activeOpacity={0.6}
+            onPress={handleSubmit}
+            disabled={loading}
+          >
+            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+              {loading ? "Signing up..." : "Sign Up"}
+            </Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={globalstyles.buttonContainer}
           activeOpacity={0.6}
@@ -169,14 +196,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#F3F8F9",
     paddingHorizontal: 20,
   },
-
   agreeContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 10,
     marginVertical: 10,
   },
-
   agreeCircle: {
     borderColor: "#10798B",
     width: 18,

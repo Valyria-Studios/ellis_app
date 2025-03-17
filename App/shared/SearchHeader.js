@@ -13,6 +13,7 @@ import Icon from "@expo/vector-icons/Ionicons";
 import globalstyles from "../shared/globalStyles";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { dataSupabase } from "../api/supabaseClient";
 
 const SearchComponent = ({
   searchInput,
@@ -169,91 +170,204 @@ const SearchComponent = ({
     }
   };
 
-  const handleSendSearch = () => {
-    const dataToSend = {
-      search: searchInput,
-      Organization: searchInput,
-      iterations: 1,
-      id: `${searchInput} Needs an id`,
-    };
+  const handleSendSearch = async () => {
+    if (!searchInput.trim()) return;
 
-    fetch("https://ellis-test-data.com:8000/Data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to send data");
+    const searchTerm = searchInput;
+    const searchId = `search-${Date.now()}`; // Use a unique ID if not found
+    const newTimestamp = new Date().toISOString();
+
+    try {
+      // Step 1: Check if the record already exists
+      const { data: existingRecords, error: fetchError } = await dataSupabase
+        .from("search_data")
+        .select("id, iterations, time")
+        .eq("search", searchTerm)
+        .single(); // Fetch only one record matching the search term
+
+      if (fetchError && fetchError.code !== "PGRST116") {
+        console.error("❌ Error checking for existing search:", fetchError);
+        return;
+      }
+
+      if (existingRecords) {
+        // Step 2: If it exists, update iterations and add timestamp
+        const updatedIterations = existingRecords.iterations + 1;
+        const updatedTime = [...existingRecords.time, newTimestamp];
+
+        const { error: updateError } = await dataSupabase
+          .from("search_data")
+          .update({ iterations: updatedIterations, time: updatedTime })
+          .eq("id", existingRecords.id);
+
+        if (updateError) {
+          console.error("❌ Error updating existing search:", updateError);
+        } else {
+          console.log("✅ Search term updated in Supabase!");
         }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error sending data to /Data endpoint:", error);
-      });
+      } else {
+        // Step 3: If no record exists, insert a new one
+        const newEntry = {
+          search: searchTerm,
+          Organization: searchInput,
+          Subservice: searchInput,
+          iterations: 1,
+          id: searchId,
+          time: [newTimestamp],
+        };
 
-    setSearchInput("");
+        const { error: insertError } = await dataSupabase
+          .from("search_data")
+          .insert([newEntry]);
+
+        if (insertError) {
+          console.error("❌ Error inserting new search term:", insertError);
+        } else {
+          console.log("✅ New search term inserted into Supabase!");
+        }
+      }
+    } catch (error) {
+      console.error("❌ Error processing search term:", error);
+    }
+
+    setSearchInput(""); // Clear input after sending data
   };
 
-  const handleSearchPress = (organization) => {
-    const dataToSend = {
-      search: searchInput,
-      Organization: organization.attributes?.Name || organization.name,
-      iterations: 1,
-      id: organization.id,
-    };
+  const handleSearchPress = async (organization) => {
+    const searchTerm = searchInput;
+    const organizationName = organization.attributes?.Name || organization.name;
+    const orgId = organization.id || `placeholder-${Date.now()}`;
+    const newTimestamp = new Date().toISOString();
 
-    fetch("https://ellis-test-data.com:8000/Data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to send data");
+    try {
+      // Step 1: Check if the record already exists
+      const { data: existingRecords, error: fetchError } = await dataSupabase
+        .from("search_data")
+        .select("id, iterations, time")
+        .eq("id", orgId)
+        .single(); // Fetch only one record
+
+      if (fetchError && fetchError.code !== "PGRST116") {
+        // Ignore "PGRST116" because it means no record was found (which is expected sometimes)
+        console.error(
+          "❌ Error checking for existing organization:",
+          fetchError
+        );
+        return;
+      }
+
+      if (existingRecords) {
+        // Step 2: If the record exists, update it
+        const updatedIterations = existingRecords.iterations + 1;
+        const updatedTime = [...existingRecords.time, newTimestamp]; // Append new timestamp
+
+        const { error: updateError } = await dataSupabase
+          .from("search_data")
+          .update({ iterations: updatedIterations, time: updatedTime })
+          .eq("id", orgId);
+
+        if (updateError) {
+          console.error(
+            "❌ Error updating existing organization:",
+            updateError
+          );
+        } else {
+          console.log("✅ Organization search updated in Supabase!");
         }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error sending data to /Data endpoint:", error);
-      });
+      } else {
+        // Step 3: If no record exists, insert a new one
+        const newEntry = {
+          search: searchTerm,
+          Organization: organizationName,
+          Subservice: null,
+          iterations: 1,
+          id: orgId,
+          time: [newTimestamp], // Start with one timestamp
+        };
+
+        const { error: insertError } = await dataSupabase
+          .from("search_data")
+          .insert([newEntry]);
+
+        if (insertError) {
+          console.error(
+            "❌ Error inserting new organization search:",
+            insertError
+          );
+        } else {
+          console.log("✅ New organization search inserted into Supabase!");
+        }
+      }
+    } catch (error) {
+      console.error("❌ Error processing organization search:", error);
+    }
 
     setSearchInput("");
     navigation.navigate("Amenity Page", { amenity: organization });
   };
 
-  const handleSubservicePress = (subservice) => {
-    const dataToSend = {
-      search: searchInput,
-      Subservice: subservice.name,
-      iterations: 1,
-      id: subservice.valueId,
-    };
+  const handleSubservicePress = async (subservice) => {
+    const searchTerm = searchInput;
+    const subserviceName = subservice.name;
+    const subserviceId = subservice.valueId || `placeholder-${Date.now()}`;
+    const newTimestamp = new Date().toISOString();
 
-    fetch("https://ellis-test-data.com:8000/Data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to send data");
+    try {
+      const { data: existingRecords, error: fetchError } = await dataSupabase
+        .from("search_data")
+        .select("id, iterations, time")
+        .eq("id", subserviceId)
+        .single();
+
+      if (fetchError && fetchError.code !== "PGRST116") {
+        console.error("❌ Error checking for existing subservice:", fetchError);
+        return;
+      }
+
+      if (existingRecords) {
+        const updatedIterations = existingRecords.iterations + 1;
+        const updatedTime = [...existingRecords.time, newTimestamp];
+
+        const { error: updateError } = await dataSupabase
+          .from("search_data")
+          .update({ iterations: updatedIterations, time: updatedTime })
+          .eq("id", subserviceId);
+
+        if (updateError) {
+          console.error("❌ Error updating subservice:", updateError);
+        } else {
+          console.log("✅ Subservice search updated in Supabase!");
         }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error sending data to /Data endpoint:", error);
-      });
+      } else {
+        const newEntry = {
+          search: searchTerm,
+          Subservice: subserviceName,
+          Organization: null,
+          iterations: 1,
+          id: subserviceId,
+          time: [newTimestamp],
+        };
+
+        const { error: insertError } = await dataSupabase
+          .from("search_data")
+          .insert([newEntry]);
+
+        if (insertError) {
+          console.error(
+            "❌ Error inserting new subservice search:",
+            insertError
+          );
+        } else {
+          console.log("✅ New subservice search inserted into Supabase!");
+        }
+      }
+    } catch (error) {
+      console.error("❌ Error processing subservice search:", error);
+    }
 
     setSearchInput("");
     navigation.navigate("Referral Location", {
-      option: subservice.name,
+      option: subserviceName,
       providedServicesId: subservice.valueId,
     });
   };

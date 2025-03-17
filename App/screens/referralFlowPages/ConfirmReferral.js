@@ -14,6 +14,7 @@ import globalstyles from "../../shared/globalStyles";
 import Card from "../../shared/Card";
 import imageMap from "../../shared/getProfileImage";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { dataSupabase } from "../../api/supabaseClient";
 
 const ConfirmReferral = ({ route, navigation }) => {
   const {
@@ -40,7 +41,6 @@ const ConfirmReferral = ({ route, navigation }) => {
     const dateStarted = new Date().toISOString();
 
     try {
-      // Fetch the client data
       const clientResponse = await fetch(
         `https://ellis-test-data.com:8000/Clients/${selectedClient.id}`
       );
@@ -51,9 +51,8 @@ const ConfirmReferral = ({ route, navigation }) => {
           selectedClient.referralSenderId || "1"
         }`
       );
-      const sender = await senderResponse.json(); // Get the sender's full data
+      const sender = await senderResponse.json();
 
-      // Construct the referral data
       const referralData = {
         clientId: selectedClient.id,
         referralSenderId: sender.id || "1",
@@ -74,7 +73,6 @@ const ConfirmReferral = ({ route, navigation }) => {
         notes,
       };
 
-      // Send referral data to the NonProfits-Referrals endpoint
       await fetch(`https://ellis-test-data.com:8000/NonProfits-Referrals`, {
         method: "POST",
         headers: {
@@ -86,7 +84,6 @@ const ConfirmReferral = ({ route, navigation }) => {
         }),
       });
 
-      // Update backend referral logs for both client and sender
       client.referrals.push(referralData);
       sender.referrals.push(referralData);
 
@@ -112,23 +109,46 @@ const ConfirmReferral = ({ route, navigation }) => {
         }
       );
 
-      // **Send to the /Data endpoint like in the Search Header**
-      const dataToSend = {
-        search: "Used Referral Flow",
-        Organization: selectedService.name,
-        iterations: 1,
-        id: `${selectedService.id}`,
-      };
+      // ✅ Fetch existing record from Supabase before upsert
+      const { data: existingEntry, error: fetchError } = await dataSupabase
+        .from("search_data")
+        .select("iterations, time")
+        .eq("id", selectedService.id)
+        .single(); // Fetch a single row if it exists
 
-      await fetch("https://ellis-test-data.com:8000/Data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      if (fetchError && fetchError.code !== "PGRST116") {
+        console.error(
+          "Error fetching existing referral data from Supabase:",
+          fetchError
+        );
+        return;
+      }
 
-      // Navigate to the Referral Sent page
+      // ✅ Update iterations count and append new time
+      const newIterations = existingEntry ? existingEntry.iterations + 1 : 1;
+      const newTime = existingEntry
+        ? [...existingEntry.time, dateStarted]
+        : [dateStarted];
+
+      const { data, error } = await dataSupabase.from("search_data").upsert(
+        [
+          {
+            search: "Used Referral Flow",
+            Organization: selectedService.name,
+            iterations: newIterations,
+            id: `${selectedService.id}`,
+            time: newTime,
+          },
+        ],
+        { onConflict: ["id"] } // ✅ Ensures existing rows are updated
+      );
+
+      if (error) {
+        console.error("Error inserting referral data into Supabase:", error);
+      } else {
+        console.log("✅ Referral data successfully added to Supabase!", data);
+      }
+
       navigation.navigate("Referral Sent", {
         selectedClient: selectedClient,
         referralSender: sender.fullName,

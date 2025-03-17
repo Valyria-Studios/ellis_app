@@ -43,657 +43,679 @@ import CustomBackButton from "../shared/CustomBackButton";
 import NonprofitsByTag from "../screens/referralFlowPages/NonprofitTags";
 import RecentReferrals from "../screens/directoryPages/recentReferral";
 import GoogleSheetScreen from "../screens/sheetTest/googleSheetScreen";
+import OnBoardingNavigator from "./OnboardingNavigator";
+import { useUser } from "../context/userContext";
 
 const RootStack = createStackNavigator();
 
 const RootNavigator = () => {
+  const supauser = useUser(); // 🔹 Get user from context
+
   return (
     <RootStack.Navigator>
-      <RootStack.Screen
-        name="MainScreen"
-        component={GoogleSheetScreen}
-        options={{
-          headerTitle: "Service Directory",
-          headerTitleAlign: "left",
-          headerTintColor: "#094852",
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
+      {supauser ? (
+        <>
+          <RootStack.Screen
+            name="Service Directory"
+            component={ServiceDirectory}
+            options={{
+              headerTitle: "Service Directory",
+              headerTitleAlign: "left",
+              headerTintColor: "#094852",
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            }}
+          />
 
-      <RootStack.Screen
-        name="My Clients"
-        component={MyClients}
-        options={{
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
-      <RootStack.Screen
-        name="My Services"
-        component={MyServices}
-        options={{
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
-      <RootStack.Screen
-        name="My Hours"
-        component={MyHours}
-        options={{
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
-      <RootStack.Screen
-        name="ChatPage"
-        component={ChatPage}
-        options={({ route }) => ({
-          headerTitle: route.params.chatIdentifier || "Chat",
+          <RootStack.Screen
+            name="My Clients"
+            component={MyClients}
+            options={{
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="My Services"
+            component={MyServices}
+            options={{
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="My Hours"
+            component={MyHours}
+            options={{
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ChatPage"
+            component={ChatPage}
+            options={({ route }) => ({
+              headerTitle: route.params.chatIdentifier || "Chat",
 
-          headerTintColor: "black",
-        })}
-      />
-      <RootStack.Screen
-        name="Amenity Page"
-        component={AmenityPage}
-        options={({ navigation, route }) => ({
-          headerTitle: "",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleAlign: "left",
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#094852",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerTransparent: true,
-        })}
-      />
+              headerTintColor: "black",
+            })}
+          />
+          <RootStack.Screen
+            name="Amenity Page"
+            component={AmenityPage}
+            options={({ navigation, route }) => ({
+              headerTitle: "",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleAlign: "left",
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#094852",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerTransparent: true,
+            })}
+          />
 
-      <RootStack.Screen
-        name="Profile Page"
-        component={ProfilePage}
-        options={({ route, navigation }) => ({
-          headerTitle: route.params?.client?.fullName || "Profile",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            color: "#171B1C",
-            fontSize: 24,
-          },
-          headerTintColor: "#094852",
-          headerRight: () => (
-            <Menu>
-              <MenuTrigger>
-                <Ionicons
-                  name="ellipsis-vertical"
-                  size={24}
-                  style={{ paddingRight: 10, color: "#094852" }}
-                />
-              </MenuTrigger>
-              <MenuOptions
-                optionsContainerStyle={{
-                  marginTop: 30,
-                  width: 150,
-                  padding: 5,
-                }}
-              >
-                <MenuOption
-                  onSelect={() => navigation.navigate("SendMessagePage")}
-                  text="Send Message"
-                  style={styles.menuOption}
-                />
-                <MenuOption
-                  onSelect={() =>
-                    navigation.navigate("Request Services Page", {
-                      client: route.params.client,
-                    })
-                  }
-                  text="Refer to service"
-                  style={styles.menuOption}
-                />
-                <MenuOption
-                  onSelect={() => navigation.navigate("RemoveClientPage")}
-                  text="Remove as client"
-                  style={[styles.menuOption, { borderBottomWidth: 0 }]}
-                />
-              </MenuOptions>
-            </Menu>
-          ),
-        })}
-      />
-      <RootStack.Screen
-        name="Request Services Page"
-        component={ServiceDirectory}
-        options={({ route }) => ({
-          headerTitle:
-            route.params && route.params.headerTitle
-              ? route.params.headerTitle
-              : "Service Directory",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerTintColor: "#094852",
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Organization Profile"
-        component={OrgProfile}
-        options={{}}
-      />
-      <RootStack.Screen name="Account" component={AccountPage} options={{}} />
-      <RootStack.Screen
-        name="Notifications"
-        component={NotificationsPage}
-        options={{}}
-      />
-      <RootStack.Screen name="Help" component={HelpPage} options={{}} />
-      <RootStack.Screen name="LogOut" component={LogOutPage} options={{}} />
-      <RootStack.Screen
-        name="Service Details"
-        component={ServiceDetails}
-        options={({ route }) => ({
-          headerTitle: route.params.category.name,
+          <RootStack.Screen
+            name="Profile Page"
+            component={ProfilePage}
+            options={({ route, navigation }) => ({
+              headerTitle: route.params?.client?.fullName || "Profile",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                color: "#171B1C",
+                fontSize: 24,
+              },
+              headerTintColor: "#094852",
+              headerRight: () => (
+                <Menu>
+                  <MenuTrigger>
+                    <Ionicons
+                      name="ellipsis-vertical"
+                      size={24}
+                      style={{ paddingRight: 10, color: "#094852" }}
+                    />
+                  </MenuTrigger>
+                  <MenuOptions
+                    optionsContainerStyle={{
+                      marginTop: 30,
+                      width: 150,
+                      padding: 5,
+                    }}
+                  >
+                    <MenuOption
+                      onSelect={() => navigation.navigate("SendMessagePage")}
+                      text="Send Message"
+                      style={styles.menuOption}
+                    />
+                    <MenuOption
+                      onSelect={() =>
+                        navigation.navigate("Request Services Page", {
+                          client: route.params.client,
+                        })
+                      }
+                      text="Refer to service"
+                      style={styles.menuOption}
+                    />
+                    <MenuOption
+                      onSelect={() => navigation.navigate("RemoveClientPage")}
+                      text="Remove as client"
+                      style={[styles.menuOption, { borderBottomWidth: 0 }]}
+                    />
+                  </MenuOptions>
+                </Menu>
+              ),
+            })}
+          />
+          <RootStack.Screen
+            name="Request Services Page"
+            component={ServiceDirectory}
+            options={({ route }) => ({
+              headerTitle:
+                route.params && route.params.headerTitle
+                  ? route.params.headerTitle
+                  : "Service Directory",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerTintColor: "#094852",
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Organization Profile"
+            component={OrgProfile}
+            options={{}}
+          />
+          <RootStack.Screen
+            name="Account"
+            component={AccountPage}
+            options={{}}
+          />
+          <RootStack.Screen
+            name="Notifications"
+            component={NotificationsPage}
+            options={{}}
+          />
+          <RootStack.Screen name="Help" component={HelpPage} options={{}} />
+          <RootStack.Screen name="LogOut" component={LogOutPage} options={{}} />
+          <RootStack.Screen
+            name="Service Details"
+            component={ServiceDetails}
+            options={({ route }) => ({
+              headerTitle: route.params.category.name,
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Referral Location"
-        component={SelectReferralLocation}
-        options={({ route }) => ({
-          headerTitle: route.params.option,
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Nonprofit Tags"
-        component={NonprofitsByTag}
-        options={({ route }) => ({
-          headerTitle: route.params.selectedTag,
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Select Client With Location"
-        component={SelectClientWithLocation}
-        options={({ route }) => ({
-          headerTitle: `${route.params.option} Referral`,
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Referral Location"
+            component={SelectReferralLocation}
+            options={({ route }) => ({
+              headerTitle: route.params.option,
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Nonprofit Tags"
+            component={NonprofitsByTag}
+            options={({ route }) => ({
+              headerTitle: route.params.selectedTag,
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Select Client With Location"
+            component={SelectClientWithLocation}
+            options={({ route }) => ({
+              headerTitle: `${route.params.option} Referral`,
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Enrollment Form"
-        component={EnrollmentForm}
-        options={({ route }) => ({
-          headerTitle: `${route.params.option} Enrollment Form`,
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Enrollment Form"
+            component={EnrollmentForm}
+            options={({ route }) => ({
+              headerTitle: `${route.params.option} Enrollment Form`,
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Confirm Referral"
-        component={ConfirmReferral}
-        options={{
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
-      <RootStack.Screen
-        name="Recent Referral"
-        component={RecentReferrals}
-        options={({ route }) => {
-          const { clientName } = route.params || {};
-          return {
-            headerTitle: clientName
-              ? `${clientName}'s Referral`
-              : "Recent Referrals",
-            headerTintColor: "#094852",
-            headerTitleAlign: "left",
-            headerLeft: () => <CustomBackButton color="#094852" />,
-            headerTitleStyle: {
-              fontFamily: "gabarito-semibold",
-              fontSize: 24,
-              color: "#171B1C",
-            },
-            headerStyle: {
-              backgroundColor: "#F3F8F9",
-              shadowColor: "transparent",
-              elevation: 0,
-            },
-          };
-        }}
-      />
-      <RootStack.Screen
-        name="Referral Sent"
-        component={ReferralSent}
-        options={({ navigation }) => ({
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => navigation.popToTop()} // Navigates to the first screen in the stack
-              style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning
-            >
-              <Ionicons name="close" size={30} color="#094852" />
-            </TouchableOpacity>
-          ),
-        })}
-      />
-      <RootStack.Screen
-        name="Select Client"
-        component={SelectClient}
-        options={{
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#094852",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
-      <RootStack.Screen
-        name="Select Referral For"
-        component={SelectReferralFor}
-        options={{
-          headerTitle: "Select Referral",
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Confirm Referral"
+            component={ConfirmReferral}
+            options={{
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="Recent Referral"
+            component={RecentReferrals}
+            options={({ route }) => {
+              const { clientName } = route.params || {};
+              return {
+                headerTitle: clientName
+                  ? `${clientName}'s Referral`
+                  : "Recent Referrals",
+                headerTintColor: "#094852",
+                headerTitleAlign: "left",
+                headerLeft: () => <CustomBackButton color="#094852" />,
+                headerTitleStyle: {
+                  fontFamily: "gabarito-semibold",
+                  fontSize: 24,
+                  color: "#171B1C",
+                },
+                headerStyle: {
+                  backgroundColor: "#F3F8F9",
+                  shadowColor: "transparent",
+                  elevation: 0,
+                },
+              };
+            }}
+          />
+          <RootStack.Screen
+            name="Referral Sent"
+            component={ReferralSent}
+            options={({ navigation }) => ({
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.popToTop()} // Navigates to the first screen in the stack
+                  style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning
+                >
+                  <Ionicons name="close" size={30} color="#094852" />
+                </TouchableOpacity>
+              ),
+            })}
+          />
+          <RootStack.Screen
+            name="Select Client"
+            component={SelectClient}
+            options={{
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#094852",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="Select Referral For"
+            component={SelectReferralFor}
+            options={{
+              headerTitle: "Select Referral",
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#094852",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        }}
-      />
-      <RootStack.Screen
-        name="Refer to Person"
-        component={ReferToPerson}
-        options={({ route }) => ({
-          headerTitle: `Refer to ${route.params.teamMember}`,
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#094852",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="Refer to Person"
+            component={ReferToPerson}
+            options={({ route }) => ({
+              headerTitle: `Refer to ${route.params.teamMember}`,
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#094852",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Refer to Service"
-        component={ReferToService}
-        options={({ route }) => ({
-          headerTitle: `${route.params.service.name}`,
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#094852",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Refer to Service"
+            component={ReferToService}
+            options={({ route }) => ({
+              headerTitle: `${route.params.service.name}`,
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerTransparent: true,
-        })}
-      />
-      <RootStack.Screen
-        name="Create a Note"
-        component={CreateNote}
-        options={({ route }) => ({
-          headerTitle:
-            route.params && route.params.headerTitle
-              ? route.params.headerTitle
-              : "New Note",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerTransparent: true,
+            })}
+          />
+          <RootStack.Screen
+            name="Create a Note"
+            component={CreateNote}
+            options={({ route }) => ({
+              headerTitle:
+                route.params && route.params.headerTitle
+                  ? route.params.headerTitle
+                  : "New Note",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
 
-          headerTintColor: "#094852",
-          headerStyle: {
-            backgroundColor: "#FFFFFF",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-        })}
-      />
-      <RootStack.Screen
-        name="Note Details"
-        component={NoteDetails}
-        options={({ route, navigation }) => ({
-          headerTitle: `${route.params.note.title} Notes`,
-          headerTitleAlign: "left",
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                if (route.params.fromProfile) {
-                  // Navigate back to the profile page
-                  navigation.pop(2); // This takes you back to the Profile Page
-                } else {
-                  // Navigate to the start of the stack
-                  navigation.popToTop();
-                }
-              }}
-              style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning
-            >
-              <Ionicons name="close" size={30} color="#094852" />
-            </TouchableOpacity>
-          ),
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-
-          headerTintColor: "#094852",
-          headerStyle: {
-            backgroundColor: "#FFFFFF",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerRight: () => (
-            <Menu>
-              <MenuTrigger>
-                <Ionicons
-                  name="ellipsis-vertical"
-                  size={24}
-                  style={{ paddingRight: 10, color: "#094852" }}
-                />
-              </MenuTrigger>
-              <MenuOptions
-                optionsContainerStyle={{
-                  marginTop: 30,
-                  width: 150,
-                  padding: 5,
-                }}
-              >
-                <MenuOption text="Edit Note" style={styles.noteOptionEdit} />
-                <MenuOption
-                  text="Delete Note"
-                  style={styles.noteOptionDelete}
-                  onSelect={() => {
-                    // Call the confirmDelete function passed via navigation params
-                    route.params.confirmDelete && route.params.confirmDelete();
+              headerTintColor: "#094852",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+            })}
+          />
+          <RootStack.Screen
+            name="Note Details"
+            component={NoteDetails}
+            options={({ route, navigation }) => ({
+              headerTitle: `${route.params.note.title} Notes`,
+              headerTitleAlign: "left",
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => {
+                    if (route.params.fromProfile) {
+                      // Navigate back to the profile page
+                      navigation.pop(2); // This takes you back to the Profile Page
+                    } else {
+                      // Navigate to the start of the stack
+                      navigation.popToTop();
+                    }
                   }}
-                />
-              </MenuOptions>
-            </Menu>
-          ),
-        })}
-      />
-      <RootStack.Screen
-        name="Create New Client"
-        component={CreateClient}
-        options={({ route }) => ({
-          headerTitle: "Create New Client Profile",
+                  style={{ marginLeft: 10 }} // Add marginLeft if needed for positioning
+                >
+                  <Ionicons name="close" size={30} color="#094852" />
+                </TouchableOpacity>
+              ),
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerTransparent: true,
-        })}
-      />
-      <RootStack.Screen
-        name="Client Information"
-        component={ClientInformation}
-        options={({ route }) => ({
-          headerTitle: "Add Client Information",
+              headerTintColor: "#094852",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerRight: () => (
+                <Menu>
+                  <MenuTrigger>
+                    <Ionicons
+                      name="ellipsis-vertical"
+                      size={24}
+                      style={{ paddingRight: 10, color: "#094852" }}
+                    />
+                  </MenuTrigger>
+                  <MenuOptions
+                    optionsContainerStyle={{
+                      marginTop: 30,
+                      width: 150,
+                      padding: 5,
+                    }}
+                  >
+                    <MenuOption
+                      text="Edit Note"
+                      style={styles.noteOptionEdit}
+                    />
+                    <MenuOption
+                      text="Delete Note"
+                      style={styles.noteOptionDelete}
+                      onSelect={() => {
+                        // Call the confirmDelete function passed via navigation params
+                        route.params.confirmDelete &&
+                          route.params.confirmDelete();
+                      }}
+                    />
+                  </MenuOptions>
+                </Menu>
+              ),
+            })}
+          />
+          <RootStack.Screen
+            name="Create New Client"
+            component={CreateClient}
+            options={({ route }) => ({
+              headerTitle: "Create New Client Profile",
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerTransparent: true,
-        })}
-      />
-      <RootStack.Screen
-        name="Add a Service"
-        component={ServicePage}
-        options={({ route }) => ({
-          headerTitle: "Add a Service",
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerTransparent: true,
+            })}
+          />
+          <RootStack.Screen
+            name="Client Information"
+            component={ClientInformation}
+            options={({ route }) => ({
+              headerTitle: "Add Client Information",
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerTransparent: true,
-        })}
-      />
-      <RootStack.Screen
-        name="Select a Meeting Time"
-        component={AppointmentScheduler}
-        options={({ route }) => ({
-          headerTitle: "Select meeting time",
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerTransparent: true,
+            })}
+          />
+          <RootStack.Screen
+            name="Add a Service"
+            component={ServicePage}
+            options={({ route }) => ({
+              headerTitle: "Add a Service",
 
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerTransparent: true,
-        })}
-      />
-      <RootStack.Screen
-        name="Entities Screen"
-        component={EntitiesScreen}
-        options={({ route }) => ({
-          headerTitle: "Select Entity",
-          headerTintColor: "#094852",
-          headerTitleAlign: "left",
-          headerLeft: () => <CustomBackButton color="#094852" />,
-          headerTitleStyle: {
-            fontFamily: "gabarito-semibold",
-            fontSize: 24,
-            color: "#171B1C",
-          },
-          headerStyle: {
-            backgroundColor: "#F3F8F9",
-            shadowColor: "transparent",
-            elevation: 0,
-          },
-          headerTransparent: true,
-        })}
-      />
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerTransparent: true,
+            })}
+          />
+          <RootStack.Screen
+            name="Select a Meeting Time"
+            component={AppointmentScheduler}
+            options={({ route }) => ({
+              headerTitle: "Select meeting time",
+
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerTransparent: true,
+            })}
+          />
+          <RootStack.Screen
+            name="Entities Screen"
+            component={EntitiesScreen}
+            options={({ route }) => ({
+              headerTitle: "Select Entity",
+              headerTintColor: "#094852",
+              headerTitleAlign: "left",
+              headerLeft: () => <CustomBackButton color="#094852" />,
+              headerTitleStyle: {
+                fontFamily: "gabarito-semibold",
+                fontSize: 24,
+                color: "#171B1C",
+              },
+              headerStyle: {
+                backgroundColor: "#F3F8F9",
+                shadowColor: "transparent",
+                elevation: 0,
+              },
+              headerTransparent: true,
+            })}
+          />
+        </>
+      ) : (
+        <RootStack.Screen
+          name="MainScreen"
+          component={OnBoardingNavigator}
+          options={{ headerShown: false }}
+        />
+      )}
     </RootStack.Navigator>
   );
 };

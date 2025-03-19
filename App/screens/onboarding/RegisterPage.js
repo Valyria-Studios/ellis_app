@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Modal,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import OTPInputView from "@twotalltotems/react-native-otp-input"; // ✅ Import OTP input
 import globalstyles from "../../shared/globalStyles";
 import { authSupabase } from "../../api/supabaseClient"; // Import Supabase client
 
@@ -21,7 +23,7 @@ const Register = ({ navigation }) => {
 
   const [agreed, setAgreed] = useState(false);
   const [otp, setOtp] = useState("");
-  const [waitingForOtp, setWaitingForOtp] = useState(false);
+  const [otpModalVisible, setOtpModalVisible] = useState(false);
 
   const toggleAgree = () => {
     setAgreed(!agreed);
@@ -77,7 +79,7 @@ const Register = ({ navigation }) => {
       }
 
       Alert.alert("Check Your Email", "Enter the OTP code sent to your email.");
-      setWaitingForOtp(true);
+      setOtpModalVisible(true);
       setLoading(false);
     } catch (error) {
       console.error("Unexpected error:", error);
@@ -87,20 +89,21 @@ const Register = ({ navigation }) => {
   };
 
   // Function to verify OTP
-  const handleVerifyOtp = async () => {
+  const handleVerifyOtp = async (code) => {
     try {
       const { data, error } = await authSupabase.auth.verifyOtp({
         email,
-        token: otp,
+        token: code,
         type: "email",
       });
 
       if (error) {
         Alert.alert("Verification Error", error.message);
         return;
-      } else {
-        console.log("User Data After Login:", data);
       }
+
+      Alert.alert("Success", "You are registered and logged in!");
+      setOtpModalVisible(false); // Close modal
     } catch (error) {
       console.error("OTP Verification Error:", error);
       Alert.alert("Error", "Something went wrong. Please try again.");
@@ -144,41 +147,35 @@ const Register = ({ navigation }) => {
       </View>
       {agreedError ? <Text style={styles.errorText}>{agreedError}</Text> : null}
       <View>
-        {waitingForOtp ? (
-          <>
-            <TextInput
-              placeholder="Enter OTP"
-              style={globalstyles.textInput}
-              value={otp}
-              onChangeText={setOtp}
-              keyboardType="number-pad"
-            />
-            <TouchableOpacity
-              style={globalstyles.buttonContainer}
-              onPress={handleVerifyOtp}
-              activeOpacity={0.6}
-            >
-              <Text style={globalstyles.buttonText}>Verify OTP</Text>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <TouchableOpacity
-            style={[
-              globalstyles.buttonContainer,
-              !agreed || !name || !email
-                ? styles.disabledButton
-                : { backgroundColor: "#10798B" },
-              { marginVertical: 10 },
-            ]}
-            activeOpacity={0.6}
-            onPress={handleSubmit}
-            disabled={loading}
-          >
-            <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
-              {loading ? "Signing up..." : "Sign Up"}
-            </Text>
-          </TouchableOpacity>
-        )}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={otpModalVisible}
+          onRequestClose={() => setOtpModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Enter the Code</Text>
+              <OTPInputView
+                style={{ width: "80%", height: 80 }}
+                pinCount={6}
+                autoFocusOnLoad
+                keyboardType="number-pad"
+                clearInputs={false} // Keeps input visible even if wrong code is entered
+                codeInputFieldStyle={styles.otpInput}
+                codeInputHighlightStyle={styles.otpInputActive}
+                onCodeChanged={(code) => setOtp(code)} // Updates OTP state as user types or deletes
+                onCodeFilled={(code) => handleVerifyOtp(code)} // Automatically submits when 6 digits are entered
+              />
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => setOtpModalVisible(false)}
+              >
+                <Text style={styles.closeButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
         <TouchableOpacity
           style={globalstyles.buttonContainer}
           activeOpacity={0.6}
@@ -235,6 +232,46 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     paddingHorizontal: 15,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    width: "90%",
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 15,
+  },
+  otpInput: {
+    width: 40,
+    height: 45,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 5,
+    color: "#000",
+  },
+  otpInputActive: {
+    borderColor: "#10798B",
+  },
+  closeButton: {
+    marginTop: 20,
+    backgroundColor: "#10798B",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 

@@ -89,6 +89,7 @@ const Register = ({ navigation }) => {
   };
 
   // Function to verify OTP
+  // Function to verify OTP
   const handleVerifyOtp = async (code) => {
     try {
       const { data, error } = await authSupabase.auth.verifyOtp({
@@ -102,8 +103,9 @@ const Register = ({ navigation }) => {
         return;
       }
 
-      Alert.alert("Success", "You are registered and logged in!");
+      Alert.alert("Success", "You are registered!");
       setOtpModalVisible(false); // Close modal
+      setOtp("");
     } catch (error) {
       console.error("OTP Verification Error:", error);
       Alert.alert("Error", "Something went wrong. Please try again.");
@@ -146,6 +148,22 @@ const Register = ({ navigation }) => {
         </Text>
       </View>
       {agreedError ? <Text style={styles.errorText}>{agreedError}</Text> : null}
+      <TouchableOpacity
+        style={[
+          globalstyles.buttonContainer,
+          !agreed || !name || !email
+            ? styles.disabledButton
+            : { backgroundColor: "#10798B" },
+          { marginVertical: 10 },
+        ]}
+        activeOpacity={0.6}
+        onPress={handleSubmit}
+        disabled={loading}
+      >
+        <Text style={[globalstyles.buttonText, { color: "#fff" }]}>
+          {loading ? "Signing up..." : "Sign Up"}
+        </Text>
+      </TouchableOpacity>
       <View>
         <Modal
           animationType="slide"

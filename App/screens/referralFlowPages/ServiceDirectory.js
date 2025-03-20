@@ -33,8 +33,6 @@ const ServiceDirectory = ({ route, navigation }) => {
   const CACHE_KEY_SERVICES = "cache_services";
   const CACHE_KEY_NONPROFITS = "cache_nonprofits"; // Add cache key for NonProfits
 
-  console.log(user)
-
   const handlePressOutside = () => {
     Keyboard.dismiss();
     setSearchInput(""); // Clears search input and hides search results

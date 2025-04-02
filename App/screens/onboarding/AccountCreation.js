@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,16 +8,45 @@ import {
   Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { authSupabase } from "../../api/supabaseClient"; // Import Supabase client
+import DropDownPicker from "react-native-dropdown-picker";
+import { authSupabase } from "../../api/supabaseClient";
 import { useUser } from "../../context/userContext";
 
 const AccountCreation = () => {
   const { user, fetchUserProfile } = useUser();
+
   const [name, setName] = useState("");
   const [organization, setOrganization] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Function to handle account creation
+  // dropdown state
+  const [orgList, setOrgList] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchNonprofits = async () => {
+      const { data, error } = await authSupabase
+        .from("nonprofits")
+        .select("id, name");
+
+      if (error) {
+        console.error("Failed to fetch nonprofits:", error);
+        return;
+      }
+
+      console.log(data);
+
+      const formatted = data.map((np) => ({
+        label: np.name,
+        value: np.id, // Or use `np.id` if storing ID instead
+      }));
+
+      setOrgList(formatted);
+    };
+
+    fetchNonprofits();
+  }, []);
+
   const handleAccountCreation = async () => {
     setLoading(true);
 
@@ -29,15 +58,11 @@ const AccountCreation = () => {
 
     try {
       if (!user || !user.id) {
-        Alert.alert("Error", "User not authenticated. Please log in again.");
+        Alert.alert("Error", "User not authenticated.");
         setLoading(false);
         return;
       }
 
-      console.log("Authenticated User:", user);
-      console.log("User ID:", user.id);
-
-      // ✅ Insert user profile
       const { error } = await authSupabase.from("users").upsert([
         {
           user_id: user.id,
@@ -51,11 +76,8 @@ const AccountCreation = () => {
 
       if (error) throw error;
 
-      // ✅ Fetch updated profile
       await fetchUserProfile(user.id);
-
       Alert.alert("Success", "Account setup complete!");
-
     } catch (error) {
       console.error("Account Creation Error:", error);
       Alert.alert("Error", error.message || "Something went wrong.");
@@ -66,23 +88,32 @@ const AccountCreation = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ margin: 40 }}></View>
+      <View style={{ margin: 40 }} />
       <Text style={styles.header}>Complete Your Profile</Text>
       <Text style={styles.subHeader}>
         Enter your name and organization details to complete your registration.
       </Text>
+
       <TextInput
         placeholder="Full Name"
         style={styles.textInput}
         value={name}
         onChangeText={setName}
       />
-      <TextInput
-        placeholder="Organization"
-        style={styles.textInput}
+
+      <DropDownPicker
+        open={open}
         value={organization}
-        onChangeText={setOrganization}
+        items={orgList}
+        setOpen={setOpen}
+        setValue={setOrganization}
+        setItems={setOrgList}
+        searchable={true}
+        placeholder="Select Organization"
+        style={styles.dropdown}
+        dropDownContainerStyle={styles.dropdownContainer}
       />
+
       <TouchableOpacity
         style={styles.button}
         onPress={handleAccountCreation}
@@ -122,6 +153,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ddd",
     marginBottom: 15,
+  },
+  dropdown: {
+    backgroundColor: "white",
+    borderColor: "#ddd",
+    marginBottom: 15,
+  },
+  dropdownContainer: {
+    borderColor: "#ddd",
   },
   button: {
     backgroundColor: "#10798B",

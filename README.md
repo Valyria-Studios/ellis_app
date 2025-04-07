@@ -5,6 +5,7 @@ Ellis is a relationship and service manager application designed for service pro
 ## Project Overview
 
 Ellis helps service providers by:
+
 - Managing client profiles and relationships
 - Making service referrals to other organizations
 - Tracking client progress through different services
@@ -89,7 +90,7 @@ App/
 │   │   ├── ReferToService.js # Refer client to specific service
 │   │   ├── SelectClient.js # Select client for referral
 │   │   ├── SelectClientWithReferralLocation.js # Select client with location
-│   │   ├── SelectReferralFor.js # Select referral type 
+│   │   ├── SelectReferralFor.js # Select referral type
 │   │   ├── SelectReferralLocation.js # Select service location
 │   │   ├── ServiceDetails.js # View service details
 │   │   └── ServiceDirectory.js # Browse available services
@@ -151,6 +152,7 @@ Ellis uses Supabase for authentication with email-based OTP (One-Time Password) 
 ### Referral System
 
 Ellis includes a comprehensive referral system that allows service providers to:
+
 - Refer clients to specific services (`App/screens/referralFlowPages/ReferToService.js`)
 - Refer clients to specific staff members (`App/screens/referralFlowPages/ReferToPerson.js`)
 - Select appropriate referral locations (`App/screens/referralFlowPages/SelectReferralLocation.js`)
@@ -168,6 +170,7 @@ Ellis includes a comprehensive referral system that allows service providers to:
 ### HMIS Integration
 
 The app includes integration with the Homeless Management Information System (HMIS) to:
+
 - Export client data in the HMIS CSV format (`App/HMIS/CSVBreakdown.md`)
 - Map app data to HMIS data elements (`App/HMIS/PDDEandUDETemplate.json`)
 - Support federal program requirements through specialized data formats:
@@ -177,6 +180,17 @@ The app includes integration with the Homeless Management Information System (HM
   - HHS-RHY (Runaway and Homeless Youth) - `App/HMIS/FederalPartnerProgramData/HHS-RHY.json`
   - VA (Veterans Affairs) programs - `App/HMIS/FederalPartnerProgramData/VA.json`
 - Comprehensive data structure documentation in `App/HMIS/HMISINTEGRATION.md`
+
+The app includes comprehensive support for the Homeless Management Information System (HMIS) data elements, including:
+
+- Universal Data Elements (UDEs)
+- Project Descriptor Data Elements (PDDEs)
+- Program-specific data elements for:
+  - HUD-CoC (Continuum of Care)
+  - HUD-HOPWA (Housing Opportunities for Persons With AIDS)
+  - HHS-PATH (Projects for Assistance in Transition from Homelessness)
+  - HHS-RHY (Runaway and Homeless Youth)
+  - VA (Veterans Affairs) programs
 
 ## Getting Started
 
@@ -190,12 +204,14 @@ The app includes integration with the Homeless Management Information System (HM
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/your-repo/ellis-app.git
 cd ellis-app
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 # or
@@ -203,6 +219,7 @@ yarn install
 ```
 
 3. Start the development server
+
 ```bash
 expo start
 # or
@@ -220,18 +237,60 @@ DATA_SUPABASE_URL=your_data_supabase_url
 DATA_SUPABASE_ANON_KEY=your_data_supabase_anon_key
 ```
 
-## HMIS Integration
+# Database Schemas
 
-The app includes comprehensive support for the Homeless Management Information System (HMIS) data elements, including:
+The Ellis app uses Supabase for data storage with the following schema structure:
 
-- Universal Data Elements (UDEs)
-- Project Descriptor Data Elements (PDDEs)
-- Program-specific data elements for:
-  - HUD-CoC (Continuum of Care)
-  - HUD-HOPWA (Housing Opportunities for Persons With AIDS)
-  - HHS-PATH (Projects for Assistance in Transition from Homelessness)
-  - HHS-RHY (Runaway and Homeless Youth)
-  - VA (Veterans Affairs) programs
+## Authentication Schema
+
+### `auth.users` Table
+
+- `id` (UUID): Primary key, unique identifier for each user
+- Connected to the application users table via user_id
+
+## Application Schemas
+
+### `users` Table
+
+- `user_id` (UUID): Foreign key to auth.users.id
+- `email` (text): User's email address
+- `name` (text): User's full name
+- `organization` (text): User's affiliated organization
+- `clients` (jsonb): Array of client information
+- `servicedetails` (jsonb): Details of services provided
+- `created_at` (timestamptz): Timestamp when the user record was created
+
+### `nonprofits` Table
+
+- `id` (text): Primary key, unique identifier for each nonprofit
+- `name` (text): Name of the nonprofit organization
+- `description` (text): Description of the nonprofit
+- `email` (text): Contact email address
+- `phone_number` (text): Contact phone number
+- `address` (text): Physical address
+- `web_url` (text): Website URL
+- `regions` (text): Geographical regions served
+- `types` (text): Types of services provided
+- `services` (jsonb): Detailed information about services
+- `attributes` (jsonb): Additional attributes and information
+- `referrals` (jsonb): Referral information
+
+### `search_data` Table
+
+- `id` (text): Primary key, unique identifier for each nonprofit
+- `search` (text): Value in Search bar
+- `organization` (text): Organization referred to
+- `iterations` (int8): Number of referrals
+- `time` (timestamp): Date at which referral was created
+- `Subservice` (text): Service requested from Organization
+
+The database schema supports:
+
+1. User authentication and profile management
+2. Nonprofit organization directory
+3. Client relationship tracking
+4. Service referral system
+5. Program and service details storage
 
 ## License
 

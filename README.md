@@ -1,4 +1,5 @@
 # Ellis App
+
 This is the geo-browser version!
 
 Ellis is a relationship and service manager application designed for service providers to meet the needs of marginalized communities more efficiently and effectively. It enables service providers to manage client relationships, make referrals to services, track client progress, and coordinate care across organizations.
@@ -20,12 +21,9 @@ App/
 ├── api/                  # API clients and mock data
 │   ├── ChatMessages.js   # Mock message data for chat functionality
 │   ├── Chats.js          # Mock chat data for conversations
-│   └── supabaseClient.js # Supabase client configuration
 ├── assets/               # Images, fonts and static resources
 │   ├── fonts/            # Custom font files (Gabarito, Karla, JetBrainsMono)
 │   └── images/           # App images including profile pictures and icons
-├── context/              # React Context providers
-│   └── userContext.js    # User authentication and profile context
 ├── filtering/            # Filtering utilities for search
 │   ├── amenityFilter.js  # Filter amenities by category
 │   ├── openNowFilter.js  # Filter services by current operational hours
@@ -64,7 +62,6 @@ App/
 │   ├── messagesPages/    # Messaging interface
 │   │   └── Messages.js   # List of message conversations
 │   ├── onboarding/       # User onboarding screens
-│   │   ├── AccountCreation.js # Create user account
 │   │   ├── addServiceHours.js # Add service hours during onboarding
 │   │   ├── addServicesPage.js # Add available services during onboarding
 │   │   ├── CreateOrganization.js # Create new organization profile
@@ -125,13 +122,6 @@ Each directory is organized around a specific feature or functionality of the ap
 ## Key Features
 
 ### User Authentication
-
-Ellis uses Supabase for authentication with email-based OTP (One-Time Password) login flow.
-
-- Implementation in `App/screens/onboarding/LoginPage.js` and `App/screens/onboarding/RegisterPage.js`
-- Authentication state management in `App/context/userContext.js`
-- Supabase client configuration in `App/api/supabaseClient.js`
-- User profile creation in `App/screens/onboarding/AccountCreation.js`
 
 ### Client Management
 
@@ -207,8 +197,8 @@ The app includes comprehensive support for the Homeless Management Information S
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-repo/ellis-app.git
-cd ellis-app
+git clone https://github.com/your-repo/ellis-app-geo.git
+cd ellis-app-geo
 ```
 
 2. Install dependencies
@@ -227,71 +217,9 @@ expo start
 npm start
 ```
 
-### Environment Variables
+### Enviornmental Variables
 
-Create a `.env` file in the App directory with the following variables:
-
-```
-AUTH_SUPABASE_URL=your_auth_supabase_url
-AUTH_SUPABASE_ANON_KEY=your_auth_supabase_anon_key
-DATA_SUPABASE_URL=your_data_supabase_url
-DATA_SUPABASE_ANON_KEY=your_data_supabase_anon_key
-```
-
-# Database Schemas
-
-The Ellis app uses Supabase for data storage with the following schema structure:
-
-## Authentication Schema
-
-### `auth.users` Table
-
-- `id` (UUID): Primary key, unique identifier for each user
-- Connected to the application users table via user_id
-
-## Application Schemas
-
-### `users` Table
-
-- `user_id` (UUID): Foreign key to auth.users.id
-- `email` (text): User's email address
-- `name` (text): User's full name
-- `organization` (text): User's affiliated organization
-- `clients` (jsonb): Array of client information
-- `servicedetails` (jsonb): Details of services provided
-- `created_at` (timestamptz): Timestamp when the user record was created
-
-### `nonprofits` Table
-
-- `id` (text): Primary key, unique identifier for each nonprofit
-- `name` (text): Name of the nonprofit organization
-- `description` (text): Description of the nonprofit
-- `email` (text): Contact email address
-- `phone_number` (text): Contact phone number
-- `address` (text): Physical address
-- `web_url` (text): Website URL
-- `regions` (text): Geographical regions served
-- `types` (text): Types of services provided
-- `services` (jsonb): Detailed information about services
-- `attributes` (jsonb): Additional attributes and information
-- `referrals` (jsonb): Referral information
-
-### `search_data` Table
-
-- `id` (text): Primary key, unique identifier for each nonprofit
-- `search` (text): Value in Search bar
-- `organization` (text): Organization referred to
-- `iterations` (int8): Number of referrals
-- `time` (timestamp): Date at which referral was created
-- `Subservice` (text): Service requested from Organization
-
-The database schema supports:
-
-1. User authentication and profile management
-2. Nonprofit organization directory
-3. Client relationship tracking
-4. Service referral system
-5. Program and service details storage
+# Database Schema
 
 ## License
 

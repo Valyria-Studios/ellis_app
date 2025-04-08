@@ -17,12 +17,10 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import SearchComponent from "../../shared/SearchHeader";
-import { useUser } from "../../context/userContext";
 
 const ServiceDirectory = ({ route, navigation }) => {
   const client = route.params?.client;
   const [frequentServices, setFrequentServices] = useState([]);
-  const user = useUser();
   const [serviceCategories, setServiceCategories] = useState([]);
   const [nonProfits, setNonProfits] = useState([]); // Store NonProfits data
   const [loading, setLoading] = useState(true); // Track loading state

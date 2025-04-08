@@ -4,7 +4,6 @@ import * as Font from "expo-font";
 import RootNavigator from "./routes/RootNavigator";
 import * as SplashScreen from "expo-splash-screen";
 import { MenuProvider } from "react-native-popup-menu";
-import { UserProvider } from "./context/userContext"; // Import UserProvider
 
 const getFonts = () =>
   Font.loadAsync({
@@ -51,13 +50,11 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <UserProvider>
-        <NavigationContainer>
-          <MenuProvider>
-            <RootNavigator />
-          </MenuProvider>
-        </NavigationContainer>
-      </UserProvider>
+      <NavigationContainer>
+        <MenuProvider>
+          <RootNavigator />
+        </MenuProvider>
+      </NavigationContainer>
     );
   } else {
     return null;

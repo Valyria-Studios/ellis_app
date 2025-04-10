@@ -219,6 +219,13 @@ npm start
 
 ### Enviornmental Variables
 
+Create a `.env` file in the App directory with the following variables:
+
+```
+DATA_SUPABASE_URL=your_data_supabase_url
+DATA_SUPABASE_ANON_KEY=your_data_supabase_anon_key
+```
+
 # Database Schema
 
 ## License
